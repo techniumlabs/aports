@@ -1,13 +1,36 @@
 # Contributor: Bart Ribbers <bribbers@disroot.org>
 # Maintainer: Bart Ribbers <bribbers@disroot.org>
 pkgname=kmix
-pkgver=21.04.0
+pkgver=21.04.3
 pkgrel=0
-arch="all !armhf !s390x !mips64"
+# armhf blocked by extra-cmake-modules
+# s390x, mips64 and riscv64 blocked by polkit -> kxmlgui
+arch="all !armhf !s390x !mips64 !riscv64"
 url="https://kde.org/applications/multimedia/org.kde.kmix"
 pkgdesc="A sound channel mixer and volume control"
 license="GPL-2.0-or-later AND LGPL-2.0-or-later AND GFDL-1.2-only"
-makedepends="extra-cmake-modules qt5-qtbase-dev kcompletion-dev kconfig-dev kconfigwidgets-dev kcrash-dev kdbusaddons-dev kdoctools-dev kglobalaccel-dev ki18n-dev kiconthemes-dev knotifications-dev plasma-framework-dev solid-dev kwidgetsaddons-dev kwindowsystem-dev kxmlgui-dev alsa-lib-dev pulseaudio-dev libcanberra-dev"
+makedepends="
+	alsa-lib-dev
+	extra-cmake-modules
+	kcompletion-dev
+	kconfig-dev
+	kconfigwidgets-dev
+	kcrash-dev
+	kdbusaddons-dev
+	kdoctools-dev
+	kglobalaccel-dev
+	ki18n-dev
+	kiconthemes-dev
+	knotifications-dev
+	kwidgetsaddons-dev
+	kwindowsystem-dev
+	kxmlgui-dev
+	libcanberra-dev
+	plasma-framework-dev
+	pulseaudio-dev
+	qt5-qtbase-dev
+	solid-dev
+	"
 source="https://download.kde.org/stable/release-service/$pkgver/src/kmix-$pkgver.tar.xz"
 subpackages="$pkgname-doc $pkgname-lang"
 options="!check" # No tests
@@ -26,7 +49,9 @@ check() {
 }
 
 package() {
-	DESTDIR="$pkgdir" cmake --build build --target install
+	DESTDIR="$pkgdir" cmake --install build
 }
 
-sha512sums="447754bd4fc919ea7c36deadf839dc014cf20791b85545b01ed7cfb84d54a26035dc32d93b2a31466f9556be81eab4445e95ecd65e2507c1f060b9b40193b609  kmix-21.04.0.tar.xz"
+sha512sums="
+9577c5e9de3dc34e9301d52ec1ec436fdf4856d89fbb5ba735f83d3ea2af57ef308884ba5e18e7b989b503e3f73bb87428d9873d9034778d6d7fcbf47750b8e6  kmix-21.04.3.tar.xz
+"

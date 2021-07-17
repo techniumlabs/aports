@@ -1,19 +1,20 @@
 # Contributor: Isaac Dunham <ibid.ag@gmail.com>
 # Contributor: Jakub Jirutka <jakub@jirutka.cz>
-# Maintainer: Isaac Dunham <ibid.ag@gmail.com>
+# Maintainer:
 pkgname=openblas
 _pkgname=OpenBLAS
-pkgver=0.3.14
+pkgver=0.3.17
 pkgrel=0
 pkgdesc="fast BSD-licensed BLAS based on gotoBLAS2, with LAPACK"
 url="https://www.openblas.net/"
-arch="all !mips !mips64"
+arch="all !mips64"
 license="BSD-3-Clause"
 replaces="blas lapack"
 depends_dev="gfortran"
 makedepends="$depends_dev perl linux-headers"
 subpackages="$pkgname-static $pkgname-dev $pkgname-doc"
-source="$pkgname-$pkgver.tar.gz::https://github.com/xianyi/$_pkgname/archive/v$pkgver.tar.gz"
+source="$pkgname-$pkgver.tar.gz::https://github.com/xianyi/$_pkgname/archive/v$pkgver.tar.gz
+	separate-tests.patch"
 builddir="$srcdir/$_pkgname-$pkgver"
 
 _builddir64="$builddir-64"
@@ -46,6 +47,7 @@ armhf) _flags="$_flags TARGET=ARMV7";;
 aarch64) _flags="$_flags TARGET=ARMV8";;
 ppc64le) _flags="$_flags TARGET=POWER8";;
 s390x) _flags="$_flags TARGET=ZARCH_GENERIC";;
+riscv64) _flags="$_flags TARGET=RISCV64_GENERIC";;
 esac
 
 # Flags for ILP64 variant.
@@ -112,4 +114,7 @@ ilp64() {
 	mv "$pkgdir"/usr/lib/libopenblas64_* "$subpkgdir"/usr/lib/
 }
 
-sha512sums="c7d5947ada525a32bc6e97ff94272df9730fa5fb06102e06e80472baedc1a9119d82050cdaede192db15f816ae7143784d7801b61b64fab5b5cf97cdbd5e625e  openblas-0.3.14.tar.gz"
+sha512sums="
+a97745c1f050ea44fce5f1722810de469612d374a29796a874d12673d6ad189872160cc2b5d0885790e6562d9d7ade629144c86f2649e668b0d4def36aa74495  openblas-0.3.17.tar.gz
+de2769ba6d1adcb31e19732c6c4a9f39dc1745932b954106a8037a4dfa98d77a468bd414abadab0d72bbbabf17f86748fb9297051c937fd6eae3d375aa5f5ad7  separate-tests.patch
+"

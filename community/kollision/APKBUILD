@@ -1,12 +1,12 @@
 # Contributor: Bart Ribbers <bribbers@disroot.org>
 # Maintainer: Bart Ribbers <bribbers@disroot.org>
 pkgname=kollision
-pkgver=21.04.0
+pkgver=21.04.3
 pkgrel=0
 pkgdesc="A simple ball dodging game"
 # armhf blocked by extra-cmake-modules
-# mips, mips64 and s390x blocked by kxmlgui
-arch="all !armhf !mips64 !s390x"
+# mips64, s390x and riscv64 blocked by polkit -> kxmlgui
+arch="all !armhf !mips64 !s390x !riscv64"
 url="https://kde.org/applications/games/kollision/"
 license="GPL-2.0-or-later AND GFDL-1.2-only"
 makedepends="
@@ -35,7 +35,9 @@ build() {
 }
 
 package() {
-	DESTDIR="$pkgdir" cmake --build build --target install
+	DESTDIR="$pkgdir" cmake --install build
 }
 
-sha512sums="1da46d8e991328e6805657c10a5412bfbce7c3911a0d634930ec7b459f06102a09cfe714543b5827b948a01e075555c86ce6e155a37862990ef5dcccbbdd428c  kollision-21.04.0.tar.xz"
+sha512sums="
+cf7296b0bc725c5fed42b34ce7ac3a5abd5a5c00d18b2f5e4756eeba9ff229850f4d6559f32289a05a661084babf29e4404ab62708c24d5be5e7b32419ea5530  kollision-21.04.3.tar.xz
+"

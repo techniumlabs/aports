@@ -2,17 +2,18 @@
 # Contributor: Jakub Jirutka <jakub@jirutka.cz>
 # Maintainer: Timo Teras <timo.teras@iki.fi>
 pkgname=openjdk7
-_icedteaver=2.6.24
+_icedteaver=2.6.26
 _icedteaversrc=$_icedteaver
 # pkgver is <JDK version>.<JDK update>
 # check icedtea JDK when updating
-pkgver=7.281.$_icedteaver
-pkgrel=1
+pkgver=7.301.$_icedteaver
+pkgrel=0
 pkgdesc="OpenJDK 7 via IcedTea"
 provider_priority=7
 url="https://icedtea.classpath.org/"
 # no bootstrap JDK on mips
-arch="all !mips !mips64"
+# riscv64 blocked by java-gcj-compat
+arch="all !mips64 !riscv64"
 license="GPL-2.0 with Classpath"
 depends="$pkgname-jre java-cacerts"
 options="sover-namecheck"
@@ -93,6 +94,9 @@ source="https://icedtea.classpath.org/download/source/icedtea-$_icedteaversrc.ta
 	"
 
 # secfixes:
+#   7.301.2.6.26-r0:
+#     - CVE-2021-2161
+#     - CVE-2021-2163
 #   7.281.2.6.24-r0:
 #     - CVE-2020-14803
 #   7.271.2.6.23-r0:
@@ -184,6 +188,11 @@ unpack() {
 }
 
 prepare() {
+	local ver_u=$(sed -En 's/^\s*JDK_UPDATE_VERSION\s*=\s*(\S+).*/\1/p' acinclude.m4)
+	local ver_b=$(sed -En 's/^\s*BUILD_VERSION\s*=\s*b(\S+).*/\1/p' acinclude.m4)
+	[ "${pkgver%.$_icedteaver}" = "7.$ver_u" ] \
+		|| die "Version mismatch, source is 7.$ver_u.$_icedteaver, but abuild defines $pkgver!"
+
 	# Busybox sha256 does not support longopts
 	sed -e "s/--check/-c/g" -i Makefile.am
 
@@ -327,19 +336,20 @@ doc() {
 	mv "$pkgdir"/$_install_base/man "$subpkgdir"/$_install_base/
 }
 
-sha512sums="db97bd4106f732cab64528b5d087ea56333d9b0916f238a58b84d44bc8602ca64419f827afca483c0ba9538986bbf0bf5b92683b6f96d8df047b334328d76d11  icedtea-2.6.24.tar.xz
-fb5bd58480194b556ecfdb3225e4d70ac710cf0cc75ada483ed81786ff2b5eb961508291261742eab2ba91bdab9ea38188b02caaa1eb5abbdee43db4daad0416  openjdk-2.6.24.tar.bz2
-ed6244abf6a7ddfced08c8dd1d6f0ccee2344e0e85a9499c76a97f64708cbc9676bfb475c0ae907820ea1e8b5c1c4e73f57662bdcee6e41edf25a99d46d972fc  corba-2.6.24.tar.bz2
-7a867293ef178f0af8bd37bdf94dcbf56a646974742aaec1f009d328eb18f4083c0120eb16d50e4510dff344074558151736e22f767ba9aa311b9f4a0c53013d  jaxp-2.6.24.tar.bz2
-3257d4058e056f5664d185ea3357972e412033bc8f69f7e0778c31f47b354741a2c2e2c2a389939a06cc4c9eb6c024bf47f5b936a09b3606d2cdcc7d7236517a  jaxws-2.6.24.tar.bz2
-24ff2ca12aa2f2c1b84803586f90e77527fc2c3df726650e828ab7f8430ac5a2805eee46ee830a6e1141d6f8c5a476a3ed7edece5b0534e2d33037155779f0d4  jdk-2.6.24.tar.bz2
-1d5def1076785a2a3097a18bdec0070fd69adff79e54fa24988da09b4457e9d363f05396016854301a1123b446d38e2c23c86cada43ae09e4fa8edf3b5d669b2  langtools-2.6.24.tar.bz2
-21fe6c47b7d116662bd772ecb526b993b11033e13286bdf0257aab60ec374cce6194dfea87b78ea5a1a62d5fbe83b01e9539ce8b81c73333a9dfb6dc0bf8fec5  hotspot-2.6.24.tar.bz2
+sha512sums="
+91fe86afc8a2333117f5d67816bcd9c2d35546a2165b4f138280538780cf188d4897c994b217a83e8c376c7b38f5bc057607f9f0b395b95a40122351b5e1a504  icedtea-2.6.26.tar.xz
+7a6f56a979fdd6a4e96ee4af26b884deab4d6b1f65fc831c19b46df897f67580a3fc46d8d567ff5196bd9e3e0ad39ab07809ef43eed88ddfa2610f36e4884782  openjdk-2.6.26.tar.bz2
+c363e7b18596412c9389d9ccf0f4a4ffa479442f5b4bab2c9244b0a3e744e3a50a85d518b29785f7e33b8e845e53c0911b310b8d270ae52a2068bfaaf4391277  corba-2.6.26.tar.bz2
+39aca52bbc0751cdb89663a867fc529d470aea7365a49280f7467dc54fde757ef16bb874b19fe39504c05b07e4d63f33b4bc91834952a7ade351e00f1965801c  jaxp-2.6.26.tar.bz2
+f93aeec2afd4c6db0b4ad5409b5c63e79e914bc81fe5dd54112802d5ba398c093c1927aa35c0110fb140201eb5004ee64bb820b87c5fde4b35288ab67da1df47  jaxws-2.6.26.tar.bz2
+40bdeb9145359fe08124a38d0710c796efa6284281a39a5d72bde0dc129a13bc920592ccf9d8d131934223615f1e416f610ae270787af2267da4139595ee0593  jdk-2.6.26.tar.bz2
+e7438e7af9fd5c0ba09a5389d0b49014ebd764e2ee73485ca1445c80ee3c0cc7f074a003292c0275c024d0d13203d476129b3a6b2819aae968c2117234e274ac  langtools-2.6.26.tar.bz2
+bc6c011c2b78e702393f241de605da59f0aea7ede1ac1ad6f59bdead6c493721e9ebeefae31108e9719aab9f3ef8925d24e12e1cf3e7cd6ffbf8feea6ed6ff40  hotspot-2.6.26.tar.bz2
 487dbd1d7f678a92924ba884a57e910ccb4fe565c554278795a8fdfc80c4e88d81ebc2ccecb5a8f353f0b2076572bb921499a2cadb064e0f44fc406a3c31da20  apache-ant-1.9.14-bin.tar.gz
 1b9e8721749e81c5420a00af1e00ee0e4f48624ccb4e9aa969032114116ad50f59b254d4d16d74feff74de64157cc8b0a2ead9b555907c84b7055b796fba9a75  rhino-1.7.7.2.zip
 74e38e41db0dcca6ec91d3a83330f06904342ba8e950d896c4544db72b76a3ae6665793b83d7bbeb5a0cd3896b48707c8beda92ef0eb0e7f821c15e591e2fd49  icedtea-hotspot-musl.patch
 e5cf4d70f96fc1e72ae8b97a887adb96092ff36584711cbb8de9d9fa9e859cb8731d638838de0d9591239fc44ffe5c74422d1842bd9f10a0c00dff1627bdeeef  icedtea-hotspot-musl-ppc.patch
-e7a2c1771bb582d427041f8d22e48c0daf8f20d7c0926cbce3549d49c4e949359ee25a35682b486e82f3e390535c950c5beee3bd8d06fb5a717b50f2d9b2a6bc  icedtea-hotspot-noagent-musl.patch
+ae4e32af42dfed963f5ee6dbc65d102e2ed51778ada829d8ae230904cd9e0473dacf7362a36b3e83929a9c1c7d176abc8e409bfbe27214ebb9f0ae1410dee282  icedtea-hotspot-noagent-musl.patch
 822eee0dc4d3ba677a289dfeb3668b536d2d626708390a9d9702fb4144a481fd443a215a0d2041c6026113837aafa4ba0b5e9ead8589d2da6717a238bbc95a5a  icedtea-hotspot-uclibc-fixes.patch
 0391970e6a32946aa3cccf38fdef9c0fe2af26cd0df824b98aa2fcfa1bf661d4a68e339bffcfd16f386c565fc68bb28a29208a67d4bad8a0e847ad02bd8becbb  icedtea-jdk-execinfo.patch
 8fadeee6ea9886c7ee3118a1abaee2fbd04931a3ba880062bc97397ad30aab114a83542c888461a5a8a1d131c4e73920872317c96620e2a8c4689620adf9e9c3  icedtea-jdk-fix-build.patch
@@ -352,4 +362,5 @@ e703e5f68e63f130e758b3fa813872363090c08eee6a6366f4784cf6a191a90a3642ec71e016bd05
 a54c79c82afa1bc95265397b274260584c8b8c6be1651ddfb907d9523a809ea4581409e0d3fb0bbb63ef5a204e8ce29b7940e78cd640af1f490ae938c59129b6  icedtea-cpio.patch
 c70fee8f1a10c155494ab9c6e55e979d8a3e23f12358ffe9de2029ae15feff361957f1aa43af43c90ecf00523f92e3333b40311a8d0c132ebd456486cb85ed8a  icedtea-jdk-disable-vfork.patch
 4c874f0e9f3f54f688a1faf64fa3734e31f139f465ce77d12aac87558764ef66055de6cfac5b60efef2833c64256136c70f3cf5dc2712de62fc5dbebe3a8fbcd  fix-xattr-include.patch
-d05ef2da69d3e02cbee5bd55be86b61c0a701f65e8cfac287f9b5025934059870d09d5b006c1ffe4e9b9c8aca33842199512d3433249e19346d855e768c0d94f  autoconf-2.7x.patch"
+d05ef2da69d3e02cbee5bd55be86b61c0a701f65e8cfac287f9b5025934059870d09d5b006c1ffe4e9b9c8aca33842199512d3433249e19346d855e768c0d94f  autoconf-2.7x.patch
+"

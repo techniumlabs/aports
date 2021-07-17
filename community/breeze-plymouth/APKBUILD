@@ -1,7 +1,7 @@
 # Contributor: Bart Ribbers <bribbers@disroot.org>
 # Maintainer: Bart Ribbers <bribbers@disroot.org>
 pkgname=breeze-plymouth
-pkgver=5.21.5
+pkgver=5.22.3
 pkgrel=0
 arch="all !armhf" # armhf blocked by extra-cmake-modules
 url="https://kde.org/"
@@ -34,5 +34,5 @@ package() {
 }
 
 sha512sums="
-7b562a9b86baf4f362e3cd97722bbe3940be4232910e68ff1f029f2de5d1e362d930dde03a3adbed738bda559f9f6b5b812ae7e1451a145edc37e60b5af66285  breeze-plymouth-5.21.5.tar.xz
+90949b4877a9d7c3a1d00dae07c567d59544a1537ddb807146fb342e5514abe82dc8871e359b2542b26b1796746afd28265c83c0cc51bd24f9fa6ff2e28602b4  breeze-plymouth-5.22.3.tar.xz
 "

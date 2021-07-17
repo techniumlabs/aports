@@ -1,13 +1,31 @@
 # Contributor: Bart Ribbers <bribbers@disroot.org>
 # Maintainer: Bart Ribbers <bribbers@disroot.org>
 pkgname=knetwalk
-pkgver=21.04.0
+pkgver=21.04.3
 pkgrel=0
 pkgdesc="Connect all the terminals to the server, in as few turns as possible"
-arch="all !armhf !s390x !mips64" # armhf blocked by extra-cmake-modules
+# armhf blocked by extra-cmake-modules
+# s390x, mips64 and riscv64 blocked by polkit -> kxmlgui
+# riscv64 disabled due to missing rust in recursive dependency
+arch="all !armhf !s390x !mips64 !riscv64"
 url="https://kde.org/applications/games/knetwalk/"
 license="GPL-2.0-or-later AND GFDL-1.2-only"
-makedepends="extra-cmake-modules qt5-qtbase-dev qt5-qtdeclarative-dev kconfig-dev kconfigwidgets-dev kcoreaddons-dev kcrash-dev kdbusaddons-dev kdoctools-dev ki18n-dev ktextwidgets-dev kwidgetsaddons-dev kxmlgui-dev libkdegames-dev"
+makedepends="
+	extra-cmake-modules
+	kconfig-dev
+	kconfigwidgets-dev
+	kcoreaddons-dev
+	kcrash-dev
+	kdbusaddons-dev
+	kdoctools-dev
+	ki18n-dev
+	ktextwidgets-dev
+	kwidgetsaddons-dev
+	kxmlgui-dev
+	libkdegames-dev
+	qt5-qtbase-dev
+	qt5-qtdeclarative-dev
+	"
 source="https://download.kde.org/stable/release-service/$pkgver/src/knetwalk-$pkgver.tar.xz"
 subpackages="$pkgname-doc $pkgname-lang"
 
@@ -25,7 +43,9 @@ check() {
 }
 
 package() {
-	DESTDIR="$pkgdir" cmake --build build --target install
+	DESTDIR="$pkgdir" cmake --install build
 }
 
-sha512sums="24974ab7387ef6d4cc0c2279e3be03f2b8ac5395fba1484fd8814cbf731d9cb1c56487620ed12e8499399e39ee6fa18787b023b4a3f4f51ed25edd324a2733ef  knetwalk-21.04.0.tar.xz"
+sha512sums="
+40ed5e31d458f1243ac19215fd2b22d87a811ace7e9cf8dd443efa334225e2a12a54865d3fc6173f4879a58520b9d486d50eacb1b86c2c66898659ec46159791  knetwalk-21.04.3.tar.xz
+"

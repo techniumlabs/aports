@@ -1,13 +1,24 @@
 # Contributor: Bart Ribbers <bribbers@disroot.org>
 # Maintainer: Bart Ribbers <bribbers@disroot.org>
 pkgname=kruler
-pkgver=21.04.0
+pkgver=21.04.3
 pkgrel=0
-arch="all !armhf !s390x !mips64" # armhf blocked by extra-cmake-modules
+# armhf blocked by extra-cmake-modules
+# s390x, mips64 and riscv64 blocked by kxmlgui
+arch="all !armhf !s390x !mips64 !riscv64"
 url="https://kde.org/applications/graphics/org.kde.kruler"
 pkgdesc="An on-screen ruler for measuring pixels"
 license="GPL-2.0-or-later AND GFDL-1.2-only"
-makedepends="extra-cmake-modules qt5-qtbase-dev qt5-qtx11extras-dev kdoctools-dev ki18n-dev knotifications-dev kwindowsystem-dev kxmlgui-dev"
+makedepends="
+	extra-cmake-modules
+	kdoctools-dev
+	ki18n-dev
+	knotifications-dev
+	kwindowsystem-dev
+	kxmlgui-dev
+	qt5-qtbase-dev
+	qt5-qtx11extras-dev
+	"
 source="https://download.kde.org/stable/release-service/$pkgver/src/kruler-$pkgver.tar.xz"
 subpackages="$pkgname-doc $pkgname-lang"
 options="!check" # No tests
@@ -26,7 +37,9 @@ check() {
 }
 
 package() {
-	DESTDIR="$pkgdir" cmake --build build --target install
+	DESTDIR="$pkgdir" cmake --install build
 }
 
-sha512sums="a4568cbf00d63a228700be4aaabc2399723fdfa41b912b9defd0982e9179f281daab3f6698fe17eb2e43942cb7c1fc3340d8ccc629bb7fdaba26802e0951f29c  kruler-21.04.0.tar.xz"
+sha512sums="
+e5ee427bcc1de89115eb7f8492c0da7c5d2dc0939b619f344c81ce79119ace6520565312321f48e584db5142dc5c7cb3d5ad05b1606ba060d76a54202c395360  kruler-21.04.3.tar.xz
+"

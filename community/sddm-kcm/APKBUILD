@@ -1,12 +1,12 @@
 # Contributor: Bart Ribbers <bribbers@disroot.org>
 # Maintainer: Bart Ribbers <bribbers@disroot.org>
 pkgname=sddm-kcm
-pkgver=5.21.5
+pkgver=5.22.3
 pkgrel=0
 pkgdesc="Config module for SDDM"
-# armhf blocked by qt5-qtdeclarative
-# s390x blocked by plasma-workspace
-arch="all !armhf !s390x !mips64"
+# armhf blocked by extra-cmake-modules
+# s390x, mips64 and riscv64 blocked by polkit -> kio
+arch="all !armhf !s390x !mips64 !riscv64"
 url="https://www.kde.org"
 license="GPL-2.0-or-later AND (GPL-2.0-only OR GPL-3.0-only) AND LGPL-2.1-or-later AND GPL-2.0-only"
 depends="
@@ -52,5 +52,5 @@ package() {
 	DESTDIR="$pkgdir" cmake --install build
 }
 sha512sums="
-fc2fdaf67c144cccc8d2f68cc20e50027c1a083d6b33d37e8c8e7fa703b2904c11b63fc9acca63422688013346f565c77a1f02721c7f8dfcaf52bc97c7b07dbb  sddm-kcm-5.21.5.tar.xz
+0b09da15bda6f15bc3aabbc99b6e00a81db2f3d2e4ee567360ea8a8b2100aa79252eed25c0bdc9109754c2959dfabd19bd833a8d7df5416379f9518e283e82c0  sddm-kcm-5.22.3.tar.xz
 "

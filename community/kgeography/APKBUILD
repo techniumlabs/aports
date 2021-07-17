@@ -1,13 +1,27 @@
 # Contributor: Bart Ribbers <bribbers@disroot.org>
 # Maintainer: Bart Ribbers <bribbers@disroot.org>
 pkgname=kgeography
-pkgver=21.04.0
+pkgver=21.04.3
 pkgrel=0
-arch="all !armhf !s390x !mips64"
+# armhf blocked by extra-cmake-modules
+# s390x, mips64 and riscv64 blocked by polkit -> kxmlgui
+arch="all !armhf !s390x !mips64 !riscv64"
 url="https://edu.kde.org/kgeography"
 pkgdesc="Geography Trainer"
 license="GPL-2.0-or-later"
-makedepends="extra-cmake-modules qt5-qtbase-dev kxmlgui-dev kwidgetsaddons-dev kcoreaddons-dev kconfigwidgets-dev ki18n-dev kitemviews-dev kiconthemes-dev kcrash-dev kdoctools-dev"
+makedepends="
+	extra-cmake-modules
+	kconfigwidgets-dev
+	kcoreaddons-dev
+	kcrash-dev
+	kdoctools-dev
+	ki18n-dev
+	kiconthemes-dev
+	kitemviews-dev
+	kwidgetsaddons-dev
+	kxmlgui-dev
+	qt5-qtbase-dev
+	"
 source="https://download.kde.org/stable/release-service/$pkgver/src/kgeography-$pkgver.tar.xz"
 subpackages="$pkgname-doc $pkgname-lang"
 options="!check" # No tests
@@ -26,7 +40,9 @@ check() {
 }
 
 package() {
-	DESTDIR="$pkgdir" cmake --build build --target install
+	DESTDIR="$pkgdir" cmake --install build
 }
 
-sha512sums="bde42ca20b4b81b181a522bccdf2928de8409450e759f75576df7811e36cdd32727a3fbb4172bc26e2a9a202514ff3be87a7e727f9ad8807b2850f5c3407e173  kgeography-21.04.0.tar.xz"
+sha512sums="
+92be1d653d4b7019bff9018cc9bfe4550326ff4aebf1d63d5b5752cc6b0169d34a8613837ed7e8c27dca827cfa27ae1035de96a2dd1cf0346a3bd2aa4f0126f3  kgeography-21.04.3.tar.xz
+"

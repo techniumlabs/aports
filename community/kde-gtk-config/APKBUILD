@@ -1,12 +1,12 @@
 # Contributor: Bart Ribbers <bribbers@disroot.org>
 # Maintainer: Bart Ribbers <bribbers@disroot.org>
 pkgname=kde-gtk-config
-pkgver=5.21.5
+pkgver=5.22.3
 pkgrel=0
 pkgdesc="GTK2 and GTK3 Configurator for KDE"
 # armhf blocked by qt5-qtdeclarative
-# s390x blocked by kcmutils
-arch="all !armhf !s390x !mips64"
+# s390x, mips64, riscv64 blocked by polkit -> kio
+arch="all !armhf !s390x !mips64 !riscv64"
 url="https://invent.kde.org/plasma/kde-gtk-config"
 license="GPL-2.0 AND LGPL-2.1-only OR LGPL-3.0-only"
 depends="gsettings-desktop-schemas"
@@ -51,5 +51,5 @@ package() {
 	DESTDIR="$pkgdir" cmake --install build
 }
 sha512sums="
-7acd5036cc008fac85cabd9f3a5321dc1c0209a1133d6063342ca1b1235843dce5e37a7712e0cbbd520f09b3ff46b71a94517c61414c8e7c1c35a2d65b428347  kde-gtk-config-5.21.5.tar.xz
+d2308bbd83804aad37bdf534f10e8fecb277aaef84ec75e036de2ffd923133beba332287297f2cc529db1ceeeb5a686fee76ddbae083f96d6708dde37c26c6e3  kde-gtk-config-5.22.3.tar.xz
 "

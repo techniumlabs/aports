@@ -1,13 +1,26 @@
 # Contributor: Bart Ribbers <bribbers@disroot.org>
 # Maintainer: Bart Ribbers <bribbers@disroot.org>
 pkgname=kmplot
-pkgver=21.04.0
+pkgver=21.04.3
 pkgrel=0
-arch="all !armhf !s390x !mips64"
+# armhf blocked by extra-cmake-modules
+# s390x, mips64 and riscv64 blocked by polkit -> kparts
+arch="all !armhf !s390x !mips64 !riscv64"
 url="http://edu.kde.org/kmplot"
 pkgdesc="Mathematical Function Plotter"
 license="GPL-2.0-or-later AND GFDL-1.2-only"
-makedepends="extra-cmake-modules qt5-qtbase-dev qt5-qtsvg-dev kcrash-dev kguiaddons-dev ki18n-dev kparts-dev kwidgetsaddons-dev kdoctools-dev kdbusaddons-dev"
+makedepends="
+	extra-cmake-modules
+	kcrash-dev
+	kdbusaddons-dev
+	kdoctools-dev
+	kguiaddons-dev
+	ki18n-dev
+	kparts-dev
+	kwidgetsaddons-dev
+	qt5-qtbase-dev
+	qt5-qtsvg-dev
+	"
 source="https://download.kde.org/stable/release-service/$pkgver/src/kmplot-$pkgver.tar.xz"
 subpackages="$pkgname-doc $pkgname-lang"
 options="!check" # No tests
@@ -26,7 +39,9 @@ check() {
 }
 
 package() {
-	DESTDIR="$pkgdir" cmake --build build --target install
+	DESTDIR="$pkgdir" cmake --install build
 }
 
-sha512sums="f2d12538dcfa42d6f0d74ce9078d207124eb7cde66f20fe429e1f782594f0eb53e042c8ab1fe3bd31263ff5a2201c189e12c09d862241eaf9d813eea6772bffe  kmplot-21.04.0.tar.xz"
+sha512sums="
+80ceb936b6cb41ff3976fd7b4859ff9e54d0ab24a6d8d90690751b114749d55b70e2e1c07a7440addf8bc88c6a9fbc42d8cbab9aff49b70e808edeceaa8ee8f4  kmplot-21.04.3.tar.xz
+"

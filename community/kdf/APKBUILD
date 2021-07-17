@@ -1,13 +1,28 @@
 # Contributor: Bart Ribbers <bribbers@disroot.org>
 # Maintainer: Bart Ribbers <bribbers@disroot.org>
 pkgname=kdf
-pkgver=21.04.0
+pkgver=21.04.3
 pkgrel=0
-arch="all !armhf !s390x !mips64"
+# armhf blocked by extra-cmake-modules
+# s390x, mips64 and riscv64 blocked by polkit -> kio
+arch="all !armhf !s390x !mips64 !riscv64"
 url="https://kde.org/applications/system/org.kde.kdf"
 pkgdesc="View disk usage"
 license="GPL-2.0-or-later"
-makedepends="extra-cmake-modules qt5-qtbase-dev kconfigwidgets-dev kcoreaddons-dev kdoctools-dev ki18n-dev kiconthemes-dev kio-dev kcmutils-dev knotifications-dev kwidgetsaddons-dev kxmlgui-dev"
+makedepends="
+	extra-cmake-modules
+	kcmutils-dev
+	kconfigwidgets-dev
+	kcoreaddons-dev
+	kdoctools-dev
+	ki18n-dev
+	kiconthemes-dev
+	kio-dev
+	knotifications-dev
+	kwidgetsaddons-dev
+	kxmlgui-dev
+	qt5-qtbase-dev
+	"
 source="https://download.kde.org/stable/release-service/$pkgver/src/kdf-$pkgver.tar.xz"
 subpackages="$pkgname-doc $pkgname-lang"
 
@@ -25,7 +40,9 @@ check() {
 }
 
 package() {
-	DESTDIR="$pkgdir" cmake --build build --target install
+	DESTDIR="$pkgdir" cmake --install build
 }
 
-sha512sums="7de86aabd0336b7f3750df9e8cec0501503de8d014a6366de6cd62fbdb095cd947e80e54c2210f8dab8a6cd6b741ca6317361791f97ae2da9324f42838f7a232  kdf-21.04.0.tar.xz"
+sha512sums="
+985ec37fade53297e8bbe03aae78a560ec1f69e0c1b093c431e249de340e14e0f372bfe51d15dfdb4c7e0f4fadf3e81aa0b53a6649ce5ce891a837f96fe9e755  kdf-21.04.3.tar.xz
+"

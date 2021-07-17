@@ -1,11 +1,13 @@
 # Contributor: kpcyrd <git@rxv.cc>
 # Maintainer: kpcyrd <git@rxv.cc>
 pkgname=sn0int
-pkgver=0.20.1
+pkgver=0.21.1
 pkgrel=0
 pkgdesc="Semi-automatic OSINT framework and package manager"
 url="https://github.com/kpcyrd/sn0int"
-arch="all !mips64 !s390x !ppc64le" # limited by rust, ppc64le by ring crate
+# mips64, s390x and riscv64 blocked by cargo
+# ppc64le blocked by ring crate
+arch="all !mips64 !s390x !ppc64le !riscv64"
 license="GPL-3.0-or-later"
 makedepends="
 	cargo
@@ -55,4 +57,6 @@ package() {
 		"$pkgdir/usr/share/fish/completions/sn0int.fish"
 }
 
-sha512sums="2095c3173332b44a3960c6b7a87aa449558652d94b769bc86649ee75d39061530bb34a783467cfa4f2b49ce486979f76b24bd52b1a20ccd4b8ffaf6a14cf80e0  sn0int-0.20.1.tar.gz"
+sha512sums="
+73242c84bdc95211ca5919c5d1e0ed7133558bc8de6dba243976fef8bb14f7a27cadae5cacc04f2a2386b18756c25d2c7f0ba88fb340c45d524606a1bf380bc8  sn0int-0.21.1.tar.gz
+"

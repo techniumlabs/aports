@@ -1,14 +1,11 @@
 # Contributor: Bart Ribbers <bribbers@disroot.org>
 # Maintainer: Bart Ribbers <bribbers@disroot.org>
 pkgname=konversation
-pkgver=21.04.0
+pkgver=21.04.3
 pkgrel=0
 # armhf blocked by extra-cmake-modules
-# mips64 blocked by polkit
-# s390x blocked by kbookmarks, kconfigwidgets, kiconthemes, kio, knotifyconfig
-#  kparts kwallet, solid
-arch="all !armhf"
-arch="$arch !mips64 !s390x"
+# s390x, mips64 and riscv64 blocked by polkit -> kio
+arch="all !armhf !mips64 !s390x !riscv64"
 url="https://konversation.kde.org/"
 pkgdesc="A user-friendly and fully-featured IRC client"
 license="GPL-2.0-or-later"
@@ -53,7 +50,9 @@ build() {
 }
 
 package() {
-	DESTDIR="$pkgdir" cmake --build build --target install
+	DESTDIR="$pkgdir" cmake --install build
 }
 
-sha512sums="1b0355d9ad2fdb5f62aced44c92d312115fe58153a1f52278aeb699f78e8b48eabf2f816190943f5fc583356885486ea7e04aefab1712f7627bb70d405d4ff47  konversation-21.04.0.tar.xz"
+sha512sums="
+af2e7d232412f316090be72cc2b412b19c8735be4e04c9286561ed3cf83b5858b83572f33ee70281610c7fe5e339683d33e9d1f9ddb57eb5198db91e82613869  konversation-21.04.3.tar.xz
+"

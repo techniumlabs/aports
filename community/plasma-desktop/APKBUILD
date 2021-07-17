@@ -1,12 +1,14 @@
 # Contributor: Bart Ribbers <bribbers@disroot.org>
 # Maintainer: Bart Ribbers <bribbers@disroot.org>
 pkgname=plasma-desktop
-pkgver=5.21.5
+pkgver=5.22.3
 pkgrel=0
 pkgdesc="KDE Plasma Desktop"
-# s390x, mips, mips64 blocked by ibus
 # armhf blocked by qt5-qtdeclarative
-arch="all !s390x !armhf !mips !mips64"
+# s390x and mips64 blocked by ibus
+# ppc64le blocked by kaccounts-integration
+# riscv64 blocked by polkit -> kwin
+arch="all !armhf !s390x !mips64 !ppc64le !riscv64"
 url='https://kde.org/plasma-desktop/'
 license="GPL-2.0-only AND LGPL-2.1-only"
 depends="
@@ -98,5 +100,5 @@ knetattach() {
 	DESTDIR="$subpkgdir" make install
 }
 sha512sums="
-40814910676a05d3d5a308a432c06ce9664b90724fe8c56c4f68f6eb939f35401f19dddb8c46006f44fa418e0f18b4a42b0ff78b5b07031f54e6b3c10c919e57  plasma-desktop-5.21.5.tar.xz
+ad7bcc269ea2da59be90dee310bd406efb6558944ac21feaaf5df1eb113a2b0626890354b8066050b9c38dfb4ecb4af18b62ed0274a4af4d76b7a6cb7445c4a3  plasma-desktop-5.22.3.tar.xz
 "

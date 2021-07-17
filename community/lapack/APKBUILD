@@ -1,7 +1,7 @@
 # Contributor: Francesco Colista <fcolista@alpinelinux.org>
 # Maintainer: Francesco Colista <fcolista@alpinelinux.org>
 pkgname=lapack
-pkgver=3.9.1
+pkgver=3.10.0
 pkgrel=0
 pkgdesc="Linear Algebra PACKage"
 url="https://www.netlib.org/lapack/"
@@ -69,4 +69,6 @@ blas() {
 		"$subpkgdir"/usr/lib
 }
 
-sha512sums="6909d9f12b7cba9fd3df8f9c0b7db6d6fce6ddb99bd40dce95b3a6c2cdd7985a25dc47a8064cb2d9e4f154eca839c1ae8328a293395abec5602bfbb99ef26ce3  lapack-v3.9.1.tar.gz"
+sha512sums="
+56055000c241bab8f318ebd79249ea012c33be0c4c3eca6a78e247f35ad9e8088f46605a0ba52fd5ad3e7898be3b7bc6c50ceb3af327c4986a266b06fe768cbf  lapack-v3.10.0.tar.gz
+"

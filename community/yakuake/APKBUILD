@@ -1,9 +1,9 @@
 # Contributor: Bart Ribbers <bribbers@disroot.org>
 # Maintainer: Bart Ribbers <bribbers@disroot.org>
 pkgname=yakuake
-pkgver=21.04.0
+pkgver=21.04.3
 pkgrel=0
-arch="all !armhf !s390x !mips64"
+arch="all !armhf !s390x !mips64 !riscv64" # blocked by polkit -> kio
 url="https://kde.org/applications/system/org.kde.yakuake"
 pkgdesc="A drop-down terminal emulator based on KDE Konsole technology"
 license="GPL-2.0-only OR GPL-3.0-only"
@@ -29,4 +29,6 @@ package() {
 	DESTDIR="$pkgdir" cmake --build build --target install
 }
 
-sha512sums="f0cf8b49a09b3c43f4852eadd71493129498763b6ebd4e883c4cfd3e956aa470de00b92b36949c42585587073c880b81c9c91766ce118e7be7721b712329eead  yakuake-21.04.0.tar.xz"
+sha512sums="
+d4f651bfcc9db787f8b53c7237e4c19db33a7c2cd4c337ed271b639886a1453e562236be589644896de0fd82cbdc7adc41a3e16a20c8d6d7fadb4232849ef5c7  yakuake-21.04.3.tar.xz
+"

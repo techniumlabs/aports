@@ -1,7 +1,7 @@
 # Contributor: Michał Polański <michal@polanski.me>
 # Maintainer: Michał Polański <michal@polanski.me>
 pkgname=black
-pkgver=21.5_beta1
+pkgver=21.6_beta0
 _pkgver=${pkgver/_beta/b}
 pkgrel=0
 pkgdesc="The uncompromising Python code formatter"
@@ -33,5 +33,5 @@ package() {
 }
 
 sha512sums="
-94b34411bb62df80604441877460a4e04e881fc3e664978080209c90fa7613abacc427ec4419e76cf87ad29d64d8d99d2f4418d22cdf547bf7291219fbb735d8  black-21.5b1.tar.gz
+79f39eb53c0a03b1d1401bb4c9c71ace829011e9981d8434b76180a068d862030b3bda253763e489f96ea999dad29ad82aa89cfeb1fd18b435c7e09dc6e35831  black-21.6b0.tar.gz
 "

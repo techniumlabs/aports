@@ -1,14 +1,15 @@
 # Contributor: Sean Summers <seansummers@gmail.com>
 # Maintainer: Jakub Jirutka <jakub@jirutka.cz>
 pkgname=tomcat-native
-pkgver=1.2.28
-pkgrel=0
+pkgver=1.2.30
+pkgrel=1
 pkgdesc="Native resources optional component for Apache Tomcat"
 url="https://tomcat.apache.org/native-doc/"
-arch="all !mips !mips64"
+# mips64 and riscv64 blocked by java-jdk
+arch="all !mips64 !riscv64"
 license="Apache-2.0"
 options="!check" # package has no tests
-makedepends="apr-dev chrpath openjdk8 openssl-dev"
+makedepends="apr-dev chrpath java-jdk openssl-dev"
 subpackages="$pkgname-dev"
 source="https://www-eu.apache.org/dist/tomcat/tomcat-connectors/native/$pkgver/source/tomcat-native-$pkgver-src.tar.gz"
 builddir="$srcdir/$pkgname-$pkgver-src/native"
@@ -35,4 +36,6 @@ dev() {
 	mv "$subpkgdir"/usr/lib/libtcnative-1.so "$pkgdir"/usr/lib/
 }
 
-sha512sums="16b8659dcd228ea153d05c9ae19e3d97add944315f3b8b42905162d0e4e8a28fd51a172d59d7da8508271ecad0b8ac025a386895565acaf8e2ba11fba77492bb  tomcat-native-1.2.28-src.tar.gz"
+sha512sums="
+51a8c55214de166cace193c3330abe77cabea56c2d05efc8c3408bc06369c328899376c94c572725ebe2887f2faf99fea05d1819fa84c712d57fd309d0476953  tomcat-native-1.2.30-src.tar.gz
+"

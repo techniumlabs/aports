@@ -1,16 +1,32 @@
 # Contributor: Bart Ribbers <bribbers@disroot.org>
 # Maintainer: Bart Ribbers <bribbers@disroot.org>
 pkgname=akonadi-calendar
-pkgver=21.04.0
+pkgver=21.04.3
 pkgrel=0
-pkgdesc="Libraries and daemons to implement basic email handling"
-arch="all !ppc64le !s390x !armhf !mips !mips64" # Limited by kmailtransport -> libkgapi -> qt5-qtwebengine
+pkgdesc="Akonadi calendar integration"
+# armhf blocked by extra-cmake-modules
+# ppc64le, s390x, mips64 and riscv64 blocked by kmailtransport -> libkgapi -> qt5-qtwebengine
+arch="all !armhf !ppc64le !s390x !mips64 !riscv64"
 url="https://community.kde.org/KDE_PIM"
 license="LGPL-2.0-or-later"
-depends_dev="ki18n-dev kwidgetsaddons-dev kxmlgui-dev kio-dev kcodecs-dev
-	kiconthemes-dev kdbusaddons-dev kmailtransport-dev kidentitymanagement-dev
-	kcalendarcore-dev kcalutils-dev akonadi-dev>=$pkgver akonadi-contacts-dev>=$pkgver"
-makedepends="$depends_dev extra-cmake-modules"
+depends_dev="
+	akonadi-contacts-dev>=$pkgver
+	akonadi-dev>=$pkgver
+	kcalendarcore-dev
+	kcalutils-dev
+	kcodecs-dev
+	kdbusaddons-dev
+	ki18n-dev
+	kiconthemes-dev
+	kidentitymanagement-dev
+	kio-dev
+	kmailtransport-dev
+	kwidgetsaddons-dev
+	kxmlgui-dev
+	"
+makedepends="$depends_dev
+	extra-cmake-modules
+	"
 checkdepends="xvfb-run"
 source="https://download.kde.org/stable/release-service/$pkgver/src/akonadi-calendar-$pkgver.tar.xz"
 subpackages="$pkgname-dev $pkgname-lang"
@@ -30,6 +46,8 @@ check() {
 }
 
 package() {
-	DESTDIR="$pkgdir" cmake --build build --target install
+	DESTDIR="$pkgdir" cmake --install build
 }
-sha512sums="0ce070d98b84bdaf5fe0cad8fc1f1366a13a05700eb88a15bf8e709a9b1c93ec59aefc4b096e96a7e22bc94057779d5ae80ff36bc3b24b504455320ca65222f5  akonadi-calendar-21.04.0.tar.xz"
+sha512sums="
+220f5ef5d403d3b1f59faf7f57bbd33670e9bd909896ac786618563c8fc67856727f4587039b1666f1f5b1d4bbce93357d474e865b29ac629b21fb59f023801c  akonadi-calendar-21.04.3.tar.xz
+"

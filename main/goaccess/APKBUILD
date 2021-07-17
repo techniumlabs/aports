@@ -2,7 +2,7 @@
 # Contributor: Fabian Affolter <fabian@affolter-engineering.ch>
 # Maintainer: Fabian Affolter <fabian@affolter-engineering.ch>
 pkgname=goaccess
-pkgver=1.4.6
+pkgver=1.5.1
 pkgrel=0
 pkgdesc="Real-time web log analyzer and interactive viewer"
 options="!check" # no test suite
@@ -30,4 +30,6 @@ package() {
 	make DESTDIR="$pkgdir" install
 }
 
-sha512sums="4470809e7ebe59522824b3300e31b93294cfd964e25b1a3c50c77e1c10d6f23b3b014c86518cd8a28f314ce875f15627aba0f0e9f4636ef4181d1169c018f1ff  goaccess-1.4.6.tar.gz"
+sha512sums="
+aefdc8a61d85d7f8148857c6873b4589eb2f1d3f5b4986a97d0d4223c1d30da23d5fc8e6ba3cbdf41654072b299036fbcbae397d1934a95d1d26931e7f2f5d9a  goaccess-1.5.1.tar.gz
+"

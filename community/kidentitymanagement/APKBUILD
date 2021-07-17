@@ -1,12 +1,12 @@
 # Contributor: Bart Ribbers <bribbers@disroot.org>
 # Maintainer: Bart Ribbers <bribbers@disroot.org>
 pkgname=kidentitymanagement
-pkgver=21.04.0
+pkgver=21.04.3
 pkgrel=0
 pkgdesc="KDE PIM libraries"
 # armhf blocked by extra-cmake-modules
-# s390x blocked by multiple KDE Frameworks
-arch="all !armhf !s390x !mips64"
+# s390x, mips64 and riscv64 blocked by polkit -> kio
+arch="all !armhf !s390x !mips64 !riscv64"
 url="https://kontact.kde.org"
 license="LGPL-2.0-or-later"
 depends_dev="
@@ -42,6 +42,8 @@ check() {
 }
 
 package() {
-	DESTDIR="$pkgdir" cmake --build build --target install
+	DESTDIR="$pkgdir" cmake --install build
 }
-sha512sums="55c3d6170739811434ec66c6ef4706b386ea40145bba3e8712d5f131c5897f3aa9f7b116483c37ebdada66c255c66305b15c344300d1ff938d4755ded7070dcf  kidentitymanagement-21.04.0.tar.xz"
+sha512sums="
+f1f8b2bf314165fad19d6cca60e2df265cccb8839de7d1ece4f6ac9567117cee72b4496fdadb6280f26d402a09a9bc8600c49fe4eeb4ffb91536cf0a83e8430c  kidentitymanagement-21.04.3.tar.xz
+"

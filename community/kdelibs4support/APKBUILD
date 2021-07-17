@@ -1,14 +1,48 @@
 # Contributor: Bart Ribbers <bribbers@disroot.org>
 # Maintainer: Bart Ribbers <bribbers@disroot.org>
 pkgname=kdelibs4support
-pkgver=5.82.0
+pkgver=5.84.0
 pkgrel=0
 pkgdesc="Porting aid from KDELibs4"
-arch="all !armhf !mips64 !s390x" # armhf blocked by extra-cmake-modules and mips64, s390x blocked by polkit
+# armhf blocked by extra-cmake-modules
+# mips64, s390x and riscv64 blocked by polkit -> kio
+arch="all !armhf !mips64 !s390x !riscv64"
 url="https://community.kde.org/Frameworks"
 license="LGPL-2.1-or-later AND MIT AND LGPL-2.1-only AND LGPL-2.0-only AND (LGPL-2.1-only OR LGPL-3.0-only) AND (LGPL-2.0-only OR LGPL-3.0-only)"
-depends_dev="qt5-qtbase-dev qt5-qttools-dev kcompletion-dev kconfig-dev kconfigwidgets-dev kcrash-dev kdesignerplugin kdesignerplugin-dev kglobalaccel-dev kemoticons-dev kguiaddons-dev ki18n-dev kiconthemes-dev kio-dev knotifications-dev kparts-dev kservice-dev ktextwidgets-dev kunitconversion-dev kwidgetsaddons-dev kwindowsystem-dev kxmlgui-dev kdbusaddons-dev kded-dev kinit-dev perl-uri kdoctools-dev kitemmodels-dev"
-makedepends="$depends_dev extra-cmake-modules kded"
+depends_dev="
+	kcompletion-dev
+	kconfig-dev
+	kconfigwidgets-dev
+	kcrash-dev
+	kdbusaddons-dev
+	kded-dev
+	kdesignerplugin
+	kdesignerplugin-dev
+	kdoctools-dev
+	kemoticons-dev
+	kglobalaccel-dev
+	kguiaddons-dev
+	ki18n-dev
+	kiconthemes-dev
+	kinit-dev
+	kio-dev
+	kitemmodels-dev
+	knotifications-dev
+	kparts-dev
+	kservice-dev
+	ktextwidgets-dev
+	kunitconversion-dev
+	kwidgetsaddons-dev
+	kwindowsystem-dev
+	kxmlgui-dev
+	perl-uri
+	qt5-qtbase-dev
+	qt5-qttools-dev
+	"
+makedepends="$depends_dev
+	extra-cmake-modules
+	kded
+	"
 checkdepends="xvfb-run"
 source="https://download.kde.org/stable/frameworks/${pkgver%.*}/portingAids/kdelibs4support-$pkgver.tar.xz"
 subpackages="$pkgname-dev $pkgname-doc $pkgname-lang"
@@ -29,8 +63,8 @@ check() {
 
 
 package() {
-	DESTDIR="$pkgdir" cmake --build build --target install
+	DESTDIR="$pkgdir" cmake --install build
 }
 sha512sums="
-0662810f884d65d33b789fbae02009e5e6c92d8df45a4355899722a96dd7402168a46998150a9ee580e5dad8873a38a829c1f73d8157cc3cbcff495cd5a875d9  kdelibs4support-5.82.0.tar.xz
+9c4cfd20ad16ba8bd4f8feeade4142e8126c37d5967f61672282e6f98f5cd505f2e4fec36700b15451c08549416c0bb81ce3bf450bdd25e5ef11670c093c51ff  kdelibs4support-5.84.0.tar.xz
 "

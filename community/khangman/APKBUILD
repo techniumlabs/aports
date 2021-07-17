@@ -1,13 +1,33 @@
 # Contributor: Bart Ribbers <bribbers@disroot.org>
 # Maintainer: Bart Ribbers <bribbers@disroot.org>
 pkgname=khangman
-pkgver=21.04.0
+pkgver=21.04.3
 pkgrel=0
-arch="all !armhf !s390x !mips64" # armhf blocked by qt5-qtdeclarative
+# armhf blocked by qt5-qtdeclarative
+# s390x, mips64 and riscv64 blocked by polkit -> kio
+arch="all !armhf !s390x !mips64 !riscv64"
 url="http://edu.kde.org/khangman"
 pkgdesc="Hangman game"
 license="GPL-2.0-or-later"
-makedepends="extra-cmake-modules qt5-qtbase-dev qt5-qtdeclarative-dev qt5-qtsvg-dev ki18n-dev kcrash-dev kcompletion-dev kconfig-dev kcoreaddons-dev kconfigwidgets-dev kdeclarative-dev kdoctools-dev knewstuff-dev knotifications-dev kxmlgui-dev kio-dev libkeduvocdocument-dev"
+makedepends="
+	extra-cmake-modules
+	kcompletion-dev
+	kconfig-dev
+	kconfigwidgets-dev
+	kcoreaddons-dev
+	kcrash-dev
+	kdeclarative-dev
+	kdoctools-dev
+	ki18n-dev
+	kio-dev
+	knewstuff-dev
+	knotifications-dev
+	kxmlgui-dev
+	libkeduvocdocument-dev
+	qt5-qtbase-dev
+	qt5-qtdeclarative-dev
+	qt5-qtsvg-dev
+	"
 source="https://download.kde.org/stable/release-service/$pkgver/src/khangman-$pkgver.tar.xz"
 subpackages="$pkgname-doc $pkgname-lang"
 options="!check" # No tests
@@ -26,7 +46,9 @@ check() {
 }
 
 package() {
-	DESTDIR="$pkgdir" cmake --build build --target install
+	DESTDIR="$pkgdir" cmake --install build
 }
 
-sha512sums="add758d8fb22d584c044a6c98a350ac7bde3d14ea210d36adac3f19d789f9adcad647e36daeccfa5e068101e1c07ed72021d3feaf98ac6eab34b6fd0db4790c8  khangman-21.04.0.tar.xz"
+sha512sums="
+9b5f719d1740484fcb30492f03c6e88f0306932bcd581425f6c6cf8d85868fe11dfd7b5fbd1bef5cc81c113d8e209961df0147f4d440ed6f6106ff1b215532e4  khangman-21.04.3.tar.xz
+"

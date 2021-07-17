@@ -1,7 +1,7 @@
 # Contributor: Bart Ribbers <bribbers@disroot.org>
 # Maintainer: Bart Ribbers <bribbers@disroot.org>
 pkgname=kdeedu-data
-pkgver=21.04.0
+pkgver=21.04.3
 pkgrel=0
 arch="noarch !armhf" # armhf blocked by extra-cmake-modules
 url="https://kde.org/applications/education"
@@ -23,4 +23,6 @@ package() {
 	DESTDIR="$pkgdir" cmake --build build --target install
 }
 
-sha512sums="dc7c71a6a420efa923d9b39fa7da3ecdea7504c337f31f6d4bfe8d1fb9ce3f0ceef1ad89c8ba199cf7c6ccaa5366c950bd9a62cf3403f52871c37bafd4525dfb  kdeedu-data-21.04.0.tar.xz"
+sha512sums="
+987c5d65be467837e458d5d74540ff6ec2d6a47f59043d7a41517642deda5c4645b76ae9cbf8d5f299841b13e4034aedf9ef9afe30b2453e782a6056656885fc  kdeedu-data-21.04.3.tar.xz
+"

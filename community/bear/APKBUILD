@@ -1,8 +1,8 @@
 # Contributor: Sören Tempel <soeren+alpine@soeren-tempel.net>
 # Maintainer: Sören Tempel <soeren+alpine@soeren-tempel.net>
 pkgname=bear
-pkgver=3.0.11
-pkgrel=0
+pkgver=3.0.13
+pkgrel=1
 pkgdesc="Tool which generates a compilation database for clang tooling"
 url="https://github.com/rizsotto/Bear"
 # ppc64le armv7 armhf mips64: Limited by grpc
@@ -10,7 +10,7 @@ url="https://github.com/rizsotto/Bear"
 arch="all !s390x !ppc64le !armv7 !armhf !mips64"
 license="GPL-3.0-or-later"
 makedepends="cmake grpc grpc-dev fmt-dev spdlog-dev sqlite-dev
-	nlohmann-json protobuf-dev gtest-dev c-ares-dev"
+	nlohmann-json protobuf-dev gtest-dev c-ares-dev re2-dev"
 subpackages="$pkgname-doc"
 source="https://github.com/rizsotto/Bear/archive/$pkgver/bear-$pkgver.tar.gz"
 builddir="$srcdir/Bear-$pkgver"
@@ -34,4 +34,6 @@ package() {
 	make -C build DESTDIR="$pkgdir" install
 }
 
-sha512sums="6d362aede911a8ad35be30638a698579582ca5de770a7c3199bb205046f08f355387099261b8d857188d526ab62024f78e3d06a225734c5f9acca03e5dfea1ec  bear-3.0.11.tar.gz"
+sha512sums="
+1c515d5941870b9bc76fa85d02229ace85653c6f985e00a8fa9e2f17ba9079d162d654a17024394819a7ae203167253641a3d7c17c490e49e30fa92d434e6a6e  bear-3.0.13.tar.gz
+"

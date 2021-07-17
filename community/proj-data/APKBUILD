@@ -1,7 +1,7 @@
 # Contributor: Holger Jaekel <holger.jaekel@gmx.de>
 # Maintainer: Holger Jaekel <holger.jaekel@gmx.de>
 pkgname=proj-data
-pkgver=1.3
+pkgver=1.7
 pkgrel=0
 pkgdesc="Resource files for Cartographic Projections and Coordinate Transformations Library PROJ"
 url="https://proj.org/"
@@ -15,4 +15,6 @@ package() {
 	unzip -o "$srcdir/proj-data-$pkgver.zip" -d "$pkgdir"/usr/share/proj
 }
 
-sha512sums="fb5c710160b54db0a1eb7de0b218857534935052373ac4b8e93f620ca12079bf9286832a269a3cc310c9e1a8d08a783ccf92f9d321cee9986d6bb41e59a24c6c  proj-data-1.3.zip"
+sha512sums="
+df1a1c3c17a4f2620ef8441a257a270fc19fdb2696a598e08c1d0703db51d59832ae39c6096e6a1affaf08f463b97c97894ffb68995ac15a99930e5d6ab89872  proj-data-1.7.zip
+"

@@ -1,14 +1,29 @@
 # Contributor: Bart Ribbers <bribbers@disroot.org>
 # Maintainer: Bart Ribbers <bribbers@disroot.org>
 pkgname=kcmutils
-pkgver=5.82.0
+pkgver=5.84.0
 pkgrel=0
 pkgdesc="Utilities for interacting with KCModules"
-arch="all !armhf !mips64 !s390x" # armhf blocked by extra-cmake-modules and mips64, s390x blocked by polkit
+# armhf blocked by extra-cmake-modules
+# mips64, s390x and riscv64 blocked by polkit
+arch="all !armhf !mips64 !s390x !riscv64"
 url="https://community.kde.org/Frameworks"
 license="LGPL-2.1-only AND LGPL-2.1-or-later"
-depends_dev="kitemviews-dev kconfigwidgets-dev kcoreaddons-dev ki18n-dev kiconthemes-dev kservice-dev kxmlgui-dev kdeclarative-dev"
-makedepends="$depends_dev extra-cmake-modules doxygen qt5-qttools-dev"
+depends_dev="
+	kconfigwidgets-dev
+	kcoreaddons-dev
+	kdeclarative-dev
+	ki18n-dev
+	kiconthemes-dev
+	kitemviews-dev
+	kservice-dev
+	kxmlgui-dev
+	"
+makedepends="$depends_dev
+	doxygen
+	extra-cmake-modules
+	qt5-qttools-dev
+	"
 checkdepends="xvfb-run"
 source="https://download.kde.org/stable/frameworks/${pkgver%.*}/kcmutils-$pkgver.tar.xz"
 subpackages="$pkgname-dev $pkgname-doc $pkgname-lang"
@@ -28,8 +43,8 @@ check() {
 }
 
 package() {
-	DESTDIR="$pkgdir" cmake --build build --target install
+	DESTDIR="$pkgdir" cmake --install build
 }
 sha512sums="
-709294fbbbaabf31384753651a320069e6779d101dbbec94ba09ae95146344989e854cab5fdd39510c300e026f113a156fe43d3b2fa57191851c95709a1997e4  kcmutils-5.82.0.tar.xz
+176533ba2b3039c736478ddcb2d921396ebcf0b9c5e50b70878b111de1419b64ab7ee02227052e3e5c1f71f65f41db5caacf0c12e6055e9661318820d91d3eb3  kcmutils-5.84.0.tar.xz
 "

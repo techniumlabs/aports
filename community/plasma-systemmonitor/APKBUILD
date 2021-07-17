@@ -1,12 +1,12 @@
 # Contributor: Bart Ribbers <bribbers@disroot.org>
 # Maintainer: Bart Ribbers <bribbers@disroot.org>
 pkgname=plasma-systemmonitor
-pkgver=5.21.5
+pkgver=5.22.3
 pkgrel=0
 pkgdesc="An application for monitoring system resources"
 # armhf blocked by extra-cmake-modules
-# s390x blocked by libksysguard
-arch="all !armhf !s390x !mips64"
+# s390x, mips64 and riscv64 blocked by polkit -> kio
+arch="all !armhf !s390x !mips64 !riscv64"
 url="https://kde.org/plasma-desktop/"
 license="LicenseRef-KDE-Accepted-GPL AND LicenseRef-KDE-Accepted-LGPL AND CC0-1.0"
 depends="kirigami2"
@@ -51,5 +51,5 @@ package() {
 	DESTDIR="$pkgdir" cmake --install build
 }
 sha512sums="
-f21db1dc9428b9f97b4b012ae481738f7aa96c9080f35870c8a8f2dfed582b937507fd626723dbd60e66656d78984bda24279c77548d65efd847e15374b024f0  plasma-systemmonitor-5.21.5.tar.xz
+71e815356ddeeb5ce4ef90c0e3a7b343446005b96e42b4b256095bfcf861d354764d9d1b2a0b6f4f09c484852116bf70607ce9bbc0b1fcbc5e608daa39bc181a  plasma-systemmonitor-5.22.3.tar.xz
 "

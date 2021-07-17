@@ -1,11 +1,12 @@
 # Contributor: Bart Ribbers <bribbers@disroot.org>
 # Maintainer: Bart Ribbers <bribbers@disroot.org>
 pkgname=gwenview
-pkgver=21.04.0
+pkgver=21.04.3
 pkgrel=0
 # armhf blocked by extra-cmake-modules
-# s390x blocked by kxmlgui
-arch="all !armhf !s390x !mips64"
+# s390x, mips64 and riscv64 blocked by polkit -> kio
+# ppc64le blocked by qt5-qtwebengine -> purpose
+arch="all !armhf !s390x !mips64 !riscv64 !ppc64le"
 url="https://kde.org/applications/graphics/org.kde.gwenview"
 pkgdesc="Fast and easy to use image viewer by KDE"
 license="GPL-2.0-only"
@@ -71,8 +72,10 @@ check() {
 }
 
 package() {
-	DESTDIR="$pkgdir" cmake --build build --target install
+	DESTDIR="$pkgdir" cmake --install build
 }
 
-sha512sums="68a890a11d8cb7c63f414ad940eead983a59886c9a24e7b06376f7edd388f020d337768ca78c1adf654b22aa358c65c5886b52c7fde315d6af7cd7fba2ceda3f  gwenview-21.04.0.tar.xz
-d382948b56bf66045f4ef2295a13492cfe65f90475b0e36091a10d8c2a78888891cba2278de8af229a6b7b042652b9c80f781d73c969fff0f5a62b4296c58bb5  fix-imagescalertest.patch"
+sha512sums="
+83caa2da3afe552a5c48955136a54e5c53b2ffd83ee68fd5f7caee849d9d7547a566941c41f7b13973e8f292a31ad9ad9d9ccdea7f44b76cab8b2f97efe160d1  gwenview-21.04.3.tar.xz
+d382948b56bf66045f4ef2295a13492cfe65f90475b0e36091a10d8c2a78888891cba2278de8af229a6b7b042652b9c80f781d73c969fff0f5a62b4296c58bb5  fix-imagescalertest.patch
+"

@@ -1,13 +1,28 @@
 # Contributor: Bart Ribbers <bribbers@disroot.org>
 # Maintainer: Bart Ribbers <bribbers@disroot.org>
 pkgname=klines
-pkgver=21.04.0
+pkgver=21.04.3
 pkgrel=0
-arch="all !armhf !s390x !mips64" # armhf blocked by extra-cmake-modules
+# armhf blocked by extra-cmake-modules
+# s390x, mips64 and riscv64 blocked by polkit -> kxmlgui
+arch="all !armhf !s390x !mips64 !riscv64"
 url="https://kde.org/applications/games/klines/"
 pkgdesc="A simple but highly addictive one player game"
 license="GPL-2.0-or-later AND GFDL-1.2-only"
-makedepends="extra-cmake-modules qt5-qtbase-dev kcoreaddons-dev kconfig-dev kcrash-dev kwidgetsaddons-dev kdbusaddons-dev ki18n-dev kconfigwidgets-dev kxmlgui-dev kdoctools-dev libkdegames-dev"
+makedepends="
+	extra-cmake-modules
+	kconfig-dev
+	kconfigwidgets-dev
+	kcoreaddons-dev
+	kcrash-dev
+	kdbusaddons-dev
+	kdoctools-dev
+	ki18n-dev
+	kwidgetsaddons-dev
+	kxmlgui-dev
+	libkdegames-dev
+	qt5-qtbase-dev
+	"
 source="https://download.kde.org/stable/release-service/$pkgver/src/klines-$pkgver.tar.xz"
 subpackages="$pkgname-doc $pkgname-lang"
 options="!check" # No tests
@@ -21,7 +36,9 @@ build() {
 }
 
 package() {
-	DESTDIR="$pkgdir" cmake --build build --target install
+	DESTDIR="$pkgdir" cmake --install build
 }
 
-sha512sums="20a5c943313b245b3b48919c687661a15ef6749d6924d9f318999084f5add6b83f08e3b51c9e7f609c44adc127e529bc660cc1c56f56d8780c8b4cafaa48e96b  klines-21.04.0.tar.xz"
+sha512sums="
+1d7d04c1e11b3e33a95749ec8516459bd6c6399e6d08f1065aaf50499b8a778256c826ea9c8107c264acc08622834aaf65d817e90ca12d3fd4b4cb033c2e4b0b  klines-21.04.3.tar.xz
+"

@@ -1,13 +1,12 @@
 # Contributor: Bart Ribbers <bribbers@disroot.org>
 # Maintainer: Bart Ribbers <bribbers@disroot.org>
 pkgname=plasma-sdk
-pkgver=5.21.5
+pkgver=5.22.3
 pkgrel=0
 pkgdesc="Applications useful for Plasma Development"
 # armhf blocked by qt5-qtdeclarative
-# s390x blocked by kconfigwidgets
-# mips64 blocked by multiple dependencies
-arch="all !armhf !s390x !mips64"
+# mips64, s390x and riscv64 blocked by polkit -> kio
+arch="all !armhf !s390x !mips64 !riscv64"
 url="https://kde.org/plasma-desktop/"
 license="GPL-2.0-or-later"
 depends="
@@ -64,5 +63,5 @@ package() {
 }
 
 sha512sums="
-83d27d9ffca15baba292bdf285f19a743589f5a4433c6fad8fd581a93a910be0ce98f3163c7d6872d6a95b71342e301de5ebf6ce2677fcdfb61b8e4644a0d80f  plasma-sdk-5.21.5.tar.xz
+4531b4d0e7a56034f5c145c9586192185b46a40e93ba0e17bff8b82e3ccb7eaf480c2deb1208db04475ed4520e6513f5f1a679e1de8c7a8950c822409f9571e4  plasma-sdk-5.22.3.tar.xz
 "

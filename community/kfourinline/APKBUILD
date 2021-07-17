@@ -1,13 +1,29 @@
 # Contributor: Bart Ribbers <bribbers@disroot.org>
 # Maintainer: Bart Ribbers <bribbers@disroot.org>
 pkgname=kfourinline
-pkgver=21.04.0
+pkgver=21.04.3
 pkgrel=0
-arch="all !armhf !s390x !mips64" # armhf blocked by extra-cmake-modules
-url="https://kde.org/applications/games/kfourinline/"
 pkgdesc="A four-in-a-row game"
+# armhf blocked by extra-cmake-modules
+# s390x, mips64 and riscv64 blocked by polkit -> kxmlgui
+arch="all !armhf !s390x !mips64 !riscv64"
+url="https://kde.org/applications/games/kfourinline/"
 license="GPL-2.0-or-later AND GFDL-1.2-only"
-makedepends="extra-cmake-modules qt5-qtbase-dev qt5-qtsvg-dev kconfig-dev kconfigwidgets-dev kcoreaddons-dev kcrash-dev kdnssd-dev kdoctools-dev ki18n-dev kwidgetsaddons-dev kxmlgui-dev libkdegames-dev"
+makedepends="
+	extra-cmake-modules
+	kconfig-dev
+	kconfigwidgets-dev
+	kcoreaddons-dev
+	kcrash-dev
+	kdnssd-dev
+	kdoctools-dev
+	ki18n-dev
+	kwidgetsaddons-dev
+	kxmlgui-dev
+	libkdegames-dev
+	qt5-qtbase-dev
+	qt5-qtsvg-dev
+	"
 source="https://download.kde.org/stable/release-service/$pkgver/src/kfourinline-$pkgver.tar.xz"
 subpackages="$pkgname-doc $pkgname-lang"
 options="!check" # No tests
@@ -21,7 +37,9 @@ build() {
 }
 
 package() {
-	DESTDIR="$pkgdir" cmake --build build --target install
+	DESTDIR="$pkgdir" cmake --install build
 }
 
-sha512sums="18e055e9faeb38a107da66266be197dc9b6fd2fc4eb5dabfdfe7afee13bc75b03f39ae2c337aee07d11c138d85f04f50fb55078b595e0d8c7ea6f689c336b5f7  kfourinline-21.04.0.tar.xz"
+sha512sums="
+29460df6c7f0529d4b82a1e30256bb5629bbeacabaa78b843837f6b4c084f07a9748ca8dd41e2a41acb3a5f81662ef224f0ed508714f9f4e53ca33bab64099fe  kfourinline-21.04.3.tar.xz
+"

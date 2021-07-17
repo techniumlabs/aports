@@ -1,7 +1,7 @@
 # Contributor:
 # Maintainer: Bart Ribbers <bribbers@disroot.org>
 pkgname=attica
-pkgver=5.82.0
+pkgver=5.84.0
 pkgrel=0
 pkgdesc="Freedesktop OCS binding for Qt"
 url="http://www.kde.org/"
@@ -31,5 +31,5 @@ package() {
 }
 
 sha512sums="
-8569ec110679bc026f98cf98ef79aba44279821f10f6153f0054c7a75806921683a83317bc1873896f5bba23679eb4fbe50b50ea43b22813dd2b203e84bf44d2  attica-5.82.0.tar.xz
+6baf5dae5785784f7c52efec17394ae5f5ee7eac76f7d8ca76448de15e735350d43b8200ab88a4bb69d228637e0584d38c0d073e998c16a3d46e4b358e5c0c8e  attica-5.84.0.tar.xz
 "

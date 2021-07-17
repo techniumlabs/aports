@@ -1,10 +1,12 @@
 # Contributor: Bart Ribbers <bribbers@disroot.org>
 # Maintainer: Bart Ribbers <bribbers@disroot.org>
 pkgname=qqc2-desktop-style
-pkgver=5.82.0
+pkgver=5.84.0
 pkgrel=0
 pkgdesc="A style for Qt Quick Controls 2 to make it follow your desktop theme"
-arch="all !armhf !mips64 !s390x" # armhf blocked by qt5-qtdeclarative and mips64, s390x blocked by polkit
+# armhf blocked by qt5-qtdeclarative
+# mips64, s390x and riscv64 blocked by polkit -> kconfigwidgets
+arch="all !armhf !mips64 !s390x !riscv64"
 url="https://community.kde.org/Frameworks"
 license="LGPL-3.0-only AND (GPL-2.0-only OR GPL-3.0-only)"
 depends="
@@ -39,8 +41,8 @@ check() {
 }
 
 package() {
-	DESTDIR="$pkgdir" cmake --build build --target install
+	DESTDIR="$pkgdir" cmake --install build
 }
 sha512sums="
-ce4db38f835971d6f63dced360db8a320e06e3a6f808bd017d56548041f6d0332b119dc0f6d4e160c7847d9d47e6818d2a867e0f243e58fd6c56843643d55a52  qqc2-desktop-style-5.82.0.tar.xz
+9cb24d5013dea87fe96c4de464e8c72934e578385fe371880b6e599e46b45631c677f8b98c367bc60252cfadff2142da0652010d734c4f57d7ac46599bcb029a  qqc2-desktop-style-5.84.0.tar.xz
 "

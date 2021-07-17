@@ -2,7 +2,7 @@
 # Maintainer: Fabio Ribeiro <fabiorphp@gmail.com>
 pkgname=php7-pecl-ast
 _extname=ast
-pkgver=1.0.11
+pkgver=1.0.13
 pkgrel=0
 pkgdesc="PHP extension exposing PHP 7 abstract syntax tree - PECL"
 url="https://pecl.php.net/package/ast"
@@ -33,4 +33,6 @@ package() {
 	echo "extension=$_extname" > $_confdir/$_extname.ini
 }
 
-sha512sums="54e28bfdbe72e4a7675c2a6d6e50560bc55c8aa5b102a0469f3baafee35b039aca0d8ce70dd1fcb14d956003ee5a071b19388d303711d5d0aef7b3039bee2d3c  php-pecl-ast-1.0.11.tar.gz"
+sha512sums="
+b499c8720e0b13dcd21e8dbc529286b4fa52c27798b8f5b99c8569ba12515b182e5bf26b7e7b45b79826b30aaf0ac2c1f41f6738464b198857d2192d42882b11  php-pecl-ast-1.0.13.tar.gz
+"

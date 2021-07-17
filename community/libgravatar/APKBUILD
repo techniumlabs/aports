@@ -1,12 +1,13 @@
 # Contributor: Bart Ribbers <bribbers@disroot.org>
 # Maintainer: Bart Ribbers <bribbers@disroot.org>
 pkgname=libgravatar
-pkgver=21.04.0
+pkgver=21.04.3
 pkgrel=0
 pkgdesc="KDE PIM library providing Gravatar support"
 # armhf blocked by extra-cmake-modules
-# mips, mips64 and s390x blocked by pimcommon
-arch="all !armhf !mips64 !s390x"
+# mips64, s390x and riscv64 blocked by polkit -> kio
+# ppc64le blocked by qt5-qtwebengine -> akonadi
+arch="all !armhf !mips64 !s390x !riscv64 !ppc64le"
 url="https://kontact.kde.org/"
 license="LGPL-2.0-or-later"
 depends_dev="
@@ -18,7 +19,9 @@ depends_dev="
 	pimcommon-dev
 	qt5-qtbase-dev
 	"
-makedepends="$depends_dev extra-cmake-modules"
+makedepends="$depends_dev
+	extra-cmake-modules
+	"
 checkdepends="xvfb-run"
 source="https://download.kde.org/stable/release-service/$pkgver/src/libgravatar-$pkgver.tar.xz"
 subpackages="$pkgname-dev $pkgname-lang"
@@ -37,6 +40,8 @@ check() {
 }
 
 package() {
-	DESTDIR="$pkgdir" cmake --build build --target install
+	DESTDIR="$pkgdir" cmake --install build
 }
-sha512sums="21e53f156c2d79d1811ec8f5a1aa23975e373db821e9995ec1841c32c5b26323941e2f0c70a7b4442203b96f43e10f7b10ba856163d81e28039132b888b6fde0  libgravatar-21.04.0.tar.xz"
+sha512sums="
+3477d1884915c0c157e565474d1c61a7ab5bcd3a589c94312e389b3ccb780888aa404d5bf76c6eb9363f1ee30f0f77f748aa0b5a8c835214134675a176daa028  libgravatar-21.04.3.tar.xz
+"

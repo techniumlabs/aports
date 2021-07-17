@@ -1,26 +1,30 @@
 # Contributor: Konstantin Kulikov <k.kulikov2@gmail.com>
 # Maintainer: Konstantin Kulikov <k.kulikov2@gmail.com>
+
+# Keep in sync with grafana-frontend.
+
 pkgname=grafana
-pkgver=7.5.6
+pkgver=8.0.6
 pkgrel=0
-_commit=5fdad5bfe4 # git rev-parse --short HEAD
-_stamp=1620734547 # git --no-pager show -s --format=%ct
+_commit=68fe9e3431 # git rev-parse --short HEAD
+_stamp=1626335359 # git --no-pager show -s --format=%ct
 pkgdesc="Open source, feature rich metrics dashboard and graph editor"
 url="https://grafana.com"
 arch="all"
-license="Apache-2.0"
+license="AGPL-3.0-only"
+depends="grafana-frontend=$pkgver-r$pkgrel"
 makedepends="go"
 install="$pkgname.pre-install"
 subpackages="$pkgname-openrc"
 options="net"
 source="$pkgname-$pkgver.tar.gz::https://github.com/grafana/grafana/archive/v$pkgver.tar.gz
-	$pkgname-$pkgver-bin.tar.gz::https://dl.grafana.com/oss/release/grafana-$pkgver.linux-amd64.tar.gz
 	$pkgname.initd
 	$pkgname.confd"
 
 export GOPATH=$srcdir/go
 export GOCACHE=$srcdir/go-build
 export GOTMPDIR=$srcdir
+export GOFLAGS="$GOFLAGS -modcacherw"
 
 # secfixes:
 #   7.4.5-r0:
@@ -35,8 +39,8 @@ export GOTMPDIR=$srcdir
 
 build() {
 	local ldflags="-X main.version=$pkgver -X main.commit=$_commit -X main.buildstamp=$_stamp"
-	go build -modcacherw -ldflags "$ldflags" -v github.com/grafana/grafana/pkg/cmd/grafana-server
-	go build -modcacherw -ldflags "$ldflags" -v github.com/grafana/grafana/pkg/cmd/grafana-cli
+	go build -ldflags "$ldflags" -v github.com/grafana/grafana/pkg/cmd/grafana-server
+	go build -ldflags "$ldflags" -v github.com/grafana/grafana/pkg/cmd/grafana-cli
 
 }
 
@@ -45,30 +49,12 @@ check() {
 
 	case "$CARCH" in
 	# https://github.com/grafana/grafana/issues/26389
-	x86) pkgs="$(go list -modcacherw ./... | grep -Ev '(pkg/tsdb$)|(pkg/components/gtime$)')" ;;
-	armv7|armhf) pkgs="$(go list -modcacherw ./... | grep -Ev '(pkg/components/gtime$)')" ;;
+	x86|armv7|armhf) pkgs="$(go list ./... | grep -Ev '(pkg/components/gtime$)')" ;;
 	# https://github.com/grafana/grafana/issues/26390
-	s390x|mips64) pkgs="$(go list -modcacherw ./... | grep -Ev '(pkg/tsdb/influxdb/flux$)')" ;;
+	s390x|mips64) pkgs="$(go list ./... | grep -Ev '(pkg/tsdb/influxdb/flux$)|(pkg/tsdb/testdatasource$)')" ;;
 	esac
 
-	# Grafana creates html tree in /tmp during test.
-	# However instead of copying files it instead tries to hardlink them.
-	# It then overwrites {index,error}.html with {index,error}-template.html
-	# This is not a problem for most systems because /tmp is usually on tmpfs
-	# and hardlinking there from another filesystem is not possible.
-	# Also grafana official builder builds backend, then runs tests,
-	# then builds frontend and finally runs frontend tests, so it's not a problem for them as well.
-	# As this apkbuild uses prebuilt html assets (because upstream doesn't support building
-	# on anything other than linux/amd64),
-	# changing build order is much harder than simply backing up overwritten files
-	# and restoring them after running tests.
-	cp public/views/index.html public/views/index.bkp
-	cp public/views/error.html public/views/error.bkp
-
-	go test -modcacherw $pkgs
-
-	mv public/views/index.bkp public/views/index.html
-	mv public/views/error.bkp public/views/error.html
+	go test $pkgs
 }
 
 package() {
@@ -78,10 +64,11 @@ package() {
 	install -Dm755 "$builddir/$pkgname-cli" "$pkgdir/usr/bin/$pkgname-cli"
 	install -Dm644 "$builddir/conf/sample.ini" "$pkgdir/etc/grafana.ini"
 	install -dm755 "$pkgdir/usr/share/grafana"
-	cp -r "$builddir/conf" "$builddir/public" "$pkgdir/usr/share/$pkgname/"
+	cp -r "$builddir/conf" "$pkgdir/usr/share/$pkgname/"
 }
 
-sha512sums="7018b3b77e6422252ea6db8be008a7032e6b969e6b78e7c3432fd50fcf969b6b2474fd3830885d3676a30214bb1be877f6b64642f9afe698060194fc07803e34  grafana-7.5.6.tar.gz
-f5472c6e12e9f67d96ef50e7646efc994cfe706837ffc38c0e35caae6aac309fa4a28f2ac7eb40ad2a829ea84c84d59ee76149793bf9e025f1e038276521174b  grafana-7.5.6-bin.tar.gz
+sha512sums="
+5421267ab242f1d236b9b1c1542c333b5713c55a45b38be380f17eba6a220e30b4a1cc3a531efe0dc647187e7d4ebee277b3bdf06170d088f4076aaa20754110  grafana-8.0.6.tar.gz
 b0a781e1b1e33741a97e231c761b1200239c6f1235ffbe82311fe883387eb23bef262ad68256ebd6cf87d74298041b53b947ea7a493cfa5aa814b2a1c5181e13  grafana.initd
-c2d9896ae9a9425f759a47aeab42b7c43b63328e82670d50185de8c08cda7b8df264c8b105c5c3138b90dd46e86598b16826457eb3b2979a899b3a508cbe4e8c  grafana.confd"
+c2d9896ae9a9425f759a47aeab42b7c43b63328e82670d50185de8c08cda7b8df264c8b105c5c3138b90dd46e86598b16826457eb3b2979a899b3a508cbe4e8c  grafana.confd
+"

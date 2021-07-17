@@ -1,11 +1,11 @@
 # Contributor: Bart Ribbers <bribbers@disroot.org>
 # Maintainer: Bart Ribbers <bribbers@disroot.org>
 pkgname=discover
-pkgver=5.21.5
+pkgver=5.22.3
 pkgrel=0
 # armhf blocked by qt5-qtdeclarative
-# s390x blocked by flatpak
-arch="all !armhf !s390x !mips64"
+# s390x, mips64 and riscv64 blocked by polkit -> kio
+arch="all !armhf !s390x !mips64 !riscv64"
 url="https://userbase.kde.org/Discover"
 pkgdesc="KDE Plasma resources management GUI"
 license="LGPL-2.0-or-later AND (GPL-2.0-only OR GPL-3.0-only) AND GFDL-1.2-only"
@@ -47,9 +47,10 @@ case "$pkgver" in
 esac
 source="
 	https://download.kde.org/$_rel/plasma/$pkgver/discover-$pkgver.tar.xz
-	0001-port-away-from-qaction.patch
-	0002-Add-support-for-Alpine-Linux-apk-backend.patch
+	0001-Add-support-for-Alpine-Linux-apk-backend.patch
+	0002-Make-building-updates-KCM-optional.patch
 	alpine-appstream-data.json
+	alpine-linux-logo-icon.png
 	"
 subpackages="
 	$pkgname-backend-apk:backend_apk
@@ -70,7 +71,8 @@ build() {
 		-DCMAKE_BUILD_TYPE=None \
 		-DCMAKE_INSTALL_PREFIX=/usr \
 		-DCMAKE_INSTALL_LIBDIR=lib \
-		-DCMAKE_DISABLE_FIND_PACKAGE_Snapd=ON
+		-DCMAKE_DISABLE_FIND_PACKAGE_Snapd=ON \
+		-DWITH_KCM=OFF
 	cmake --build build
 }
 
@@ -89,26 +91,12 @@ backend_flatpak() {
 	depends=""
 	install_if="$pkgname flatpak"
 
-	mkdir -p \
-		"$subpkgdir"/usr/lib/qt5/plugins/discover \
-		"$subpkgdir"/usr/share/libdiscover/categories \
-		"$subpkgdir"/usr/lib/qt5/plugins/discover-notifier \
-		"$subpkgdir"/usr/share/applications \
-		"$subpkgdir"/usr/share/metainfo \
-		"$subpkgdir"/usr/share/icons/hicolor/scalable/apps
-
-	mv "$pkgdir"/usr/lib/qt5/plugins/discover/flatpak-backend.so \
-		"$subpkgdir"/usr/lib/qt5/plugins/discover/
-	mv "$pkgdir"/usr/share/libdiscover/categories/flatpak-backend-categories.xml \
-		"$subpkgdir"/usr/share/libdiscover/categories/
-	mv "$pkgdir"/usr/lib/qt5/plugins/discover-notifier/FlatpakNotifier.so \
-		"$subpkgdir"/usr/lib/qt5/plugins/discover-notifier/
-	mv "$pkgdir"/usr/share/applications/org.kde.discover-flatpak.desktop \
-		"$subpkgdir"/usr/share/applications/
-	mv "$pkgdir"/usr/share/metainfo/org.kde.discover.flatpak.appdata.xml \
-		"$subpkgdir"/usr/share/metainfo/
-	mv "$pkgdir"/usr/share/icons/hicolor/scalable/apps/flatpak-discover.svg \
-		"$subpkgdir"/usr/share/icons/hicolor/scalable/apps/
+	amove usr/lib/qt5/plugins/discover/flatpak-backend.so
+	amove usr/share/libdiscover/categories/flatpak-backend-categories.xml
+	amove usr/lib/qt5/plugins/discover-notifier/FlatpakNotifier.so
+	amove usr/share/applications/org.kde.discover-flatpak.desktop
+	amove usr/share/metainfo/org.kde.discover.flatpak.appdata.xml
+	amove usr/share/icons/hicolor/scalable/apps/flatpak-discover.svg
 }
 
 backend_apk() {
@@ -116,29 +104,19 @@ backend_apk() {
 	depends=""
 	install_if="$pkgname apk-tools"
 
-	mkdir -p \
-		"$subpkgdir"/usr/lib/qt5/plugins/discover \
-		"$subpkgdir"/usr/share/libdiscover/external-appstream-urls \
-		"$subpkgdir"/usr/lib/libexec/kauth/ \
-		"$subpkgdir"/usr/share/polkit-1/actions/ \
-		"$subpkgdir"/usr/share/dbus-1/system.d/ \
-		"$subpkgdir"/usr/share/dbus-1/system-services/
-
-	mv "$pkgdir"/usr/lib/qt5/plugins/discover/alpineapk-backend.so \
-		"$subpkgdir"/usr/lib/qt5/plugins/discover/
-	mv "$pkgdir"/usr/lib/libexec/kauth/alpineapk_kauth_helper \
-		"$subpkgdir"/usr/lib/libexec/kauth/
-	mv "$pkgdir"/usr/share/polkit-1/actions/org.kde.discover.alpineapkbackend.policy \
-		"$subpkgdir"/usr/share/polkit-1/actions/
-	mv "$pkgdir"/usr/share/dbus-1/system.d/org.kde.discover.alpineapkbackend.conf \
-		"$subpkgdir"/usr/share/dbus-1/system.d/
-	mv "$pkgdir"/usr/share/dbus-1/system-services/org.kde.discover.alpineapkbackend.service \
-		"$subpkgdir"/usr/share/dbus-1/system-services/
+	amove usr/lib/qt5/plugins/discover/alpineapk-backend.so
+	amove usr/lib/libexec/kauth/alpineapk_kauth_helper
+	amove usr/share/polkit-1/actions/org.kde.discover.alpineapkbackend.policy
+	amove usr/share/dbus-1/system.d/org.kde.discover.alpineapkbackend.conf
+	amove usr/share/dbus-1/system-services/org.kde.discover.alpineapkbackend.service
 
 	# JSON file contains placeholder for replacement - @CARCH@
 	sed -i "s/@CARCH@/$CARCH/g" "$srcdir"/alpine-appstream-data.json
 	install -Dm644 "$srcdir"/alpine-appstream-data.json \
 		"$subpkgdir"/usr/share/libdiscover/external-appstream-urls/alpine-appstream-data.json
+
+	install -Dm644 -t "$subpkgdir"/usr/share/icons/hicolor/32x32/apps/ \
+		"$srcdir"/alpine-linux-logo-icon.png
 }
 
 backend_fwupd() {
@@ -146,16 +124,13 @@ backend_fwupd() {
 	depends=""
 	install_if="$pkgname fwupd"
 
-	mkdir -p \
-		"$subpkgdir"/usr/lib/qt5/plugins/discover
-
-	mv "$pkgdir"/usr/lib/qt5/plugins/discover/fwupd-backend.so \
-		"$subpkgdir"/usr/lib/qt5/plugins/discover/
+	amove usr/lib/qt5/plugins/discover/fwupd-backend.so
 }
 
 sha512sums="
-933a16dd5f99c18e61fdf77330a78e3c5251d13ce6aa99daa4f7b939320a3ddde2c66ead85e1bc31e7719c0cf657ef46516f35f08863cd6f2be25efcbf156fbf  discover-5.21.5.tar.xz
-60537172868d4922266632d1821a0a971fcab572a37a388f06801537b6c4c7ae63cb19443c2e2be8e76acb8fd2811c005a2c625f645f93fdf8cbedaa1afd051d  0001-port-away-from-qaction.patch
-2d7fa6c1540c789d32312d0c61bd758ddd54b749a85a046659f31f63fb75fe0f27e324b4d32ffc8309c2667f3ae195feaa7f8595d301e2889930a19693324433  0002-Add-support-for-Alpine-Linux-apk-backend.patch
+ed6772f9573ac5e43f30ea83c344365154b43f87c1beea0573f646e5f7239727d49eda1eaa9588b2afae32e3fbcbeeb7f36a6fdd6ed6e2b06b82967f86c60be0  discover-5.22.3.tar.xz
+40019b59c8ad5523ccf64313bf03efb354e8c81074733e62b6a778a3c0dbb699f5d6ba3ee8c950b484fee40bf21c82a5608aa2b0e30bad989fdcf557aa68b583  0001-Add-support-for-Alpine-Linux-apk-backend.patch
+f5ce169e35e0971f76bcf1232f9300a1ff9cfddff470778d9e499aab3f7ec851b2a9fc2583517a3e47538fee8a0443548802d31ca14ed556a90f5281500c8d09  0002-Make-building-updates-KCM-optional.patch
 f9f73888f8e20b317987da55028bd578de854fb34293466d1bc5deb82e32dc164916f724411de64a42235ecda37205d3f1ba26621ed7ab710b94273acce34aa3  alpine-appstream-data.json
+0766668630cb14f58c840ebdda8b76bd1dec98b4dd61469677d4ad6eb4966809a25dbec2a846502cad0391df5b6ca9d692bb857a6fa203b61a52e6ac044cfbf4  alpine-linux-logo-icon.png
 "

@@ -1,13 +1,29 @@
 # Contributor: Bart Ribbers <bribbers@disroot.org>
 # Maintainer: Bart Ribbers <bribbers@disroot.org>
 pkgname=kiten
-pkgver=21.04.0
+pkgver=21.04.3
 pkgrel=0
-arch="all !armhf !s390x !mips64" # kconfigwidgets khtml kxmlgui
+# armhf blocked by extra-cmake-modules
+# s390x, mips64 and riscv64 blocked by polkit -> kconfigwidgets
+arch="all !armhf !s390x !mips64 !riscv64"
 url="https://edu.kde.org/kiten/"
 pkgdesc="Japanese Reference/Study Tool"
 license="GPL-2.0-or-later AND GFDL-1.2-only"
-makedepends="extra-cmake-modules qt5-qtbase-dev karchive-dev kcompletion-dev kconfig-dev kconfigwidgets-dev kcoreaddons-dev kcrash-dev kdoctools-dev ki18n-dev khtml-dev knotifications-dev kxmlgui-dev"
+makedepends="
+	extra-cmake-modules
+	karchive-dev
+	kcompletion-dev
+	kconfig-dev
+	kconfigwidgets-dev
+	kcoreaddons-dev
+	kcrash-dev
+	kdoctools-dev
+	khtml-dev
+	ki18n-dev
+	knotifications-dev
+	kxmlgui-dev
+	qt5-qtbase-dev
+	"
 source="https://download.kde.org/stable/release-service/$pkgver/src/kiten-$pkgver.tar.xz"
 subpackages="$pkgname-doc $pkgname-lang $pkgname-dev"
 options="!check" # No tests
@@ -26,7 +42,9 @@ check() {
 }
 
 package() {
-	DESTDIR="$pkgdir" cmake --build build --target install
+	DESTDIR="$pkgdir" cmake --install build
 }
 
-sha512sums="3ba2d754c3b7837473234ce9a735270be30067631ace5a7addbb6da4eb0e818c731d0725036ae333552739232a4433a3b3c66619701c1d272f985ab1841bc316  kiten-21.04.0.tar.xz"
+sha512sums="
+22ae9b0ead5f6a8c30cff5fd5d29c7273c5e0844d0494b136d82245dc60d0d4635f9a83b61b94136554f545a7c3ddd51342c4072def2ba8050ef7a73f60da695  kiten-21.04.3.tar.xz
+"

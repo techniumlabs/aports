@@ -1,7 +1,7 @@
 # Contributor: Holger Jaekel <holger.jaekel@gmx.de>
 # Maintainer: Natanael Copa <ncopa@alpinelinux.org>
 pkgname=proj
-pkgver=7.2.1
+pkgver=8.1.0
 pkgrel=0
 pkgdesc="PROJ coordinate transformation software library"
 url="https://proj.org/"
@@ -16,7 +16,8 @@ subpackages="
 	$pkgname-dev
 	"
 source="
-	http://download.osgeo.org/proj/proj-$pkgver.tar.gz
+	https://download.osgeo.org/proj/proj-$pkgver.tar.gz
+	https://github.com/OSGeo/PROJ/commit/fc983b6e3343ba4d52fd0a889bb6bbf6f143f417.patch
 	"
 
 build() {
@@ -38,7 +39,9 @@ build() {
 check() {
 	case "$CARCH" in
 		x86) sed -i "s/tolerance 3 mm/tolerance 10 mm/" test/gie/adams_ws2.gie && \
-		     sed -i '2618s/tolerance 0.1 mm/tolerance 40 mm/' test/gie/builtins.gie;;
+		     sed -i '2618s/tolerance 0.1 mm/tolerance 40 mm/' test/gie/builtins.gie && \
+		     sed -i '2629s/tolerance 0.1 mm/tolerance 40 mm/' test/gie/builtins.gie &&
+		     sed -i '2642s/tolerance 0.1 mm/tolerance 40 mm/' test/gie/builtins.gie;;
 	esac
 	CTEST_OUTPUT_ON_FAILURE=TRUE ctest --force-new-ctest-process
 }
@@ -56,4 +59,7 @@ util() {
 	mv "$pkgdir/usr/bin" "$subpkgdir/usr"
 }
 
-sha512sums="59b9b31b0183e620a2f4a25a08620c170773fe4f99e8eca59e9ed6815f43bb379ea21ef71e8f759dbd747855b982657d7503bac3acc542218e0d862105f25324  proj-7.2.1.tar.gz"
+sha512sums="
+0c11d43bcdf97fbb3be9238c77cc111ae6df7948dc5076b1a31350c84a60299964ea1a320edfbee0568a2d9d3c7f80eafa6322adfdf99aea5f06172d7ee53a2f  proj-8.1.0.tar.gz
+035bfaffebfbe4c9e89f18ca9caea25dcce7a6f12f8ebca18a35d5374b1ee6d1ee30fee46c0be0f5eaacf427137750ec20cc48443d59da7f2aacb2f6e0b20b6a  fc983b6e3343ba4d52fd0a889bb6bbf6f143f417.patch
+"

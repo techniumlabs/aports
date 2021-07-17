@@ -2,8 +2,8 @@
 # Maintainer: Holger Jaekel <holger.jaekel@gmx.de>
 _pkgname=cligj
 pkgname=py3-$_pkgname
-pkgver=0.7.1
-pkgrel=1
+pkgver=0.7.2
+pkgrel=0
 pkgdesc="Common arguments and options for GeoJSON processing commands, using Click"
 url="https://pypi.org/project/cligj/"
 arch="noarch"
@@ -35,4 +35,6 @@ package() {
 	python3 setup.py install --prefix=/usr --root="$pkgdir" --optimize=2
 }
 
-sha512sums="34cd6c6a2ff1e268443d74694608e2acf92a31b93ffd53bd0f7280b8e0a18d3c25f98b9206638ee50793b714bea01593bb67becfd7d70322ad6d609d552465a9  py3-cligj-0.7.1.tar.gz"
+sha512sums="
+292c1a6de4ed5d4926ccd71802d369db383d310a3a8590729233448cebe5e9ad9dd6bff0d0c861890102bc9f23e90fe1b9db62275a9263765e3d77436a0b38b4  py3-cligj-0.7.2.tar.gz
+"

@@ -8,8 +8,8 @@
 # this aport from arch=all WILL be reverted.
 
 pkgname=curl
-pkgver=7.76.1
-pkgrel=0
+pkgver=7.77.0
+pkgrel=1
 pkgdesc="URL retrival utility and library"
 url="https://curl.se/"
 arch="all"
@@ -20,10 +20,15 @@ checkdepends="nghttp2 python3"
 makedepends_host="$depends_dev"
 makedepends_build="autoconf automake groff libtool perl"
 subpackages="$pkgname-dbg $pkgname-static $pkgname-doc $pkgname-dev libcurl"
-source="https://curl.se/download/curl-$pkgver.tar.xz"
+source="https://curl.se/download/curl-$pkgver.tar.xz
+	conn_shutdown-if-closed-during-CONNECT-cleanup-properly.patch
+	"
 options="net" # Required for running tests
 
 # secfixes:
+#   7.77.0-r0:
+#     - CVE-2021-22898
+#     - CVE-2021-22901
 #   7.76.0-r0:
 #     - CVE-2021-22876
 #     - CVE-2021-22890
@@ -102,6 +107,8 @@ options="net" # Required for running tests
 #   7.36.0-r0:
 #     - CVE-2014-0138
 #     - CVE-2014-0139
+#   0:
+#     - CVE-2021-22897
 
 prepare() {
 	default_prepare
@@ -116,6 +123,7 @@ build() {
 		--enable-ipv6 \
 		--enable-unix-sockets \
 		--enable-static \
+		--with-openssl \
 		--without-libidn \
 		--without-libidn2 \
 		--with-nghttp2 \
@@ -147,4 +155,7 @@ static() {
 	mv "$pkgdir"/usr/lib/*.a "$subpkgdir"/usr/lib
 }
 
-sha512sums="5fe85d2e776789aa8117c57fe7648e375b7fa92d5ead5d69855f19ca9a2624d77a1f9ab91766ecb72bbc17e82862248cd07e48917884d6fd856b93fb00d83e28  curl-7.76.1.tar.xz"
+sha512sums="
+aef92a0e3f8ce8491b258a9a1c4dcea3c07c29b139a1f68f08619caa0295cfde76335d2dfb9cdf434525daea7dd05d8acd22f203f5ccc7735bd317964ec1da76  curl-7.77.0.tar.xz
+bcf90547f574dd79c2dabdbc16a17426dbc6f7699799368b0b6d39d8ac6c044b027ceb484160d1e6aa7a1044834f568b94facadfa9430e720296c3103e14d3f0  conn_shutdown-if-closed-during-CONNECT-cleanup-properly.patch
+"

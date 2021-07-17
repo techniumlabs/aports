@@ -1,13 +1,30 @@
 # Contributor: Bart Ribbers <bribbers@disroot.org>
 # Maintainer: Bart Ribbers <bribbers@disroot.org>
 pkgname=knights
-pkgver=21.04.0
+pkgver=21.04.3
 pkgrel=0
 pkgdesc="Chess board by KDE with XBoard protocol support"
-arch="all !armhf !s390x !mips64" # armhf blocked by extra-cmake-modules
+# armhf blocked by extra-cmake-modules
+# s390x, mips64 and riscv64 blocked by polkit -> kio
+arch="all !armhf !s390x !mips64 !riscv64"
 url="https://www.kde.org/applications/games/knights/"
 license="GPL-2.0-or-later"
-makedepends="extra-cmake-modules qt5-qtbase-dev qt5-qtsvg-dev kdbusaddons-dev kconfigwidgets-dev kcrash-dev ktextwidgets-dev kxmlgui-dev kio-dev kplotting-dev kdoctools-dev kwallet-dev plasma-framework-dev libkdegames-dev"
+makedepends="
+	extra-cmake-modules
+	kconfigwidgets-dev
+	kcrash-dev
+	kdbusaddons-dev
+	kdoctools-dev
+	kio-dev
+	kplotting-dev
+	ktextwidgets-dev
+	kwallet-dev
+	kxmlgui-dev
+	libkdegames-dev
+	plasma-framework-dev
+	qt5-qtbase-dev
+	qt5-qtsvg-dev
+	"
 source="https://download.kde.org/stable/release-service/$pkgver/src/knights-$pkgver.tar.xz"
 subpackages="$pkgname-doc $pkgname-lang"
 options="!check" # No tests
@@ -21,7 +38,9 @@ build() {
 }
 
 package() {
-	DESTDIR="$pkgdir" cmake --build build --target install
+	DESTDIR="$pkgdir" cmake --install build
 }
 
-sha512sums="c48d50a31ec1995c66993aae9663afeba3b0c99b364c7b4f45a43ca97692c9733376afba3a43aaa3b51ac110f917092f153603715153f3f23b0f9ce3697d1dc4  knights-21.04.0.tar.xz"
+sha512sums="
+1f9136e85730cae9085b152b720475dd64dd53cec98f9d20eb67f1b68aea851b86c6781f87127bbc0ff3f385db907bd1566534bc05f3013317f33ea0b35b438b  knights-21.04.3.tar.xz
+"

@@ -1,11 +1,12 @@
 # Contributor: Bart Ribbers <bribbers@disroot.org>
 # Maintainer: Bart Ribbers <bribbers@disroot.org>
 pkgname=kalarmcal
-pkgver=21.04.0
+pkgver=21.04.3
 pkgrel=0
 # armhf blocked by extra-cmake-modules
-# mips, mips64 and s390x blocked by kconfigwidgets
-arch="all !armhf !mips !mips64 !s390x"
+# mips64, s390x and riscv64 blocked by polkit -> kcalutils
+# ppc64le blocked by qt5-qtwebengine -> akonadi
+arch="all !armhf !mips64 !s390x !riscv64 !ppc64le"
 url="https://kontact.kde.org/"
 pkgdesc="The KAlarm client library"
 license="LGPL-2.0-or-later"
@@ -37,7 +38,9 @@ check() {
 }
 
 package() {
-	DESTDIR="$pkgdir" cmake --build build --target install
+	DESTDIR="$pkgdir" cmake --install build
 }
 
-sha512sums="2edf1f7f662826c5700f0f0326c152ff21b78fbd3e364618cfa5fff54e014825d360bc4fdaffb95b1ed71d0fcdaa12107eac1b40d81cec225b44eda7ae785f11  kalarmcal-21.04.0.tar.xz"
+sha512sums="
+3db4c4d3e8e1d3b552f5f094a87d0b283e85328990f992783e93384a02cf2247a8042c8447500e1e238feb32b405f977a0bdcb5aebbd9860ea47872e9ee458a6  kalarmcal-21.04.3.tar.xz
+"

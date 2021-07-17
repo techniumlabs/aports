@@ -1,7 +1,7 @@
 # Contributor: Bart Ribbers <bribbers@disroot.org>
 # Maintainer: Bart Ribbers <bribbers@disroot.org>
 pkgname=ki18n
-pkgver=5.82.0
+pkgver=5.84.0
 pkgrel=0
 pkgdesc="Advanced internationalization framework"
 arch="all !armhf" # armhf blocked by qt5-qtdeclarative
@@ -33,5 +33,5 @@ package() {
 }
 
 sha512sums="
-a0f84494897d5c614923581bb3df016ba8801b7404b933c7cf85b158be96baa0cc87199a4798a694654fa80ad8204085a2fb6da8e6f930156071261b213894eb  ki18n-5.82.0.tar.xz
+eb389524041871035c166d12992f84e0d1fb34c2bf0f8faf906c469126622026e9a233b60ec841584fe694d7606246c0628146dd00ccde238c8a016c81a74273  ki18n-5.84.0.tar.xz
 "

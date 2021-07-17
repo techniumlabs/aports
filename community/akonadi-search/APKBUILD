@@ -1,13 +1,14 @@
 # Contributor: Bart Ribbers <bribbers@disroot.org>
 # Maintainer: Bart Ribbers <bribbers@disroot.org>
 pkgname=akonadi-search
-pkgver=21.04.0
+pkgver=21.04.3
 pkgrel=0
 pkgdesc="Libraries and daemons to implement searching in Akonadi"
 # armhf blocked by extra-cmake-modules
-# mips and mips64 blocked by akonadi
+# mips64 and riscv64 blocked by akonadi
 # s390x blocked by multiple KDE Frameworks
-arch="all !armhf !mips !mips64 !s390x"
+# ppc64le blocked by qt5-qtwebengine -> akonadi
+arch="all !armhf !mips64 !s390x !riscv64 !ppc64le"
 url="https://community.kde.org/KDE_PIM"
 license="(GPL-2.0-only OR GPL-3.0-only) AND (LGPL-2.1-only OR LGPL-3.0-only)"
 depends_dev="
@@ -26,7 +27,9 @@ depends_dev="
 	qt5-qtbase-dev
 	xapian-core-dev
 	"
-makedepends="$depends_dev extra-cmake-modules"
+makedepends="$depends_dev
+	extra-cmake-modules
+	"
 checkdepends="xvfb-run"
 source="https://download.kde.org/stable/release-service/$pkgver/src/akonadi-search-$pkgver.tar.xz"
 subpackages="$pkgname-dev $pkgname-lang"
@@ -61,6 +64,8 @@ check() {
 }
 
 package() {
-	DESTDIR="$pkgdir" cmake --build build --target install
+	DESTDIR="$pkgdir" cmake --install build
 }
-sha512sums="030c2708157b4a145640739e0a1947f26fe4e766a60e89d6bdedd9920ac7e4148e9f9168247e7c9789128ce858dcd4f55ac93151fd5befa48ec5b71e62adbf90  akonadi-search-21.04.0.tar.xz"
+sha512sums="
+cfeb929b4716a2a96e284dfec31688ec80b264a422cb2713fa20a8266452351f8d094f0dfd08c8687115c4862481901e183258e269a5ef2421a3736f89a677de  akonadi-search-21.04.3.tar.xz
+"

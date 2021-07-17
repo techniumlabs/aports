@@ -1,11 +1,11 @@
 # Contributor: Bart Ribbers <bribbers@disroot.org>
 # Maintainer: Bart Ribbers <bribbers@disroot.org>
 pkgname=filelight
-pkgver=21.04.0
+pkgver=21.04.3
 pkgrel=0
 # armhf blocked by extra-cmake-modules
-# s390x blocked by kxmlgui
-arch="all !armhf !s390x !mips64"
+# s390x, mips64 and riscv64 blocked by kio
+arch="all !armhf !s390x !mips64 !riscv64"
 url="https://kde.org/applications/utilities/filelight"
 pkgdesc="An application to visualize the disk usage on your computer"
 license="(GPL-2.0-only OR GPL-3.0-only) AND GFDL-1.2-only"
@@ -35,7 +35,9 @@ check() {
 }
 
 package() {
-	DESTDIR="$pkgdir" cmake --build build --target install
+	DESTDIR="$pkgdir" cmake --install build
 }
 
-sha512sums="c87e1ec0a9401ad6e85e6074e59c02cc5c4dca8de98e698bf7dc761036db27bb38eaed914d0302109c5bee26b5776aa4d493114107e2f3ec6130b3078d73fd89  filelight-21.04.0.tar.xz"
+sha512sums="
+7f239b0bbef95a111407d85cd7da6f9523a3b12e8ab13a29b4a7f661315e47866bf04a9863464124edd14f4e35b4d45e23cfafe059bd325b7f9f6ed3fc416a7d  filelight-21.04.3.tar.xz
+"

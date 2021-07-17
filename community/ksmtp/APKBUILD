@@ -1,12 +1,12 @@
 # Contributor: Bart Ribbers <bribbers@disroot.org>
 # Maintainer: Bart Ribbers <bribbers@disroot.org>
 pkgname=ksmtp
-pkgver=21.04.0
+pkgver=21.04.3
 pkgrel=0
 pkgdesc="Job-based library to send email through an SMTP server"
 # armhf blocked by extra-cmake-modules
-# s390x blocked by multiple KDE Frameworks
-arch="all !armhf !s390x !mips64"
+# s390x, mips64 and riscv64 blocked by kio
+arch="all !armhf !s390x !mips64 !riscv64"
 url="https://kontact.kde.org"
 license="LGPL-2.1-or-later"
 depends_dev="
@@ -16,7 +16,9 @@ depends_dev="
 	kio-dev
 	qt5-qtbase-dev
 	"
-makedepends="$depends_dev extra-cmake-modules"
+makedepends="$depends_dev
+	extra-cmake-modules
+	"
 source="https://download.kde.org/stable/release-service/$pkgver/src/ksmtp-$pkgver.tar.xz"
 subpackages="$pkgname-dev $pkgname-lang"
 options="!check" # Broken
@@ -35,6 +37,8 @@ check() {
 }
 
 package() {
-	DESTDIR="$pkgdir" cmake --build build --target install
+	DESTDIR="$pkgdir" cmake --install build
 }
-sha512sums="31f65e29dfd2faa07e0cadcaec383b756ce0eb6bc5cd1b32e8b04773299ccf062a7811fdee4cef02a26b4fd03e4b40852de0598b43b85a5c54c61f86af7ad7f2  ksmtp-21.04.0.tar.xz"
+sha512sums="
+b29e18e6b6b489e60fc100b8570ccc056babc2e6863e47d1f811e99bac1423b269939189763fd46b55ff8e8c31c9b219c30850e284de629a5b3bd6e61f3f9805  ksmtp-21.04.3.tar.xz
+"

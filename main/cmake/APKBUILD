@@ -1,7 +1,7 @@
 # Contributor: Valery Kartel <valery.kartel@gmail.com>
 # Maintainer: Natanael Copa <ncopa@alpinelinux.org>
 pkgname=cmake
-pkgver=3.20.2
+pkgver=3.21.0
 pkgrel=0
 pkgdesc="Cross-platform, open-source make system"
 url="https://www.cmake.org/"
@@ -19,7 +19,6 @@ case $pkgver in
 esac
 
 source="https://www.cmake.org/files/$_v/cmake-$pkgver.tar.gz
-	patch-adjust-lib64.patch
 	"
 
 _parallel_opt() {
@@ -57,6 +56,6 @@ package() {
 	cd $startdir/src/$pkgname-$pkgver
 	make DESTDIR="$pkgdir" install
 }
-
-sha512sums="675a92f84b437169aee86dbfa59715671b9195ddeffc6fea83c7803a70abe3116106ad0a627b9e4bef326bfb2a10fdf624ad341fd9d3d08e3d8a69c271cd2b32  cmake-3.20.2.tar.gz
-87051601dda49894a1631156bf63aaa79fcf7cb7bb6705712889b9012d87d2f11d2707a1d729223b180668ad61f22b16893658e9777beee330c7e9a90e7421e6  patch-adjust-lib64.patch"
+sha512sums="
+b635c50db0d3a18392a84b24f14017bb625708bcc6f6ba2d749a5c37d45f5e0565e415a802d129090a18e0747f80f2640747650d28fa0b3069d28e3e6a735ebc  cmake-3.21.0.tar.gz
+"

@@ -2,15 +2,16 @@
 # Contributor: Leonardo Arena <rnalrd@alpinelinux.org>
 # Maintainer: Natanael Copa <ncopa@alpinelinux.org>
 pkgname=vlc
-pkgver=3.0.14
+pkgver=3.0.16
 pkgrel=0
 pkgdesc="A multi-platform MPEG, VCD/DVD, and DivX player"
 triggers="vlc-libs.trigger=/usr/lib/vlc/plugins"
 pkgusers="vlc"
 pkggroups="vlc"
 url="https://www.videolan.org/vlc/"
-arch="all !s390x !mips !mips64" # librsvg
-arch="$arch !armhf" # field 'mPainterPath' has incomplete type 'QPainterPath'
+# armhf fails to build: field 'mPainterPath' has incomplete type 'QPainterPath'
+# s390x, mips64 and riscv64 blocked by librsvg
+arch="all !armhf !s390x !mips64 !riscv64"
 license="GPL-2.0-or-later"
 subpackages="$pkgname-dev
 	$pkgname-doc
@@ -235,7 +236,7 @@ libs() {
 }
 
 sha512sums="
-d809ec062d5c1ce15cd0ce3bc4777b6451fe8bea372678eac84b7ea1777a9a8891de31d81e26ac651cc9ce02b99b514f1672de829410fc1ddc81cccfd41db47a  vlc-3.0.14.tar.xz
+35cdf191071224d0cf1b5a83c00773ff87b9e5bfcf0f5523f7edd53f75b23eda6b27bb49ffa97d69a1d176b8fe4786d959aeeb00d4380beab71c9f7e6b7c7298  vlc-3.0.16.tar.xz
 e13e398b7bfd977f6e099bcb6cf8dc5cd5bad6dea3eff715881826246dc4329468846084aff2576de2b7fd28d3f06e7c327a6e4511a28d22e5cd198a81146c89  omxil-rpi-codecs.patch
 22d80df599b8b65a5439cefbb7140af8e9530f326d54945da3769af65f37518b99ec2cc8647aafd2763324a0698280915afe043cc87e5720c4694881ed35bffa  check-headless.patch
 e214b407235cb3afb8bec93f20c9b42957b57e6fd3960679d3d4235e77762e03e64d03c01f00ef63d589e7c85aaad02ce6abbeeccd66b1867bc92451a5b5e9b0  disable-sub-autodetect-fuzzy-1-test.patch

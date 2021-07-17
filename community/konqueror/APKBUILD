@@ -1,15 +1,31 @@
 # Contributor: Bart Ribbers <bribbers@disroot.org>
 # Maintainer: Bart Ribbers <bribbers@disroot.org>
 pkgname=konqueror
-pkgver=21.04.0
+pkgver=21.04.3
 pkgrel=0
 pkgdesc="KDE File Manager & Web Browser"
 # armhf blocked by extra-cmake-modules
-# s390x, ppc64le and mips(64) blocked by qt5-qtwebengine
-arch="all !armhf !s390x !ppc64le !mips !mips64"
+# s390x, ppc64le, mips64 and riscv64 blocked by qt5-qtwebengine
+arch="all !armhf !s390x !ppc64le !mips64 !riscv64"
 url="https://konqueror.org/"
 license="GPL-2.0-or-later AND GFDL-1.2-only AND LicenseRef-KDE-Accepted-LGPL"
-makedepends="extra-cmake-modules qt5-qtbase-dev qt5-qtwebengine-dev kparts-dev kcmutils-dev karchive-dev kcrash-dev kwindowsystem-dev kinit-dev kiconthemes-dev kdbusaddons-dev kdelibs4support-dev kactivities-dev kdoctools-dev kdesu-dev"
+makedepends="
+	extra-cmake-modules
+	kactivities-dev
+	karchive-dev
+	kcmutils-dev
+	kcrash-dev
+	kdbusaddons-dev
+	kdelibs4support-dev
+	kdesu-dev
+	kdoctools-dev
+	kiconthemes-dev
+	kinit-dev
+	kparts-dev
+	kwindowsystem-dev
+	qt5-qtbase-dev
+	qt5-qtwebengine-dev
+	"
 checkdepends="xvfb-run"
 source="https://download.kde.org/stable/release-service/$pkgver/src/konqueror-$pkgver.tar.xz"
 subpackages="$pkgname-dev $pkgname-doc $pkgname-lang"
@@ -29,7 +45,9 @@ check() {
 }
 
 package() {
-	DESTDIR="$pkgdir" cmake --build build --target install
+	DESTDIR="$pkgdir" cmake --install build
 }
 
-sha512sums="5362cd558054177fd980df599108ab9450c6e05d9138f356a63af86e12d07fa87d4643e0a087511102307bd346b5da4c7b2de70c94cb472987858c87c7e12c40  konqueror-21.04.0.tar.xz"
+sha512sums="
+60a396633ba87605225e2e791d8b8a429ddd8081fc0db45227d31a550b00fb2197735f110eb0d9ea48199dcbb19525890d04470beb20c1a49bfc3fb545125104  konqueror-21.04.3.tar.xz
+"

@@ -2,11 +2,12 @@
 # Contributor: Sören Tempel <soeren+alpine@soeren-tempel.net>
 # Maintainer: Francesco Colista <fcolista@alpinelinux.org>
 pkgname=tint2
-pkgver=17.0
+pkgver=17.0.1
 pkgrel=0
 pkgdesc="tint2 is a simple unintrusive panel/taskbar"
 url="https://gitlab.com/o9000/tint2"
-arch="all !s390x !mips !mips64" # librsvg
+# s390x, mips64 and riscv64 blocked by librsvg
+arch="all !s390x !mips64 !riscv64"
 license="GPL-2.0"
 options="!check"
 depends="imlib2 glib pango cairo libxcomposite libxdamage
@@ -18,26 +19,19 @@ subpackages="$pkgname-doc $pkgname-lang"
 source="https://gitlab.com/o9000/tint2/-/archive/v$pkgver/tint2-v$pkgver.tar.bz2"
 builddir="$srcdir/$pkgname-v$pkgver"
 
-prepare() {
-	mkdir -p build
-}
-
 build() {
-	cd "$builddir"/build
-	cmake \
+	cmake -B build \
+		-DCMAKE_BUILD_TYPE=None \
 		-DCMAKE_INSTALL_PREFIX=/usr \
 		-DCMAKE_INSTALL_SYSCONFDIR=/etc \
-		-DCMAKE_INSTALL_LIBDIR=lib \
-		-DCMAKE_BUILD_TYPE=None \
-		-DCMAKE_CXX_FLAGS="$CXXFLAGS" \
-		-DCMAKE_C_FLAGS="$CFLAGS" \
-		..
-	make
+		-DCMAKE_INSTALL_LIBDIR=lib
+	cmake --build build
 }
 
 package() {
-	cd "$builddir"/build
-	make DESTDIR="$pkgdir" install
+	DESTDIR="$pkgdir" cmake --install build
 }
 
-sha512sums="df45ecd672e0b3b3ba146b1c62ea17cabab8982c7e56bf589703782edb25ec2969ecf66a23fa42651f0450054b2bfa3c2890c038f6d717b1e6f4e29d4b7e0992  tint2-v17.0.tar.bz2"
+sha512sums="
+e770768ebe3d0f4cd406455c8605fa6fe2034de938dc3968494df2d30faee79f4bb3078ddaf7cdc1483fc4f4a0f99f1850eaf394bfb69b83bacbe646904a62f9  tint2-v17.0.1.tar.bz2
+"

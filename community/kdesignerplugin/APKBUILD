@@ -1,14 +1,33 @@
 # Contributor: Bart Ribbers <bribbers@disroot.org>
 # Maintainer: Bart Ribbers <bribbers@disroot.org>
 pkgname=kdesignerplugin
-pkgver=5.82.0
+pkgver=5.84.0
 pkgrel=0
 pkgdesc="Integration of Frameworks widgets in Qt Designer/Creator"
-arch="all !armhf !mips64 !s390x" # armhf blocked by extra-cmake-modules and mips64, s390x blocked by polkit
+# armhf blocked by extra-cmake-modules
+# mips64, s390x and riscv64 blocked by polkit
+arch="all !armhf !mips64 !s390x !riscv64"
 url="https://community.kde.org/Frameworks"
 license="LGPL-2.1-only"
-depends_dev="kcoreaddons-dev kconfig-dev kcompletion-dev kconfigwidgets-dev kiconthemes-dev kio-dev kitemviews-dev kplotting-dev ktextwidgets-dev kwidgetsaddons-dev kxmlgui-dev sonnet-dev"
-makedepends="$depends_dev extra-cmake-modules qt5-qttools-dev kdoctools-dev"
+depends_dev="
+	kcompletion-dev
+	kconfig-dev
+	kconfigwidgets-dev
+	kcoreaddons-dev
+	kiconthemes-dev
+	kio-dev
+	kitemviews-dev
+	kplotting-dev
+	ktextwidgets-dev
+	kwidgetsaddons-dev
+	kxmlgui-dev
+	sonnet-dev
+	"
+makedepends="$depends_dev
+	extra-cmake-modules
+	kdoctools-dev
+	qt5-qttools-dev
+	"
 checkdepends="xvfb-run"
 source="https://download.kde.org/stable/frameworks/${pkgver%.*}/portingAids/kdesignerplugin-$pkgver.tar.xz"
 subpackages="$pkgname-dev $pkgname-doc $pkgname-lang"
@@ -27,9 +46,9 @@ check() {
 }
 
 package() {
-	DESTDIR="$pkgdir" cmake --build build --target install
+	DESTDIR="$pkgdir" cmake --install build
 }
 
 sha512sums="
-b672ce606dacd638d6b9adf199ee86dacf87fc9689277ee8ad4b8bb3b686e1e7cdf01d94a9690fd50a644679d178fadbc6d8dc0c840b83577142421b54edf1da  kdesignerplugin-5.82.0.tar.xz
+095786c8de9f0b2767e7db6722af1482314e42b99a998d4a210d41bb74a08ff9540c47458450383ebbe60e6a2ecbef6a66e2904501db635ccd7b68d9dac1a10c  kdesignerplugin-5.84.0.tar.xz
 "

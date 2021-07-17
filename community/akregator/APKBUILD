@@ -1,9 +1,11 @@
 # Contributor: Bart Ribbers <bribbers@disroot.org>
 # Maintainer: Bart Ribbers <bribbers@disroot.org>
 pkgname=akregator
-pkgver=21.04.0
-pkgrel=1
-arch="all !ppc64le !s390x !armhf !mips !mips64" # Limited by qt5-qtwebengine
+pkgver=21.04.3
+pkgrel=0
+# armhf blocked by extra-cmake-modules
+# ppc64le, s390x, mips64 and riscv64 blocked by qt5-qtwebengine
+arch="all !armhf !ppc64le !s390x !mips64 !riscv64"
 url="https://kontact.kde.org/components/akregator.html"
 pkgdesc="RSS Feed Reader"
 license="GPL-2.0-or-later AND LGPL-2.0-or-later"
@@ -52,4 +54,6 @@ package() {
 	DESTDIR="$pkgdir" cmake --install build
 }
 
-sha512sums="75d158cc4384728b5d690550bb49eb620b38606ff73c070cbb0b3ee39186c9a84a81cebd0720e0b08c7d1b517efc7124204fe25b608dd55274d3957548009731  akregator-21.04.0.tar.xz"
+sha512sums="
+cf431b849e31d01976414f89a887f4de46b22607cfbf4332f272ac15cc0d8334df6adbf03c7a3106b560dc01b58522966906bc828333d25cd872d8e7a6cbf396  akregator-21.04.3.tar.xz
+"

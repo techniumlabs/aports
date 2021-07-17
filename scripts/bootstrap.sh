@@ -60,7 +60,7 @@ fi
 if [ ! -d "$CBUILDROOT" ]; then
 	msg "Creating sysroot in $CBUILDROOT"
 	mkdir -p "$CBUILDROOT/etc/apk/keys"
-	cp -a /etc/apk/keys/* "$CBUILDROOT/etc/apk/keys"
+	cp -a /etc/apk/keys/* ~/.abuild/*.pub "$CBUILDROOT/etc/apk/keys"
 	${SUDO_APK} add --quiet --initdb --arch $TARGET_ARCH --root $CBUILDROOT
 fi
 
@@ -94,11 +94,22 @@ msg "Cross building base system"
 # Implicit dependencies for early targets
 EXTRADEPENDS_TARGET="libgcc libstdc++ musl-dev"
 
+# On a few architectures like riscv64 we need to account for
+# gcc requiring -ltomic to be set explicitly if a C[++]11 program
+# uses atomics (e.g. #include <atomic>):
+# https://github.com/riscv/riscv-gnu-toolchain/issues/183#issuecomment-253721765
+# The reason gcc itself is needed is because .so is in that package,
+# not in libatomic.
+if [ "$TARGET_ARCH" = "riscv64" ]; then
+	NEEDS_LIBATOMIC="yes"
+fi
+
 # ordered cross-build
 for PKG in fortify-headers linux-headers musl libc-dev pkgconf zlib \
-	   openssl ca-certificates libmd libbsd libretls busybox busybox-initscripts binutils make \
+	   openssl ca-certificates libmd \
+	   gmp mpfr4 mpc1 isl22 cloog libucontext binutils gcc \
+	   libbsd libretls busybox busybox-initscripts make \
 	   apk-tools file \
-	   gmp mpfr4 mpc1 isl22 cloog libucontext gcc \
 	   openrc alpine-conf alpine-baselayout alpine-keys alpine-base patch build-base \
 	   attr libcap acl fakeroot tar \
 	   lzip abuild ncurses libedit openssh \
@@ -107,16 +118,24 @@ for PKG in fortify-headers linux-headers musl libc-dev pkgconf zlib \
 	   community/go libffi community/ghc \
 	   brotli libev c-ares cunit nghttp2 curl \
 	   pcre libssh2 community/http-parser community/libgit2 \
-	   libxml2 llvm10 community/rust \
+	   libxml2 pax-utils llvm11 community/rust \
 	   $KERNEL_PKG ; do
 
-	EXTRADEPENDS_TARGET="$EXTRADEPENDS_TARGET" \
+	if [ "$NEEDS_LIBATOMIC" = "yes" ]; then
+		EXTRADEPENDS_BUILD="libatomic gcc-$TARGET_ARCH g++-$TARGET_ARCH"
+	fi
+	EXTRADEPENDS_TARGET="$EXTRADEPENDS_TARGET"  EXTRADEPENDS_BUILD="$EXTRADEPENDS_BUILD" \
 	CHOST=$TARGET_ARCH BOOTSTRAP=bootimage APKBUILD=$(apkbuildname $PKG) abuild -r
 
 	case "$PKG" in
 	fortify-headers | libc-dev)
 		# Additional implicit dependencies once built
 		EXTRADEPENDS_TARGET="$EXTRADEPENDS_TARGET $PKG"
+		;;
+	gcc)
+		if [ "$NEEDS_LIBATOMIC" = "yes" ]; then
+			EXTRADEPENDS_TARGET="libatomic gcc $EXTRADEPENDS_TARGET"
+		fi
 		;;
 	build-base)
 		# After build-base, that alone is sufficient dependency in the target

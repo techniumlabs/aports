@@ -1,11 +1,11 @@
 # Contributor: Bart Ribbers <bribbers@disroot.org>
 # Maintainer: Bart Ribbers <bribbers@disroot.org>
 pkgname=kde-dev-utils
-pkgver=21.04.0
+pkgver=21.04.3
 pkgrel=0
 # armhf blocked by extra-cmake-modules
-# s390x, mips64 blocked by kparts-dev
-arch="all !armhf !s390x !mips64"
+# s390x, mips64 and riscv64 blocked by polkit -> kparts-dev
+arch="all !armhf !s390x !mips64 !riscv64"
 url="https://kde.org/applications/development/"
 pkgdesc="Small utilities for developers using KDE/Qt libs/frameworks"
 license="(LGPL-2.0-only OR LGPL-3.0-only) AND GPL-2.0-or-later"
@@ -35,7 +35,9 @@ check() {
 }
 
 package() {
-	DESTDIR="$pkgdir" cmake --build build --target install
+	DESTDIR="$pkgdir" cmake --install build
 }
 
-sha512sums="bb3e76a3d58fc07eb3ca7b9d71bd844eb43239feebcf522e1833a35ff452fcb4ddb15d83268b2c4bd0498c3926cd72edaae1b8aed6424bf1fb717bbc5e1810ee  kde-dev-utils-21.04.0.tar.xz"
+sha512sums="
+5cc7fdf44779852bed67d7321d6a4918dd1973dd9868fe1c4cf0c275a0ae06c21fa388f027a0b15b0839be1c9d482f78db06c96285366a0530f58901353572c6  kde-dev-utils-21.04.3.tar.xz
+"

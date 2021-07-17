@@ -43,13 +43,13 @@ source="https://github.com/elogind/elogind/archive/v$pkgver/elogind-v$pkgver.tar
 	fix-version.patch
 	"
 case "$CARCH" in
-	s390x|mips|mips64) ;;
+	s390x|mips|mips64|riscv64) ;;
 	*) makedepends="$makedepends polkit-dev" ;;
 esac
 
 build() {
 	case "$CARCH" in
-		s390x|mips|mips64) _polkit=false; export CFLAGS="$CFLAGS -D__IGNORE_pkey_mprotect -DSO_PEERSEC=31" ;;
+		s390x|mips|mips64|riscv64) _polkit=false; export CFLAGS="$CFLAGS -D__IGNORE_pkey_mprotect -DSO_PEERSEC=31" ;;
 		*) _polkit=true ;;
 	esac
 	export LDFLAGS="$LDFLAGS -lintl"

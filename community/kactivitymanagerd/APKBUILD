@@ -1,12 +1,12 @@
 # Contributor: Bart Ribbers <bribbers@disroot.org>
 # Maintainer: Bart Ribbers <bribbers@disroot.org>
 pkgname=kactivitymanagerd
-pkgver=5.21.5
+pkgver=5.22.3
 pkgrel=0
 pkgdesc="System service to manage user's activities and track the usage patterns"
 # armhf blocked by qt5-qtdeclarative
-# s390x, mips64 blocked by kxmlgui, kio
-arch="all !armhf !s390x !mips64"
+# s390x, mips64 and riscv64 blocked by polkit -> kio
+arch="all !armhf !s390x !mips64 !riscv64"
 url="https://kde.org/plasma-desktop/"
 license="GPL-2.0-only OR GPL-3.0-only"
 depends="qt5-qtbase-sqlite"
@@ -51,5 +51,5 @@ package() {
 	rm -r "$pkgdir"/usr/lib/systemd
 }
 sha512sums="
-097c18f39d5024a05e645e7dcf82ad39df07afb0ad0b010410699e3fa1261002f05553dbc049af63e7882c305d4c2c20d5032e9448354de7c22d9b9371a8c633  kactivitymanagerd-5.21.5.tar.xz
+80100b8408d901157fda2e4a5ba01aa9a48916f6d4d02b39464c9a5292a89dfd8c0d823d1fc91a2484c5e16abe8aa460dbc71f772c9a028a2227c0594e4b94d9  kactivitymanagerd-5.22.3.tar.xz
 "

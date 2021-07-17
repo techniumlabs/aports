@@ -1,11 +1,11 @@
 # Contributor: Bart Ribbers <bribbers@disroot.org>
 # Maintainer: Bart Ribbers <bribbers@disroot.org>
 pkgname=libkcompactdisc
-pkgver=21.04.0
+pkgver=21.04.3
 pkgrel=0
 # armhf blocked by extra-cmake-modules
-# s390x blocked by solid
-arch="all !armhf !s390x !mips64"
+# s390x, mips64 and riscv64 blocked by polkit -> solid
+arch="all !armhf !s390x !mips64 !riscv64"
 url="https://www.kde.org/applications/multimedia/"
 pkgdesc="Library for interfacing with CDs"
 license="GPL-2.0-or-later AND LGPL-2.0-or-later"
@@ -35,7 +35,9 @@ check() {
 }
 
 package() {
-	DESTDIR="$pkgdir" cmake --build build --target install
+	DESTDIR="$pkgdir" cmake --install build
 }
 
-sha512sums="eaaa343f8b901318d1a6001dfa151c2b5d176babf2ad1551d0cac7f9a0d7f75ba64d249c4680f18d7561750c89002a7c2bbca3e3a20fad703a76f8ace25a6021  libkcompactdisc-21.04.0.tar.xz"
+sha512sums="
+d41c7782740255ab5e641f22abc3b821506a0999be023cdfbe02faf081227255a4a53c6776463d8f912e268e8dd09a0c99dad20c842a8550085c499fd65caa9c  libkcompactdisc-21.04.3.tar.xz
+"

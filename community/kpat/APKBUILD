@@ -1,10 +1,12 @@
 # Contributor: Bart Ribbers <bribbers@disroot.org>
 # Maintainer: Bart Ribbers <bribbers@disroot.org>
 pkgname=kpat
-pkgver=21.04.0
+pkgver=21.04.3
 pkgrel=0
 pkgdesc="KPatience offers a selection of solitaire card games"
-arch="all !armhf !s390x !mips64" # armhf blocked by extra-cmake-modules
+# armhf blocked by extra-cmake-modules
+# s390x, mips64 and riscv64 blocked by polkit -> kio
+arch="all !armhf !s390x !mips64 !riscv64"
 url="https://kde.org/applications/games/kpat/"
 license="GPL-2.0-or-later AND GFDL-1.2-only"
 makedepends="
@@ -46,7 +48,9 @@ check() {
 }
 
 package() {
-	DESTDIR="$pkgdir" cmake --build build --target install
+	DESTDIR="$pkgdir" cmake --install build
 }
 
-sha512sums="f5d086e6369929860fbdf31fd1213981c952039ca0e841539f042553bebffac991b33c52aba7f4b73bf88783da7d85d296d744d48751f5cbd0598cf2ef9ca685  kpat-21.04.0.tar.xz"
+sha512sums="
+1e2f8eae3cac9877f9cd495c9b430070148188f99a759c0e4d22c900c822f944052bdbc7e5c7e86ce278afbf6351e2af100aa3482518c79e6d993f3954de375c  kpat-21.04.3.tar.xz
+"

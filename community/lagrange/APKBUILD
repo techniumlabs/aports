@@ -1,15 +1,17 @@
 # Contributor: Michał Polański <michal@polanski.me>
 # Maintainer: Michał Polański <michal@polanski.me>
 pkgname=lagrange
-pkgver=1.4.1
+pkgver=1.5.2
 pkgrel=0
 pkgdesc="Beautiful Gemini client"
 url="https://gmi.skyjake.fi/lagrange"
 license="BSD-2-Clause"
 arch="all"
-options="!check" # no test suite
 makedepends="cmake zlib-dev pcre-dev openssl-dev sdl2-dev libunistring-dev mpg123-dev"
 source="https://git.skyjake.fi/gemini/lagrange/releases/download/v$pkgver/lagrange-$pkgver.tar.gz"
+options="!check" # no test suite
+
+[ "$CARCH" = "riscv64" ] && options="$options textrels"
 
 build() {
 	cmake -B build \
@@ -19,9 +21,9 @@ build() {
 }
 
 package() {
-	DESTDIR="$pkgdir" cmake --build build --target install
+	DESTDIR="$pkgdir" cmake --install build
 }
 
 sha512sums="
-6e6a24bf50361a1a48af26f4c1d70216866bb4726c42ed0867cb63469d54bc7fb3c9a292a4ea11904ecc82fc2cd6d4cf1e154a69a4d868ba220ad2f1fe2116c4  lagrange-1.4.1.tar.gz
+971d54d072799cc03bc2521571c74e3da996f390198c3a7e04ff8480040aa1ae96d1407dec68ecb02225ece14c0032304ad1c605b6619b4538d9078c8180f9d6  lagrange-1.5.2.tar.gz
 "

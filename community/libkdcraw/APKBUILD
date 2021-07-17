@@ -1,7 +1,7 @@
 # Contributor: Bart Ribbers <bribbers@disroot.org>
 # Maintainer: Bart Ribbers <bribbers@disroot.org>
 pkgname=libkdcraw
-pkgver=21.04.0
+pkgver=21.04.3
 pkgrel=0
 # armhf blocked by extra-cmake-modules
 # s390x blocked by qt5-qtbase-x11
@@ -36,4 +36,6 @@ package() {
 	DESTDIR="$pkgdir" cmake --build build --target install
 }
 
-sha512sums="b770d88460f00d7581adfe20f5d7a666b5c002088a49b550e44b1fd1fb7dba4be857fd0ce30b5fdefb23acbb2fd8845b9989ccec795467bd8d1f4eb5a267e603  libkdcraw-21.04.0.tar.xz"
+sha512sums="
+a319fa7cb1b06054bd43201faddc251f9a35bc0c10d71c06c0e1dea8db90847c68ec20653373e69df9c2fde7f899d0ad62ef3635ded3aba8bb379594862fc611  libkdcraw-21.04.3.tar.xz
+"

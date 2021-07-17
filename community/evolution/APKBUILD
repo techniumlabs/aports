@@ -2,11 +2,13 @@
 # Contributor: Natanael Copa <ncopa@alpinelinux.org>
 # Maintainer: Rasmus Thomsen <oss@cogitri.dev>
 pkgname=evolution
-pkgver=3.40.1
+pkgver=3.40.3
 pkgrel=0
 pkgdesc="evolution mail client"
 url="https://projects.gnome.org/evolution"
-arch="all !s390x !mips64" # Limited by gnome-autoar
+# s390x blocked by by gnome-autoar
+# mips64 and riscv64 blocked by webkit2gtk -> evolution-data-server
+arch="all !s390x !mips64 !riscv64"
 license="GPL-2.0-or-later"
 depends="highlight gsettings-desktop-schemas"
 depends_dev="itstool libxml2-dev gcr-dev enchant2-dev libcanberra-dev
@@ -44,5 +46,5 @@ package() {
 }
 
 sha512sums="
-acebe937e7bce5e998b86ceb8e53b07ffc9f558543b72cc5d68a54ca2714684bdf3f22726f243754c6ecea7205ccb1b9411095e9c62ca7f9890d2edb0a0b0d00  evolution-3.40.1.tar.xz
+08fcfdafd78ee323a57355dec1c8755525eefb599b70e6fb60ed0e9963a538a4b3f172b78f03aecbd245741fad08363b01ada46c2e349a9ccdc080d28c286452  evolution-3.40.3.tar.xz
 "

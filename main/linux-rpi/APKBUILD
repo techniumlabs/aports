@@ -1,7 +1,7 @@
 # Maintainer: Natanael Copa <ncopa@alpinelinux.org>
 
 pkgname=linux-rpi
-pkgver=5.10.36
+pkgver=5.10.50
 case $pkgver in
 *.*.*)	_kernver=${pkgver%.*};;
 *.*)	_kernver=${pkgver};;
@@ -9,7 +9,7 @@ esac
 pkgrel=0
 pkgdesc="Linux kernel with Raspberry Pi patches"
 url=https://github.com/raspberrypi/linux
-depends="mkinitfs"
+depends="mkinitfs linux-firmware-brcm linux-firmware-cypress"
 _depends_dev="perl gmp-dev elfutils-dev bash"
 makedepends="$_depends_dev sed installkernel bc linux-headers linux-firmware
 	bison flex openssl-dev findutils
@@ -237,18 +237,17 @@ genpatch() {
 
 # main flavor installs in $pkgdir
 package() {
-	depends="$depends linux-firmware-brcm"
 	_package rpi "$pkgdir"
 }
 
 # subflavors install in $subpkgdir
 rpi2() {
-	depends="$depends linux-firmware-brcm"
+	depends="mkinitfs linux-firmware-brcm linux-firmware-cypress"
 	_package rpi2 "$subpkgdir"
 }
 
 rpi4() {
-	depends="$depends linux-firmware-brcm"
+	depends="mkinitfs linux-firmware-brcm linux-firmware-cypress"
 	_package rpi4 "$subpkgdir"
 }
 
@@ -304,8 +303,8 @@ _dev() {
 
 sha512sums="
 95bc137d0cf9148da6a9d1f1a878698dc27b40f68e22c597544010a6c591ce1b256f083489d3ff45ff77753289b535135590194d88ef9f007d0ddab3d74de70e  linux-5.10.tar.xz
-badb51b4b3a163d67df9d7c77218b46ac69d8445eaa20db28529eb6594d525f14a27e87c4a174b96bed2b17f901928a15b6f982f00d5423c3719b9b49f2d6173  patch-5.10.36.xz
-fa520ea620a2ce6cc6701878d692abd558be160c46500559c76f4935389c3f80906481a6fb2b62bf2ec5486ee6ce6c760dc6c5fb253e8225ed2dcdedfeecfdf4  rpi-5.10.36-alpine.patch
+250e72c20446b85ca25da64e0777de9047db3c15322d349e4adff0e758ee3f40428ef169da7372205a463bf8a1e2c5d9a1e908bcfbf3840523161193703d2b8b  patch-5.10.50.xz
+4a5a1e2e285d09a25c5461bad82a12ddaeebf5a13924db3dcbe4b67cce45d76ff0b21f304a22d63e1f27f21a6076e1904858868f82ee98199558a5ed4ef69354  rpi-5.10.50-alpine.patch
 13612ed26f486a4053dc61a1d376cccf21b57f96e9359d3f3b1897458fb96dde24dfcd32f15eeec2a60e5246044d67df2d84b215b2dbb082495b08e872c735c9  config-changes-rpi.armhf
 13612ed26f486a4053dc61a1d376cccf21b57f96e9359d3f3b1897458fb96dde24dfcd32f15eeec2a60e5246044d67df2d84b215b2dbb082495b08e872c735c9  config-changes-rpi.armv7
 13612ed26f486a4053dc61a1d376cccf21b57f96e9359d3f3b1897458fb96dde24dfcd32f15eeec2a60e5246044d67df2d84b215b2dbb082495b08e872c735c9  config-changes-rpi.aarch64

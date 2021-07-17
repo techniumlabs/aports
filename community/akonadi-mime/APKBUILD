@@ -1,14 +1,32 @@
 # Contributor: Bart Ribbers <bribbers@disroot.org>
 # Maintainer: Bart Ribbers <bribbers@disroot.org>
 pkgname=akonadi-mime
-pkgver=21.04.0
+pkgver=21.04.3
 pkgrel=0
 pkgdesc="Libraries and daemons to implement basic email handling"
-arch="all !armhf !mips !mips64 !s390x" # limited by akonadi
+# armhf blocked by extra-cmake-modules
+# mips64, s390x and riscv64 blocked by akonadi
+# ppc64le blocked by qt5-qtwebengine -> kaccounts-integration
+arch="all !armhf !mips64 !s390x !riscv64 !ppc64le"
 url="https://community.kde.org/KDE_PIM"
 license="LGPL-2.0-or-later"
-depends_dev="qt5-qtbase-dev kcodecs-dev kconfigwidgets-dev kdbusaddons-dev kio-dev ki18n-dev kxmlgui-dev kmime-dev kitemmodels-dev akonadi-dev>=$pkgver shared-mime-info libxslt-dev"
-makedepends="$depends_dev extra-cmake-modules"
+depends_dev="
+	akonadi-dev>=$pkgver
+	kcodecs-dev
+	kconfigwidgets-dev
+	kdbusaddons-dev
+	ki18n-dev
+	kio-dev
+	kitemmodels-dev
+	kmime-dev
+	kxmlgui-dev
+	libxslt-dev
+	qt5-qtbase-dev
+	shared-mime-info
+	"
+makedepends="$depends_dev
+	extra-cmake-modules
+	"
 source="https://download.kde.org/stable/release-service/$pkgver/src/akonadi-mime-$pkgver.tar.xz"
 subpackages="$pkgname-dev $pkgname-lang"
 
@@ -26,6 +44,8 @@ check() {
 }
 
 package() {
-	DESTDIR="$pkgdir" cmake --build build --target install
+	DESTDIR="$pkgdir" cmake --install build
 }
-sha512sums="0dba31eea1ce2597939ae369e2e03106298a11aef694847aa4256f7718b98a6cefeff9f21faf17edf894709aa2646e303e7ea3ef67505363683146d9ecfe18ee  akonadi-mime-21.04.0.tar.xz"
+sha512sums="
+c665a2b64275798b4732aec651cab1395feb8cfa8c961498065cfe55aa1c937c3fd47912439fbd150cb902c12ca5023dfcf43018b8a394280b50716b5d735a8b  akonadi-mime-21.04.3.tar.xz
+"

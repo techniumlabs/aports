@@ -1,13 +1,30 @@
 # Contributor: Bart Ribbers <bribbers@disroot.org>
 # Maintainer: Bart Ribbers <bribbers@disroot.org>
 pkgname=lokalize
-pkgver=21.04.0
-pkgrel=0
+pkgver=21.04.3
+pkgrel=1
 pkgdesc="Computer-Aided Translation System"
-arch="all !armhf !s390x !mips64"
-url="https://kde.org/applications/office/org.kde.lokalize"
+url="https://apps.kde.org/lokalize/"
+# armhf blocked by extra-cmake-modules
+# s390x, mips64 and riscv64 blocked by kio
+arch="all !armhf !s390x !mips64 !riscv64"
 license="(GPL-2.0-only OR GPL-3.0-only) AND GFDL-1.2-only"
-makedepends="extra-cmake-modules qt5-qtbase-dev ki18n-dev kio-dev kxmlgui-dev knotifications-dev kconfig-dev kcoreaddons-dev kdoctools-dev kross-dev sonnet-dev kdbusaddons-dev kcrash-dev hunspell-dev"
+makedepends="
+	extra-cmake-modules
+	hunspell-dev
+	kconfig-dev
+	kcoreaddons-dev
+	kcrash-dev
+	kdbusaddons-dev
+	kdoctools-dev
+	ki18n-dev
+	kio-dev
+	knotifications-dev
+	kross-dev
+	kxmlgui-dev
+	qt5-qtbase-dev
+	sonnet-dev
+	"
 source="https://download.kde.org/stable/release-service/$pkgver/src/lokalize-$pkgver.tar.xz"
 subpackages="$pkgname-doc $pkgname-lang"
 options="!check" # No tests
@@ -26,7 +43,9 @@ check() {
 }
 
 package() {
-	DESTDIR="$pkgdir" cmake --build build --target install
+	DESTDIR="$pkgdir" cmake --install build
 }
 
-sha512sums="b2c090ab0df105626415b3e71ba202b37701715080845cb97acb19b4b29f1958b261ee378acfa14bf11a8d93ad7e7bcedc1dec3fbbb280dfaaf2a9fa1ff44fe6  lokalize-21.04.0.tar.xz"
+sha512sums="
+b336fe464c123b60e4de4ba8bda0f34e2ba5eaf7708879179b9671bc33d8b031f81d595d089c24b4275ea56032e9867653cd98bf21c3d0c3db125564c057e21d  lokalize-21.04.3.tar.xz
+"

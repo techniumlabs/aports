@@ -1,29 +1,35 @@
 # Maintainer: Francesco Colista <fcolista@alpinelinux.org>
 pkgname=py3-libvirt
 _pkgname=libvirt-python
-pkgver=7.2.0
-pkgrel=1
+pkgver=7.5.0
+pkgrel=0
 pkgdesc="The libvirt virtualization API python binding"
 url="http://libvirt.org"
-arch="all !s390x !mips64" # libvirt
+# s390x, mips64 and riscv64 blocked by polkit -> libvirt
+arch="all !s390x !mips64 !riscv64"
 license="LGPL-2.0-or-later"
 makedepends="py3-setuptools python3-dev libvirt-dev"
-source="https://libvirt.org/sources/python/$_pkgname-$pkgver.tar.gz"
+checkdepends="py3-pytest"
+source="https://libvirt.org/sources/python/$_pkgname-$pkgver.tar.gz
+	disable-screenshot-test.patch"
 builddir="$srcdir/$_pkgname-$pkgver"
 
 replaces="py-libvirt" # Backwards compatibility
 provides="py-libvirt=$pkgver" # Backwards compatibility
 
-check() {
-	python3 setup.py check
-}
-
 build() {
 	python3 setup.py build
+}
+
+check() {
+	python3 setup.py test
 }
 
 package() {
 	python3 setup.py install --prefix=/usr --root="$pkgdir"
 }
 
-sha512sums="6df5be4d98884751e4a098b54ec1d8827268993b6df5769c1a687420dd5889c629ca0bd286f5a0c22a9c81974fa02565b36628f8026c697ae414137f0c1d8441  libvirt-python-7.2.0.tar.gz"
+sha512sums="
+ae111e4b7db5662af5315642232e2308ebc349bf80a3f9fd372b0fa0ebcde8e25690368187c86d425faef397550caad3366e7b6a3e6a0c4b56fa58df5e8bc276  libvirt-python-7.5.0.tar.gz
+3d1d62a5d5283e5679dd1318a335b2785c895499f1fedae5d75947e29b0a55f6e4925108cf74e6b36f1c9f140aaf5c89171b84d8e94b1c3d3fc6fdc8c7f2f5fc  disable-screenshot-test.patch
+"

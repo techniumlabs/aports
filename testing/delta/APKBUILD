@@ -1,11 +1,11 @@
 # Contributor: Aleks Bunin <alpinelinux@compuix.com>
 # Maintainer: Aleks Bunin <alpinelinux@compuix.com>
 pkgname=delta
-pkgver=0.7.1
+pkgver=0.8.3
 pkgrel=0
 pkgdesc="A viewer for git and diff output"
 url="https://github.com/dandavison/delta"
-arch="all !s390x !mips !mips64" # Limited by cargo
+arch="all !s390x !mips !mips64 !riscv64" # Limited by cargo
 license="MIT"
 makedepends="cargo"
 source="$pkgname-$pkgver.tar.gz::https://github.com/dandavison/delta/archive/$pkgver.tar.gz"
@@ -22,4 +22,4 @@ package() {
 	install -Dm755 target/release/"$pkgname" "$pkgdir"/usr/bin/"$pkgname"
 }
 
-sha512sums="cac2fdb9460ee49e8855a99ba2d9625205f050ef6be286c5ab55950aa256243ee5f367b8c2a333759a6a0399c89edb33ec97014296403a9ca4ab9b3d9704530d  delta-0.7.1.tar.gz"
+sha512sums="8cda4255c878be8dc4dc841dc1778f992c7b01c7a56965babfff9cd0dd085b751e79ffb87450d50d78fd094f2ab851f468c0e88ca4e2f0becf6ebbc122ce602d  delta-0.8.3.tar.gz"

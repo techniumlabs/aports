@@ -1,8 +1,8 @@
 # Contributor: Sören Tempel <soeren+alpine@soeren-tempel.net>
 # Maintainer: Sören Tempel <soeren+alpine@soeren-tempel.net>
 pkgname=z3
-pkgver=4.8.10
-pkgrel=2
+pkgver=4.8.12
+pkgrel=0
 pkgdesc="Theorem prover from Microsoft Research"
 url="https://github.com/Z3Prover/z3"
 arch="all !mips !mips64"
@@ -10,26 +10,23 @@ license="MIT"
 makedepends="cmake python3"
 subpackages="$pkgname-dev py3-$pkgname:py3:noarch"
 source="https://github.com/Z3Prover/z3/archive/z3-$pkgver.tar.gz
-	none-build-type.patch"
+	none-build-type.patch
+	"
 builddir="$srcdir/z3-z3-$pkgver"
 
 build() {
-	mkdir build && cd build
-	cmake -G "Unix Makefiles" \
+	cmake -B build \
 		-DZ3_BUILD_PYTHON_BINDINGS=True \
 		-DZ3_INSTALL_PYTHON_BINDINGS=True \
 		-DPYTHON_EXECUTABLE=/usr/bin/python3 \
 		-DCMAKE_INSTALL_PREFIX=/usr \
 		-DCMAKE_INSTALL_LIBDIR=lib \
 		-DBUILD_SHARED_LIBS=True \
-		-DCMAKE_BUILD_TYPE=None \
-		-DCMAKE_CXX_FLAGS="$CXXFLAGS" \
-		-DCMAKE_C_FLAGS="$CFLAGS" \
-		..
-	make
+		-DCMAKE_BUILD_TYPE=None
+	cmake --build build
 
 	# Binary for running the unit tests
-	make test-z3
+	cmake --build build --target test-z3
 }
 
 check() {
@@ -37,18 +34,17 @@ check() {
 }
 
 package() {
-	cd "$builddir/build"
-	make DESTDIR="$pkgdir" install
+	DESTDIR="$pkgdir" cmake --install build
 }
 
 py3() {
 	pkgdesc="Python bindings for $pkgname"
 	depends="python3"
 
-	mkdir -p "$subpkgdir"/usr/lib/
-	mv "$pkgdir"/usr/lib/python3* \
-		"$subpkgdir"/usr/lib/
+	amove usr/lib/python3*
 }
 
-sha512sums="d2741d7ad3e1d5ee3fec92095b061a96a700c3327b2eb2090d4162bdcaeaebca8c072ef79c5daac1f6de3456165c2cc38e13f1045bc707779d1027b943837c5b  z3-4.8.10.tar.gz
-9a99777d29558ffcc15fa43e3dc1da46261469c60561c5bc3bcaab40164ed59c45386ed597f27c8160e69acf16d0d8f3ddb06a53b52886ab146d54becc9ccb02  none-build-type.patch"
+sha512sums="
+0b377923bdaffaca1846aa2abd61003bbecadfcdfc908ed3097d0aac8f32028ac39d93fb4a9c2e2c2bfffbdbee80aa415875f17de6c2ee2ae8e2b7921f788c6e  z3-4.8.12.tar.gz
+9a99777d29558ffcc15fa43e3dc1da46261469c60561c5bc3bcaab40164ed59c45386ed597f27c8160e69acf16d0d8f3ddb06a53b52886ab146d54becc9ccb02  none-build-type.patch
+"

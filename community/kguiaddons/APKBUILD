@@ -1,7 +1,7 @@
 # Contributor: Bart Ribbers <bribbers@disroot.org>
 # Maintainer: Bart Ribbers <bribbers@disroot.org>
 pkgname=kguiaddons
-pkgver=5.82.0
+pkgver=5.84.0
 pkgrel=0
 pkgdesc="Addons to QtGui"
 # armhf blocked by extra-cmake-modules
@@ -42,5 +42,5 @@ package() {
 }
 
 sha512sums="
-8713b2036371240e92503e4be51bdd16a354bc08f1831fe242f64841945ce99e1c1e3a62d367f1c07c4769768d724341733c6f1360985e215bfd3a85d2574ca6  kguiaddons-5.82.0.tar.xz
+7dc5d417e2b214b0d2a98b64162a570be14b74202a3aa6cd12d699c9372a9ad7e32b778f0a70266f9dee8b88cb5381aa6157d9ce6774f26e134aa6c79005bf57  kguiaddons-5.84.0.tar.xz
 "

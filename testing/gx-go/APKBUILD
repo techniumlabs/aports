@@ -2,7 +2,7 @@
 # Maintainer: Oleg Titov <oleg.titov@gmail.com>
 pkgname=gx-go
 pkgver=1.9.0
-pkgrel=3
+pkgrel=4
 pkgdesc="A tool to use with the gx package manager for packages written in go"
 url="https://github.com/whyrusleeping/gx-go"
 arch="all"
@@ -18,6 +18,7 @@ builddir="$srcdir/src/github.com/whyrusleeping/$pkgname"
 
 prepare() {
 	export GOPATH="$srcdir"
+	export GO111MODULE=off
 
 	mkdir -p $(dirname $builddir)
 	mv "$srcdir"/$pkgname-$pkgver "$builddir"/

@@ -1,9 +1,9 @@
 # Contributor: Bart Ribbers <bribbers@disroot.org>
 # Maintainer: Bart Ribbers <bribbers@disroot.org>
 pkgname=poxml
-pkgver=21.04.0
+pkgver=21.04.3
 pkgrel=0
-arch="all !armhf"
+arch="all !armhf !riscv64"
 url="https://www.kde.org/applications/development/"
 pkgdesc="Translates DocBook XML files using gettext po files"
 license="GPL-2.0-or-later AND GFDL-1.2-only"
@@ -28,4 +28,6 @@ package() {
 	DESTDIR="$pkgdir" cmake --build build --target install
 }
 
-sha512sums="448be68328031fed5b61f8db170ff29681929a7822622acd53934f0c728d9426770ca62c084a94f10f296063f962e00fbd385ad1632c1f991f7b275a88bf4ac3  poxml-21.04.0.tar.xz"
+sha512sums="
+52647f1574790e7f0c444e4a0ade0789da6034db0e68f8a9b92606c8511ca06c7f317ead23b4cb72db5330cf1e41e58646b98eb2c3bec47c6b8c813c60969df8  poxml-21.04.3.tar.xz
+"

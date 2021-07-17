@@ -5,10 +5,10 @@ pkgver=0.30.11
 pkgrel=1
 pkgdesc="A digital photo organizer designed for the GNOME desktop environment"
 url="https://wiki.gnome.org/Apps/Shotwell"
-arch="all !s390x !mips !mips64" # librsvg
+arch="all !s390x !mips !mips64 !riscv64" # limited by librsvg -> rust
 license="CC-BY-SA-3.0 AND LGPL-2.1-or-later"
 subpackages="$pkgname-lang $pkgname-doc"
-makedepends="vala libgee-dev libunique3-dev webkit2gtk-dev libexif-dev
+makedepends="vala libgee-dev webkit2gtk-dev libexif-dev
 	sqlite-dev libgudev-dev dbus-glib-dev libgphoto2-dev gexiv2-dev libraw-dev
 	librsvg-dev json-glib-dev gst-plugins-base-dev gtk+3.0-dev rest-dev
 	gcr-dev itstool libgdata-dev meson"

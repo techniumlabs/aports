@@ -1,12 +1,12 @@
 # Contributor: Bart Ribbers <bribbers@disroot.org>
 # Maintainer: Bart Ribbers <bribbers@disroot.org>
 pkgname=powerdevil
-pkgver=5.21.5
+pkgver=5.22.3
 pkgrel=0
 pkgdesc="Manages the power consumption settings of a Plasma Shell"
 # armhf blocked by extra-cmake-modules
-# s390x blocked by libksysguard
-arch="all !armhf !s390x !mips64"
+# s390x, mips64 and riscv64 blocked by polkit -> kio
+arch="all !armhf !s390x !mips64 !riscv64"
 url="https://kde.org/plasma-desktop/"
 license="GPL-2.0-or-later AND LGPL-2.0-or-later AND (LGPL-2.1-only OR LGPL-3.0-only)"
 depends="upower"
@@ -69,5 +69,5 @@ package() {
 }
 
 sha512sums="
-0d6b9cbd5cbf5cf3d34e3053f352d86586ed3672ddfae068531b899827d65b9e42c5ec0013f684deca501528590ec5074371fa7699aae4d6a20b120e319b625c  powerdevil-5.21.5.tar.xz
+6ca57a23909690a90787f214762b0f2fe304560fe29aef76b518b10ab9909f3dadf50ed0c59f857313ce53618f4c0ba04a95cc931ef3f1bf4ea91f838e36059f  powerdevil-5.22.3.tar.xz
 "

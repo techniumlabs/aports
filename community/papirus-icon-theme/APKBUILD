@@ -1,7 +1,7 @@
 # Contributor: David Demelier <markand@malikania.fr>
 # Maintainer: David Demelier <markand@malikania.fr>
 pkgname=papirus-icon-theme
-pkgver=20210501
+pkgver=20210701
 pkgrel=0
 pkgdesc="papirus icon theme"
 options="!check"
@@ -14,4 +14,6 @@ package() {
 	make DESTDIR="$pkgdir" install
 }
 
-sha512sums="65f096428756e52a4c373c206a320e2185fc176238100fd2e8dc9281c7772e3a3381a6ce2d4642be9ff0ea97f5e5292b1a5b631c07459d5863ee7e5cfcced8ac  papirus-icon-theme-20210501.tar.gz"
+sha512sums="
+0ec131bac6a0804d0a61d0c01c30d8d55f4438e93e17849a5c3cb741c4d8aa050977b24101d7f33416a7d617b53c5dca28ce38316e52bd5f72d9034147983d4d  papirus-icon-theme-20210701.tar.gz
+"

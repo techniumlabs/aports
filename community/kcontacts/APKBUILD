@@ -1,7 +1,7 @@
 # Contributor: Bart Ribbers <bribbers@disroot.org>
 # Maintainer: Bart Ribbers <bribbers@disroot.org>
 pkgname=kcontacts
-pkgver=5.82.0
+pkgver=5.84.0
 pkgrel=0
 pkgdesc="Address book API for KDE"
 arch="all !armhf" # armhf blocked by extra-cmake-modules
@@ -32,5 +32,5 @@ package() {
 	DESTDIR="$pkgdir" cmake --build build --target install
 }
 sha512sums="
-05cde28d3b9c83054d004fe6fa9d439358fd95ae3b739089a08b37a3b44e1b3119242de64c5e5155bda9df9ad5736a2629385c1b1c39326fbd9e3fa6a1984e6f  kcontacts-5.82.0.tar.xz
+8bc88f2ce9ebdb0c28ae47311b411de01885cd4bf29a5125818acd8c0ac0c71635eefd87ca8f0c8f873ca303268741e0fccc235e6f887b1ceee880dbca7dd2ff  kcontacts-5.84.0.tar.xz
 "

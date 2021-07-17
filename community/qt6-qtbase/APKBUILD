@@ -1,9 +1,9 @@
 # Maintainer: Bart Ribbers <bribbers@disroot.org>
 pkgname=qt6-qtbase
-pkgver=6.1.0
-pkgrel=0
+pkgver=6.1.2
+pkgrel=1
 pkgdesc="A cross-platform application and UI framework"
-url="https://qt.io"
+url="https://qt.io/"
 arch="all"
 license="LGPL-2.1-only AND LGPL-3.0-only AND GPL-3.0-only AND Qt-GPL-exception-1.0"
 _sub="
@@ -13,7 +13,7 @@ _sub="
 	$pkgname-sqlite
 	$pkgname-x11
 	"
-
+depends="xdg-utils"
 # TODO: Add vulkan-loader-dev, right now it's linked wrongly
 depends_dev="$_sub
 	cups-dev
@@ -41,13 +41,20 @@ depends_dev="$_sub
 	tslib-dev
 	unixodbc-dev
 	vulkan-headers
+	vulkan-loader-dev
 	wayland-dev
 	xcb-util-dev
+	xcb-util-image-dev
+	xcb-util-keysyms-dev
+	xcb-util-renderutil-dev
+	xcb-util-wm-dev
 	zlib-dev
 	"
 makedepends="$depends_dev
 	cmake
 	perl
+	samurai
+	xmlstarlet
 	"
 subpackages="$pkgname-dev $pkgname-doc $_sub"
 builddir="$srcdir/qtbase-everywhere-src-${pkgver/_/-}"
@@ -59,8 +66,14 @@ esac
 
 source="https://download.qt.io/$_rel/qt/${pkgver%.*}/${pkgver/_/-}/submodules/qtbase-everywhere-src-${pkgver/_/-}.tar.xz"
 
+case "$CTARGET_ARCH" in
+	arm*|aarch64) _opengl="-DQT_FEATURE_opengles2=ON" ;;
+esac
+
+[ "$CARCH" = "riscv64" ] && options="$options textrels"
+
 build() {
-	cmake -B build \
+	cmake -B build -G Ninja \
 		-DCMAKE_BUILD_TYPE=None \
 		-DCMAKE_INSTALL_PREFIX=/usr \
 		-DINSTALL_BINDIR=lib/qt6/bin \
@@ -71,8 +84,10 @@ build() {
 		-DINSTALL_MKSPECSDIR=lib/qt6/mkspecs \
 		-DINSTALL_EXAMPLESDIR=share/doc/qt6/examples \
 		-DQT_FEATURE_journald=OFF \
-		-DQT_FEATURE_openssl_linked=ON
-	cmake --build build
+		-DQT_FEATURE_openssl_linked=ON \
+		-DQT_FEATURE_vulkan=ON \
+		$_opengl
+	cmake --build build --parallel
 }
 
 check() {
@@ -127,5 +142,5 @@ x11() {
 }
 
 sha512sums="
-2926e66fd1de9c7e541671fbccb2127a2abd490562180a640fdda95ba15b2c8b1828c747ebfcb49190c5d01092c8194ad4d0f1fe6bbe350b62c438322a8eb7b8  qtbase-everywhere-src-6.1.0.tar.xz
+0f9bf5680268c6dc95c10c28297908c9113a7e3e498ba80ed3ba73cc98b809b38fa610ee3b15f367b6ace2f593842db8d27dc7ec2142737574cfa32cdf57ea91  qtbase-everywhere-src-6.1.2.tar.xz
 "

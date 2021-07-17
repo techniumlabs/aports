@@ -1,11 +1,11 @@
 # Contributor: Bart Ribbers <bribbers@disroot.org>
 # Maintainer: Bart Ribbers <bribbers@disroot.org>
 pkgname=kmag
-pkgver=21.04.0
+pkgver=21.04.3
 pkgrel=0
 # armhf blocked by extra-cmake-modules
-# mips, mips64 and s390x blocked by kio and kxmlgui
-arch="all !armhf !mips !mips64 !s390x"
+# mips64, s390x and riscv64 blocked by polkit -> kio
+arch="all !armhf !mips64 !s390x !riscv64"
 url="https://kde.org/applications/utilities/org.kde.kmag"
 pkgdesc="A screen magnifier"
 license="GPL-2.0-or-later AND GFDL-1.2-only"
@@ -34,7 +34,9 @@ check() {
 }
 
 package() {
-	DESTDIR="$pkgdir" cmake --build build --target install
+	DESTDIR="$pkgdir" cmake --install build
 }
 
-sha512sums="b8e368bf84b97db367731ff42c2c6ffc17ae5721c3fb880a67f57f8c552a77633935a87a852efc15eb36a401e9d7f55daf23f3e2c7922d44347f94a1ccc1c56d  kmag-21.04.0.tar.xz"
+sha512sums="
+b8893a9ebae7c0c2f15b27e0219f51992a3670783c5d84caf9b371b72cf0ec8d80580e067d2dd0d1b6ed86b80d71cb5eb383cd45f31dbd27809e6d73fa5668fa  kmag-21.04.3.tar.xz
+"

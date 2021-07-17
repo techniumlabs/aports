@@ -1,20 +1,18 @@
 # Contributor: Leo <thinkabit.ukim@gmail.com>
 # Maintainer: Natanael Copa <ncopa@alpinelinux.org>
 pkgname=libcap
-pkgver=2.49
+pkgver=2.51
 pkgrel=0
 pkgdesc="POSIX 1003.1e capabilities"
 arch="all"
 license="BSD-3-Clause OR GPL-2.0-only"
 url="https://sites.google.com/site/fullycapable/"
 depends_dev="linux-headers"
-makedepends_build="linux-headers perl"
+makedepends_build="linux-headers perl bash"
 makedepends_host="$depends_dev attr-dev"
 makedepends="$makedepends_build $makedepends_host"
-checkdepends="bash"
-source="https://kernel.org/pub/linux/libs/security/linux-privs/libcap2/libcap-$pkgver.tar.xz
-	"
 subpackages="$pkgname-doc $pkgname-static $pkgname-dev"
+source="https://kernel.org/pub/linux/libs/security/linux-privs/libcap2/libcap-$pkgver.tar.xz"
 
 build() {
 	make BUILD_CC=gcc CC="${CC:-gcc}" lib=lib prefix=/usr GOLANG=no \
@@ -40,4 +38,6 @@ static() {
 	mv "$pkgdir"/usr/lib/*.a "$subpkgdir"/usr/lib
 }
 
-sha512sums="2934a2ded1370edeb9603dbf43d8ca23a2eb5d67efc5cec5d4ba96c707a8db2702da8aa9be0cb86c5ff100d37ec96115c7777a7566ad0ab2e0b4a288bbe357d0  libcap-2.49.tar.xz"
+sha512sums="
+3b4a97ef864a2ce2f87056ebc282223b0c71ca71c539744dc629ffe7905ca5fdde937ca70c34ec84406fe54863d39abf32775818a5e5a6fdf3069706b1723a88  libcap-2.51.tar.xz
+"

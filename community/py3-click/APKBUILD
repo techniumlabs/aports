@@ -1,8 +1,8 @@
 # Contributor: Fabian Affolter <fabian@affolter-engineering.ch>
 # Maintainer: Fabian Affolter <fabian@affolter-engineering.ch>
 pkgname=py3-click
-pkgver=7.1.2
-pkgrel=1
+pkgver=8.0.1
+pkgrel=0
 pkgdesc="Simple wrapper around optparse for powerful command line utilities"
 url="https://click.palletsprojects.com"
 arch="noarch"
@@ -28,4 +28,6 @@ package() {
 	python3 setup.py install --prefix=/usr --root="$pkgdir"
 }
 
-sha512sums="b9fba8a30f57e380a2005b45c4f37074a27637ace9e16fb0fb0cce88aac72cfa806eea2829dac665fe2b558b8753a40b811dbfcca94dfccf999ad494865d7888  click-7.1.2.tar.gz"
+sha512sums="
+6a6d66c68dae4cfcfdab5d77dab4ab280b18f8e9ec326b4860012253d8f6b4fa57a5a3794ddebd228da85f893b0c6a737d8be3ad361d31098ef0a2ad684d6d0a  click-8.0.1.tar.gz
+"

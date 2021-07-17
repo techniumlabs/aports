@@ -1,12 +1,13 @@
 # Contributor: Bart Ribbers <bribbers@disroot.org>
 # Maintainer: Bart Ribbers <bribbers@disroot.org>
 pkgname=calendarsupport
-pkgver=21.04.0
+pkgver=21.04.3
 pkgrel=0
 pkgdesc="Library providing calendar support"
 # armhf blocked by extra-cmake-modules
-# ppc64le, s390x and mips blocked by akonadi-calendar-dev
-arch="all !armhf !ppc64le !s390x !mips !mips64"
+# ppc64le blocked by akonadi-calendar
+# s390x, mips64 and riscv64 blocked by polkit -> kio
+arch="all !armhf !ppc64le !s390x !mips64 !riscv64"
 url="https://kontact.kde.org"
 license="GPL-2.0-or-later AND Qt-GPL-exception-1.0 AND LGPL-2.0-or-later"
 depends_dev="
@@ -48,6 +49,8 @@ check() {
 }
 
 package() {
-	DESTDIR="$pkgdir" cmake --build build --target install
+	DESTDIR="$pkgdir" cmake --install build
 }
-sha512sums="3e6a5f65451a0f37eb017096e36a925c57915acfcdb21317eb2dabad860826fb2195ea763bceefc01f3f5953c13a4712635c05bdbc133e2deb506a2b635e0334  calendarsupport-21.04.0.tar.xz"
+sha512sums="
+10ed1bfc953483b0af1cb6e8cb5d35659b0400cb5e61723fdc8a22eba7c5205c8c944fb2c3ba7b07907dd673111cc7bb12db2ac3e04f3bc27c824cdfde401cd2  calendarsupport-21.04.3.tar.xz
+"

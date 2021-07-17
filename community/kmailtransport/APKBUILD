@@ -1,12 +1,12 @@
 # Contributor: Bart Ribbers <bribbers@disroot.org>
 # Maintainer: Bart Ribbers <bribbers@disroot.org>
 pkgname=kmailtransport
-pkgver=21.04.0
+pkgver=21.04.3
 pkgrel=0
 pkgdesc="Manage mail transport"
 # armhf blocked by extra-cmake-modules
 # ppc64le, s390x and mips64 blocked by libkgapi
-arch="all !ppc64le !s390x !armhf !mips !mips64"
+arch="all !armhf !ppc64le !s390x !mips64 !riscv64"
 url="https://kontact.kde.org/"
 license="LGPL-2.0-or-later"
 depends_dev="
@@ -46,4 +46,6 @@ check() {
 package() {
 	DESTDIR="$pkgdir" cmake --install build
 }
-sha512sums="d5280cc1442f66e161f339f804c4187c4322ef02c06993fbc7e96d76ed15ad7057cd001c016b16a753e29d43349e32de04f0cf993e560290ded59424b8c60e07  kmailtransport-21.04.0.tar.xz"
+sha512sums="
+aa4afb187969faee3b6fc5567595232ac5aa74aebfa2e407e0ad10245f4bb26da4fb8beae17b2a2a3d3d8b676198e1eedc694f4ba669927b3a6eb50be6703c30  kmailtransport-21.04.3.tar.xz
+"

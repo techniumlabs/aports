@@ -1,11 +1,12 @@
 # Contributor: Bart Ribbers <bribbers@disroot.org>
 # Maintainer: Bart Ribbers <bribbers@disroot.org>
 pkgname=step
-pkgver=21.04.0
+pkgver=21.04.3
 pkgrel=0
 # armhf blocked by extra-cmake-modules
 # mips, mips64 and s390x blocked by khtml
-arch="all !armhf !mips !mips64 !s390x"
+# riscv64 disabled due to missing rust in recursive dependency
+arch="all !armhf !mips !mips64 !s390x !riscv64"
 url="https://edu.kde.org/step/"
 pkgdesc="Interactive Physics Simulator"
 license="GPL-2.0-or-later AND GFDL-1.2-only"
@@ -44,4 +45,6 @@ package() {
 	DESTDIR="$pkgdir" cmake --build build --target install
 }
 
-sha512sums="df3d5ad7aa5ad6814bbc53be27ea64cf07b84474dea7b654b324ccf54a8e5e06f8a5a74999f7a24ede8a9181a65a892881c9a6714b20a83f0fd0c6c9d98f56ac  step-21.04.0.tar.xz"
+sha512sums="
+273c5424321a1508a715c4553c954914dbd8b0a42b8ca0872d61ed0d272f252262f6794daa64d5764366f406678004c51cf0224541da1a813d99bd7502af1898  step-21.04.3.tar.xz
+"

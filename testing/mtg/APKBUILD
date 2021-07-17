@@ -1,8 +1,8 @@
 # Contributor: Konstantin Kulikov <k.kulikov2@gmail.com>
 # Maintainer: Konstantin Kulikov <k.kulikov2@gmail.com>
 pkgname=mtg
-pkgver=2.0.0
-pkgrel=0
+pkgver=2.0.1
+pkgrel=1
 pkgdesc="MTPROTO proxy for Telegram"
 url="https://github.com/9seconds/mtg"
 license="MIT"
@@ -11,19 +11,24 @@ makedepends="go"
 options="net"
 subpackages="$pkgname-openrc"
 install="mtg.pre-install"
-source="go.mod go.sum apk.go mtg.initd mtg.confd mtg.conf"
-builddir=$srcdir
-
+source="$pkgname-$pkgver.tar.gz::https://github.com/9seconds/mtg/archive/refs/tags/v$pkgver.tar.gz
+	mtg.initd
+	mtg.confd
+	mtg.conf
+	skip-tests-on-network-error.patch
+	"
 export GOPATH=$srcdir/go
 export GOCACHE=$srcdir/go-build
 export GOTMPDIR=$srcdir
 
+export GOFLAGS="$GOFLAGS -modcacherw"
+
 build() {
-	go build -modcacherw -v github.com/9seconds/mtg/v2
+	go build -v github.com/9seconds/mtg/v2
 }
 
 check() {
-	go test -modcacherw github.com/9seconds/mtg/v2/...
+	go test github.com/9seconds/mtg/v2/...
 }
 
 package() {
@@ -33,9 +38,10 @@ package() {
 	install -Dm644 $srcdir/$pkgname.conf  $pkgdir/etc/$pkgname.conf
 }
 
-sha512sums="43f492d8fe082d618e76b938b6dbe6435e63fafb728eea48b47ab64fcb60e3c088cdec408b3fe42553b0837cd69ad7db066f86f09c0beb09ece663a620082f5d  go.mod
-0ea18d336e737f2cf2d344097d42836419f0a977deb94b1b512ddc13558f7cfa4a4e5e174c63217da98bef0d0a483d582d366510fc0f404ea48a73d3d58f7321  go.sum
-fcb3e40714aba2605aa58298b88eaabaf03e1c2bad71bc0b064573a1cd91a85a0d8892b0e080eefdc921879ebf9364283bb98fad084ad75d68cf8434a6fe31cb  apk.go
+sha512sums="
+7f924bc345eb53843207f8cee4c2517878af2d908bc8997c61c45e7e29fde4e0e8dfbe0571c4b7a42f5c6b5653ff1359ed0269ad8aa224551de807b0e7dfd595  mtg-2.0.1.tar.gz
 6ce0b34b2224ea86d56f1c6911302c42a6b4aa9d13046fd0016d9adc267121fd1365829e26559875b836d0b94f9e784954949094489b7e16975d82332d241273  mtg.initd
 41c3edc721fae9569596776e38fe6cebfe213cbb62b9a187fbb893eab9421d64ec5a683a54af5f1444a3e28af89402ab4d55abf9f653a64a040c0a4b684f5ece  mtg.confd
-340651372d8fa861bf40ead66af7fc52ee917aa62eb21bbf562bd5775ffd13ed688fe516a278aa96a8fe55ea48225ca1d9048a7bca7eaf6a5fedd563b27f21b4  mtg.conf"
+340651372d8fa861bf40ead66af7fc52ee917aa62eb21bbf562bd5775ffd13ed688fe516a278aa96a8fe55ea48225ca1d9048a7bca7eaf6a5fedd563b27f21b4  mtg.conf
+4dcf0949d3fc83cc7b3b971950c6d384866dba46845209a776fd1cf7b3b8169fbdb04cc4f635743b7a5be25f52b4d4be320470e11a79174d1348c2fb97b95b59  skip-tests-on-network-error.patch
+"

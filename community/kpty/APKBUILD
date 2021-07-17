@@ -1,7 +1,7 @@
 # Contributor: Bart Ribbers <bribbers@disroot.org>
 # Maintainer: Bart Ribbers <bribbers@disroot.org>
 pkgname=kpty
-pkgver=5.82.0
+pkgver=5.84.0
 pkgrel=0
 pkgdesc="Pty abstraction"
 arch="all !armhf" # armhf blocked by extra-cmake-modules
@@ -31,5 +31,5 @@ package() {
 	DESTDIR="$pkgdir" cmake --build build --target install
 }
 sha512sums="
-9515443671c2030646dfa628555b3e131ad8ff018aa73fe7e0168e352968cbab6111f8e00a47cb7c26ca3807da2e502de19505d44da84750ca46a834bb7a3193  kpty-5.82.0.tar.xz
+8252e3a25e9d8015563ccdc394d31e89949827fa332c2fbf95af5f86b349f1536c20835cb5859ac5e5f92d533276f7411ecf42d2b742ce92dc36e6fa2b0b726d  kpty-5.84.0.tar.xz
 "

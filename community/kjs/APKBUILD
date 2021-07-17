@@ -1,7 +1,7 @@
 # Contributor: Bart Ribbers <bribbers@disroot.org>
 # Maintainer: Bart Ribbers <bribbers@disroot.org>
 pkgname=kjs
-pkgver=5.82.0
+pkgver=5.84.0
 pkgrel=0
 pkgdesc="Support for JS scripting in applications"
 arch="all !armhf" # armhf blocked by extra-cmake-modules
@@ -29,5 +29,5 @@ package() {
 	DESTDIR="$pkgdir" cmake --build build --target install
 }
 sha512sums="
-9ac3f70b09d309fe11026964607aa102d1b6264ad19c8618993fc533ad13dd367772886c56da26d980cef1aa1b80d228a8822340be582cb2a150352d64efaef8  kjs-5.82.0.tar.xz
+a766b6eac0c6abd69867cd137ea2c5cb87f1a93a89711d2ed3882c762425d56aea740fb6384850218806334684141f98aaf2fb54a587ccc3fce1d9fe8f865aef  kjs-5.84.0.tar.xz
 "

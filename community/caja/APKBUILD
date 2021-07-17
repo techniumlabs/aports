@@ -5,12 +5,13 @@ pkgver=1.24.0
 pkgrel=0
 pkgdesc="The file manager for the MATE desktop"
 url="https://github.com/mate-desktop/caja"
-arch="all !s390x !mips !mips64" # mate-desktop is not available on s390x or mips
+# s390x, mips64 and riscv64 blocked by librsvg -> mate-desktop
+arch="all !s390x !mips64 !riscv64"
 license="GPL-2.0-or-later AND LGPL-2.0-or-later"
 depends="mate-common mate-desktop"
-makedepends="$depends_dev intltool libtool dconf-dev gtk+3.0-dev libunique3-dev
+makedepends="$depends_dev intltool libtool dconf-dev gtk+3.0-dev gtk-doc
 	libsm-dev libnotify-dev mate-desktop-dev libxml2-dev gobject-introspection-dev
-	gtk-doc"
+	"
 checkdepends="xvfb-run"
 subpackages="$pkgname-dev $pkgname-doc $pkgname-lang"
 source="https://pub.mate-desktop.org/releases/${pkgver%.*}/caja-$pkgver.tar.xz"

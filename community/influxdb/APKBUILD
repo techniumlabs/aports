@@ -2,15 +2,15 @@
 # Maintainer:
 pkgname=influxdb
 pkgver=1.8.3
-pkgrel=2
+pkgrel=3
 _commit=563e6c3d1a # git rev-parse --short HEAD
 _branch=${pkgver%.*}
 pkgdesc="Scalable datastore for metrics, events, and real-time analytics"
 url="https://www.influxdata.com/time-series-platform/influxdb/"
 # many tests fail on x86, it's unclear whether it works at all
 # armhf has no ci
-# mips(64): build failures
-arch="all !x86 !armhf !mips !mips64"
+# mips64 and riscv64 blocked by boltdb dependency
+arch="all !x86 !armhf !mips64 !riscv64"
 license="MIT"
 makedepends="go asciidoc xmlto"
 install="$pkgname.pre-install"
@@ -46,6 +46,7 @@ check() {
 	# CI too slow, some tests timeout.
 	[ "$CARCH" == "armv7" ] && return 0
 
+	ulimit -n 4096 # Checks fail on aarch64 with: 'too many open files'
 	go test -short $pkgs
 }
 

@@ -1,11 +1,11 @@
 # Contributor: Bart Ribbers <bribbers@disroot.org>
 # Maintainer: Bart Ribbers <bribbers@disroot.org>
 pkgname=kbreakout
-pkgver=21.04.0
+pkgver=21.04.3
 pkgrel=0
 # armhf blocked by extra-cmake-modules
-# s390x blocked by kconfigwidgets
-arch="all !armhf !s390x !mips64"
+# s390x, mips64 and riscv64 blocked by polkit -> kxmlgui
+arch="all !armhf !s390x !mips64 !riscv64"
 url="https://kde.org/applications/games/kbreakout/"
 pkgdesc="A Breakout-like game"
 license="GPL-2.0-or-later AND GFDL-1.2-only"
@@ -41,7 +41,9 @@ check() {
 }
 
 package() {
-	DESTDIR="$pkgdir" cmake --build build --target install
+	DESTDIR="$pkgdir" cmake --install build
 }
 
-sha512sums="4b904461e25c9ea196c12ac7e5e9d85aafe217dc849cafab3977a415836715f381f07b43d50cdd1491d6193c974990e2d19571260bb061efaad855fc44cff556  kbreakout-21.04.0.tar.xz"
+sha512sums="
+0f72faaf376a239c5d107dd4b45c0d0bff9a8710fca018e1ed0e519b087570c5b3679c00556b2a21feddcba8b3a182d2209b42fc8b3ff5785e0dff863b53942a  kbreakout-21.04.3.tar.xz
+"

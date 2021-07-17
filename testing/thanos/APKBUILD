@@ -2,11 +2,11 @@
 # Maintainer: wener <wenermail@gmail.com>
 pkgname=thanos
 pkgver=0.15.0
-pkgrel=0
+pkgrel=1
 pkgdesc="Highly available Prometheus setup with long term storage capabilities. CNCF Sandbox project."
 url="https://github.com/thanos-io/thanos"
 license="Apache-2.0"
-arch="all !mips64" # prometheus
+arch="all !mips64 !riscv64" # prometheus
 install="thanos.pre-install"
 makedepends="go prometheus tzdata"
 subpackages="$pkgname-openrc"

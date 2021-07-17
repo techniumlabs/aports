@@ -1,12 +1,13 @@
 # Contributor: Bart Ribbers <bribbers@disroot.org>
 # Maintainer: Bart Ribbers <bribbers@disroot.org>
 pkgname=akonadi-contacts
-pkgver=21.04.0
+pkgver=21.04.3
 pkgrel=0
 pkgdesc="Libraries and daemons to implement Contact Management in Akonadi"
 # armhf blocked by extra-cmake-modules
-# s390x, mips and mips64 blocked by akonadi
-arch="all !armhf !s390x !mips !mips64"
+# s390x, mips64 and riscv64 blocked by akonadi
+# ppc64le blocked by qt5-qtwebengine -> akonadi
+arch="all !armhf !s390x !mips64 !riscv64 !ppc64le"
 url="https://community.kde.org/KDE_PIM"
 license="LGPL-2.1"
 depends_dev="
@@ -52,6 +53,8 @@ check() {
 }
 
 package() {
-	DESTDIR="$pkgdir" cmake --build build --target install
+	DESTDIR="$pkgdir" cmake --install build
 }
-sha512sums="3de75e1aae96a7ad7eef4fa3a15f3f179d55f9138ccadff99e6e418973097a654900163574e18c054f89c9dd58c10953ebabcf2f07de5b4eaa5866578e86d059  akonadi-contacts-21.04.0.tar.xz"
+sha512sums="
+11e9d2122fbd8c870bddae42b63f00a16b755c8aabb0f5f88066179d99b721bbbed93dceb9242a36e6aa222a2eee13bbd88235eedf0899c2d2a85aacf0c00ea2  akonadi-contacts-21.04.3.tar.xz
+"

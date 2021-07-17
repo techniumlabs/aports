@@ -1,15 +1,15 @@
 # Contributor: Francesco Colista <fcolista@alpinelinux.org>
 # Maintainer: Francesco Colista <fcolista@alpinelinux.org>
 pkgname=belle-sip
-pkgver=4.5.13
+pkgver=4.5.22
 pkgrel=0
 pkgdesc="SIP (RFC3261) implementation written in C"
 url="https://www.linphone.org"
-arch="all !mips !mips64" # java
+arch="all !mips !mips64 !riscv64" # java
 license="GPL-2.0-or-later"
 options="!check" # no test available
 makedepends="cmake libantlr3c libantlr3c-dev bctoolbox-dev
-zlib-dev mbedtls-dev openjdk8-jre-base"
+zlib-dev mbedtls-dev java-jre-headless"
 subpackages="$pkgname-dev"
 source="https://gitlab.linphone.org/BC/public/belle-sip/-/archive/$pkgver/belle-sip-$pkgver.tar.gz
 	antlr.jar::https://github.com/antlr/website-antlr3/blob/gh-pages/download/antlr-3.4-complete.jar?raw=true"
@@ -33,6 +33,6 @@ package() {
 }
 
 sha512sums="
-3c1d76d31c3da3409e91b1710e228b46951b6dff417f57669f73815da08e9f8ed1fc21cb68e0a96a8cf68d7c56ef8ad953440fe42a1b0bddf7f776c79261a529  belle-sip-4.5.13.tar.gz
+acffafc041f84979bf30afaa886c030a8f3665eb89b377c2be1c8f8115e1d8bdc41c4a7fdeebb628422f227cea7ea70fbcc67081778879a0302f033723b682c2  belle-sip-4.5.22.tar.gz
 04be4dfba3a21f3ab9d9e439a64958bd8e844a9f151b798383bd9e0dd6ebc416783ae7cb1d1dbb27fb7288ab9756b13b8338cdb8ceb41a10949c852ad45ab1f2  antlr.jar
 "

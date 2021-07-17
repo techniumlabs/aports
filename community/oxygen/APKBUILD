@@ -1,12 +1,12 @@
 # Contributor: Bart Ribbers <bribbers@disroot.org>
 # Maintainer: Bart Ribbers <bribbers@disroot.org>
 pkgname=oxygen
-pkgver=5.21.5
+pkgver=5.22.3
 pkgrel=0
 pkgdesc="Artwork, styles and assets for the Oxygen visual style for the Plasma Desktop"
 # armhf blocked by extra-cmake-modules
-# s390x and mips64 blocked by frameworkintegration
-arch="all !armhf !s390x !mips64"
+# s390x, mips64 and riscv64 blocked by polkit -> kcmutils
+arch="all !armhf !s390x !mips64 !riscv64"
 url="https://kde.org/plasma-desktop/"
 license="LGPL-2.1-or-later"
 makedepends="
@@ -52,8 +52,9 @@ package() {
 
 sounds() {
 	pkgdesc="$pkgdesc (sounds)"
+
 	amove usr/share/sounds
 }
 sha512sums="
-f8ab4989376eedecc5402dd788b15abf1a748863c510bebd306110423904790a9d3df3a246b8ed87273c4bd0425813a9b0a51181dca08b4c2ed27dcade6c950a  oxygen-5.21.5.tar.xz
+8ff38ed3d6b8bd27701d716fd0645cb783ae0d6abf3f63fda284a96a958f3844071ae6037a99ddc07a06d4c6ffddf53becf1e510b6cf56db868e601fdffb66a1  oxygen-5.22.3.tar.xz
 "

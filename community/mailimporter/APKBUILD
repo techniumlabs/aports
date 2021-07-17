@@ -1,12 +1,13 @@
 # Contributor: Bart Ribbers <bribbers@disroot.org>
 # Maintainer: Bart Ribbers <bribbers@disroot.org>
 pkgname=mailimporter
-pkgver=21.04.0
+pkgver=21.04.3
 pkgrel=0
 pkgdesc="KDE PIM library providing support for mail applications"
 # armhf blocked by extra-cmake-modules
-# mips, mips64 and s390x blocked by pimcommon
-arch="all !armhf !mips !mips64 !s390x"
+# mips64, s390x and riscv64 blocked by polkit -> pimcommon
+# ppc64le blocked by qt5-qtwebengine -> akonadi
+arch="all !armhf !mips64 !s390x !riscv64 !ppc64le"
 url="https://kontact.kde.org/"
 license="GPL-2.0-or-later"
 depends_dev="
@@ -40,6 +41,8 @@ check() {
 }
 
 package() {
-	DESTDIR="$pkgdir" cmake --build build --target install
+	DESTDIR="$pkgdir" cmake --install build
 }
-sha512sums="da0f82b296c2899d6e2a45f5f8585af4e9b3273db388d2a315880eb9236b64e9a64e74478e0fd037fd9d2ecda824df77d6fba4df41e1f91cfc9ffb29b4231dac  mailimporter-21.04.0.tar.xz"
+sha512sums="
+a90350b3c88fe7153b6b3058cbbb10dd4ed3667d1d36f9f57c7534da16f788e63e568e7c0400dd71d68e6641a189b939ea408145043025e2bd2e5e65aacb8e71  mailimporter-21.04.3.tar.xz
+"

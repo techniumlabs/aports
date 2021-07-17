@@ -1,11 +1,12 @@
 # Contributor: Bart Ribbers <bribbers@disroot.org>
 # Maintainer: Bart Ribbers <bribbers@disroot.org>
 pkgname=kamoso
-pkgver=21.04.0
+pkgver=21.04.3
 pkgrel=0
-# armhf blocked by kirigami2
-# mips64 and s390x blocked by kio
-arch="all !armhf !mips64 !s390x"
+# armhf blocked by extra-cmake-modules
+# mips64, s390x and riscv64 blocked by polkit -> kio
+# ppc64le blocked by qt5-qtwebengine -> purpose
+arch="all !armhf !mips64 !s390x !riscv64 !ppc64le"
 url="https://kde.org/applications/multimedia/org.kde.kamoso"
 pkgdesc="An application to take pictures and videos out of your webcam"
 license="GPL-2.0-or-later AND LGPL-2.1-only"
@@ -47,7 +48,9 @@ check() {
 }
 
 package() {
-	DESTDIR="$pkgdir" cmake --build build --target install
+	DESTDIR="$pkgdir" cmake --install build
 }
 
-sha512sums="713c38090fbf2a541897e048147aea04ba6f63f55ec56fa14b131a77dedc1bf83bea80cf90ea66ad032af11431d6e1b6761e2674911d468cf4c91eb60e304cf1  kamoso-21.04.0.tar.xz"
+sha512sums="
+e15e703e0e3f189cf065e1709914416a0a1e51f58e512fdc816e06ec9af58c84711b33eda17883ce30074da4b5dd4b924ad402b07899ddf2491b4363bcc8ea9d  kamoso-21.04.3.tar.xz
+"

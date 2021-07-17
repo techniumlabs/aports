@@ -1,13 +1,43 @@
 # Contributor: Bart Ribbers <bribbers@disroot.org>
 # Maintainer: Bart Ribbers <bribbers@disroot.org>
 pkgname=akonadiconsole
-pkgver=21.04.0
+pkgver=21.04.3
 pkgrel=0
-arch="all !s390x !ppc64le !armhf !mips !mips64" # calendarsupport messagelib missing
+# armhf blocked by extra-cmake-modules
+# s390x, ppc64le, mips64 and riscv64 blocked by akonadi
+# ppc64le blocked by calendarsupport
+arch="all !armhf !s390x !ppc64le !mips64 !riscv64"
 url="https://kontact.kde.org/"
 pkgdesc="Application for debugging Akonadi Resources"
 license="GPL-2.0-or-later AND GFDL-1.2-only"
-makedepends="extra-cmake-modules qt5-qtbase-dev kcompletion-dev kconfig-dev kconfigwidgets-dev kdbusaddons-dev kdoctools-dev ki18n-dev kitemmodels-dev ktextwidgets-dev kwidgetsaddons-dev kxmlgui-dev kcrash-dev kcompletion-dev kitemviews-dev kio-dev akonadi-dev kcontacts-dev kcalendarcore-dev kmime-dev akonadi-contacts-dev calendarsupport-dev messagelib-dev libkdepim-dev akonadi-search-dev xapian-bindings"
+makedepends="
+	extra-cmake-modules
+	qt5-qtbase-dev
+	kcompletion-dev
+	kconfig-dev
+	kconfigwidgets-dev
+	kdbusaddons-dev
+	kdoctools-dev
+	ki18n-dev
+	kitemmodels-dev
+	ktextwidgets-dev
+	kwidgetsaddons-dev
+	kxmlgui-dev
+	kcrash-dev
+	kcompletion-dev
+	kitemviews-dev
+	kio-dev
+	akonadi-dev
+	kcontacts-dev
+	kcalendarcore-dev
+	kmime-dev
+	akonadi-contacts-dev
+	calendarsupport-dev
+	messagelib-dev
+	libkdepim-dev
+	akonadi-search-dev
+	xapian-bindings
+	"
 checkdepends="xvfb-run"
 source="https://download.kde.org/stable/release-service/$pkgver/src/akonadiconsole-$pkgver.tar.xz"
 
@@ -25,7 +55,9 @@ check() {
 }
 
 package() {
-	DESTDIR="$pkgdir" cmake --build build --target install
+	DESTDIR="$pkgdir" cmake --install build
 }
 
-sha512sums="e559dace323bafb8c1e78b0ed57c12d4723ad9a285d9a8f34acd4750a822619d223351a151397ea8d7a139b8dd26885bd8b3c704dd754579bb3214ad73053520  akonadiconsole-21.04.0.tar.xz"
+sha512sums="
+d2a1daf6feba0154dedbdfebdfb1a5744e523a44d35ca38f46567c7cb50683ac83c604057230957be9d735ec5790e2a28abb2bbf1947156c7dd3104b9a2bafe4  akonadiconsole-21.04.3.tar.xz
+"

@@ -2,7 +2,7 @@
 # Maintainer: Joseph Benden <joe@benden.us>
 pkgname=thunderbird
 pkgver=78.9.0
-pkgrel=0
+pkgrel=2
 pkgdesc="Thunderbird email client"
 url="https://www.thunderbird.net/"
 # Limited on:
@@ -10,7 +10,7 @@ url="https://www.thunderbird.net/"
 # s390x: limited by pipewire
 # armhf: build failure on armhf due to wasm
 # ppc64le: Rust SIGSEGVs when compiling gkrust
-arch="all !s390x !armhf !mips !mips64 !ppc64le"
+arch="all !s390x !armhf !mips !mips64 !ppc64le !riscv64"
 license="GPL-3.0-or-later AND LGPL-2.1-or-later AND MPL-2.0"
 options="!check"
 depends="
@@ -188,6 +188,7 @@ _mozappdir=/usr/lib/thunderbird
 
 # help our shared-object scanner to find the libs
 ldpath="$_mozappdir"
+sonameprefix="$pkgname:"
 
 # we need this because cargo verifies checksums of all files in vendor
 # crates when it builds and gives us no way to override or update the

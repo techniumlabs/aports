@@ -1,7 +1,7 @@
 # Contributor: Bart Ribbers <bribbers@disroot.org>
 # Maintainer: Bart Ribbers <bribbers@disroot.org>
 pkgname=kdebugsettings
-pkgver=21.04.0
+pkgver=21.04.3
 pkgrel=0
 arch="all !armhf"
 url="https://kde.org/applications/utilities/"
@@ -29,4 +29,6 @@ package() {
 	DESTDIR="$pkgdir" cmake --build build --target install
 }
 
-sha512sums="c059e9bbc526cfdb447861cbf2bc945def87e02a2c5086be2dd14d595a24ae1dc4f7fe11b648da07df8e7be5698664edcaa9f1a194573f75845d3dc36c1813fe  kdebugsettings-21.04.0.tar.xz"
+sha512sums="
+371f07e896381a21233c4967c9b0f9b7380356edbfceb491017ddc7d985de4c8e685e508762abdaa394adf3796ca734af047411da276bc578f0512b4b633c5d8  kdebugsettings-21.04.3.tar.xz
+"

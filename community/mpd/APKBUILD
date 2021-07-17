@@ -4,12 +4,12 @@
 # Contributor: Sören Tempel <soeren+alpine@soeren-tempel.net>
 # Maintainer: Carlo Landmeter <clandmeter@alpinelinux.org>
 pkgname=mpd
-pkgver=0.22.6
+pkgver=0.22.9
 case $pkgver in
 *.*.*) _branch=${pkgver%.*};;
 *.*) _branch=$pkgver;;
 esac
-pkgrel=2
+pkgrel=0
 pkgdesc="Music daemon that plays MP3, FLAC, Ogg Vorbis files and Audio CDs"
 url="https://musicpd.org"
 pkgusers="mpd"
@@ -26,6 +26,7 @@ makedepends="
 	ffmpeg-dev
 	flac-dev
 	glib-dev
+	gtest-dev
 	icu-dev
 	jack-dev
 	lame-dev
@@ -50,7 +51,7 @@ makedepends="
 	soxr-dev
 	wavpack-dev
 	"
-checkdepends="gtest-dev gtest"
+checkdepends="gtest"
 install="$pkgname.pre-install"
 subpackages="$pkgname-doc $pkgname-dbg $pkgname-openrc"
 source="https://www.musicpd.org/download/mpd/$_branch/mpd-$pkgver.tar.xz
@@ -114,10 +115,12 @@ package() {
 		"$pkgdir"/var/lib/mpd/music
 }
 
-sha512sums="5e417204e24d11fa609740ae92bc1d796aad2d63537655f655074d829cd79cadaf1ca025171dcf5486c1e557cc946152c21e299286b1cb74cc342da2b1f41343  mpd-0.22.6.tar.xz
+sha512sums="
+744e20e9a2b5df0f0c01b33809aa87cb159385b69868df5418302b091e6c5265dd70de13f383efcd71f76ae059c73969667212e55ee96e13d89ca0da5c2d4ae2  mpd-0.22.9.tar.xz
 f60f6f3e921d20732c1a4c31a97f28660b43fd649e767d6c39661b6a90145231a79ad3f740ae0d706380b245ad040e98b661a513463c54cea161d1f64fc261e0  stacksize.patch
 8547f685adf3cdc7b2aab7bedeed8c72242011c6f1e01750415ac21eba5ecf6b416239f527adbc904f72439c5d476249148cfb89965e33de1be69421e02c18e0  mpd.initd
 41b2467f5b03f5c4dd7003cd5f56f6cfc1f67af7a9aa2538d70360f839625222bdd0c4b04c33e8cd52eeecfc354da3ca22f5aaab8aee357a5774aaf3503594e7  mpd.confd
 1a8bc5ec04c75c2aa240d607dfb2790e57126299dd5449cd71d3ea1cdf00951d546bc58ecc4003e062c02a82c9879e1ac6e89c3ad4cdefe3adcde217df9c07ad  libcdio-paranoia-version.patch
 b888b8d033e7752ce48cc47c116d1265f77d8b2ec42fb4587839afe901ae1392731524f18520888ae1fa654ac9a742e46b309e9450cf403d6077012947f746c5  remove-avahi-test.patch
-4352009b1b0f9ffb19c51d476539656f2fe0ab9e34cd4a7ba65c1397d155cc408bb08da96d6ecf8f798a9af615da7662f8d1bf44ab35e9522177da44ba59fbf2  disable-time-test.patch"
+4352009b1b0f9ffb19c51d476539656f2fe0ab9e34cd4a7ba65c1397d155cc408bb08da96d6ecf8f798a9af615da7662f8d1bf44ab35e9522177da44ba59fbf2  disable-time-test.patch
+"

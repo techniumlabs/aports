@@ -1,24 +1,26 @@
 # Contributor: Bart Ribbers <bribbers@disroot.org>
 # Maintainer: Bart Ribbers <bribbers@disroot.org>
 pkgname=mapplauncherd
-pkgver=4.1.43
+pkgver=4.2.3
 pkgrel=0
 pkgdesc="A daemon that helps to launch applications faster"
 url="https://git.sailfishos.org/mer-core/mapplauncherd"
-arch="all"
+# armhf blocked by extra-cmake-modules
+arch="all !armhf"
 license="LGPL-2.1-only"
 depends_dev="
 	dbus-dev
 	elogind-dev
+	glib-dev
 	libcap-dev
 	"
 makedepends="$depends_dev
-	cmake
+	extra-cmake-modules
 	doxygen
 	"
 subpackages="$pkgname-dev $pkgname-doc"
-source="https://git.sailfishos.org/mer-core/mapplauncherd/-/archive/$pkgver/mapplauncherd-$pkgver.tar.gz
-	0001-fix-cmake-and-add-pkgconfig.patch
+source="https://github.com/sailfishos/mapplauncherd/archive/$pkgver/mapplauncherd-$pkgver.tar.gz
+	0001-fix-build.patch
 	"
 options="!check" # No tests
 
@@ -28,12 +30,14 @@ build() {
 		-DCMAKE_INSTALL_PREFIX=/usr \
 		-DCMAKE_INSTALL_LIBDIR=lib \
 		-DINSTALL_SYSTEMD_UNITS=OFF
-	make -C build
-	make -C build doc
+	cmake --build build
+	cmake --build build --target doc
 }
 
 package() {
 	DESTDIR="$pkgdir" cmake --install build
 }
-sha512sums="2fcf764738835f8ad2397a273a4a1264de651363bad885f715f15a08ff91e67bac7632d0900fd4c1c290ccd6ae2f9d266eb165946466a0e69d0ad7c2ba36d2bc  mapplauncherd-4.1.43.tar.gz
-40fc31e7b4420fbff1131a30705345714f1430e2cad0f137675131d1c4d7e106c14ceddefba5ef60cc09c196d8e17f13ea0eb92cd2abc7414fd697865eb8ac7f  0001-fix-cmake-and-add-pkgconfig.patch"
+sha512sums="
+d06eca56923f4901f4a0c6055a282d288c79cc4b47497f81cc2af7f7f5a533690a2ddd8332ce17da999b1acec54b17d133354e4de91dfe440a06fbd66a2e5c81  mapplauncherd-4.2.3.tar.gz
+87b6315de195fa6a416fa293a4db2f0490ec56113609a8a55d79d2c7f1609c30e2226e69b457ae3c24b0fdde286cf7a16c60c7f6d58e9be774c767b6d43a7cce  0001-fix-build.patch
+"

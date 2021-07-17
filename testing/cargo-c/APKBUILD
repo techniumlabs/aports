@@ -1,11 +1,11 @@
 # Contributor: Oleg Titov <oleg.titov@gmail.com>
 # Maintainer: Oleg Titov <oleg.titov@gmail.com>
 pkgname=cargo-c
-pkgver=0.8.1
+pkgver=0.9.1
 pkgrel=0
 pkgdesc="cargo subcommand to build and install C-ABI compatibile dynamic and static libraries"
 url="https://github.com/lu-zero/cargo-c"
-arch="all !s390x !mips !mips64" # no cargo for these archies
+arch="all !s390x !mips !mips64 !riscv64" # no cargo for these archies
 license="MIT"
 makedepends="cargo openssl-dev"
 subpackages="$pkgname-doc"
@@ -37,6 +37,6 @@ package() {
 }
 
 sha512sums="
-04b36b61ccebb56fd4e136ce4ade7414ff1f3c44222c4ac1e917c5ea27799a1f4239a374d5ada9a665713c83601c9d92666c76c5e843a045c2814a4ead431de4  cargo-c-0.8.1.tar.gz
-ef5a2161563c45cef057d3a2fe96aa6e073ad0a5eab894a23dec88687ca5905e8df05b0d6fddf75c89b430bbadf8b0c0f14355dc654ac0170cc99928fa5c1840  cargo-c-0.8.1-Cargo.lock
+a7de8abab308bcda2c4c67feeb64687ed5bf633a0514c6462284fd2e75c28e18d767a8fa45bd3617f177f656088c94be0b1df0ac619364296cbd190e8a2ede8d  cargo-c-0.9.1.tar.gz
+02c48a34488a02d436398fecf92c097acb30f84382c7bbea5e70b8fc73f73a793956ae6ccebb16a3404221b33cc3daca684a122174eb913d899415d21b5c616f  cargo-c-0.9.1-Cargo.lock
 "

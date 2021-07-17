@@ -1,16 +1,18 @@
 # Contributor: Bart Ribbers <bribbers@disroot.org>
 # Maintainer: Bart Ribbers <bribbers@disroot.org>
 pkgname=kaccounts-integration
-pkgver=21.04.0
+pkgver=21.04.3
 pkgrel=0
 # armhf blocked by extra-cmake-modules
-# s390x blocked by multiple KDE Frameworks
-# mips64 blocked by multiple KDE Frameworks
-arch="all !armhf !s390x !mips64"
+# s390x, mips64, ppc64le and riscv64 blocked by signon-ui and kdeclarative
+arch="all !armhf !s390x !mips64 !ppc64le !riscv64"
 url="https://kde.org/applications/internet/"
 pkgdesc="Small system to administer web accounts for the sites and services across the KDE desktop"
 license="GPL-2.0-or-later AND LGPL-2.1-or-later"
-depends="accounts-qml-module"
+depends="
+	accounts-qml-module
+	signon-ui
+	"
 depends_dev="
 	kcmutils-dev
 	kcoreaddons-dev
@@ -21,7 +23,9 @@ depends_dev="
 	qt5-qtbase-dev
 	signond-dev
 	"
-makedepends="$depends_dev extra-cmake-modules"
+makedepends="$depends_dev
+	extra-cmake-modules
+	"
 source="https://download.kde.org/stable/release-service/$pkgver/src/kaccounts-integration-$pkgver.tar.xz"
 subpackages="$pkgname-dev $pkgname-lang"
 options="!check" # No tests available
@@ -35,7 +39,9 @@ build() {
 }
 
 package() {
-	DESTDIR="$pkgdir" cmake --build build --target install
+	DESTDIR="$pkgdir" cmake --install build
 }
 
-sha512sums="83d78b34216a8670f2a042b1beb3da733eff9120abff5db9bda864cb8470e885754897448bc6bd1e1eb388ad95ad7dfaffd57967f3ff954f3f42a98a6c87a69b  kaccounts-integration-21.04.0.tar.xz"
+sha512sums="
+0552ab2da16b8ab85632f458827a1c16dc0b7e4a4d3b97266249430595abe11f0b76dc2dd7f59dc7796e795855bce122915733b692d9270b6da8b6cabc2c2ae8  kaccounts-integration-21.04.3.tar.xz
+"

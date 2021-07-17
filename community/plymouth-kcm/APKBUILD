@@ -1,11 +1,11 @@
 # Contributor: Bart Ribbers <bribbers@disroot.org>
 # Maintainer: Bart Ribbers <bribbers@disroot.org>
 pkgname=plymouth-kcm
-pkgver=5.21.5
+pkgver=5.22.3
 pkgrel=0
 # armhf blocked by extra-cmake-modules
-# s390x blocked by knewstuff
-arch="all !armhf !s390x !mips64"
+# s390x, mips64 and riscv64 blocked by polkit -> kio
+arch="all !armhf !s390x !mips64 !riscv64"
 url="https://invent.kde.org/plasma/plymouth-kcm"
 pkgdesc="KCM to manage the Plymouth (Boot) theme"
 license="GPL-2.0-or-later"
@@ -50,5 +50,5 @@ package() {
 }
 
 sha512sums="
-d8b8187ecce7bfdd2a3c22dec9b4ea2b085614a7e3b495671226bb9c5fe0a674d75ea03c74bfc3cc58f0ae3a7fc82ec2261d1ace5483658fd65333f61f95ba07  plymouth-kcm-5.21.5.tar.xz
+5139cecdfaad57944d9a50aa5f83f8a5b4e7cdffae4cb2306ee228b9ceb7cc9ea4c8be3f0f110370c09c7fba12f5379cb9049ef89789266fc5b8918e9fe4af7a  plymouth-kcm-5.22.3.tar.xz
 "

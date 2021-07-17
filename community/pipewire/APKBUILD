@@ -1,7 +1,7 @@
 # Contributor: Rasmus Thomsen <oss@cogitri.dev>
 # Maintainer: Rasmus Thomsen <oss@cogitri.dev>
 pkgname=pipewire
-pkgver=0.3.25
+pkgver=0.3.31
 pkgrel=1
 pkgdesc="Multimedia processing graphs"
 url="https://pipewire.org/"
@@ -9,16 +9,21 @@ arch="all !s390x !mips64" # unit tests fail on big-endian
 license="LGPL-2.1-or-later"
 makedepends="meson alsa-lib-dev libx11-dev sdl2-dev ffmpeg-dev eudev-dev dbus-dev
 	glib-dev gstreamer-dev gst-plugins-base-dev sbc-dev doxygen xmltoman graphviz
-	bluez-dev jack-dev vulkan-loader-dev pulseaudio-dev libopenaptx-dev"
+	bluez-dev jack-dev vulkan-loader-dev pulseaudio-dev libopenaptx-dev avahi-dev
+	libusb-dev bash"
 subpackages="
 	$pkgname-dev
 	$pkgname-doc
 	$pkgname-pulse
 	$pkgname-jack
+	$pkgname-media-session:media_session
+	gst-plugin-pipewire:gst_plugin
+	$pkgname-zeroconf
 	$pkgname-lang
 	"
 source="https://gitlab.freedesktop.org/PipeWire/pipewire/-/archive/$pkgver/pipewire-$pkgver.tar.gz
 	pipewire.desktop
+	0001-Autostart-pipewire-media-session-and-pipewire-pulse.patch
 	"
 
 build() {
@@ -45,15 +50,16 @@ package() {
 
 pulse() {
 	pkgdesc="Pulseaudio support for pipewire"
-	install="$subpkgname.post-install $subpkgname.post-upgrade"
-	# Don't re-apply the provides. APK bug: https://gitlab.alpinelinux.org/alpine/apk-tools/-/issues/10742
-	# provides="pulseaudio=$pkgver-r$pkgrel pulseaudio-bluez=$pkgver-r$pkgrel pulseaudio-alsa=$pkgver-r$pkgrel"
-	# provider_priority=1
-
+	depends="$pkgname-media-session"
+	provides="pulseaudio=$pkgver-r$pkgrel pulseaudio-bluez=$pkgver-r$pkgrel pulseaudio-alsa=$pkgver-r$pkgrel"
+	provider_priority=1
 
 	amove usr/bin/pipewire-pulse
-	amove usr/lib/pipewire-0.3/libpipewire-module-protocol-pulse.so
-	amove etc/pipewire/media-session.d/with-pulseaudio
+	amove usr/lib/pipewire-${pkgver%.*}/libpipewire-module-protocol-pulse.so
+	amove usr/lib/pipewire-${pkgver%.*}/libpipewire-module-pulse-tunnel.so
+	amove usr/share/pipewire/media-session.d/with-pulseaudio
+	amove usr/share/pipewire/pipewire-pulse.conf
+
 }
 
 jack() {
@@ -61,8 +67,34 @@ jack() {
 	amove usr/lib/pipewire-*/jack
 	amove usr/bin/pw-jack
 	amove usr/lib/spa-*/jack/libspa-jack.so
-	amove etc/pipewire/media-session.d/with-jack
+	amove usr/share/pipewire/media-session.d/with-jack
+	amove usr/share/pipewire/jack.conf
 }
 
-sha512sums="0f84be21bfcd70f25900c53a8ce399c29ce2d4d10f8b56e5103603cf0c80673aab0b16492e55b42985283adf46343cdca01626225db85a2263f06c309f68f2d7  pipewire-0.3.25.tar.gz
-c84a10c8be7ad59c1be9ce02083d81be8a2447fa0da4958e7f1acc5ad2282b1b67cae5f40af821b5e7a40daa73b71fa92988a1137b474bb5c67a9e71f8fb0afb  pipewire.desktop"
+media_session() {
+	pkgdesc="$pkgdesc - Session manager"
+
+	amove usr/bin/pipewire-media-session
+	amove usr/share/pipewire/media-session.d
+}
+
+gst_plugin() {
+	pkgdesc="Multimedia graph framework - PipeWire plugin"
+	depends="$pkgname-media-session gst-plugins-base"
+
+	amove usr/lib/gstreamer-1.0
+}
+
+zeroconf() {
+	pkgdesc="$pkgdesc - Zeroconf support"
+	provides="pulseaudio-zeroconf=$pkgver-r$pkgrel"
+	provider_priority=1
+
+	amove usr/lib/pipewire-${pkgver%.*}/libpipewire-module-zeroconf-discover.so
+}
+
+sha512sums="
+ff21e281bb3e5f6da1001e0c64b33368e96d31f0ec2d395cdfcfac105b0442d8fedd2225e6e5d1c93fdbd5e0108accecebbb7c294c55803a4ea853f1efa0c069  pipewire-0.3.31.tar.gz
+c84a10c8be7ad59c1be9ce02083d81be8a2447fa0da4958e7f1acc5ad2282b1b67cae5f40af821b5e7a40daa73b71fa92988a1137b474bb5c67a9e71f8fb0afb  pipewire.desktop
+bc9b12438aeff0e456e6fe366815aa731ea975d5679726f331e5a2da3d173909fe4fb5db70346f7931d83cba06954a87fedff8183b1df36100719f75b0590666  0001-Autostart-pipewire-media-session-and-pipewire-pulse.patch
+"

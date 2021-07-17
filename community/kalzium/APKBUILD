@@ -1,11 +1,11 @@
 # Contributor: Bart Ribbers <bribbers@disroot.org>
 # Maintainer: Bart Ribbers <bribbers@disroot.org>
 pkgname=kalzium
-pkgver=21.04.0
+pkgver=21.04.3
 pkgrel=0
 # armhf blocked by extra-cmake-modules
-# mips, mips64 and s390x blocked by khtml
-arch="all !armhf !mips !mips64 !s390x"
+# mips64, s390x and riscv64 blocked by polkit -> khtml
+arch="all !armhf !mips64 !s390x !riscv64"
 url="https://edu.kde.org/kalzium/"
 pkgdesc="Periodic Table of Elements"
 license="GPL-2.0-or-later AND LGPL-2.0-or-later AND GFDL-1.2-only"
@@ -45,7 +45,9 @@ check() {
 }
 
 package() {
-	DESTDIR="$pkgdir" cmake --build build --target install
+	DESTDIR="$pkgdir" cmake --install build
 }
 
-sha512sums="cc319f212b5284b7889fa5af85c3c0976ba9ed93d8224f2845ff2f1b64df63040f51ddbaf877c0d66ca33988832f5506fcfef8d598b121981612306ea12d6f3c  kalzium-21.04.0.tar.xz"
+sha512sums="
+8c19954fc1fbe70b866769d89ec7cf85afeb71a1c0bd67783808fed59375acbd7f86484b36aa0e724450e4307cfece86846023dac77a24fa82df229007244a35  kalzium-21.04.3.tar.xz
+"

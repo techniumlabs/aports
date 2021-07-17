@@ -1,12 +1,12 @@
 # Contributor: Bart Ribbers <bribbers@disroot.org>
 # Maintainer: Bart Ribbers <bribbers@disroot.org>
 pkgname=kde-cli-tools
-pkgver=5.21.5
+pkgver=5.22.3
 pkgrel=0
 pkgdesc="Tools based on KDE Frameworks 5 to better interact with the system"
 # armhf blocked by extra-cmake-modules
-# s390x blocked by libksysguard
-arch="all !armhf !s390x !mips64"
+# s390x, mips64 and riscv64 blocked by polkit -> kio
+arch="all !armhf !s390x !mips64 !riscv64"
 url="https://invent.kde.org/plasma/kde-cli-tools"
 license="(GPL-2.0-only OR GPL-3.0-only) AND GPL-2.0-or-later AND GPL-2.0-only AND LGPL-2.1-only"
 makedepends="
@@ -58,5 +58,5 @@ package() {
 	DESTDIR="$pkgdir" cmake --install build
 }
 sha512sums="
-20859f88044c6af84ba4b666b803a6a3a4fbe33748495d9c186fc0739e7b5464b234166cef4d03f0dd44540919eca4f3ea8a1f5ac7b54d480cc9dadeaa0ec3fc  kde-cli-tools-5.21.5.tar.xz
+c3db0082fbe55323d30cb434827028b6d82138254e99ee5a2e00ee3a808be3de5ccaa3fda4f16d96d14f0d200951a7ab14bad21ade66ebefb76fa4c369063592  kde-cli-tools-5.22.3.tar.xz
 "

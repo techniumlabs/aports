@@ -1,15 +1,34 @@
 # Contributor: Bart Ribbers <bribbers@disroot.org>
 # Maintainer: Bart Ribbers <bribbers@disroot.org>
 pkgname=krfb
-pkgver=21.04.0
+pkgver=21.04.3
 pkgrel=0
-# armhf, s390x, mips64 blocked by kwallet-dev, kxmlgui-dev
-# s390x: blocked by pipewire
-arch="all !armhf !s390x !mips64"
+# armhf, s390x, mips64 and riscv64 blocked by kwallet-dev and kxmlgui-dev
+arch="all !armhf !s390x !mips64 !riscv64"
 url="https://kde.org/applications/internet/org.kde.krfb"
 pkgdesc="Desktop sharing"
 license="GPL-3.0-or-later AND GFDL-1.2-only"
-makedepends="extra-cmake-modules qt5-qtbase-dev qt5-qtx11extras-dev ki18n-dev kcompletion-dev kconfig-dev kcoreaddons-dev kcrash-dev kdbusaddons-dev kdnssd-dev kdoctools-dev knotifications-dev kwallet-dev kwidgetsaddons-dev kxmlgui-dev xcb-util-dev xcb-util-image-dev libvncserver-dev pipewire-dev"
+makedepends="
+	extra-cmake-modules
+	kcompletion-dev
+	kconfig-dev
+	kcoreaddons-dev
+	kcrash-dev
+	kdbusaddons-dev
+	kdnssd-dev
+	kdoctools-dev
+	ki18n-dev
+	knotifications-dev
+	kwallet-dev
+	kwidgetsaddons-dev
+	kxmlgui-dev
+	libvncserver-dev
+	pipewire-dev
+	qt5-qtbase-dev
+	qt5-qtx11extras-dev
+	xcb-util-dev
+	xcb-util-image-dev
+	"
 source="https://download.kde.org/stable/release-service/$pkgver/src/krfb-$pkgver.tar.xz"
 subpackages="$pkgname-doc $pkgname-lang"
 options="!check" # No tests
@@ -28,7 +47,9 @@ check() {
 }
 
 package() {
-	DESTDIR="$pkgdir" cmake --build build --target install
+	DESTDIR="$pkgdir" cmake --install build
 }
 
-sha512sums="57acd4ceacf796707f7b73eabcb7853970f8c28bb124c6b70f1e2a63d12148f9c441e935f01bb2e32092a7bf460e71d20b224f73eb1335af99d8ba1befb0981c  krfb-21.04.0.tar.xz"
+sha512sums="
+3066fa25a405195922d962d0906d48e69bbc93d1a17d6f84b2c0a584b48d3758ec39d9e302debdee936c81998a81a75fff9faf1ee823b9a39169dcd7cd51a6ed  krfb-21.04.3.tar.xz
+"

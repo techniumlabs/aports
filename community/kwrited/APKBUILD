@@ -1,7 +1,7 @@
 # Contributor: Bart Ribbers <bribbers@disroot.org>
 # Maintainer: Bart Ribbers <bribbers@disroot.org>
 pkgname=kwrited
-pkgver=5.21.5
+pkgver=5.22.3
 pkgrel=0
 pkgdesc="KDE daemon listening for wall and write messages"
 arch="all !armhf" # qt5-qtdeclarative-dev  unavilable on armhf
@@ -37,5 +37,5 @@ package() {
 }
 
 sha512sums="
-b187763675cfa386ef51ff6f5bb59458d799c2010d93fd35ad0fa32c1d0898d35927eb77d82dcdfa079bbd1c8c889823cc802742016d767618e6e9e25ac417fe  kwrited-5.21.5.tar.xz
+8da0305fd3de91d25e7abd8f4523c3b336e2a589242538dcf4c810e1b40690cffcdd02ceadf43599590ba33e6de4cc2acdcad33b65f6bee5c4b425e98d3c1eef  kwrited-5.22.3.tar.xz
 "

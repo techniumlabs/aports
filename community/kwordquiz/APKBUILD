@@ -1,13 +1,33 @@
 # Contributor: Bart Ribbers <bribbers@disroot.org>
 # Maintainer: Bart Ribbers <bribbers@disroot.org>
 pkgname=kwordquiz
-pkgver=21.04.0
+pkgver=21.04.3
 pkgrel=0
-arch="all !armhf !s390x !mips64"
+# armhf blocked by extra-cmake-modules
+# s390x, mips64 and riscv64 blocked by polkit -> kxmlgui
+arch="all !armhf !s390x !mips64 !riscv64"
 url="https://edu.kde.org/kwordquiz"
 pkgdesc="Flash Card Trainer"
 license="GPL-2.0-or-later AND LGPL-2.0-or-later AND GFDL-1.2-only"
-makedepends="extra-cmake-modules qt5-qtbase-dev ki18n-dev kcrash-dev kconfig-dev kconfigwidgets-dev kdoctools-dev kguiaddons-dev kiconthemes-dev kitemviews-dev knotifyconfig-dev knewstuff-dev knotifications-dev kwindowsystem-dev kxmlgui-dev phonon-dev libkeduvocdocument-dev"
+makedepends="
+	extra-cmake-modules
+	kconfig-dev
+	kconfigwidgets-dev
+	kcrash-dev
+	kdoctools-dev
+	kguiaddons-dev
+	ki18n-dev
+	kiconthemes-dev
+	kitemviews-dev
+	knewstuff-dev
+	knotifications-dev
+	knotifyconfig-dev
+	kwindowsystem-dev
+	kxmlgui-dev
+	libkeduvocdocument-dev
+	phonon-dev
+	qt5-qtbase-dev
+	"
 source="https://download.kde.org/stable/release-service/$pkgver/src/kwordquiz-$pkgver.tar.xz"
 subpackages="$pkgname-doc $pkgname-lang"
 options="!check" # No tests
@@ -26,7 +46,9 @@ check() {
 }
 
 package() {
-	DESTDIR="$pkgdir" cmake --build build --target install
+	DESTDIR="$pkgdir" cmake --install build
 }
 
-sha512sums="0d0318a65116eb99370d6ae6a97ef341f4609356fa6b350ece65aaf52aff7f2262756d8592921cdd99dc8e2b3f36b4d0b4e473c197e9b95da3ae360e5908af59  kwordquiz-21.04.0.tar.xz"
+sha512sums="
+5b52aa118b80f846ef4b61b43468438d0597e551a130ab9e2eb8d93a997eb59a3d5c694ccb2e77dc8c6372e3f81561c0e630a9e659bc1c561e448abeeeb46e21  kwordquiz-21.04.3.tar.xz
+"

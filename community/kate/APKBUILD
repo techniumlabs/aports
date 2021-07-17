@@ -1,11 +1,11 @@
 # Contributor: Bart Ribbers <bribbers@disroot.org>
 # Maintainer: Bart Ribbers <bribbers@disroot.org>
 pkgname=kate
-pkgver=21.04.0
+pkgver=21.04.3
 pkgrel=0
 # armhf blocked by extra-cmake-modules
-# s390x, mips64 blocked by kio
-arch="all !armhf !s390x !mips64"
+# s390x, mips64 and riscv64 blocked by kio
+arch="all !armhf !s390x !mips64 !riscv64"
 url="https://kde.org/applications/utilities/org.kde.kate"
 pkgdesc="A multi-document, multi-view text editor"
 license="LGPL-2.0-only AND LGPL-2.0-or-later"
@@ -95,4 +95,6 @@ kwrite_lang() {
 	done
 }
 
-sha512sums="bc610758597bb2e800e8797c9c25eb0d227040dc2cf5b6e522dd019839f205b4ef05dcf2801265a4ce2743221054061b3002e31bc5e65470ef056afb96b834d9  kate-21.04.0.tar.xz"
+sha512sums="
+51c4023f3915edd348c1aa7ce448475f39c3401649510f89c7e17f9943739b67b09330e52b912794b31d4bbab1f94ed322f96bb45d450f016f84efa010d694bf  kate-21.04.3.tar.xz
+"

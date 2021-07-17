@@ -1,7 +1,7 @@
 # Contributor: nibon7 <nibon7@163.com>
 # Maintainer: nibon7 <nibon7@163.com>
 pkgname=v2ray
-pkgver=4.38.3
+pkgver=4.40.1
 pkgrel=0
 pkgdesc="A platform for building proxies to bypass network restrictions"
 url="https://v2fly.org"
@@ -10,8 +10,8 @@ license="MIT"
 options="chmod-clean"
 makedepends="go"
 subpackages="$pkgname-openrc"
-_geosite_ver=20210503160945
-_geoip_ver=202105060017
+_geosite_ver=20210621183458
+_geoip_ver=202106170022
 source="$pkgname-core-$pkgver.tar.gz::https://github.com/v2fly/v2ray-core/archive/v$pkgver.tar.gz
 	geosite-$_geosite_ver.dat::https://github.com/v2fly/domain-list-community/releases/download/$_geosite_ver/dlc.dat
 	geoip-$_geoip_ver.dat::https://github.com/v2fly/geoip/releases/download/$_geoip_ver/geoip.dat
@@ -36,12 +36,15 @@ build() {
 
 check() {
 	# testing/sceanarios may fail
-	# app/stats, transport/{pipe, internet/websocket}, proxy/vmess, common/signal fail on armv7
+	# app/{stats, router},  transport/{pipe, internet/websocket}, proxy/vmess, common/signal fail on armv7
 	# app/router/command, app/dns fail on aarch64
 	# transport/internet/quic, common/task fail on s390x
+	# v4/infra/conf/{rule, geodata/memconservative} may fail
+	# v4/transport/internet/kcp may fail
 	local pkgs=$(go list ./... | grep -v \
 		-e 'app/dns$' \
 		-e 'app/stats$' \
+		-e 'app/router$' \
 		-e 'app/router/command$' \
 		-e 'common/task$' \
 		-e 'common/signal$' \
@@ -50,6 +53,9 @@ check() {
 		-e 'transport/pipe$' \
 		-e 'transport/internet/websocket$' \
 		-e 'transport/internet/quic$' \
+		-e 'v4/infra/conf/rule$' \
+		-e 'v4/infra/conf/geodata/memconservative$' \
+		-e 'v4/transport/internet/kcp$' \
 		)
 	go test $pkgs
 }
@@ -70,9 +76,7 @@ package() {
 	install -Dm755 "$srcdir"/$pkgname.initd "$pkgdir"/etc/init.d/$pkgname
 }
 
-sha512sums="
-e6089b346850fc61a4a135a2f86c4966ebf472737422676a9c40151323e2df9619e5fcea9e9ea345a8735bdba53e212cb502d7c76c2d359284624962b560ee1d  v2ray-core-4.38.3.tar.gz
-b28c95e4d9757d7ba9b0e297f7fb47ffd7916145808664d17a69a670bb408c94424898e8791f95d750a187a6cf019c95da8f66dad09b6fbfe5c5a7a011d5da08  geosite-20210503160945.dat
-2d0972d749f39aab390b6ac993d40e4483a2d3cec5e13cc8a710aef2663de92a94c1d3241e2a01235f2343555dd2b7361476da537313539d4df21bb991cacfd2  geoip-202105060017.dat
-f22cd2ef4182a003a4e0f94a550e5805c6c30d608d9e655c98e850b5fd8b3785c30df9a8e07c2d5460e6dac9088316f901018a89143e47c9da168e3aee3b94ca  v2ray.initd
-"
+sha512sums="ef9a4f46fc0118793ae789151eb6e5792e96c97de5f19345c47b334ff1557b92306b731b2229b4dfd284263a205e6fb8bf29206ec32a94d875e6d3c20b6e6233  v2ray-core-4.40.1.tar.gz
+db7ec1966ee8a7056dc7cb2a189f252878628e2f155890a3309bc2a061a2c38dfc20c4e89b6b9ce00993c7de9c5c4843aa76dae6225bcfce502e7a8626b1aeb7  geosite-20210621183458.dat
+67ea8982306fbf4a4d31001a0bc76669351026069750afed86a5a6dca5aae94bf0735f07ecd6c51de3b1a9035afd37b0fd8b3c50311ecd7d902333e5c83303d4  geoip-202106170022.dat
+f22cd2ef4182a003a4e0f94a550e5805c6c30d608d9e655c98e850b5fd8b3785c30df9a8e07c2d5460e6dac9088316f901018a89143e47c9da168e3aee3b94ca  v2ray.initd"

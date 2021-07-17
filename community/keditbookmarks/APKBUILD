@@ -1,13 +1,25 @@
 # Contributor: Bart Ribbers <bribbers@disroot.org>
 # Maintainer: Bart Ribbers <bribbers@disroot.org>
 pkgname=keditbookmarks
-pkgver=21.04.0
+pkgver=21.04.3
 pkgrel=0
-arch="all !armhf !s390x !mips64" # armhf blocked by extra-cmake-modules
+# armhf blocked by extra-cmake-modules
+# s390x and mips64 blocked by polkit -> kio
+arch="all !armhf !s390x !mips64 !riscv64"
 url="https://www.kde.org/"
 pkgdesc="Bookmark Organizer and Editor"
 license="GPL-2.0-only AND GFDL-1.2-only"
-makedepends="extra-cmake-modules qt5-qtbase-dev ki18n-dev kio-dev kbookmarks-dev kparts-dev kwindowsystem-dev kiconthemes-dev kdoctools-dev"
+makedepends="
+	extra-cmake-modules
+	kbookmarks-dev
+	kdoctools-dev
+	ki18n-dev
+	kiconthemes-dev
+	kio-dev
+	kparts-dev
+	kwindowsystem-dev
+	qt5-qtbase-dev
+	"
 checkdepends="xvfb-run"
 source="https://download.kde.org/stable/release-service/$pkgver/src/keditbookmarks-$pkgver.tar.xz"
 subpackages="$pkgname-doc $pkgname-lang"
@@ -26,7 +38,9 @@ check() {
 }
 
 package() {
-	DESTDIR="$pkgdir" cmake --build build --target install
+	DESTDIR="$pkgdir" cmake --install build
 }
 
-sha512sums="0bd979d6df63106df7bea7e7e1f36337b77ffad20ea189d774e715a45d39093edc6e8933697147dc8055dd29a654b48c349e8d8a3cd223f96c045c52985fa70f  keditbookmarks-21.04.0.tar.xz"
+sha512sums="
+1467e909cabeec95e235317333b601731daf44866df4106e06dca02c41b647527552e7307bd8ec0762fc2cf31d21a40dd7592ce9f64f8628cd89a886ee292b13  keditbookmarks-21.04.3.tar.xz
+"

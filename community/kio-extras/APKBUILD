@@ -1,9 +1,11 @@
 # Contributor: Bart Ribbers <bribbers@disroot.org>
 # Maintainer: Bart Ribbers <bribbers@disroot.org>
 pkgname=kio-extras
-pkgver=21.04.0
+pkgver=21.04.3
 pkgrel=0
-arch="all !armhf !s390x !mips !mips64" # armhf: extra-cmake-modules, s390x: khtml-dev, mips: polkit-elogind
+# armhf blocked by extra-cmake-modules
+# s390x, mips64 and riscv64 blocked by polkit -> kio
+arch="all !armhf !s390x !mips64 !riscv64"
 url="https://www.kde.org/applications/internet/"
 pkgdesc="Additional components to increase the functionality of KIO"
 license="GPL-2.0-or-later (LGPL-2.1-only OR LGPL-3.0-only)"
@@ -57,7 +59,9 @@ check() {
 }
 
 package() {
-	DESTDIR="$pkgdir" cmake --build build --target install
+	DESTDIR="$pkgdir" cmake --install build
 }
 
-sha512sums="c5f4dfd6517a3a57bc58bb7429d311f7e2327f663ac5da6495ea79ae7a8a2de55a495a9d9ea960d7d004a7fbe3a5df6ea179b7d4a01f6ce87a978446b27b03b0  kio-extras-21.04.0.tar.xz"
+sha512sums="
+98cdf33a73b9321c127cb3174f5ffc243e51222c2c4572afc7b51a949a41c85e8758aafaca5db613b11109af693eb6de061d78bcf1138c12fbaebf3b5dc82da9  kio-extras-21.04.3.tar.xz
+"

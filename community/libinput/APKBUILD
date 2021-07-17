@@ -2,7 +2,7 @@
 # Contributor: Sören Tempel <soeren+alpine@soeren-tempel.net>
 # Maintainer: Daniel Sabogal <dsabogalcc@gmail.com>
 pkgname=libinput
-pkgver=1.17.2
+pkgver=1.18.0
 pkgrel=0
 pkgdesc="Library for handling input devices"
 url="https://www.freedesktop.org/wiki/Software/libinput"
@@ -44,5 +44,5 @@ libs() {
 }
 
 sha512sums="
-b8953ad483648d5629d56c4dc226d4906693b15da5ba4027627a51ec35ea65b0603c09056b52ed2025df1f7a877669a5b7482c025e0b37003fc676563bd05263  libinput-1.17.2.tar.xz
+9a834f075d7a1f892416bb6b241eb052f749d3aa883c4b39c0f1c9616c115d6b9a541b587508646fddaf0d3fe57af92fe4629b522d1d51196499e7b523e0aa90  libinput-1.18.0.tar.xz
 "

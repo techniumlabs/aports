@@ -1,7 +1,7 @@
 # Contributor: Bart Ribbers <bribbers@disroot.org>
 # Maintainer: Bart Ribbers <bribbers@disroot.org>
 pkgname=kunitconversion
-pkgver=5.82.0
+pkgver=5.84.0
 pkgrel=0
 pkgdesc="Support for unit conversion"
 arch="all !armhf" # armhf blocked by extra-cmake-modules
@@ -31,5 +31,5 @@ package() {
 }
 
 sha512sums="
-735684240372b9dc7a37205af92172be164a71537b96c810bf64dd46123748901a079202aef394b2624ccfe5aff2ac69e9380e5715c57089739eb59fbd48a527  kunitconversion-5.82.0.tar.xz
+8db9ab10c1ad195e70680f5a3c8c65f261784385eb8c88e6e8f847cb204267fa735cd94482e844b4496a2c9a6b0ac65728f93e4d5caddbc0e3a4e1f116990f97  kunitconversion-5.84.0.tar.xz
 "

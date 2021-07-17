@@ -1,11 +1,11 @@
 # Contributor: Bart Ribbers <bribbers@disroot.org>
 # Maintainer: Bart Ribbers <bribbers@disroot.org>
 pkgname=kalarm
-pkgver=21.04.0
+pkgver=21.04.3
 pkgrel=0
 # armhf blocked by extra-cmake-modules
-# ppc64le, s390x and mips blocked by kmailtransport
-arch="all !armhf !ppc64le !s390x !mips !mips64"
+# ppc64le, s390x, mips64 and riscv64 blocked by polkit -> kio
+arch="all !armhf !ppc64le !s390x !mips64 !riscv64"
 url="https://kontact.kde.org/"
 pkgdesc="Personal alarm scheduler"
 license="GPL-2.0-or-later AND GFDL-1.2-only"
@@ -75,4 +75,6 @@ package() {
 	DESTDIR="$pkgdir" cmake --install build
 }
 
-sha512sums="8d6212d62ec3e88aac4398ca9015ac5818a777e092eaf51dde9db9cfbdbfecb5dbb6c884c94a1ad7e46a8425559b0f7c215ab2062d57fe2d4a25ad0017ebeee2  kalarm-21.04.0.tar.xz"
+sha512sums="
+19a9bb6e185b86fe4710d04a8dc4985b8d0c0e49cc53c5fde24e23e4c0cfa4587aea4400957190606122db1363be7a705c5ca0a716631b0eb3a496b82b550f42  kalarm-21.04.3.tar.xz
+"

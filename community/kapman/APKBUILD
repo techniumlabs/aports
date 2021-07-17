@@ -1,11 +1,11 @@
 # Contributor: Bart Ribbers <bribbers@disroot.org>
 # Maintainer: Bart Ribbers <bribbers@disroot.org>
 pkgname=kapman
-pkgver=21.04.0
+pkgver=21.04.3
 pkgrel=0
 # armhf blocked by extra-cmake-modules
-# s390x blocked by kconfigwidgets
-arch="all !armhf !s390x !mips64"
+# s390x, mips64 and riscv64 blocked by kxmlgui
+arch="all !armhf !s390x !mips64 !riscv64"
 url="https://kde.org/applications/games/org.kde.kapman"
 pkgdesc="A clone of the well known game Pac-Man"
 license="GPL-2.0-or-later AND GFDL-1.2-only"
@@ -42,7 +42,9 @@ check() {
 }
 
 package() {
-	DESTDIR="$pkgdir" cmake --build build --target install
+	DESTDIR="$pkgdir" cmake --install build
 }
 
-sha512sums="e0d47fb40bbb04e90eea421c40d2ad8d0c1d04485276e00767e2ed3f083951f38ea18d13611f666bd001a8eb434ce51c1f10eb51f954af6e59e69b1c39d92a09  kapman-21.04.0.tar.xz"
+sha512sums="
+1925b9d05a29e59b4dfec7d8dcaa57fccafcb7e7cd11667bdecc0490ae8c95d2f9b2b2099905343fd6e7b0fb77f17352654116e9952d8d20d1d2b805f7c86858  kapman-21.04.3.tar.xz
+"

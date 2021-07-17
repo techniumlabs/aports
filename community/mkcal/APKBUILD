@@ -1,10 +1,10 @@
 # Contributor: Bart Ribbers <bribbers@disroot.org>
 # Maintainer: Bart Ribbers <bribbers@disroot.org>
 pkgname=mkcal
-pkgver=0.5.35
+pkgver=0.5.44
 pkgrel=0
 pkgdesc="The mobile version of the original KCAL from KDE"
-url="https://git.sailfishos.org/mer-core/mkcal"
+url="https://github.com/sailfishos/mkcal"
 # armhf blocked extra-cmake-modules
 arch="all !armhf"
 license="LGPL-2.0-or-later"
@@ -19,17 +19,16 @@ makedepends="$depends_dev
 	extra-cmake-modules
 	"
 subpackages="$pkgname-dev $pkgname-doc $pkgname-tools"
-source="https://git.sailfishos.org/mer-core/mkcal/-/archive/$pkgver/mkcal-$pkgver.tar.gz
-	0001-Port-to-CMake.patch
-	"
-options="!check" # Broken
+source="https://github.com/sailfishos/mkcal/archive/$pkgver/mkcal-$pkgver.tar.gz"
+options="!check" # Broken and requires running DBus server
 
 build() {
 	cmake -B build \
 		-DCMAKE_BUILD_TYPE=None \
 		-DCMAKE_INSTALL_PREFIX=/usr \
 		-DCMAKE_INSTALL_LIBDIR=lib \
-		-DBUILD_PLUGINS=OFF
+		-DBUILD_PLUGINS=OFF \
+		-DBUILD_DOCUMENTATION=ON
 	cmake --build build
 }
 
@@ -47,5 +46,6 @@ tools() {
 
 	amove usr/bin/mkcaltool
 }
-sha512sums="b120d90d794e6aab95ebbb3811a9fc46fa6f14fef077fe4698ad858317525a277e11d1edf2be7ef3a10caa8c309c4c0624fd6d02d27564219ba2131a50e303d2  mkcal-0.5.35.tar.gz
-d5fc10e657656df69886d6f782bc453f89fd74cc8b4887b00dbec25cdacddd6f2de2b8808ecba1662d5b77166e68ed39650c04db81b483f934b36d4eeae6d4f0  0001-Port-to-CMake.patch"
+sha512sums="
+500b49434b607f85f0cffdfa632062713f62f55e3df4354f87c7a57933078d44b62d0bb88667a5fbbb5b6b23a98fe93195d164fa630eb249fceb983de47192c8  mkcal-0.5.44.tar.gz
+"

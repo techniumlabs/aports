@@ -1,12 +1,13 @@
 # Contributor: Bart Ribbers <bribbers@disroot.org>
 # Maintainer: Bart Ribbers <bribbers@disroot.org>
 pkgname=spectacle
-pkgver=21.04.0
+pkgver=21.04.3
 pkgrel=0
 pkgdesc="Application for capturing desktop screenshots"
 # armhf blocked by extra-cmake-modules
-# s390x and mips64 blocked by kdeclarative
-arch="all !armhf !s390x !mips64"
+# s390x, mips64 and riscv64 blocked by polkit -> kdeclarative
+# ppc64le blocked by qt5-qtwebengine -> purpose
+arch="all !armhf !s390x !mips64 !riscv64 !ppc64le"
 url="https://kde.org/applications/utilities/org.kde.spectacle"
 license="GPL-2.0-only"
 makedepends="
@@ -58,5 +59,7 @@ package() {
 	# We don't ship systemd
 	rm -r "$pkgdir"/usr/lib/systemd
 }
-sha512sums="40ccfe9f3f0373cfdb3a16fc215536520da4ce2a9bff8cf5e4924a24e6b5058a209a55261d77bb5d9d645245d139ffdb9f89dc2dd5d569f80be55fe4540caa62  spectacle-21.04.0.tar.xz
-7c563d811f30d26f83e01a465e803b95167c5b2b842315257216ab282e07c69e7582a14d7f429cd19678199179ad8f3f2854265092f5a4c9ce9b65c87ed3849d  spectacle.desktop"
+sha512sums="
+86af85d322c8d1231c4c47edaf886077dcfd1b20a33d6022ef5a8a543261e3d9f8c7b33957140d32f346c3dbaa87e13c9bed25b391771185468b4994e7ca3841  spectacle-21.04.3.tar.xz
+7c563d811f30d26f83e01a465e803b95167c5b2b842315257216ab282e07c69e7582a14d7f429cd19678199179ad8f3f2854265092f5a4c9ce9b65c87ed3849d  spectacle.desktop
+"

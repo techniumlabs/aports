@@ -1,11 +1,11 @@
 # Contributor: Bart Ribbers <bribbers@disroot.org>
 # Maintainer: Bart Ribbers <bribbers@disroot.org>
 pkgname=kajongg
-pkgver=21.04.0
+pkgver=21.04.3
 pkgrel=0
 # armhf blocked by extra-cmake-modules
-# s390x, mips64 blocked by kconfigwidgets
-arch="noarch !armhf !s390x !mips64"
+# s390x, mips64 and riscv64 blocked by polkit -> kconfigwidgets
+arch="noarch !armhf !s390x !mips64 !riscv64"
 url="https://kde.org/applications/games/org.kde.kajongg"
 pkgdesc="Mah Jongg - the ancient Chinese board game for 4 players"
 license="GPL-2.0-or-later AND GFDL-1.2-only"
@@ -39,7 +39,9 @@ check() {
 }
 
 package() {
-	DESTDIR="$pkgdir" cmake --build build --target install
+	DESTDIR="$pkgdir" cmake --install build
 }
 
-sha512sums="88143faf29323cd6cc7e1789174484e89a44ff6acc5ed0546c768567006c1554b4cd5459c4b9cf82b06be7f7feba33da96084875e9a56a475f887f83cd7f73b0  kajongg-21.04.0.tar.xz"
+sha512sums="
+1eec0c3dc0f0bbdd8f10afe0d701eb83a6cc8ae4116776f123319b0949cace331476196d80fbd1b81aeee8757644787b3e842386472350486358774fa6358178  kajongg-21.04.3.tar.xz
+"

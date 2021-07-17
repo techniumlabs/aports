@@ -1,14 +1,14 @@
 # Contributor: Francesco Camuffo <dev@fmac.xyz>
 # Maintainer: Francesco Camuffo <dev@fmac.xyz>
 pkgname=ugrep
-pkgver=3.2.1
+pkgver=3.3.4
 pkgrel=0
 pkgdesc="Ultra fast grep with interactive query UI and fuzzy search"
 url="https://github.com/Genivia/ugrep/wiki"
 arch="all"
 license="BSD-3-Clause"
 checkdepends="bash"
-makedepends="bzip2-dev lz4-dev pcre2-dev xz-dev zlib-dev"
+makedepends="bzip2-dev lz4-dev pcre2-dev xz-dev zlib-dev zstd-dev"
 subpackages="$pkgname-doc"
 source="$pkgname-$pkgver.tar.gz::https://github.com/Genivia/ugrep/archive/refs/tags/v$pkgver.tar.gz"
 
@@ -31,5 +31,5 @@ package() {
 }
 
 sha512sums="
-133f0e74493fe937219497e8955471d5739ab89745694fd0676845f38038a716e7803dd0202001de138fad4f2ce4f42439c214338571e57fe8095fd7bec26023  ugrep-3.2.1.tar.gz
+01125cad1e4e32d76b39dce498a1cbcf66ca3f1dcc69d9a2355fe8a6c6e83896197e3bd26b02ed366ba4248cce6af09cdda1e9153f24d8a832f8ee9fec0e7b6b  ugrep-3.3.4.tar.gz
 "

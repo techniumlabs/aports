@@ -3,7 +3,7 @@
 # Maintainer: Natanael Copa <ncopa@alpinelinux.org>
 pkgname=imagemagick
 _pkgname=ImageMagick
-pkgver=7.0.11.9
+pkgver=7.1.0.2
 pkgrel=0
 _pkgver=${pkgver%.*}-${pkgver##*.}
 _abiver=7
@@ -32,8 +32,8 @@ makedepends="
 	"
 
 case "$CARCH" in
-	s390x) ;;
-	mips*) options="$options !check" ;;
+	s390x|riscv64) ;;
+	mips64) options="$options !check" ;;
 	*) makedepends="$makedepends librsvg-dev" ;;
 esac
 
@@ -54,12 +54,16 @@ builddir="$srcdir/$_pkgname-$_pkgver"
 
 # secfixes:
 #   7.0.11.1-r0:
-#     - CVE-2021-20176
 #     - CVE-2021-20241
 #     - CVE-2021-20243
 #     - CVE-2021-20244
 #     - CVE-2021-20245
 #     - CVE-2021-20246
+#     - CVE-2021-20309
+#     - CVE-2021-20310
+#     - CVE-2021-20311
+#     - CVE-2021-20312
+#     - CVE-2021-20313
 #   7.0.10.57-r0:
 #     - CVE-2021-20176
 #   7.0.10.42-r0:
@@ -203,5 +207,7 @@ _perlmagick_doc() {
 	make -j1 DESTDIR="$subpkgdir" doc_vendor_install
 }
 
-sha512sums="73ecb116fd8885f2ec88a12ae8b36c51b37de3e7e2aa2f9fbbd24a90bc0d78d7603663ec8003abea8af0f200a6176fb26998963a9bb90ce80ebc7feb2dd8921a  ImageMagick-7.0.11-9.tar.xz
-58afb2da075a6208b6a990ff297b3a827d260687c3355198a8b4d987e1596c0b0cd78aff6f0be0e1896e537fbe44a3d467473183f5f149664ea6e6fb3d3291a9  disable-avaraging-tests.patch"
+sha512sums="
+e9b38ccc56ad6936c59adbd934148aeca441f41015be8d2d4b7dd4106a120748aff8cba0239d8ada4288d679a19931696a0bec5ae05681eba7d3078fa119ad0a  ImageMagick-7.1.0-2.tar.xz
+58afb2da075a6208b6a990ff297b3a827d260687c3355198a8b4d987e1596c0b0cd78aff6f0be0e1896e537fbe44a3d467473183f5f149664ea6e6fb3d3291a9  disable-avaraging-tests.patch
+"

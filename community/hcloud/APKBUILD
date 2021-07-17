@@ -2,7 +2,7 @@
 # Maintainer: Michał Polański <michal@polanski.me>
 pkgname=hcloud
 _pkgname=cli
-pkgver=1.22.1
+pkgver=1.25.1
 pkgrel=0
 pkgdesc="Command-line interface for Hetzner Cloud"
 url="https://github.com/hetznercloud/cli"
@@ -30,9 +30,11 @@ check() {
 }
 
 package() {
-	install -Dm755 "$builddir"/hcloud "$pkgdir"/usr/bin/$pkgname
-	install -Dm644 "$builddir"/$pkgname.bash \
+	install -Dm755 hcloud "$pkgdir"/usr/bin/hcloud
+	install -Dm644 $pkgname.bash \
 		"$pkgdir"/usr/share/bash-completion/completions/$pkgname
 }
 
-sha512sums="f83fea40c987c4c20e155e60f87404544f090f05966ca26a9b4f41ce4d0bd058b5af64d7237bea0ce8263667d25d2c982734ad9d3430f47b874de2d44c2bef66  hcloud-1.22.1.tar.gz"
+sha512sums="
+85fdcffd1b5a462fff335086155c2a848f88c569526a6dc1ecc8c2455cb60cf3e2b2410f653c4c86ae8c4fb1caea910066bb1cd55cf9e5baa0c9c40e696392cb  hcloud-1.25.1.tar.gz
+"

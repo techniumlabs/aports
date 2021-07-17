@@ -1,12 +1,12 @@
 # Contributor: Bart Ribbers <bribbers@disroot.org>
 # Maintainer: Bart Ribbers <bribbers@disroot.org>
 pkgname=plasma-nano
-pkgver=5.21.5
+pkgver=5.22.3
 pkgrel=0
 pkgdesc="A minimal Plasma shell package intended for embedded devices"
 # armhf blocked by extra-cmake-modules
-# s390x blocked by plasma-framework
-arch="all !armhf !s390x !mips64"
+# s390x, mips64 and riscv64 blocked by polkit -> plasma-framework
+arch="all !armhf !s390x !mips64 !riscv64"
 url="https://invent.kde.org/kde/plasma-nano"
 license="GPL-2.0-or-later AND LGPL-2.1-or-later"
 depends="qt5-qtvirtualkeyboard"
@@ -43,5 +43,5 @@ package() {
 	DESTDIR="$pkgdir" cmake --install build
 }
 sha512sums="
-bb4c13b854f390f20bdc085db03622eef5666537ba4a8854e2eae9cdb1c53180055af2744c968eb212fe9fc699718260a032981bc16eab1f2ed8ab2cca0590d3  plasma-nano-5.21.5.tar.xz
+9a520a0214c00dcc75af20c606752547bf2bb6e4182a8a1679ff66ac4fede988bd9c882e28535c7e757b7865249dcf19d0a2f3213e0e89c9f6c89d7e3951f8fc  plasma-nano-5.22.3.tar.xz
 "

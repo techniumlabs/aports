@@ -1,11 +1,11 @@
 # Contributor: Bart Ribbers <bribbers@disroot.org>
 # Maintainer: Bart Ribbers <bribbers@disroot.org>
 pkgname=kwave
-pkgver=21.04.0
+pkgver=21.04.3
 pkgrel=0
 # armhf blocked by extra-cmake-modules
-# mips, mips64 and s390x blocked by kxmlgui
-arch="all !armhf !mips !mips64 !s390x"
+# mips64, s390x and riscv64 blocked by polkit -> kio
+arch="all !armhf !mips64 !s390x !riscv64"
 url="http://kwave.sourceforge.net/"
 pkgdesc="A sound editor for KDE"
 license="GPL-2.0-or-later"
@@ -65,7 +65,9 @@ check() {
 }
 
 package() {
-	DESTDIR="$pkgdir" cmake --build build --target install
+	DESTDIR="$pkgdir" cmake --install build
 }
 
-sha512sums="84e704e96b39d7685629c6a90c59b99b6ea44ce28525c148c79ba7442254aa5a3603e626b8e33326274e12903995b560cb89d288120b7d0154306bb62d180f7a  kwave-21.04.0.tar.xz"
+sha512sums="
+08a648e75ca3a331025ad84f02be7c04b6ec9e68ba251436fa923add35bb3132765519b9bc9fda44b01a45d8b3a9b85f12ac3eb267a8313593d360eb08161f6b  kwave-21.04.3.tar.xz
+"

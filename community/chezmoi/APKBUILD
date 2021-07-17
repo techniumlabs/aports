@@ -1,7 +1,7 @@
 # Contributor: Kevin Daudt <kdaudt@alpinelinux.org>
 # Maintainer: Kevin Daudt <kdaudt@alpinelinux.org>
 pkgname=chezmoi
-pkgver=2.0.12
+pkgver=2.1.2
 pkgrel=0
 pkgdesc="Manage your dotfiles across multiple machines, securely."
 url="https://www.chezmoi.io/"
@@ -48,5 +48,5 @@ doc() {
 }
 
 sha512sums="
-8aa9bbfbd2274a04c07f9e37422bb71d8866a4955aa8db3762275238acd20a5e1e31b2b7bdece295ea358e5e4c5d68370c4d4d9ead033e61ffdde64905a78109  chezmoi-2.0.12.tar.gz
+dd7611521cddfba3ccce561a2831b6aca3c433a49e266f78c682ba3c4cdb49fb89fdc78b9a3dd0bd2b5247c2d8e84b102b361db2575c96063bfa7f948d782faa  chezmoi-2.1.2.tar.gz
 "

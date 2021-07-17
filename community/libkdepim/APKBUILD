@@ -1,12 +1,13 @@
 # Contributor: Bart Ribbers <bribbers@disroot.org>
 # Maintainer: Bart Ribbers <bribbers@disroot.org>
 pkgname=libkdepim
-pkgver=21.04.0
+pkgver=21.04.3
 pkgrel=0
 pkgdesc="Lib for common KDEPim apps"
 # armhf blocked by extra-cmake-modules
-# s390x blocked by multiple KDE Frameworks
-arch="all !armhf !s390x !mips64"
+# s390x, mips64 and riscv64 blocked by polkit -> kio
+# ppc64le blocked by qt5-qtwebengine -> akonadi
+arch="all !armhf !s390x !mips64 !riscv64 !ppc64le"
 url="https://community.kde.org/KDE_PIM"
 license="GPL-2.0-or-later AND LGPL-2.0-or-later"
 depends_dev="
@@ -52,6 +53,8 @@ check() {
 }
 
 package() {
-	DESTDIR="$pkgdir" cmake --build build --target install
+	DESTDIR="$pkgdir" cmake --install build
 }
-sha512sums="771aee627003063a4447f835e99fb04c91cea868b7f87cb27e5abbe42efa6395179daa0cfb43bda733f0aa9c43df3e6aaa1a18cf3195ebc0fd426c51e6a0e527  libkdepim-21.04.0.tar.xz"
+sha512sums="
+79cfe0aa5095246d407d697e05916878a74cc021368f4385ecbd4c92dc87a43b8b001ace84b3f40752d549de1940f65acfe709da4171e2a3a21a9c335c090bac  libkdepim-21.04.3.tar.xz
+"

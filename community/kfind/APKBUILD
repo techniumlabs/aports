@@ -1,15 +1,25 @@
 # Contributor: Bart Ribbers <bribbers@disroot.org>
 # Maintainer: Bart Ribbers <bribbers@disroot.org>
 pkgname=kfind
-pkgver=21.04.0
+pkgver=21.04.3
 pkgrel=0
 # armhf blocked by extra-cmake-modules
-# s390x blocked by kio, ktextwidgets
-arch="all !armhf !s390x !mips64"
+# s390x, mips64 and riscv64 blocked by polkit -> kio
+arch="all !armhf !s390x !mips64 !riscv64"
 url="https://www.kde.org/applications/utilities/kfind"
 pkgdesc="Find Files/Folders"
 license="GPL-2.0-or-later AND GFDL-1.2-only"
-makedepends="extra-cmake-modules karchive-dev kcoreaddons-dev kdoctools-dev kfilemetadata-dev ki18n-dev kio-dev ktextwidgets-dev kwidgetsaddons-dev"
+makedepends="
+	extra-cmake-modules
+	karchive-dev
+	kcoreaddons-dev
+	kdoctools-dev
+	kfilemetadata-dev
+	ki18n-dev
+	kio-dev
+	ktextwidgets-dev
+	kwidgetsaddons-dev
+	"
 source="https://download.kde.org/stable/release-service/$pkgver/src/kfind-$pkgver.tar.xz"
 subpackages="$pkgname-doc $pkgname-lang"
 options="!check" # No tests
@@ -28,7 +38,9 @@ check() {
 }
 
 package() {
-	DESTDIR="$pkgdir" cmake --build build --target install
+	DESTDIR="$pkgdir" cmake --install build
 }
 
-sha512sums="e57e15a07661627f86c661e2cb6655061771e7ef62dd9a486cf6fc1adeeb2d64de99731c04bdd7125d132611bdc7fa0e26ba39aa54e8927f15fcfd3405a3e3ed  kfind-21.04.0.tar.xz"
+sha512sums="
+bfb985228e7fd96f6c88dff8792e64a1ccf9e999155acfce76de6cb434b02aab92bcb4c8473399a9de59049138809149f33b423bc46d47abc8b7ea4966bfd61c  kfind-21.04.3.tar.xz
+"

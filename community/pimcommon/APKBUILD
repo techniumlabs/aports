@@ -1,13 +1,13 @@
 # Contributor: Bart Ribbers <bribbers@disroot.org>
 # Maintainer: Bart Ribbers <bribbers@disroot.org>
 pkgname=pimcommon
-pkgver=21.04.0
+pkgver=21.04.3
 pkgrel=0
 pkgdesc="Common lib for KDEPim"
 # armhf blocked by extra-cmake-modules
-# mips and mips64 blocked by akonadi
-# s390x blocked by multiple KDE Frameworks
-arch="all !armhf !mips !mips64 !s390x"
+# s390x, mips64 and riscv64 blocked by polkit -> kio
+# ppc64le blocked by qt5-qtwebengine -> akonadi
+arch="all !armhf !mips64 !s390x !riscv64 !ppc64le"
 url='https://community.kde.org/KDE_PIM'
 license="GPL-2.0-or-later"
 depends_dev="
@@ -60,6 +60,8 @@ check() {
 }
 
 package() {
-	DESTDIR="$pkgdir" cmake --build build --target install
+	DESTDIR="$pkgdir" cmake --install build
 }
-sha512sums="6c130aa592254089cc07c9d8a83ac7a08f3a34361270a49d073325b738e6329fb59d32ed454fe5b07fc49958d89bd21c3255eb0c6484a5b4c0c8f8f1088617b2  pimcommon-21.04.0.tar.xz"
+sha512sums="
+b2ff1ff7942e49676aedfbe923e3a3bfa26e170007b58d2ee07d80da466b4d701fbf0707720cdc10304c7c41381c3503781993e83f88414546e605896817b320  pimcommon-21.04.3.tar.xz
+"

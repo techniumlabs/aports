@@ -1,11 +1,12 @@
 # Contributor: Bart Ribbers <bribbers@disroot.org>
 # Maintainer: Bart Ribbers <bribbers@disroot.org>
 pkgname=kamera
-pkgver=21.04.0
+pkgver=21.04.3
 pkgrel=0
 # armhf blocked by extra-cmake-modules
 # s390x blocked by exif
-arch="all !armhf !s390x !mips64"
+# mips64 and riscv64 blocked by polkit -> kio
+arch="all !armhf !s390x !mips64 !riscv64"
 url="https://kde.org/applications/graphics"
 pkgdesc="KDE integration for gphoto2 cameras"
 license="GPL-2.0-or-later AND GFDL-1.2-only"
@@ -38,7 +39,9 @@ check() {
 }
 
 package() {
-	DESTDIR="$pkgdir" cmake --build build --target install
+	DESTDIR="$pkgdir" cmake --install build
 }
 
-sha512sums="951543ed0dff35de5a4066552b57f5a84e2200290f65de452fe12c48483acb26bf58785eec983089aedb7a73cc0d4313f5224c0eb179f6530e72ddd33967a259  kamera-21.04.0.tar.xz"
+sha512sums="
+629f1de8cd94900b8ac247f63a91634613e6f8d3b3889cb289e2f7d926cc58f9eeb0d3b0466d0d963798ea604538485c7409d74dd957398bdc47031e597509f4  kamera-21.04.3.tar.xz
+"

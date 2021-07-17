@@ -3,7 +3,7 @@
 # Contributor: Leonardo Arena <rnalrd@alpinelinux.org>
 # Maintainer: Kevin Daudt <kdaudt@alpinelinux.org>
 pkgname=zabbix
-pkgver=5.2.6
+pkgver=5.4.2
 pkgrel=0
 pkgdesc="Enterprise-class open source distributed monitoring"
 url="http://www.zabbix.com"
@@ -39,6 +39,7 @@ source="$pkgname-$pkgver.tar.gz::https://github.com/zabbix/zabbix/archive/${pkgv
 	musl-fix-includes.patch
 	zabbix_server.conf.patch
 	zabbix_agent2.conf.patch
+	go-agent-plugin-uname-add-riscv64.patch
 	"
 
 builddir="$srcdir/$pkgname-${pkgver/_/}"
@@ -51,6 +52,8 @@ mips|mips64)
 	makedepends="$makedepends go"
 	_build_agent2=true;;
 esac
+
+[ "$CARCH" = "riscv64" ] && options="$options textrels"
 
 # secfixes:
 #   5.2.6-r0:
@@ -254,7 +257,8 @@ agent2_openrc() {
 		"$subpkgdir"/etc/init.d/zabbix-agent2
 }
 
-sha512sums="fc26bfc993a35c2976b1b8fd82d17472bd23c7497f4eec0b410aca439a6400e3466784edc95a3d2ccc0c764003aac9aa9f70c9246645ddb76f6ee086eba93578  zabbix-5.2.6.tar.gz
+sha512sums="
+23fe24eb6aa30dd8a9a6fe8b111eee29237800da38b11a358aa755cdd384b1e5b136e73eb3b86bc849ac3e952f89b4beb920ed9043d85df25f6a8995acc2d580  zabbix-5.4.2.tar.gz
 9998ee172a28002d98bacc3f76038ff52b8cf2b206e101418d76b4ca3de94afaf92cb4f7a6235ecf177f74beb9dd3ea1f3983c4f164b4f60bb601acba65aa175  zabbix-server.initd
 9c06527bf653c40585fa7eeb3f7a0b2fc454031d24cd0d1633aed87b78a681c5227a193c5b9fcfcea0839135874e27ba7dd9b198573f905f680a2856f79e9512  zabbix-server.confd
 7beca0fc6e254c1692e0e74deb9eb3d06ac78f5f6b08f3ab0491861e11e09f00f57bb4d22e11517dab86456e87bd13110805bfb38a715d2f1e68549937b29c76  zabbix-agentd.initd
@@ -264,4 +268,6 @@ a26e7ac422ff60a4b8eed3603022c3a1bde640870bb9286ab061c3cb5c2fd7e91ddb317cb3d1cf61
 7f70dfd602aa164ec8cc65ebb7e8274c685975f6aea9051933928051b8d9b6e368e5a673a07e7084a2105468c5085d72fa7b9f934460f10648d594f28f031a91  automake.patch
 72709df7624d99b2eaab8d91d95167580e80da10b3ac65b7f27f12d858f0d051d4f9143bcabceae2bfd51aeb7c4ca93e2b74670637ec0925b026e3c52475d52b  musl-fix-includes.patch
 183e2d99800d8eebb932cb31c5a3e8742ce6a15e87aec50dc49d9c20b35840eb7ede9920aa62d2c7a5e3f584f5c3df398aa08e93f98fa537a3ba6db63b472a1f  zabbix_server.conf.patch
-84cc513fb5593d571e06e13afd0f6cfef78cbca71824f4d79dbaac71dcb7f8c4708a78b354fa4b9b814abc7edc170f513cebd7c247182c200e5fde4f928aa085  zabbix_agent2.conf.patch"
+7298af197d93f3c78be146819c31be96c43288b0987dc42df6e2352a925129a5a853c4f77a93c79c5bea5fc9bd76ddd3192520e45df1a056a9df0f6294e31513  zabbix_agent2.conf.patch
+1df199b7749b5ad5b39430f2b3144dda63759b429e711838e9d60ae1f2a75572442df512606a80b538d9daecb60348e69d953db887d99f8a0431ca62bdda6345  go-agent-plugin-uname-add-riscv64.patch
+"

@@ -1,9 +1,10 @@
 # Contributor: Bart Ribbers <bribbers@disroot.org>
 # Maintainer: Bart Ribbers <bribbers@disroot.org>
 pkgname=ktouch
-pkgver=21.04.0
+pkgver=21.04.3
 pkgrel=0
-arch="all !armhf !mips !mips64 !s390x" # armhf blocked by qt5-qtdeclarative, everything else by rust
+# riscv64 disabled due to missing rust in recursive dependency
+arch="all !armhf !mips !mips64 !s390x !riscv64" # armhf blocked by qt5-qtdeclarative, everything else by rust
 url="https://edu.kde.org/ktouch/"
 pkgdesc="Touch Typing Tutor"
 license="GPL-2.0-or-later AND GFDL-1.2-only"
@@ -29,4 +30,6 @@ package() {
 	DESTDIR="$pkgdir" cmake --build build --target install
 }
 
-sha512sums="efb2364f9f0c55f670d3b99976c5c9f4dfc8a646c88481d475816f54c88ecc6dbdc49b028d2ff36e7848baf62553bfbe3ec5938a5f16cf9c84265e23f5eb8a9f  ktouch-21.04.0.tar.xz"
+sha512sums="
+5d5cf00581518315736e5f52040f8487731e2899438ed5e78356755d22dfcbf890889a4510922cffa6e2b8460c4d092f86583060195eaf6214fcdc830da2bb97  ktouch-21.04.3.tar.xz
+"

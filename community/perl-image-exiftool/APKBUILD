@@ -1,14 +1,13 @@
 # Contributor: Natanael Copa <ncopa@alpinelinux.org>
 # Maintainer: Natanael Copa <ncopa@alpinelinux.org>
 pkgname=perl-image-exiftool
-pkgver=12.25
+pkgver=12.28
 pkgrel=0
 pkgdesc="Perl module for editing exif metadata in files"
 url="https://exiftool.org/"
 arch="noarch"
 license="Artistic-1.0-Perl GPL-1.0-or-later"
 depends="perl"
-makedepends="perl-dev"
 subpackages="$pkgname-doc exiftool"
 source="https://exiftool.org/Image-ExifTool-$pkgver.tar.gz"
 
@@ -40,4 +39,6 @@ exiftool() {
 	mv "$pkgdir"/usr/bin "$subpkgdir"/usr/
 }
 
-sha512sums="bc549b021cf608959ef72f98f24ddd60f331edc0c430593aa076d6967357488430369b6ab7b5b0ebfa7d6dc3b79a77dff9ffd0b740cf334a5062cd46a4741bf7  Image-ExifTool-12.25.tar.gz"
+sha512sums="
+06984ab0af3362230dede6d1ae4ccde7b8e2fad6a2764141f4434f36e277367e04a6160ac16a54342a47d519fa6b0499be457b11c8411dd3860835ed6defde01  Image-ExifTool-12.28.tar.gz
+"

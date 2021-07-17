@@ -1,13 +1,28 @@
 # Contributor: Bart Ribbers <bribbers@disroot.org>
 # Maintainer: Bart Ribbers <bribbers@disroot.org>
 pkgname=kiriki
-pkgver=21.04.0
+pkgver=21.04.3
 pkgrel=0
 pkgdesc="An addictive and fun dice game"
-arch="all !armhf !s390x !mips64" # armhf blocked by extra-cmake-modules
+# armhf blocked by extra-cmake-modules
+# s390x, mips64 and riscv64 blocked by polkit -> kxmlgui
+arch="all !armhf !s390x !mips64 !riscv64"
 url="https://kde.org/applications/games/kiriki/"
 license="GPL-2.0-or-later AND GFDL-1.2-only"
-makedepends="extra-cmake-modules qt5-qtbase-dev kcoreaddons-dev kconfig-dev kcrash-dev kdbusaddons-dev kdoctools-dev ki18n-dev kconfigwidgets-dev kiconthemes-dev kxmlgui-dev libkdegames-dev"
+makedepends="
+	extra-cmake-modules
+	kconfig-dev
+	kconfigwidgets-dev
+	kcoreaddons-dev
+	kcrash-dev
+	kdbusaddons-dev
+	kdoctools-dev
+	ki18n-dev
+	kiconthemes-dev
+	kxmlgui-dev
+	libkdegames-dev
+	qt5-qtbase-dev
+	"
 source="https://download.kde.org/stable/release-service/$pkgver/src/kiriki-$pkgver.tar.xz"
 subpackages="$pkgname-doc $pkgname-lang"
 options="!check" # No tests
@@ -21,7 +36,9 @@ build() {
 }
 
 package() {
-	DESTDIR="$pkgdir" cmake --build build --target install
+	DESTDIR="$pkgdir" cmake --install build
 }
 
-sha512sums="c6749b6247697925840d33e5e0995debb3ea74e9344ca7c731220e818a40b838b3f2a1f1344de59cebf9e2829f05949ca77252ed6cc7b6d783712cae3b89155b  kiriki-21.04.0.tar.xz"
+sha512sums="
+92e29859d6037b30605a3da54ee2e780c81c5515f28e0a03270812eda6597181ab5e413e02c1b0bb4710e9a4c3404cf7fa3c87cb991841b0baf991345556fb4f  kiriki-21.04.3.tar.xz
+"

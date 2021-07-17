@@ -2,7 +2,7 @@
 # Maintainer: Francesco Colista <fcolista@alpinelinux.org>
 pkgname=py3-watchdog
 _pkgname=watchdog
-pkgver=2.0.3
+pkgver=2.1.3
 pkgrel=0
 pkgdesc="Filesystem events monitoring"
 url="https://github.com/gorakhargosh/watchdog"
@@ -24,5 +24,5 @@ package() {
 }
 
 sha512sums="
-fb379e7ebcd6e4ceda57f07f40764ff7aa5ba7f4feab62a93f56484fc5ace5268b74bf36e6c9aba726f486fddeec911abbf0590e95a841dfc0526de3bddd82b0  watchdog-2.0.3.tar.gz
+72f7a39b06b6fa5bd32e1e39638485450be60f0e62c359d76bf9acb904a888c6401f4daae943f420b2e86dadb8e7b60fcb664c9e00183b1ab5ad79bb205311f2  watchdog-2.1.3.tar.gz
 "

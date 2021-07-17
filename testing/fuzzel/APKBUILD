@@ -1,7 +1,7 @@
 # Contributor: Michał Polański <michal@polanski.me>
 # Maintainer: Michał Polański <michal@polanski.me>
 pkgname=fuzzel
-pkgver=1.5.4
+pkgver=1.6.1
 pkgrel=0
 pkgdesc="Application launcher for wlroots-based Wayland compositors"
 url="https://codeberg.org/dnkl/fuzzel"
@@ -26,7 +26,7 @@ builddir="$srcdir/fuzzel"
 
 # enable support for SVG icons where possible
 case "$CARCH" in
-	s390x|mips64) ;;
+	s390x|mips64|riscv64) ;;
 	*) makedepends="$makedepends librsvg-dev" ;;
 esac
 
@@ -40,5 +40,5 @@ package() {
 }
 
 sha512sums="
-cbb90608503586ec7455b63f539698b0a63dd2d7294ef1f09d9e761cb6f22252eba9fa1ccb35ba80af71cff423bc6feb7bee101e050ec481f488a1f2e72970dc  fuzzel-1.5.4.tar.gz
+2562d7491b1da3eb7675dcaf508f90c98b235cdeba9f6c53184f48b1dffb0f77d4353acfb137b3278126e84c56429d2eee80581c9dea7fca951de66a31f8b9c3  fuzzel-1.6.1.tar.gz
 "

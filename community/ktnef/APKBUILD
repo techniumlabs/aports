@@ -1,12 +1,13 @@
 # Contributor: Bart Ribbers <bribbers@disroot.org>
 # Maintainer: Bart Ribbers <bribbers@disroot.org>
 pkgname=ktnef
-pkgver=21.04.0
+pkgver=21.04.3
 pkgrel=0
 pkgdesc="API for handling TNEF data"
 # armhf blocked by extra-cmake-modules
 # s390x blocked by kcalendarcore
-arch="all !armhf !s390x !mips64"
+# mips64 and riscv64 blocked by polkit -> kcalutils
+arch="all !armhf !s390x !mips64 !riscv64"
 url="https://kontact.kde.org/"
 license="LGPL-2.0-or-later"
 depends_dev="
@@ -36,6 +37,8 @@ check() {
 }
 
 package() {
-	DESTDIR="$pkgdir" cmake --build build --target install
+	DESTDIR="$pkgdir" cmake --install build
 }
-sha512sums="935c8f463a9b4883e9487bb5e458a2c418013bd45f663ffbc0f406287246cff0b8c3b2ffcbc1c41ffb6a9b5561671cee5cf9d9383198e62c7c71184a21c73516  ktnef-21.04.0.tar.xz"
+sha512sums="
+e2d13dcf5ec40f777b88a662c85cccccbebb7a7fe24c980d4faa2ff4e1a9a1129dd59b6e05b2564c6884552541a53f4a3de5456ed1c51574753c2306c70daa60  ktnef-21.04.3.tar.xz
+"

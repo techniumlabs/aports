@@ -1,11 +1,12 @@
 # Contributor: Bart Ribbers <bribbers@disroot.org>
 # Maintainer: Bart Ribbers <bribbers@disroot.org>
 pkgname=rocs
-pkgver=21.04.0
+pkgver=21.04.3
 pkgrel=0
 # armhf blocked by extra-cmake-modules
 # mips, mips64 and s390x blocked by kxmlgui
-arch="all !armhf !mips !mips64 !s390x"
+# riscv64 disabled due to missing rust in recursive dependency
+arch="all !armhf !mips !mips64 !s390x !riscv64"
 url="https://kde.org/applications/education/org.kde.rocs"
 pkgdesc="Graph Theory IDE"
 license="GPL-2.0-or-later AND (LGPL-2.1-only OR LGPL-3.0-only) AND GFDL-1.2-only"
@@ -64,4 +65,6 @@ package() {
 	DESTDIR="$pkgdir" cmake --build build --target install
 }
 
-sha512sums="0e013f1ceb66712da17a853ac4c66e15b17ac93779d8fdf72dec4bf5a9d52544d38f26a523dcb88913184ba8f67eee3b04243ce574739b1e5c5cad3c6c8ed5b0  rocs-21.04.0.tar.xz"
+sha512sums="
+f097157f7664a637448055a2b9142dcb4b0fada3a811f8efa1f37c3f23f486b613aac367f4248db8efc3fbe6ca8c350b5c280c3e382b8bbc331e2659a32fb1fd  rocs-21.04.3.tar.xz
+"

@@ -1,13 +1,25 @@
 # Contributor: Bart Ribbers <bribbers@disroot.org>
 # Maintainer: Bart Ribbers <bribbers@disroot.org>
 pkgname=kdialog
-pkgver=21.04.0
+pkgver=21.04.3
 pkgrel=0
-arch="all !armhf !mips !mips64 !s390x" # armhf blocked by extra-cmake-modules, everything else blocked by rust
+# armhf blocked by extra-cmake-modules
+# mips64, s390x and riscv64 blocked by polkit -> kio
+arch="all !armhf !mips64 !s390x !riscv64"
 url="https://www.kde.org/"
 pkgdesc="A utility for displaying dialog boxes from shell scripts"
 license="GPL-2.0-or-later AND GFDL-1.2-only"
-makedepends="extra-cmake-modules qt5-qtbase-dev ktextwidgets-dev knotifications-dev kguiaddons-dev kiconthemes-dev kwindowsystem-dev kio-dev kdbusaddons-dev"
+makedepends="
+	extra-cmake-modules
+	kdbusaddons-dev
+	kguiaddons-dev
+	kiconthemes-dev
+	kio-dev
+	knotifications-dev
+	ktextwidgets-dev
+	kwindowsystem-dev
+	qt5-qtbase-dev
+	"
 source="https://download.kde.org/stable/release-service/$pkgver/src/kdialog-$pkgver.tar.xz"
 subpackages="$pkgname-lang"
 
@@ -25,7 +37,9 @@ check() {
 }
 
 package() {
-	DESTDIR="$pkgdir" cmake --build build --target install
+	DESTDIR="$pkgdir" cmake --install build
 }
 
-sha512sums="63bd29c05c9cb551ae1cbdc14f7ab97424c1056ee9bab6695f00daccf37dcf712a822ffd8b634d63a4a1ba56fe18642221898fe6507107bfe1ac64fc6afae7c0  kdialog-21.04.0.tar.xz"
+sha512sums="
+019dd95dd56881eb84f3187fe623e55df947f2ec61eccd57bf2731001f7e7594234b2a800cbc09526bafafc8b2fa78c29a445b578e52c7405936f2eb1bc4dfb2  kdialog-21.04.3.tar.xz
+"

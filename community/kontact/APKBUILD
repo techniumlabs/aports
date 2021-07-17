@@ -1,9 +1,12 @@
 # Contributor: Bart Ribbers <bribbers@disroot.org>
 # Maintainer: Bart Ribbers <bribbers@disroot.org>
 pkgname=kontact
-pkgver=21.04.0
+pkgver=21.04.3
 pkgrel=0
-arch="all !ppc64le !s390x !armhf !mips !mips64" # Limited by qt5-qtwebengine
+# armhf blocked by extra-cmake-modules
+# ppc64le, s390x, mips64 and riscv64 blocked by qt5-qtwebengine
+# riscv64 disabled due to missing rust in recursive dependency
+arch="all !armhf !ppc64le !s390x !mips64 !riscv64"
 url="https://kontact.kde.org/"
 pkgdesc="Container application to unify several major PIM applications within one application"
 license="GPL-2.0-or-later"
@@ -44,4 +47,6 @@ package() {
 	DESTDIR="$pkgdir" cmake --install build
 }
 
-sha512sums="0ce725ce483e3678b87d0281dde3df4ebb66e33a3215a133078d2492aeed827ea0ba78074829d634cf31f99d60a30c2abfcd786eaf2572a7dafc051c55baba52  kontact-21.04.0.tar.xz"
+sha512sums="
+18b489ddf4c79414eaee8a5b2a3f7c3739999f97138ac9900c095dd35571ced70fa4aa3d197057d74b2591e1b8a08b84e553bbca3b223015642e4bb48eb9dce0  kontact-21.04.3.tar.xz
+"

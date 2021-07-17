@@ -1,12 +1,13 @@
 # Contributor: Bart Ribbers <bribbers@disroot.org>
 # Maintainer: Bart Ribbers <bribbers@disroot.org>
 pkgname=plasma-browser-integration
-pkgver=5.21.5
+pkgver=5.22.3
 pkgrel=0
 pkgdesc="Components necessary to integrate browsers into the Plasma Desktop"
 # armhf blocked by extra-cmake-modules
-# s390x, mips64 blocked by kio-dev, krunner-dev, purpose-dev
-arch="all !armhf !s390x !mips64"
+# s390x, mips64 and riscv64 blocked by polkit -> kio
+# ppc64le blocked by kaccounts-integration
+arch="all !armhf !s390x !mips64 !riscv64 !ppc64le"
 url="https://community.kde.org/Plasma/Browser_Integration"
 license="GPL-3.0-or-later"
 makedepends="
@@ -49,5 +50,5 @@ package() {
 }
 
 sha512sums="
-83165c59606d32b65359ac7a9f79beabdcd50ea35becab2d6cfec3c34e0981a0bd0452176cf213e6de0db293b4adc1615631be6477048f5e8033cc5e16f1b9a0  plasma-browser-integration-5.21.5.tar.xz
+54c2efd891806d3d877c3579a3ed756d27f236764dacf308c622563929df9970ca8463fa4b2e83237cd4579e5d60f4984bf995aaf5eda80fb02ca6e38519dbdd  plasma-browser-integration-5.22.3.tar.xz
 "

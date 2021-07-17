@@ -1,7 +1,7 @@
 # Maintainer: Andy McLeod <andy@amcleod.ca>
 pkgname=ejson
 pkgver=1.2.1
-pkgrel=4
+pkgrel=5
 pkgdesc="EJSON is a small library to manage encrypted secrets using asymmetric encryption."
 url="https://github.com/Shopify/ejson"
 arch="all"
@@ -21,6 +21,7 @@ prepare() {
 
 build() {
 	export GOPATH="$srcdir"
+	export GO111MODULE=off
 	CGO_ENABLED=0 go build -v -o e${pkgname} github.com/Shopify/ejson/cmd/ejson
 
 	# Overwrite bundle exec so it runs our ronn command from the system not

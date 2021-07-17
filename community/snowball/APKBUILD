@@ -1,36 +1,47 @@
+# Contributor: Duncan Bellamy <dunk@denkimushi.com>
 # Contributor: Francesco Colista <fcolista@alpinelinux.org>
 # Maintainer: Francesco Colista <fcolista@alpinelinux.org>
 pkgname=snowball
-_pkgname=libstemmer
-pkgver=0_git20140929
-pkgrel=0
+pkgver=2.1.0
+pkgrel=2
 pkgdesc="Snowball rule-based stemming algorithms"
-url="http://snowball.tartarus.org"
+url="https://snowballstem.org/"
 arch="all"
-license="BSD"
-depends=""
-depends_dev=""
-makedepends="$depends_dev perl"
-install=""
-subpackages="$pkgname-dev"
-disturl="dev.alpinelinux.org:/archive/$pkgname/"
-snapshot="full"
-source="https://dev.alpinelinux.org/archive/$pkgname/$pkgname-$pkgver.tar.gz"
-_builddir="$srcdir"/$pkgname-$pkgver
+license="BSD-3-Clause"
+makedepends="perl"
+subpackages="$pkgname-doc libstemmer:_libstemmer libstemmer-dev:_libstemmerdev"
+source="$pkgname-$pkgver.tar.gz::https://github.com/snowballstem/snowball/archive/refs/tags/v$pkgver.tar.gz
+	libstemmer-library.patch"
 
 build() {
-	cd "$_builddir"
-	make CC='gcc -fPIC' || return 1
+	make
+}
+
+check() {
+	#check_utf8 check_iso_8859_1 check_iso_8859_2 check_koi8r
+	#all have missing sub-targets
+	make check_stemtest
 }
 
 package() {
-	cd "$_builddir"
-	install -d ${pkgdir}/usr/bin || return 1
-	install stemwords ${pkgdir}/usr/bin || return 1
-	install -d ${pkgdir}/usr/include || return 1
-	install include/libstemmer.h ${pkgdir}/usr/include || return 1
-	install -d ${pkgdir}/usr/lib || return 1
-	install libstemmer.o ${pkgdir}/usr/lib/libstemmer.a || return 1
+	install -d "$pkgdir"/usr/bin "$pkgdir"/usr/lib "$pkgdir"/usr/include
+	install snowball stemwords "$pkgdir"/usr/bin
+	install libstemmer.a "$pkgdir"/usr/lib
+	install include/libstemmer.h "$pkgdir"/usr/include
+	install -Dm644 COPYING "$pkgdir/usr/share/licenses/$pkgname/LICENSE"
 }
 
-sha512sums="a8c7426ae9e1fc4397845ace6a8d24b1ff555150f210ece76add92bb6a3092c47305577a265f6aba6fc49d6dd6bc6cb8bb4ce523979f479b176f2ffad0477ac3  snowball-0_git20140929.tar.gz"
+_libstemmer() {
+	install -d "$subpkgdir"/usr/lib
+	install "$builddir"/libstemmer.so."$pkgver" "$subpkgdir"/usr/lib
+}
+
+_libstemmerdev() {
+	pkgdesc="Header files and development libraries for libstemmer"
+	default_dev
+	mv "$builddir"/libstemmer.so "$builddir"/libstemmer.so.? $subpkgdir/usr/lib
+}
+sha512sums="
+1efd7d8ab58852987e83247048244882c517e32237c8cb3c0558b66ecfb075733ce8805ebb76041e6e7d6664c236054effe66838e7c524ee529ce869aa8134f0  snowball-2.1.0.tar.gz
+7f4c628b8803dde5c7184fbc03a975850fb12eca9b2345164cd2de72531c81e7a000a35594625cbe52b401858f0b10aa3dc6506d019e3c9ccfea1f1848df7c0d  libstemmer-library.patch
+"

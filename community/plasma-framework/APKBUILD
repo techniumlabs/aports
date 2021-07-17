@@ -1,10 +1,12 @@
 # Contributor: Bart Ribbers <bribbers@disroot.org>
 # Maintainer: Bart Ribbers <bribbers@disroot.org>
 pkgname=plasma-framework
-pkgver=5.82.0
+pkgver=5.84.0
 pkgrel=0
 pkgdesc="Plasma library and runtime components based upon KF5 and Qt5"
-arch="all !armhf !mips64 !s390x" # armhf blocked by qt5-qtdeclarative and mips64, s390x blocked by polkit
+# armhf blocked by qt5-qtdeclarative
+# mips64, s390x and riscv64 blocked by polkit
+arch="all !armhf !mips64 !s390x !riscv64"
 url="https://community.kde.org/Frameworks"
 license="LGPL-2.1-or-later AND GPL-2.0-or-later"
 depends_dev="
@@ -27,6 +29,7 @@ depends_dev="
 	kwayland-dev
 	kwindowsystem-dev
 	kxmlgui-dev
+	mesa-dev
 	qt5-qtbase-dev
 	qt5-qtdeclarative-dev
 	qt5-qtquickcontrols2-dev
@@ -34,6 +37,7 @@ depends_dev="
 makedepends="$depends_dev
 	doxygen
 	extra-cmake-modules
+	graphviz
 	kdoctools-dev
 	qt5-qttools-dev
 	"
@@ -41,7 +45,9 @@ checkdepends="
 	hicolor-icon-theme
 	xvfb-run
 	"
-source="https://download.kde.org/stable/frameworks/${pkgver%.*}/plasma-framework-$pkgver.tar.xz"
+source="https://download.kde.org/stable/frameworks/${pkgver%.*}/plasma-framework-$pkgver.tar.xz
+	0001-fix-build.patch
+	"
 subpackages="$pkgname-dev $pkgname-doc $pkgname-lang"
 options="!check" # 8 out of 13 tests fail
 
@@ -60,8 +66,9 @@ check() {
 }
 
 package() {
-	DESTDIR="$pkgdir" cmake --build build --target install
+	DESTDIR="$pkgdir" cmake --install build
 }
 sha512sums="
-e973d1b2683a88f370587a8dba71b1f3ff8a5e23127dbe4c30161fb827b6e3c83e7eb0a6860478d160c6fa69bef9fde0f16f0a8d315672df433ac9d7157b8ea9  plasma-framework-5.82.0.tar.xz
+e8032f80ec91d56d0f72faca27e1878e7e2e581943746214a359faee45f85dc125b02198a1623ec8cc5a74fbcd38f93bf2faf5e17f73ab410805adbf71579577  plasma-framework-5.84.0.tar.xz
+166f0576e06fb4eef75e5a4eb19248adba4b3e25d25bce106d2289d0978cd585ad6c1f08136f078c16e6333d6bf9891e75008539dec17ad066ec7821213e30f8  0001-fix-build.patch
 "

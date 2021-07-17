@@ -1,15 +1,30 @@
 # Contributor: Bart Ribbers <bribbers@disroot.org>
 # Maintainer: Bart Ribbers <bribbers@disroot.org>
 pkgname=krunner
-pkgver=5.82.0
+pkgver=5.84.0
 pkgrel=0
 pkgdesc="Framework for providing different actions given a string query"
-arch="all !armhf !mips64 !s390x" # armhf blocked by extra-cmake-modules and mips64, s390x blocked by polkit
+# armhf blocked by extra-cmake-modules
+# mips64, s390x and riscv64 blocked by polkit
+arch="all !armhf !mips64 !s390x !riscv64"
 url="https://community.kde.org/Frameworks"
 license="LGPL-2.1-only AND LGPL-2.1-or-later"
-depends_dev="qt5-qtbase-dev kconfig-dev kcoreaddons-dev ki18n-dev kio-dev
-	kservice-dev plasma-framework-dev threadweaver-dev plasma-framework-dev"
-makedepends="$depends_dev extra-cmake-modules qt5-qttools-dev doxygen"
+depends_dev="
+	kconfig-dev
+	kcoreaddons-dev
+	ki18n-dev
+	kio-dev
+	kservice-dev
+	plasma-framework-dev
+	plasma-framework-dev
+	qt5-qtbase-dev
+	threadweaver-dev
+	"
+makedepends="$depends_dev
+	doxygen
+	extra-cmake-modules
+	qt5-qttools-dev
+	"
 checkdepends="xvfb-run"
 source="https://download.kde.org/stable/frameworks/${pkgver%.*}/krunner-$pkgver.tar.xz"
 subpackages="$pkgname-dev $pkgname-doc"
@@ -30,8 +45,8 @@ check() {
 }
 
 package() {
-	DESTDIR="$pkgdir" cmake --build build --target install
+	DESTDIR="$pkgdir" cmake --install build
 }
 sha512sums="
-a4430196d32d850f9498027df251a65dcf3fcb161a7005926a9ec3de429bd03487e72fda342a6a588c4e5972ee55baf21e53433d68408ccab1b0b99b5c2980da  krunner-5.82.0.tar.xz
+a8113c35c6943bc48f8720396560bb35a17afabc18587506e552ec3ce189e5e620c5f1576dbad96f993ea9b1b1456c8e4e3d0461de2e67f80f22097eb1c72da3  krunner-5.84.0.tar.xz
 "

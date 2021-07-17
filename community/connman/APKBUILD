@@ -1,18 +1,32 @@
 # Maintainer: Clayton Craft <clayton@craftyguy.net>
 # Contributor: Valery Kartel <valery.kartel@gmail.com>
+# Contributor: Jakub Jirutka <jakub@jirutka.cz>
 pkgname=connman
-pkgver=1.39
-pkgrel=0
+pkgver=1.40
+pkgrel=2
 pkgdesc="Daemon for managing internet connections"
 url="https://01.org/connman"
 arch="all"
 license="GPL-2.0-only"
-makedepends="autoconf automake dbus-dev glib-dev iptables-dev libtool
-	readline-dev libmnl-dev openvpn wpa_supplicant"
-subpackages="$pkgname-dev $pkgname-doc $pkgname-openrc"
+makedepends="autoconf automake dbus-dev glib-dev iptables-dev libnftnl-dev libtool
+	readline-dev libmnl-dev openvpn ppp-dev vpnc wpa_supplicant xl2tpd"
+install="$pkgname.post-upgrade"
+subpackages="
+	$pkgname-dbg
+	$pkgname-iptables
+	$pkgname-nftables
+	$pkgname-l2tp
+	$pkgname-openvpn
+	$pkgname-vpnc
+	$pkgname-wireguard
+	$pkgname-dev
+	$pkgname-doc
+	$pkgname-openrc
+	"
 source="https://www.kernel.org/pub/linux/network/connman/connman-$pkgver.tar.xz
 	libresolv.patch
-	connman.initd
+	$pkgname.initd
+	$pkgname.confd
 	"
 
 # secfixes:
@@ -23,9 +37,11 @@ source="https://www.kernel.org/pub/linux/network/connman/connman-$pkgver.tar.xz
 prepare() {
 	default_prepare
 	autoreconf -vif
+
+	cp -r "$builddir" "$builddir~nftables"
 }
 
-build() {
+_build() {
 	./configure \
 		--build=$CBUILD \
 		--host=$CHOST \
@@ -35,10 +51,23 @@ build() {
 		--infodir=/usr/share/info \
 		--localstatedir=/var \
 		--disable-wispr \
+		--enable-pie \
 		--enable-iwd \
+		--enable-nmcompat \
 		--enable-wireguard \
-		--enable-openvpn
+		--enable-openvpn \
+		--enable-l2tp \
+		--enable-vpnc \
+		"$@"
 	make
+}
+
+build() {
+	cd "$builddir~nftables"
+	_build --with-firewall=nftables
+
+	cd "$builddir"
+	_build --with-firewall=iptables  # this is the default value
 }
 
 check() {
@@ -46,11 +75,71 @@ check() {
 }
 
 package() {
+	# Provided by connman-iptables or connman-nftables (mutually exclusive).
+	# NOTE: It must be defined here, not on top-level!
+	depends="cmd:connmand"
+
 	make DESTDIR="$pkgdir" install
 	install -Dm644 src/main.conf "$pkgdir"/etc/$pkgname/main.conf
+
+	install -Dm644 "$srcdir"/$pkgname.confd "$pkgdir"/etc/conf.d/$pkgname
 	install -Dm755 "$srcdir"/$pkgname.initd "$pkgdir"/etc/init.d/$pkgname
 }
 
-sha512sums="5bec2830971e34966a7a3a40c505b8a14cf6fa639262d4f1eaeb38f5e602d7a234f7d4f2c4919517b0832664382389e20a59fdb027753cd20059a23589de1764  connman-1.39.tar.xz
+iptables() {
+	pkgdesc="ConnMan daemon built with iptables support"
+	depends="$pkgname=$pkgver-r$pkgrel !$pkgname-nftables"
+	provider_priority=20  # highest
+	replaces="$pkgname $pkgname-nftables"
+
+	amove usr/sbin/connmand
+}
+
+nftables() {
+	pkgdesc="ConnMan daemon built with nftables support"
+	depends="$pkgname=$pkgver-r$pkgrel !$pkgname-iptables"
+	provider_priority=10  # lowest
+	replaces="$pkgname $pkgname-iptables"
+
+	cd "$builddir~nftables"
+	install -D -m 755 src/connmand "$subpkgdir"/usr/sbin/connmand
+}
+
+l2tp() {
+	pkgdesc="L2TP VPN plugin for ConnMan"
+	depends="$pkgname=$pkgver-r$pkgrel xl2tpd"
+
+	amove usr/lib/connman/plugins-vpn/l2tp.so
+	amove usr/lib/connman/scripts/libppp-plugin.so
+}
+
+openvpn() {
+	pkgdesc="OpenVPN plugin for ConnMan"
+	depends="$pkgname=$pkgver-r$pkgrel openvpn"
+	replaces="$pkgname"  # for backward compatibility
+
+	amove usr/lib/connman/plugins-vpn/openvpn.so
+	amove usr/lib/connman/scripts/openvpn-script
+}
+
+vpnc() {
+	pkgdesc="IPsec (Cisco/Juniper) VPN plugin for ConnMan"
+	depends="$pkgname=$pkgver-r$pkgrel vpnc"
+
+	amove usr/lib/connman/plugins-vpn/vpnc.so
+}
+
+wireguard() {
+	pkgdesc="WireGuard VPN plugin for ConnMan"
+	depends="$pkgname=$pkgver-r$pkgrel"
+	replaces="$pkgname"  # for backward compatibility
+
+	amove usr/lib/connman/plugins-vpn/wireguard.so
+}
+
+sha512sums="
+33df90814b7499aeafcd51fca4f8ffbc07efacfa29dda46d3b9bcd3ff26264dc53c3991e7e53a8563ca403015c345e59c7ad29427c38ee3d88dd282479db7a0f  connman-1.40.tar.xz
 122b48fc9e25354e25ba3a3e0864bdd84da84457fed94aeea726bcb189b2f05f2cc361ae15f44af5c49bcee572e91e4c0488ef3b0bc79d20f6efe15853fb6b3a  libresolv.patch
-b0676714b3952f38d50f3707c3ec72269902dd07f3cefc412c2720d91d02c9537f2823eb4ed5359650eaa64b9132cddba3abc15fd68542ff0870de653e023ed8  connman.initd"
+17c21c1c3e138790610a30ff397272e8f10b348c630e11f340fc7e97bdb871be00abc2955e11b9dad2c4be44cb6fdbf26c6c73aa18c1a2109f0668b14278593f  connman.initd
+4d266e0cb30af7aec5359a5456b12c9358c266ce0a7afdff247da7423f91b99748a15e44facec51eaab0f5a193b9c7542d9a3988c85f1bf5027a742aea995326  connman.confd
+"

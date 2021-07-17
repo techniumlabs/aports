@@ -1,7 +1,7 @@
 # Contributor: Michał Polański <michal@polanski.me>
 # Maintainer: Michał Polański <michal@polanski.me>
 pkgname=cbonsai
-pkgver=1.0.4
+pkgver=1.2.1
 pkgrel=0
 pkgdesc="Grow bonsai trees in your terminal"
 url="https://gitlab.com/jallbrit/cbonsai"
@@ -20,4 +20,6 @@ package() {
 	make DESTDIR="$pkgdir" PREFIX=/usr install
 }
 
-sha512sums="3afe0180879b62dad20bdd63f5c08427bca620251a97616f492414debfa4c55d89d165d6fac1d35e3d703ff70b4e8581071514ed3534a348de1483b2e5cfe839  cbonsai-v1.0.4.tar.gz"
+sha512sums="
+f1d514852c634359459d930cd119eb8b03c5c6f64450baa0fcab3f440af87f06118ecfd0323f5b47338c741334cdc388835111a33a8a059891caca0d6605e89d  cbonsai-v1.2.1.tar.gz
+"

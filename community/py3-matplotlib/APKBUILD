@@ -1,13 +1,13 @@
 # Contributor: Isaac Dunham <ibid.ag@gmail.com>
-# Maintainer: Isaac Dunham <ibid.ag@gmail.com>
+# Maintainer:
 pkgname=py3-matplotlib
 _pyname=matplotlib
 pkgver=3.3.3
 pkgrel=1
 pkgdesc="Python3 library for plots"
 url="https://matplotlib.org"
-# mips blocked due to py3-numpy
-arch="all !mips !mips64"
+# mips64 blocked due to py3-numpy
+arch="all !mips64"
 license="Python-2.0"
 depends="
 	py3-cairo

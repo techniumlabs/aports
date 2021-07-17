@@ -1,12 +1,13 @@
 # Contributor: Bart Ribbers <bribbers@disroot.org>
 # Maintainer: Bart Ribbers <bribbers@disroot.org>
 pkgname=kontrast
-pkgver=21.04.0
+pkgver=21.04.3
 pkgrel=0
 pkgdesc="Tool to check contrast for colors that allows verifying that your colors are correctly accessible"
-# armhf: Blocked by qt5-qtdeclarative
-# s390x: Blocked by rust
-arch="all !armhf !s390x !mips64"
+# armhf blocked by qt5-qtdeclarative
+# s390x, mips64 and riscv64 blocked by polkit -> kdeclarative
+# riscv64 disabled due to missing rust in recursive dependency
+arch="all !armhf !s390x !mips64 !riscv64"
 url="https://invent.kde.org/accessibility/kontrast"
 license="GPL-3.0-or-later AND CC0-1.0"
 depends="kirigami2"
@@ -33,6 +34,8 @@ build() {
 }
 
 package() {
-	DESTDIR="$pkgdir" cmake --build build --target install
+	DESTDIR="$pkgdir" cmake --install build
 }
-sha512sums="0df076b365353b916206748801641805a674ac1a0420ce26f197a7083f77c70550a8728d4f5f6f98ae79e162bfb611f4ce4b4171897c002718785c77aa9a693e  kontrast-21.04.0.tar.xz"
+sha512sums="
+fc966e28e790d49e2c87d45c506a7cf5170115f6528821f8634ab2e767ba725b9c6934cdfec5a308c751ff1b83fc59bea31dc50a462a81d71f47652a8b974e2a  kontrast-21.04.3.tar.xz
+"

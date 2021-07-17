@@ -1,11 +1,11 @@
 # Contributor: Bart Ribbers <bribbers@disroot.org>
 # Maintainer: Bart Ribbers <bribbers@disroot.org>
 pkgname=konsole
-pkgver=21.04.0
+pkgver=21.04.3
 pkgrel=0
 # armhf blocked by qt5-qtdeclarative
-# s390x and mips64 blocked by various KDE frameworks
-arch="all !armhf !s390x !mips64"
+# s390x, mips64 and riscv64 blocked by polkit -> kio
+arch="all !armhf !s390x !mips64 !riscv64"
 url="https://kde.org/applications/system/konsole"
 pkgdesc="KDE's terminal emulator"
 license="GPL-2.0-only AND LGPL-2.1-or-later AND Unicode-DFS-2016"
@@ -62,4 +62,6 @@ package() {
 	DESTDIR="$pkgdir" cmake --install build
 }
 
-sha512sums="35cb9822c442bc3dcec0539451f2bd1672c27ea522a2dc412e7cffbd805497c58711a9035e2af3ba5cb804dc42da5563bb3a6017774d22000870bc9e7450402e  konsole-21.04.0.tar.xz"
+sha512sums="
+490271a51304d5a64111f6ae74422a6b3143a5349359e55af0845c04a6e6d405fadd1f300dc4d866b7730c0cb852bebfddbb33b0ca9e68d22f264e379d1868e8  konsole-21.04.3.tar.xz
+"

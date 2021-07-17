@@ -5,7 +5,7 @@
 
 pkgname=poppler-qt5
 _pkgname=poppler
-pkgver=21.05.0
+pkgver=21.07.0
 pkgrel=0
 pkgdesc="PDF rendering library based on xpdf 3.0"
 url="https://poppler.freedesktop.org/"
@@ -53,6 +53,7 @@ build() {
 		-DENABLE_QT5=ON \
 		-DCMAKE_CXX_FLAGS="$CXXFLAGS" \
 		-DCMAKE_C_FLAGS="$CFLAGS" \
+		-DENABLE_BOOST=OFF \
 		$CMAKE_CROSSOPTS .
 	make -C build
 }
@@ -62,4 +63,6 @@ package() {
 	make -C build/qt5 DESTDIR="$pkgdir" install
 }
 
-sha512sums="428f63a85fc8a227efebcd64ca7e89fec487fea07c93f9dd990fae343532547bcfec29a3288dd9ffce698cf994ccc2ce5055e4fa677ebceb216c1caaa3e0cdae  poppler-21.05.0.tar.xz"
+sha512sums="
+ce1d8a5dd4a300a24aa71aea4919262e108ce1717dee04863da41de0962e4c0067e9c703c190386bd66d9c4ef54d04513cc8509f4beaf76e996576912d2583e8  poppler-21.07.0.tar.xz
+"

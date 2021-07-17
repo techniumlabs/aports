@@ -1,11 +1,11 @@
 # Contributor: Bart Ribbers <bribbers@disroot.org>
 # Maintainer: Bart Ribbers <bribbers@disroot.org>
 pkgname=dragon
-pkgver=21.04.0
+pkgver=21.04.3
 pkgrel=0
 # armhf blocked by extra-cmake-modules
-# s390x blocked by kconfigwidgets
-arch="all !armhf !s390x !mips64"
+# s390x, mips64 and riscv64 blocked by polkit -> kio
+arch="all !armhf !s390x !mips64 !riscv64"
 url="https://kde.org/applications/multimedia/org.kde.dragonplayer"
 pkgdesc="A multimedia player where the focus is on simplicity, instead of features"
 license="GPL-2.0-only OR GPL-3.0-only"
@@ -48,7 +48,9 @@ check() {
 }
 
 package() {
-	DESTDIR="$pkgdir" cmake --build build --target install
+	DESTDIR="$pkgdir" cmake --install build
 }
 
-sha512sums="14ecc31213e38236bb1a1aebc754da7f4cc9b76b01a00362fe6f5ecc7ac13a33e02551d39bb447942ff6982be02e6ea78adf7d16d73d6ff47c981e1f3549b1b0  dragon-21.04.0.tar.xz"
+sha512sums="
+b3d55168fae08617f2733407f199e1389eb088a6f82d6d3acae52c434a2f9d100fc8a183d76654ce305eb95991f2b82d01eb0f76a443bac59ddfd0133b14389c  dragon-21.04.3.tar.xz
+"

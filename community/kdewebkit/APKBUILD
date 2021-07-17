@@ -1,15 +1,30 @@
 # Contributor: Bart Ribbers <bribbers@disroot.org>
 # Maintainer: Bart Ribbers <bribbers@disroot.org>
 pkgname=kdewebkit
-pkgver=5.82.0
+pkgver=5.84.0
 pkgrel=0
 pkgdesc="Integration of the HTML rendering engine WebKit"
-arch="all !armhf !s390x" # armhf blocked by extra-cmake-modules and s390x blocked by polkit
-arch="$arch !mips !mips64" # mips blocked by qt5-qtwebkit
+# armhf blocked by extra-cmake-modules
+# mips64 and riscv64 blocked by qt5-qtwebkit
+# s390x blocked by polkit -> kio
+arch="all !armhf !s390x !mips64 !riscv64" 
 url="https://community.kde.org/Frameworks"
 license="LGPL-2.1-or-later"
-depends_dev="qt5-qtbase-dev qt5-qtwebkit-dev kconfig-dev kcoreaddons-dev kio-dev kjobwidgets-dev kparts-dev kservice-dev kwallet-dev qt5-qttools-dev"
-makedepends="$depends_dev extra-cmake-modules"
+depends_dev="
+	kconfig-dev
+	kcoreaddons-dev
+	kio-dev
+	kjobwidgets-dev
+	kparts-dev
+	kservice-dev
+	kwallet-dev
+	qt5-qtbase-dev
+	qt5-qttools-dev
+	qt5-qtwebkit-dev
+	"
+makedepends="$depends_dev
+	extra-cmake-modules
+	"
 source="https://download.kde.org/stable/frameworks/${pkgver%.*}/portingAids/kdewebkit-$pkgver.tar.xz"
 subpackages="$pkgname-dev"
 
@@ -28,9 +43,9 @@ check() {
 
 
 package() {
-	DESTDIR="$pkgdir" cmake --build build --target install
+	DESTDIR="$pkgdir" cmake --install build
 }
 
 sha512sums="
-62963d5fcb0bf2de47916c5b66e1521e9dfe8862699ecc6b8ba693af291f16003886463d73cd13164c297643f1745565824c9bf424d1329ff56477720df208f0  kdewebkit-5.82.0.tar.xz
+af7e3854a2aabfd0b568520842dc378823909f23dc1933d3b201fd6d79700f7c9eb17eecb2efe7fe30155e78a0c8b4f3f4f1afc8bcb033fb50edff9a2e1aaed6  kdewebkit-5.84.0.tar.xz
 "

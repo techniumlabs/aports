@@ -1,7 +1,7 @@
 # Contributor: Tom Lebreux <me@tomlebreux.com>
 # Maintainer: Tom Lebreux <me@tomlebreux.com>
 pkgname=navidrome
-pkgver=0.42.1
+pkgver=0.44.1
 pkgrel=0
 pkgdesc="Modern Music Server and Streamer compatible with Subsonic/Airsonic"
 url="https://navidrome.org/"
@@ -28,6 +28,7 @@ build() {
 	# Prevents crash due to allocation failure
 	echo 'node-options=--max_old_space_size=3072' > ./ui/.npmrc
 	cd ./ui/
+	npm install
 	npm run build
 	cd ..
 
@@ -61,8 +62,8 @@ package() {
 }
 
 sha512sums="
-a6e883ba008cbff0336af5ff8b011e8474371774da8d25a720ee5c564a3ac8b6679af195d89eccbbfe7800337a6ec554a47b3ea22fd876323d1d370b56759e5c  navidrome-0.42.1.tar.gz
+db21e65e7f282199eabc87b2861b07ac0a4a9df955e5c583725974c9486b40edbda76a8f54f0cdff619f6e89831e4ba005eb9188bbcac17090705d433f18a002  navidrome-0.44.1.tar.gz
 d632f769ed4dd0cc1ddf937ed6b3115df538399f176cc5afb576f3129c305e7a0b2762b5d62968e2819ee4cd9c88552e5c821601f5fd5b32ce5925f3e92ce281  navidrome.initd
 e69ff79d0be237979c7faa28cc7d6467070c48fb8870a228d122622b8fb4d4cd3cdd58bd22090bec37478b8c4cec8d30db5928c2094ee60a32c40bc7c96d10a3  navidrome.confd
-73c580fa1218ee539338ff6a5faadf2b1c64065fc7476108ded1defc7c6bc8aac54a84c74db398d64bc860c074d8ced215495ffc701635667a3b2120f410f409  navidrome.toml
+41b3511fa96990ad48298e9a8802b092bfd26a0c2007af6786867d09946818cdec9aa8be66bb800a74430c96c9ed44b5b44fe0dd85246b7390153724262088a2  navidrome.toml
 "

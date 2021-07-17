@@ -11,7 +11,7 @@
 
 pkgname=hdf5
 pkgver=1.12.0
-pkgrel=0
+pkgrel=1
 pkgdesc="HDF5 is a data model, library, and file format for storing and managing data"
 url="https://www.hdfgroup.org/solutions/hdf5/"
 arch="all"
@@ -22,6 +22,13 @@ makedepends="cmake $depends_dev perl"
 subpackages="$pkgname-static $pkgname-dev $pkgname-doc"
 source="http://www.hdfgroup.org/ftp/HDF5/current18/src/hdf5-$pkgver.tar.bz2"
 source="https://support.hdfgroup.org/ftp/HDF5/releases/hdf5-${pkgver%.*}/hdf5-$pkgver/src/hdf5-$pkgver.tar.bz2"
+
+prepare() {
+	default_prepare
+
+	update_config_sub
+	update_config_guess
+}
 
 build() {
 	if [ "$CBUILD" != "$CHOST" ]; then
@@ -41,6 +48,7 @@ build() {
 		-DHDF5_ENABLE_Z_LIB_SUPPORT=ON \
 		-DHDF5_ENABLE_SZIP_SUPPORT=OFF \
 		-DHDF5_ENABLE_SZIP_ENCODING=OFF \
+		-DDEFAULT_API_VERSION=v18 \
 		${CMAKE_CROSSOPTS} .
 
 	# But don’t build with it, it’s quite broken
@@ -56,7 +64,8 @@ build() {
 		--disable-fortran \
 		--with-pic \
 		--with-zlib \
-		--without-szlib
+		--without-szlib \
+		--with-default-api-version=v18
 	make
 }
 

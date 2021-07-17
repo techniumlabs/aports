@@ -1,12 +1,12 @@
 # Contributor: Bart Ribbers <bribbers@disroot.org>
 # Maintainer: Bart Ribbers <bribbers@disroot.org>
 pkgname=kwallet-pam
-pkgver=5.21.5
+pkgver=5.22.3
 pkgrel=0
 pkgdesc="KWallet PAM integration"
 # armhf blocked by extra-cmake-modules
-# s390x blocked by kwallet
-arch="all !armhf !s390x !mips64"
+# s390x, mips64 and riscv64 blocked by polkit -> kwallet
+arch="all !armhf !s390x !mips64 !riscv64"
 url="https://kde.org/plasma-desktop/"
 license="LGPL-2.1-or-later"
 makedepends="
@@ -37,5 +37,5 @@ package() {
 }
 
 sha512sums="
-4dab0ac4500c6ec01fef71e2197e59afb39c318dfe1e5727832fed2137b5d961bb1aad9c52d356346794ac1dd9e9451f507032aab29028806d9c04c3c566738d  kwallet-pam-5.21.5.tar.xz
+642306eb23cd823e11412c5ba7502ae5a2e15fe419b6b540155bb67aebefabad66923b99b371b89ae20fa3ae894ddf5d3c09b6df55e0fea44658bbc7c8a8ad22  kwallet-pam-5.22.3.tar.xz
 "

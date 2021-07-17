@@ -1,9 +1,11 @@
 # Contributor: Bart Ribbers <bribbers@disroot.org>
 # Maintainer: Bart Ribbers <bribbers@disroot.org>
 pkgname=kio-gdrive
-pkgver=21.04.0
+pkgver=21.04.3
 pkgrel=0
-arch="all !ppc64le !s390x !armhf !mips !mips64" # Blocked by libkgapi -> qt5-qtwebengine
+# armhf blocked by extra-cmake-modules
+# ppc64le, s390x, mips64 and riscv64 blocked by qt5-qtwebengine -> libkgapi
+arch="all !armhf !ppc64le !s390x !mips64 !riscv64"
 url="https://community.kde.org/KIO_GDrive"
 pkgdesc="KIO Slave to access Google Drive"
 license="GPL-2.0-or-later"
@@ -39,7 +41,9 @@ check() {
 }
 
 package() {
-	DESTDIR="$pkgdir" cmake --build build --target install
+	DESTDIR="$pkgdir" cmake --install build
 }
 
-sha512sums="d7be8f0c09c677db15d48596b898c0565e349ca2af165d0f82e48472682e5a4cddc2334d5f36d430ea0fa5a1b29f00085036c1d1efac988c80301e72eda7ca04  kio-gdrive-21.04.0.tar.xz"
+sha512sums="
+3e5ade6573375662161160b963120d4e09e315cf6318a47c0175f48353e5cfb3596e3e3ff2544817a5539a1d22f20370404ae5de1494227c77a6b565476182db  kio-gdrive-21.04.3.tar.xz
+"

@@ -1,11 +1,12 @@
 # Contributor: Curt Tilmes <Curt.Tilmes@nasa.gov>
 # Maintainer: Curt Tilmes <Curt.Tilmes@nasa.gov>
 pkgname=rakudo
-pkgver=2021.04
+pkgver=2021.06
 pkgrel=0
 pkgdesc="A compiler for the Raku programming language"
 url="https://rakudo.org/"
-arch="all !x86 !armhf !armv7 !s390x !mips !mips64"
+# riscv64 blocked by moarvm
+arch="all !x86 !armhf !armv7 !s390x !mips64 !riscv64"
 license="Artistic-2.0"
 depends="nqp libffi"
 makedepends="perl-utils moarvm-dev libffi-dev"
@@ -52,4 +53,4 @@ doc() {
 	done
 }
 
-sha512sums="c51da0912885c897a9c78b1c96132936d0e76eb118f2dc933df83755b231fea13c11e2b959f5505576c0a295f1428db6865bc9f0ba7fb98b6abd71452bc2b322  rakudo-2021.04.tar.gz"
+sha512sums="1141979c63a5128919d24c4660cff8011fade12487bd7f437dbaeb6d121ab2d93e42022227ad47d6d840ddb12118c9f1cde8285d87677ff88b135c4e9f079ecc  rakudo-2021.06.tar.gz"

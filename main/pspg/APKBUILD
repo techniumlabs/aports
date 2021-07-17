@@ -1,15 +1,15 @@
 # Contributor: Jakub Jirutka <jakub@jirutka.cz>
 # Maintainer: Jakub Jirutka <jakub@jirutka.cz>
 pkgname=pspg
-pkgver=4.6.3
+pkgver=5.1.0
 pkgrel=0
 pkgdesc="A unix pager optimized for psql"
 url="https://github.com/okbob/pspg"
 arch="all"
 options="!check" # there is no tests
 license="BSD-2-Clause"
-makedepends="automake autoconf ncurses-dev readline-dev"
-source="$pkgname-$pkgver.tar.gz::https://github.com/okbob/pspg/archive/$pkgver.tar.gz"
+makedepends="automake autoconf postgresql-dev ncurses-dev readline-dev"
+source="https://github.com/okbob/pspg/archive/$pkgver/$pkgname-$pkgver.tar.gz"
 
 prepare() {
 	default_prepare
@@ -30,4 +30,6 @@ package() {
 	make DESTDIR="$pkgdir" install
 }
 
-sha512sums="49eb347524d11bb243763ef906049f8cb386b154a9c29a5608a3f569d28e990505d89a61097b7c5f4f2dc895d17b459baeafea9006f16594a58e97b493956fb6  pspg-4.6.3.tar.gz"
+sha512sums="
+8d479216380667d13289d1e78888448b3624e0f0eeb70349fe870979764a74b15a309a0112d632d24312e01e2498f3d7d4570787857c861e1c27ab35a6fa5659  pspg-5.1.0.tar.gz
+"

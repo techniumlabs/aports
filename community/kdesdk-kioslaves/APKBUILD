@@ -1,13 +1,21 @@
 # Contributor: Bart Ribbers <bribbers@disroot.org>
 # Maintainer: Bart Ribbers <bribbers@disroot.org>
 pkgname=kdesdk-kioslaves
-pkgver=21.04.0
+pkgver=21.04.3
 pkgrel=0
-arch="all !armhf !mips !mips64 !s390x"
+# armhf blocked by extra-cmake-modules
+# mips64, s390x and riscv64 blocked by polkit -> kio
+arch="all !armhf !mips64 !s390x !riscv64"
 url="https://kde.org/applications/development"
 pkgdesc="KIO-Slaves"
 license="GPL-2.0-or-later"
-makedepends="extra-cmake-modules qt5-qtbase-dev ki18n-dev kio-dev perl-dev"
+makedepends="
+	extra-cmake-modules
+	ki18n-dev
+	kio-dev
+	perl-dev
+	qt5-qtbase-dev
+	"
 source="https://download.kde.org/stable/release-service/$pkgver/src/kdesdk-kioslaves-$pkgver.tar.xz"
 subpackages="$pkgname-lang"
 options="!check" # No tests
@@ -26,7 +34,9 @@ check() {
 }
 
 package() {
-	DESTDIR="$pkgdir" cmake --build build --target install
+	DESTDIR="$pkgdir" cmake --install build
 }
 
-sha512sums="defb0e30d3c3c7676dd802f682b4f2caa3504ca4b32829e032929b149e34e2a7b31b262d7614d5743b08dd935c7ecc67c286bd3e0e41386ef0fead5203b498f2  kdesdk-kioslaves-21.04.0.tar.xz"
+sha512sums="
+f0e6354b1bf5fa0dc851e7a90b71a548790903484dcbb7b31b419d33e203ba7f6e8a632ba96c3131a4996b0553bce66d5ba945ade6820c78d7ae6a7495460a3f  kdesdk-kioslaves-21.04.3.tar.xz
+"

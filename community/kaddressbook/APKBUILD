@@ -1,11 +1,11 @@
 # Contributor: Bart Ribbers <bribbers@disroot.org>
 # Maintainer: Bart Ribbers <bribbers@disroot.org>
 pkgname=kaddressbook
-pkgver=21.04.0
-pkgrel=1
+pkgver=21.04.3
+pkgrel=0
 # armhf blocked by extra-cmake-modules
-# ppc64le, s390x and mips blocked by qt5-qtwebengine
-arch="all !armhf !ppc64le !s390x !mips !mips64"
+# ppc64le, s390x, mips64 and riscv64 blocked by qt5-qtwebengine
+arch="all !armhf !ppc64le !s390x !mips64 !riscv64"
 url="https://kontact.kde.org/components/kaddressbook.html"
 pkgdesc="Address Book application to manage your contacts"
 license="GPL-2.0-or-later AND LGPL-2.0-or-later"
@@ -49,4 +49,6 @@ check() {
 package() {
 	DESTDIR="$pkgdir" cmake --install build
 }
-sha512sums="991a37c19a8fe42479dafd8039da4607c6143a6fa3ca7af37a9ba345171df55dad4c5386ba6bd60168aa17b7c5f48239df8a2f267ec8694dcb0b31d6cd32838f  kaddressbook-21.04.0.tar.xz"
+sha512sums="
+8325642b057df2489bde527be71691ce54668e13a3e815727c77051f6e7d1b76e7a4195b6f363c78d7fe6bd4f67af61364810b2fe4cfae62988d383f86fc7a5d  kaddressbook-21.04.3.tar.xz
+"

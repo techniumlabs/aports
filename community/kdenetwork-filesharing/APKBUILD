@@ -1,11 +1,11 @@
 # Contributor: Bart Ribbers <bribbers@disroot.org>
 # Maintainer: Bart Ribbers <bribbers@disroot.org>
 pkgname=kdenetwork-filesharing
-pkgver=21.04.0
+pkgver=21.04.3
 pkgrel=0
 # armhf blocked by extra-cmake-modules
-# s390x blocked by kio
-arch="all !armhf !s390x !mips64"
+# armhf, s390x, mips64 and riscv64 blocked by polkit -> kio
+arch="all !armhf !s390x !mips64 !riscv64"
 url="https://www.kde.org/applications/internet/"
 pkgdesc="Properties dialog plugin to share a directory with the local network"
 license="GPL-2.0-only OR GPL-3.0-only"
@@ -40,7 +40,9 @@ check() {
 }
 
 package() {
-	DESTDIR="$pkgdir" cmake --build build --target install
+	DESTDIR="$pkgdir" cmake --install build
 }
 
-sha512sums="1694adec76d49d97e3304f8a8d2707920bc982a7894cc82d4d12720a6baba4298d870c0aeee674d98b697278b225e6feb83ac634b13554afe3890f19b62209ae  kdenetwork-filesharing-21.04.0.tar.xz"
+sha512sums="
+7b8b0d0118829d64d46acfea666a4c274d5c6e7f825624cf02cf7e74558af1f2f2d152cca676ce0da56ed01cb74511c1b20c3940118f2dda129b40551e2ce4c7  kdenetwork-filesharing-21.04.3.tar.xz
+"

@@ -1,7 +1,7 @@
 # Contributor: Oleg Titov <oleg.titov@gmail.com>
 # Maintainer: Oleg Titov <oleg.titov@gmail.com>
 pkgname=singularity
-pkgver=3.7.3
+pkgver=3.8.0
 pkgrel=0
 pkgdesc="Application containers focused on reproducibility for scientific computing and HPC world."
 url="https://www.sylabs.io/singularity/"
@@ -27,6 +27,8 @@ source="https://github.com/hpcng/singularity/releases/download/v$pkgver/singular
 builddir="$srcdir/src/github.com/hpcng/$pkgname"
 
 # secfixes:
+#   3.7.4-r0:
+#     - CVE-2021-32635
 #   3.7.3-r0:
 #     - CVE-2021-29136
 #   3.6.4-r0:
@@ -45,7 +47,7 @@ prepare() {
 	export GOPATH="$srcdir"
 
 	mkdir -p "$(dirname $builddir)"
-	mv "$srcdir"/$pkgname "$builddir"/
+	mv "$srcdir"/$pkgname-$pkgver "$builddir"/
 
 	echo "$pkgver" > "$builddir"/VERSION
 	default_prepare
@@ -75,4 +77,6 @@ package() {
 		"$pkgdir"/usr/share/bash-completion/completions
 }
 
-sha512sums="56e797eb29a2fafaf6ccd730fb8cc9e35713020dacb4d19be02a7204272894360b0d254bd8066d9f14181b935f7179effbac2dfa776b2ff3e0e201388c372836  singularity-3.7.3.tar.gz"
+sha512sums="
+b1e3dc673fbf58d8fa13bea4c67114d1abf0f17e86f1958f585795374107f6b18dd854899b4a574dc3e4d8d4abf4177c26e63c7c3436ae1d35c66331f1630272  singularity-3.8.0.tar.gz
+"

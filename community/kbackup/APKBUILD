@@ -1,11 +1,11 @@
 # Contributor: Bart Ribbers <bribbers@disroot.org>
 # Maintainer: Bart Ribbers <bribbers@disroot.org>
 pkgname=kbackup
-pkgver=21.04.0
+pkgver=21.04.3
 pkgrel=0
 # armhf blocked by extra-cmake-modules
-# s390x blocked by kio
-arch="all !armhf !s390x !mips64"
+# s390x, mips64 and riscv64 blocked by polkit -> kio
+arch="all !armhf !s390x !mips64 !riscv64"
 url="https://kde.org/applications/utilities/org.kde.kbackup"
 pkgdesc="An application which lets you back up your data in a simple, user friendly way"
 license="GPL-2.0-only"
@@ -40,7 +40,9 @@ check() {
 }
 
 package() {
-	DESTDIR="$pkgdir" cmake --build build --target install
+	DESTDIR="$pkgdir" cmake --install build
 }
 
-sha512sums="f8c0422ea3d29df2dfd74ab274184194457136c2042b798e100b1d9a0f3b7bec958f23c5024ac7455775dce8aaa206ae7238a19fc063e3df5b25e42707eac75b  kbackup-21.04.0.tar.xz"
+sha512sums="
+749c7611806ec78542cf1f6b56229121d584ef492646fce7a3d50b85024520701e9b61a08b56b3979326bfe823130665552d79ef01dc3c2b95138a6fdb49e8dd  kbackup-21.04.3.tar.xz
+"

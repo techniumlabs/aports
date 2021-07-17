@@ -1,12 +1,12 @@
 # Contributor: Bart Ribbers <bribbers@disroot.org>
 # Maintainer: Bart Ribbers <bribbers@disroot.org>
 pkgname=polkit-kde-agent-1
-pkgver=5.21.5
+pkgver=5.22.3
 pkgrel=0
 pkgdesc="Daemon providing a polkit authentication UI for KDE"
 # armhf blocked by extra-cmake-modules
-# mips, mips64, s390x blocked by polkit-qt-1
-arch="all !armhf !s390x !mips !mips64"
+# mips64, s390x, and riscv64 blocked by polkit -> polkit-qt-1
+arch="all !armhf !s390x !mips64 !riscv64"
 url="https://kde.org/plasma-desktop/"
 license="GPL-2.0-or-later"
 depends="polkit-elogind"
@@ -47,5 +47,5 @@ package() {
 }
 
 sha512sums="
-840e63d962054e6be2204f0ca5142249338050a1d3df3db66667275ae3fb1930bd3d9f4ea37b85feee73b33822c8b34015028b981d7a100afeaab793f1525ea9  polkit-kde-agent-1-5.21.5.tar.xz
+d9c8955e0bdae3e72a47c0fc261983c9957e2577644464a1c6f58cd23f76f4946201aa9a6ef6fbf5d9421ae181ad8cd16f32ad19515928e93c36328c4d2e3161  polkit-kde-agent-1-5.22.3.tar.xz
 "

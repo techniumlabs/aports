@@ -1,7 +1,7 @@
 # Contributor: Bart Ribbers <bribbers@disroot.org>
 # Maintainer: Bart Ribbers <bribbers@disroot.org>
 pkgname=kcompletion
-pkgver=5.82.0
+pkgver=5.84.0
 pkgrel=0
 pkgdesc="Text completion helpers and widgets"
 arch="all !armhf" # armhf blocked by extra-cmake-modules
@@ -38,5 +38,5 @@ package() {
 	DESTDIR="$pkgdir" cmake --install build
 }
 sha512sums="
-19b76a46d09005ed5ab5b66ca48403f4bb0baade2b2f937ad6afdf5ef92adf7c94330502adc3aae29bb88fc5848469580319cbf4bba4bfa128537f4541fd9d24  kcompletion-5.82.0.tar.xz
+fd30f997079d17719534969addaa96d99b21774fc1310adfb8a07720b3ddeec179a98a8bf3162d813fff46dcf429e712d6122eaca0e0afe00befe0e32da22ed0  kcompletion-5.84.0.tar.xz
 "

@@ -2,7 +2,7 @@
 # Maintainer: Francesco Colista <fcolista@alpinelinux.org>
 pkgname=consul-replicate
 pkgver=0.4.0
-pkgrel=3
+pkgrel=4
 pkgdesc="Consul cross-DC KV replication daemon"
 url="https://www.consul.io/"
 arch="all"
@@ -19,7 +19,7 @@ build() {
 	ln -s "$builddir" "$builddir/src/github.com/hashicorp/$pkgname"
 	cd "$builddir/src/github.com/hashicorp/$pkgname"
 
-	GOPATH="$builddir" go build -v -o bin/$pkgname
+	GOPATH="$builddir" GO111MODULE=off go build -v -o bin/$pkgname
 }
 
 package() {

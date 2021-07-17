@@ -1,7 +1,7 @@
 # Contributor: Bart Ribbers <bribbers@disroot.org>
 # Maintainer: Bart Ribbers <bribbers@disroot.org>
 pkgname=kwayland-server
-pkgver=5.21.5
+pkgver=5.22.3
 pkgrel=0
 pkgdesc="Wayland Server Components built on KDE Frameworks"
 arch="all !armhf" # armhf blocked by qt5-qtdeclarative
@@ -41,5 +41,5 @@ package() {
 	DESTDIR="$pkgdir" cmake --install build
 }
 sha512sums="
-ff02ee6b1fb7cd193b49a4cbcf98a6b3ab6262e9da4211d91b764d8aaaa858c17863fccee19b649d2966c3a2721ca3b7c55f8a660a91d9eb56b1eec11d0766f5  kwayland-server-5.21.5.tar.xz
+cbc9e283f68c66e28d449ad057b6ad722f98be9e60c2755353ca35344bb619939ead9c90c25d57d45bf5937007987ccde748ac5af2f77535397689cbf6c8d6b1  kwayland-server-5.22.3.tar.xz
 "

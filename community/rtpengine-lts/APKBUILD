@@ -5,7 +5,7 @@ _ver=9.0.1.10
 _rel=0
 
 # kernel version
-_kver=5.10.36
+_kver=5.10.50
 _krel=0
 
 _kpkgver="$_kver-r$_krel"
@@ -28,7 +28,8 @@ pkgrel=$(($_rel + $_krel))
 
 pkgdesc="Kernel module for rtpengine"
 url="https://github.com/sipwise/rtpengine"
-arch="all !armhf"
+# armhf and riscv64 blocked by linux-lts
+arch="all !armhf !riscv64"
 license="GPL-3.0-only"
 makedepends="linux-$_flavor-dev=$_kpkgver"
 install_if="rtpengine linux-$_flavor=$_kpkgver"

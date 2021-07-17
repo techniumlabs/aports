@@ -1,10 +1,13 @@
 # Contributor: Bart Ribbers <bribbers@disroot.org>
 # Maintainer: Bart Ribbers <bribbers@disroot.org>
 pkgname=incidenceeditor
-pkgver=21.04.0
+pkgver=21.04.3
 pkgrel=0
 pkgdesc="KDE PIM incidence editor"
-arch="all !ppc64le !s390x !armhf !mips !mips64" # Limited by kmailtransport -> libkgapi -> qt5-qtwebengine
+# armhf blocked by extra-cmake-modules
+# ppc64le blocked by kmailtransport -> qt5-qtwebengine
+# s390x, mips64 and riscv64 blocked by polkit -> kio
+arch="all !armhf !ppc64le !s390x !mips64 !riscv64"
 url="https://kontact.kde.org/"
 license="LGPL-2.0-or-later AND GPL-2.0-or-later"
 depends_dev="
@@ -50,4 +53,6 @@ check() {
 package() {
 	DESTDIR="$pkgdir" cmake --install build
 }
-sha512sums="ec31ee5d209381d05a8a376792a5d16c3f9c59c8b1b120a2ed3f0c6bb76c55533ec5a72ec218a837244b16ab156cb98efcf2e9bb75e59a9ff41f01709b2589c1  incidenceeditor-21.04.0.tar.xz"
+sha512sums="
+65dc9257d0d6c238093b59cdaf76512938aa2aaf795e0a8e17c1c64afd75ccbb37941178a9295fcf240791e8daa9ca187184dcfd68294bd553d4ed5b9a9202ff  incidenceeditor-21.04.3.tar.xz
+"

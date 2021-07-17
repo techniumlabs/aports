@@ -1,7 +1,7 @@
 # Contributor: Bart Ribbers <bribbers@disroot.org>
 # Maintainer: Bart Ribbers <bribbers@disroot.org>
 pkgname=kwindowsystem
-pkgver=5.82.0
+pkgver=5.84.0
 pkgrel=0
 pkgdesc="Access to the windowing system"
 arch="all !armhf" # armhf blocked by extra-cmake-modules
@@ -52,5 +52,5 @@ package() {
 }
 
 sha512sums="
-fd823e718e439d40e85146195d03c6868c99d62cc9495d5733157db081f29884cd9a9d11421d81c47fe4cc5661107a1b52ff55dc9e0a00565682f1d7845a2e68  kwindowsystem-5.82.0.tar.xz
+9a849049e7480f6d3f6e1fdbfa540b6c99c9a225afff71ba31152cf4dd79b2c56eadf68b2992c3258f76568f89ab595c494d0baec4a5efff672f92983ec534bd  kwindowsystem-5.84.0.tar.xz
 "

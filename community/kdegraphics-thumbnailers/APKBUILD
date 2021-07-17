@@ -1,11 +1,11 @@
 # Contributor: Bart Ribbers <bribbers@disroot.org>
 # Maintainer: Bart Ribbers <bribbers@disroot.org>
 pkgname=kdegraphics-thumbnailers
-pkgver=21.04.0
+pkgver=21.04.3
 pkgrel=0
 # armhf blocked by extra-cmake-modules
-# s390x blocked by kio
-arch="all !armhf !s390x !mips64"
+# s390x and riscv64 blocked by kio -> polkit
+arch="all !armhf !s390x !mips64 !riscv64"
 pkgdesc="Thumbnailers for various graphics file formats"
 url="https://www.kde.org/applications/graphics/"
 license="GPL-2.0-or-later AND LGPL-2.0-or-later"
@@ -29,7 +29,9 @@ build() {
 }
 
 package() {
-	DESTDIR="$pkgdir" cmake --build build --target install
+	DESTDIR="$pkgdir" cmake --install build
 }
 
-sha512sums="7eaab438a2e86e8b890203726f1f83ecc1f1a9b59ea759696a94983d9b977e4197d2f0db6ca31ea0e0d8bf653eb5d12fcdc9fc3f4f0393c82080a35005991823  kdegraphics-thumbnailers-21.04.0.tar.xz"
+sha512sums="
+3534c79f21d7f61ddb15a59ca08c22cab335c478e00c7a1dd0190c7e0ede69abe21c0ff795f39ad6459bbbc7b7589268511d668a0be3a28c508e252bbfc26823  kdegraphics-thumbnailers-21.04.3.tar.xz
+"

@@ -1,11 +1,12 @@
 # Contributor: Holger Jaekel <holger.jaekel@gmx.de>
 # Maintainer: Holger Jaekel <holger.jaekel@gmx.de>
 pkgname=py3-rasterio
-pkgver=1.2.3
+pkgver=1.2.6
 pkgrel=0
 pkgdesc="Fast and direct raster I/O for use with Numpy and SciPy"
 url="https://pypi.python.org/pypi/rasterio"
-arch="all !s390x !x86 !armhf !armv7 !mips !mips64"
+# missing openjdk8 on riscv64
+arch="all !s390x !x86 !armhf !armv7 !mips !mips64 !riscv64"
 license="BSD-3-Clause"
 depends="
 	py3-affine
@@ -27,6 +28,7 @@ makedepends="
 	"
 checkdepends="
 	pytest
+	py3-pip
 	py3-hypothesis
 	py3-sphinx
 	py3-shapely
@@ -49,5 +51,5 @@ package() {
 }
 
 sha512sums="
-cd3b0c63902e5fb8441696e4efbce07f74d6652a3ed0b7f824da50c2880328bcda6e567caacb8c5590d71ddfe524a5934909eef4bdb7663e352019dcb16d81a8  rasterio-1.2.3.tar.gz
+a220c93beae892734cb62bd0bad9f33f5af92ba1fd4362dc4cc8b6aeb236dbc0431f07123894c2d8dbaa20b24ce8b6647abda87d0ec1415c64d11fb9dc0e2e4e  rasterio-1.2.6.tar.gz
 "

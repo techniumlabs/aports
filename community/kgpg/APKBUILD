@@ -1,17 +1,38 @@
 # Contributor: Bart Ribbers <bribbers@disroot.org>
 # Maintainer: Bart Ribbers <bribbers@disroot.org>
 pkgname=kgpg
-pkgver=21.04.0
+pkgver=21.04.3
 pkgrel=0
-arch="all !armhf !s390x !mips64" # kio, kiconthemes, kxmlgui, akonadi, kiconthemes
+# armhf blocked by extra-cmake-modules
+# s390x, mips64 and riscv64 blocked by polkit -> kio
+# ppc64le blocked by qt5-qtwebengine -> kaccounts-integration
+arch="all !armhf !s390x !mips64 !riscv64 !ppc64le"
 url="https://kde.org/applications/utilities/org.kde.kgpg"
 pkgdesc="A simple interface for GnuPG, a powerful encryption utility"
 license="GPL-2.0-or-later"
-makedepends="extra-cmake-modules qt5-qtbase-dev karchive-dev kdoctools-dev
-	kcodecs-dev kcoreaddons-dev kcrash-dev kdbusaddons-dev ki18n-dev
-	kiconthemes-dev kjobwidgets-dev kio-dev knotifications-dev kservice-dev
-	ktextwidgets-dev kxmlgui-dev kwidgetsaddons-dev kwindowsystem-dev
-	akonadi-contacts-dev kcontacts-dev gpgme-dev"
+makedepends="
+	akonadi-contacts-dev
+	extra-cmake-modules
+	gpgme-dev
+	karchive-dev
+	kcodecs-dev
+	kcontacts-dev
+	kcoreaddons-dev
+	kcrash-dev
+	kdbusaddons-dev
+	kdoctools-dev
+	ki18n-dev
+	kiconthemes-dev
+	kio-dev
+	kjobwidgets-dev
+	knotifications-dev
+	kservice-dev
+	ktextwidgets-dev
+	kwidgetsaddons-dev
+	kwindowsystem-dev
+	kxmlgui-dev
+	qt5-qtbase-dev
+	"
 source="https://download.kde.org/stable/release-service/$pkgver/src/kgpg-$pkgver.tar.xz"
 subpackages="$pkgname-doc $pkgname-lang"
 
@@ -31,7 +52,9 @@ check() {
 }
 
 package() {
-	DESTDIR="$pkgdir" cmake --build build --target install
+	DESTDIR="$pkgdir" cmake --install build
 }
 
-sha512sums="2e3417284806b2422d235435778674302b3b515c67c9cf53b56b3bf2d9a883093334e360ee04d2524269bf9bdb4bf437cf0e0104bef78c37a7650cac16b1994d  kgpg-21.04.0.tar.xz"
+sha512sums="
+ec59b8c4286e3fc48f4dffa585fc2fcb03c41d0aeaea1da7a861c70b181d84e33c4df0fb5862a2cbf377dac4d9eb6d8b58e817210f663d57e2c704e39dabb65a  kgpg-21.04.3.tar.xz
+"

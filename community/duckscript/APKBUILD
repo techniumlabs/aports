@@ -1,7 +1,7 @@
 # Contributor: Jakub Jirutka <jakub@jirutka.cz>
 # Maintainer: Jakub Jirutka <jakub@jirutka.cz>
 pkgname=duckscript
-pkgver=0.8.1
+pkgver=0.8.3
 pkgrel=0
 pkgdesc="Simple, extendable and embeddable scripting language"
 url="https://sagiegurari.github.io/duckscript/"
@@ -25,4 +25,6 @@ package() {
 	rm "$pkgdir"/usr/.crates*
 }
 
-sha512sums="2cfffbe886884da80b76bc2fa90dcddfa382409b21f85e8c1c80df9557d5418c76218adaa6482ae62cff0444ad2203a458e6a0f88bcba753b985226c16a7b2cf  duckscript-0.8.1.tar.gz"
+sha512sums="
+96885a9d38a2df01df5fd1781d7daa07d46f5f48030caa4085e4f8745cac56340cf99d3478b839b04faf0d0b9fdccb1819bc3c512158d8026593d35c52a3982f  duckscript-0.8.3.tar.gz
+"

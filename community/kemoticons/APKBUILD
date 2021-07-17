@@ -1,7 +1,7 @@
 # Contributor: Bart Ribbers <bribbers@disroot.org>
 # Maintainer: Bart Ribbers <bribbers@disroot.org>
 pkgname=kemoticons
-pkgver=5.82.0
+pkgver=5.84.0
 pkgrel=0
 pkgdesc="Support for emoticons and emoticons themes"
 arch="all !armhf"
@@ -31,5 +31,5 @@ package() {
 	DESTDIR="$pkgdir" cmake --build build --target install
 }
 sha512sums="
-c3c3813613891e23db9b5605de6dcfdf3e5f973e162d27d37e907b60d49bfc3ba99743534d3749dad6a67217e44220fcf52c880563da82dc465eb10536ea40d7  kemoticons-5.82.0.tar.xz
+e3019fd7565a36021d7aa6c6b904779d4f897498eb49bb3b805afcaec7c27974355e4cec2e63dcb054ca3cd828496337deff6fdeeb28e632a5f7a61ecc7dd9ff  kemoticons-5.84.0.tar.xz
 "

@@ -1,13 +1,42 @@
 # Contributor: Bart Ribbers <bribbers@disroot.org>
 # Maintainer: Bart Ribbers <bribbers@disroot.org>
 pkgname=kmail-account-wizard
-pkgver=21.04.0
+pkgver=21.04.3
 pkgrel=0
-arch="all !ppc64le !s390x !armhf !mips !mips64" # Limited by kmailtransport -> libkgapi -> qt5-qtwebengine
+# armhf blocked by extra-cmake-modules
+# ppc64le, s390x, mips64 and riscv64 blocked by qt5-qtwebengine -> kmailtransport
+arch="all !armhf !ppc64le !s390x !mips64 !riscv64"
 url="https://kontact.kde.org/"
 pkgdesc="KMail account wizard"
 license="GPL-2.0-or-later AND LGPL-2.0-or-later AND GFDL-1.2-only"
-makedepends="extra-cmake-modules qt5-qtbase-dev kwallet-dev kcmutils-dev knotifyconfig-dev kconfig-dev kservice-dev kdbusaddons-dev kdoctools-dev ktexteditor-dev kcodecs-dev kcrash-dev knotifications-dev akonadi-dev kidentitymanagement-dev kldap-dev kmailtransport-dev pimcommon-dev libkdepim-dev libkleo-dev kimap-dev akonadi-mime-dev kross-dev knewstuff-dev gpgme-dev shared-mime-info"
+makedepends="
+	akonadi-dev
+	akonadi-mime-dev
+	extra-cmake-modules
+	gpgme-dev
+	kcmutils-dev
+	kcodecs-dev
+	kconfig-dev
+	kcrash-dev
+	kdbusaddons-dev
+	kdoctools-dev
+	kidentitymanagement-dev
+	kimap-dev
+	kldap-dev
+	kmailtransport-dev
+	knewstuff-dev
+	knotifications-dev
+	knotifyconfig-dev
+	kross-dev
+	kservice-dev
+	ktexteditor-dev
+	kwallet-dev
+	libkdepim-dev
+	libkleo-dev
+	pimcommon-dev
+	qt5-qtbase-dev
+	shared-mime-info
+	"
 source="https://download.kde.org/stable/release-service/$pkgver/src/kmail-account-wizard-$pkgver.tar.xz"
 subpackages="$pkgname-lang"
 
@@ -25,7 +54,9 @@ check() {
 }
 
 package() {
-	DESTDIR="$pkgdir" cmake --build build --target install
+	DESTDIR="$pkgdir" cmake --install build
 }
 
-sha512sums="d3186c79356ff573ce6d3313296f62534c4e684b16f949649fb04d31cd37bf026c02df1584cfc75964890066a11e5c625985d95d202da5934a7c4624f498581e  kmail-account-wizard-21.04.0.tar.xz"
+sha512sums="
+075131a68dd02d61311107a8e3050044e095188b52915f493a2038fa384855de22823aca284f3aa856b388bf1acc03df2fcc3e4700581656925c2f079aaf3bc6  kmail-account-wizard-21.04.3.tar.xz
+"

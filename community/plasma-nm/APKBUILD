@@ -1,12 +1,12 @@
 # Contributor: Bart Ribbers <bribbers@disroot.org>
 # Maintainer: Bart Ribbers <bribbers@disroot.org>
 pkgname=plasma-nm
-pkgver=5.21.5
+pkgver=5.22.3
 pkgrel=0
 pkgdesc="Plasma applet written in QML for managing network connections"
 # armhf blocked by qt5-qtdeclarative
-# s390x, mips64 blocked by plasma-framework
-arch="all !armhf !s390x !mips64"
+# s390x, mips64 and riscv64 blocked by polkit -> plasma-framework
+arch="all !armhf !s390x !mips64 !riscv64"
 url="https://kde.org/plasma-desktop/"
 license="(LGPL-2.1-only OR LGPL-3.0-only) AND LGPL-2.0-or-later"
 depends="kirigami2 networkmanager"
@@ -64,16 +64,10 @@ package() {
 mobile() {
 	pkgdesc="$pkgdesc (mobile KCM's)"
 
-	mkdir -p \
-		"$subpkgdir"/usr/lib/qt5/plugins \
-		"$subpkgdir"/usr/share/kservices5
-
-	mv "$pkgdir"/usr/share/kpackage "$subpkgdir"/usr/share/
-	mv "$pkgdir"/usr/lib/qt5/plugins/kcms "$subpkgdir"/usr/lib/qt5/plugins
-	mv \
-		"$pkgdir"/usr/share/kservices5/wifisettings.desktop \
-		"$subpkgdir"/usr/share/kservices5/
+	amove usr/share/kpackage
+	amove usr/lib/qt5/plugins/kcms
+	amove usr/share/kservices5/wifisettings.desktop
 }
 sha512sums="
-ac074e50d5ee3be99bab515b02522e391b14936c1c8152ca067c7513af7a8e8b81cb55ab9b412ca703554f3e35fc9392368159c9872d8c372017089a4a65e3fa  plasma-nm-5.21.5.tar.xz
+eb70b1291560634b990b442e4a9d72bda0b90c14126b003efe5df8e952621a98dafdfe18bc48e3f2bc153f1e3fbf9e36f5e8982225a3c4fae6e41e48e7fde51f  plasma-nm-5.22.3.tar.xz
 "

@@ -1,12 +1,12 @@
 # Contributor: Bart Ribbers <bribbers@disroot.org>
 # Maintainer: Bart Ribbers <bribbers@disroot.org>
 pkgname=libksysguard
-pkgver=5.21.5
+pkgver=5.22.3
 pkgrel=0
 pkgdesc="KDE system monitor library"
 # armhf blocked by extra-cmake-modules
-# mips, mips64, s390x blocked by kauth
-arch="all !armhf !mips !mips64 !s390x"
+# mips64, s390x and riscv64 blocked by polkit -> kauth
+arch="all !armhf !mips64 !s390x !riscv64"
 url="https://kde.org/plasma-desktop/"
 license="LGPL-2.1-or-later AND (GPL-2.0-only OR GPL-3.0-only)"
 depends_dev="
@@ -23,6 +23,8 @@ depends_dev="
 	kservice-dev
 	kwidgetsaddons-dev
 	kwindowsystem-dev
+	libnl3-dev
+	libpcap-dev
 	plasma-framework-dev
 	qt5-qttools-dev
 	qt5-qtwebchannel-dev
@@ -39,6 +41,8 @@ case "$pkgver" in
 esac
 source="https://download.kde.org/$_rel/plasma/$pkgver/libksysguard-$pkgver.tar.xz"
 subpackages="$pkgname-dev $pkgname-lang"
+
+replaces="ksysguard<5.22"
 
 build() {
 	cmake -B build \
@@ -58,5 +62,5 @@ package() {
 	DESTDIR="$pkgdir" cmake --install build
 }
 sha512sums="
-1626f9489e0bdff3acad087577470818bd04d6d74d6afe95b11d02ecfe306328b3898a573704c11b0a34e73ec7a662b9c609b056be369694769a3dc2e6671fec  libksysguard-5.21.5.tar.xz
+5913df153aab821f085e4409fc84eb316ee732f41a2daecf5baa269745990a2256de03aeb5fdd89dd10a53ce490b0051d16721fdcdb1c25e28894148ddf09d10  libksysguard-5.22.3.tar.xz
 "

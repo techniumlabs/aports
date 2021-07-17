@@ -1,12 +1,12 @@
 # Contributor: Bart Ribbers <bribbers@disroot.org>
 # Maintainer: Bart Ribbers <bribbers@disroot.org>
 pkgname=plasma-pa
-pkgver=5.21.5
+pkgver=5.22.3
 pkgrel=0
 pkgdesc="Plasma applet for audio volume management using PulseAudio"
 # armhf blocked by qt5-qtdeclarative
-# s390x blocked by libksysguard
-arch="all !armhf !s390x !mips64"
+# s390x, mips64 and riscv64 blocked by polkit -> plasma-workspace
+arch="all !armhf !s390x !mips64 !riscv64"
 url="https://kde.org/plasma-desktop/"
 license="LGPL-2.1-only OR LGPL-3.0-only AND GPL-2.0-only"
 depends="pulseaudio kirigami2"
@@ -50,5 +50,5 @@ package() {
 	DESTDIR="$pkgdir" cmake --install build
 }
 sha512sums="
-96a170b0ae90ff5a8015a532cde50e7a786452f9d04a30f7ee2402c9e7065ed1891e229f589bc79337ad68cd310c339840b10e7bb94551bab744ab7ae9a2ba40  plasma-pa-5.21.5.tar.xz
+7c83da5aed22c67849cedfceeea435aba2d6ff2c874d9659b689f8fef1ee383a67f6d39812cf5793a5dc0ec2c37b25cfdd904d142dd114d9e1fc5ee8b16ff406  plasma-pa-5.22.3.tar.xz
 "

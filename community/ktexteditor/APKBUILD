@@ -1,14 +1,31 @@
 # Contributor: Bart Ribbers <bribbers@disroot.org>
 # Maintainer: Bart Ribbers <bribbers@disroot.org>
 pkgname=ktexteditor
-pkgver=5.82.0
+pkgver=5.84.0
 pkgrel=0
 pkgdesc="Advanced embeddable text editor"
-arch="all !armhf !mips64 !s390x" # armhf blocked by extra-cmake-modules and mips64, s390x blocked by polkit
+# armhf blocked by extra-cmake-modules
+# mips64, s390x and riscv64 blocked by polkit -> kio
+arch="all !armhf !mips64 !s390x !riscv64"
 url="https://community.kde.org/Frameworks"
 license="LGPL-2.0-or-later AND (LGPL-2.0-only OR LGPL-3.0-only)"
-depends_dev="karchive-dev kconfig-dev kguiaddons-dev ki18n-dev kio-dev kparts-dev sonnet-dev kiconthemes-dev syntax-highlighting-dev kauth-dev"
-makedepends="$depends_dev extra-cmake-modules qt5-qttools-dev doxygen"
+depends_dev="
+	karchive-dev
+	kauth-dev
+	kconfig-dev
+	kguiaddons-dev
+	ki18n-dev
+	kiconthemes-dev
+	kio-dev
+	kparts-dev
+	sonnet-dev
+	syntax-highlighting-dev
+	"
+makedepends="$depends_dev
+	doxygen
+	extra-cmake-modules
+	qt5-qttools-dev
+	"
 checkdepends="xvfb-run"
 options="!check" # fail on builders
 source="https://download.kde.org/stable/frameworks/${pkgver%.*}/ktexteditor-$pkgver.tar.xz"
@@ -29,8 +46,8 @@ check() {
 }
 
 package() {
-	DESTDIR="$pkgdir" cmake --build build --target install
+	DESTDIR="$pkgdir" cmake --install build
 }
 sha512sums="
-1459ba61ed4a4b603cd984449a217230914818e32c318a92232957cc83d5e70f2a55bf150ca946252c696e019c24dee5b852ca5046c9914f3fff1c6906487bdf  ktexteditor-5.82.0.tar.xz
+428991b92923d402a963a3bf0a1f86a3fc02cb8b3b5a58285380ddb201e4d9b97798e834872ec27eeeaa21fef8a3f0b180b91e0d970d763fc2e290f98eb79c99  ktexteditor-5.84.0.tar.xz
 "

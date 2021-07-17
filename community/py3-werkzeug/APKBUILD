@@ -1,8 +1,8 @@
 # Maintainer: prspkt <prspkt@protonmail.com>
 pkgname=py3-werkzeug
 _pkgname=Werkzeug
-pkgver=1.0.1
-pkgrel=2
+pkgver=2.0.1
+pkgrel=0
 pkgdesc="The WSGI swiss-army knife"
 options="!check" # Tests fail with newer py3-packaging
 url="https://werkzeug.palletsprojects.com/"
@@ -30,4 +30,6 @@ check() {
 	PYTHONPATH=$PWD/build/lib pytest --ignore="$fail"
 }
 
-sha512sums="ba76ee6f39cf8f6b2c8988e6119be78cc6c868ea78bd2014837b4e9f59e8b790fb3a7b5a45b392cabdc61f32b8a6902cf5f43d7e20b1f4571e0bef102a3e88fa  Werkzeug-1.0.1.tar.gz"
+sha512sums="
+6fb1e4fafcc352b47f2600d13db633ee2fcbcd678d453859415f792654de62135c89443ba15341efb7ff10270ae5cbf8d5120608d7dfab347d98af650f4d69f6  Werkzeug-2.0.1.tar.gz
+"

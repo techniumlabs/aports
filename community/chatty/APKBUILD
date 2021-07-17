@@ -2,10 +2,11 @@
 # Contributor: Danct12 <danct12@disroot.org>
 # Maintainer: Rasmus Thomsen <oss@cogitri.dev>
 pkgname=chatty
-pkgver=0.3.0
+pkgver=0.3.2
 pkgrel=0
 pkgdesc="A phone dialer and call handler"
-arch="all !s390x !mips !mips64" # Blocked by libhandy and evolution
+# s390x, mips64 and riscv64 blocked by purple-mm-sms
+arch="all !s390x !mips64 !riscv64"
 url="https://source.puri.sm/Librem5/chatty"
 license="GPL-3.0-or-later"
 depends="
@@ -32,4 +33,4 @@ build() {
 package() {
 	DESTDIR="$pkgdir" meson install --no-rebuild -C output
 }
-sha512sums="76a66ae890c528e829fa53bb15fd43a34c062f2c7283ff133d5ea39819f11947d1f6b405c548f2dae59593ea9b9cac1adf8828bd267cb2c2b14b159fd6c3b524  chatty-v0.3.0.tar.gz"
+sha512sums="bdf53a3708bcf866fd659f69c9f72d01da20208b8a48ca139b0cbe0278f66f368a1e02d49ec94c5cb458fa2263ccdd72266196e48631a7002d4d5b52e490e78d  chatty-v0.3.2.tar.gz"

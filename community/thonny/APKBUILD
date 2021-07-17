@@ -1,7 +1,7 @@
 # Contributor: Justin Berthault <justin.berthault@zaclys.net>
 # Maintainer: Justin Berthault <justin.berthault@zaclys.net>
 pkgname=thonny
-pkgver=3.3.7
+pkgver=3.3.11
 pkgrel=0
 pkgdesc="Python IDE for beginners"
 url="https://thonny.org"
@@ -38,5 +38,5 @@ package() {
 }
 
 sha512sums="
-b611d7e177420313c5f17a312989a6db5d2dce4281dbcf4e12b0785bdea5c1c5477563b4fa339c9ba2181c95a19e5ffb469c131bb9c2da4a7c6d8909579152ab  thonny-3.3.7.tar.gz
+8a2869c20e33c119f9cc0bfc1dd9f95489030ead2d570f25afa18b1380d4d6d400b8927eca17d5dd0df0035d41c004a0f0d71156a5ca4a9e05ec26a3cb9d263c  thonny-3.3.11.tar.gz
 "

@@ -1,13 +1,23 @@
 # Contributor: Bart Ribbers <bribbers@disroot.org>
 # Maintainer: Bart Ribbers <bribbers@disroot.org>
 pkgname=kcron
-pkgver=21.04.0
+pkgver=21.04.3
 pkgrel=0
-arch="all !armhf !s390x !mips64" # Missing dependencies
+# armhf blocked by extra-cmake-modules
+# s390x, mips64 and riscv64 blocked by polkit -> kio
+arch="all !armhf !s390x !mips64 !riscv64"
 url="https://kde.org/applications/system/"
 pkgdesc="Configure and schedule tasks"
 license="GPL-2.0-or-later"
-makedepends="extra-cmake-modules qt5-qtbase-dev kconfigwidgets-dev kdoctools-dev ki18n-dev kiconthemes-dev kio-dev"
+makedepends="
+	extra-cmake-modules
+	kconfigwidgets-dev
+	kdoctools-dev
+	ki18n-dev
+	kiconthemes-dev
+	kio-dev
+	qt5-qtbase-dev
+	"
 source="https://download.kde.org/stable/release-service/$pkgver/src/kcron-$pkgver.tar.xz"
 subpackages="$pkgname-doc $pkgname-lang"
 
@@ -25,7 +35,9 @@ check() {
 }
 
 package() {
-	DESTDIR="$pkgdir" cmake --build build --target install
+	DESTDIR="$pkgdir" cmake --install build
 }
 
-sha512sums="b06f1c896fba5ff48e1e6bbf67f5095c0982192f401f5505e0c0a5291b1e12925a07d55645152847450621bf706d48569c4c76d87296b9fe240551f903a260c5  kcron-21.04.0.tar.xz"
+sha512sums="
+1c5645bdda1ef79dcaeb06ee66c5faa8f02fcd7e94e006b88ad2fd435b28ed974a402a6b5ae3b94a729f738de1a2bc4766c48d2295d4d0e442d211c3849be7df  kcron-21.04.3.tar.xz
+"

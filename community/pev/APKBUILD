@@ -8,7 +8,7 @@ url="http://pev.sourceforge.net/"
 arch="all"
 license="GPL-2.0-or-later AND MIT AND BSD-2-Clause"
 makedepends="bsd-compat-headers linux-headers openssl-dev"
-checkdepends="bash python3-wininst"
+checkdepends="bash perf"
 subpackages="$pkgname-doc"
 source="https://sourceforge.net/projects/pev/files/pev-$pkgver/pev-$pkgver.tar.gz"
 
@@ -26,15 +26,11 @@ build() {
 # Check() code from
 # https://github.com/void-linux/void-packages/blob/master/srcpkgs/pev/template#L37
 _real_check() {
-	local py3_ver="3.8"
-	local f
-	for f in /usr/lib/python"$py3_ver"/distutils/command/*.exe; do
-		tests/run.sh pe32 "$f"
-	done
+	tests/run.sh pe32 /usr/libexec/perf-core/tests/pe-file.exe
 }
 
 check() {
-	export LD_LIBRARY_PATH=$(pwd)/src/build
+	export LD_LIBRARY_PATH="$PWD"/src/build
 	ln -sf ../../lib/libpe/libpe.so src/build/libpe.so.1
 	! _real_check | tee /dev/stderr | grep -q 'NOK$'
 }
@@ -43,4 +39,6 @@ package() {
 	make prefix=/usr DESTDIR="$pkgdir" install
 }
 
-sha512sums="d8ac24e4160a2aba6a0c788c2933fc8dac6e19d4446cfb45efd5ced939596453ed0fc4734f9669b3943d916201f913b5a363ecfb9419f4b30ed33baf62e2db90  pev-0.81.tar.gz"
+sha512sums="
+abf0087b7b3943edf41c47d8572c5b239368aa2b9afcefb3117beeb6ffd34ad3fdfb8c5779ab93ecc5f54b8745daf9030ed6636e9eb32d6d315d383cc3b0bd24  pev-0.81.tar.gz
+"

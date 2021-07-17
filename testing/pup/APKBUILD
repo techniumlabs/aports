@@ -2,7 +2,7 @@
 # Maintainer:
 pkgname=pup
 pkgver=0.4.0
-pkgrel=1
+pkgrel=2
 pkgdesc="HTML parser for the command line"
 url="https://github.com/ericchiang/pup"
 arch="all"
@@ -13,6 +13,7 @@ source="https://github.com/ericchiang/pup/archive/v$pkgver/pup-$pkgver.tar.gz"
 builddir="$srcdir/src/github.com/ericchiang/pup"
 
 export GOPATH="$srcdir"
+export GO111MODULE=off
 
 prepare() {
 	default_prepare

@@ -1,7 +1,7 @@
 # Contributor: Bart Ribbers <bribbers@disroot.org>
 # Maintainer: Bart Ribbers <bribbers@disroot.org>
 pkgname=threadweaver
-pkgver=5.82.0
+pkgver=5.84.0
 pkgrel=0
 pkgdesc="High-level multithreading framework"
 arch="all !armhf" # armhf blocked by qt5-qtdeclarative
@@ -31,5 +31,5 @@ package() {
 }
 
 sha512sums="
-11814680c7209ac29751e4b1411ea2d177e71306e06a9f01635f579147efa75641d6d3dfe84c0c52950069b415edb67965fc899427d69e896028510676af0e6c  threadweaver-5.82.0.tar.xz
+975998c58e61b611175d0505d1396f205962f7a134d15e78d55460eb66b20b1626c2885259b567cd34fafd4fbcf6e2350a23b4071be109f8f4d07ccb73d0dfaf  threadweaver-5.84.0.tar.xz
 "

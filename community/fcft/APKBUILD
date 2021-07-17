@@ -1,6 +1,6 @@
 # Maintainer: Alex McGrath <amk@amk.ie>
 pkgname=fcft
-pkgver=2.4.0
+pkgver=2.4.2
 pkgrel=0
 pkgdesc="A simple library for font loading and glyph rasterization using FontConfig, FreeType and pixman."
 url="https://codeberg.org/dnkl/fcft.git"
@@ -26,5 +26,5 @@ package() {
 }
 
 sha512sums="
-0904344cf69875e5ed2b0543911cfcbd7fddafcc19ef611ff6abb30004515eb61a69f5add25f9576132dcd60bc0c2cc7f6461fade9124a32c4026154e56d8e64  fcft-2.4.0.tar.gz
+667a2adabca4538e8b8db5ea9f7dba5eb703aa675c3aa869769ee927c8a29860294811756746e9f308a3ded9e8ef259f8c078d528b9fecd19536e6f5926cf558  fcft-2.4.2.tar.gz
 "

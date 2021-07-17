@@ -1,8 +1,8 @@
 # Contributor: Bart Ribbers <bribbers@disroot.org>
 # Maintainer: Bart Ribbers <bribbers@disroot.org>
 pkgname=kitinerary
-pkgver=21.04.0
-pkgrel=1
+pkgver=21.04.3
+pkgrel=0
 arch="all !armhf !ppc64le" # armhf blocked by qt5-qtdeclarative, ppc64le FTBFS
 url="https://kontact.kde.org/"
 pkgdesc="Data model and extraction system for travel reservation information"
@@ -62,4 +62,6 @@ package() {
 	DESTDIR="$pkgdir" cmake --install build
 }
 
-sha512sums="ed0e210ccf2fed10e1f8327e9b73540b412819eacf0db01292484b530bb8d6f4010bfd17ffcc58c2e0dd535826e6449bf1358306f8976141abb85703f675393a  kitinerary-21.04.0.tar.xz"
+sha512sums="
+9fd0270c7c4f423e90aa103e2347e0a5caa2d60ee06c86ef245a83adf58ea22259d683472af5416c10e67245d65b845abedcd1e807c9981349adf5bb0df6a10c  kitinerary-21.04.3.tar.xz
+"

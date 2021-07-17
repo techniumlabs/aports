@@ -1,7 +1,7 @@
 # Contributor: Bart Ribbers <bribbers@disroot.org>
 # Maintainer: Bart Ribbers <bribbers@disroot.org>
 pkgname=libkscreen
-pkgver=5.21.5
+pkgver=5.22.3
 pkgrel=0
 pkgdesc="KDE screen management software"
 arch="all !armhf" # armhf blocked by extra-cmake-modules
@@ -45,5 +45,5 @@ package() {
 	DESTDIR="$pkgdir" cmake --install build
 }
 sha512sums="
-283d4cac77f106d24f6eef0ba6f7a7490aff87ef5017b2db7e52ca5fd3066a33ee4e40a190cdb4e26903a79defaa724ee0a3df360464af3f76c3386c341d2d75  libkscreen-5.21.5.tar.xz
+da01aff67c282acbc7b63871e3cc1e67908d0a11e322d5dd9a233075c665ba4844be24b5ab7a3218217b695408b25fc8dd3a87c8632569b9e60d1af10d2e3599  libkscreen-5.22.3.tar.xz
 "

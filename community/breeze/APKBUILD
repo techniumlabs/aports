@@ -1,12 +1,12 @@
 # Contributor: Bart Ribbers <bribbers@disroot.org>
 # Maintainer: Bart Ribbers <bribbers@disroot.org>
 pkgname=breeze
-pkgver=5.21.5
+pkgver=5.22.3
 pkgrel=0
 pkgdesc="Artwork, styles and assets for the Breeze visual style for the Plasma Desktop"
 # armhf blocked by qt5-qtdeclarative
-# mips, mips64, s390x blocked by kiconthemes
-arch="all !armhf !s390x !mips !mips64"
+# mips64, s390x and riscv64 blocked by polkit -> kconfigwidgets
+arch="all !armhf !s390x !mips64 !riscv64"
 url="https://kde.org/plasma-desktop/"
 license="GPL-2.0-or-later"
 depends_dev="
@@ -46,5 +46,5 @@ package() {
 	DESTDIR="$pkgdir" cmake --install build
 }
 sha512sums="
-5e449624543e2bd437bd4311e7ff091ffae33c4da34da2b9968f9551970b66350d337e6aee974f9e2cd82eff877a4ab5c6f52ec52d4f2724fe93b747f021e9eb  breeze-5.21.5.tar.xz
+f5922ded36ed22d0f06cae4923d4860a3d1bcb4e0795fe845faf0fa553176e94d4210e597f78c4d3f442e4a5b57822c6abe195c5f0150fdc992b50a7210a5290  breeze-5.22.3.tar.xz
 "

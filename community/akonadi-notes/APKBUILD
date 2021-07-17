@@ -1,12 +1,11 @@
 # Contributor: Bart Ribbers <bribbers@disroot.org>
 # Maintainer: Bart Ribbers <bribbers@disroot.org>
 pkgname=akonadi-notes
-pkgver=21.04.0
+pkgver=21.04.3
 pkgrel=0
 pkgdesc="Libraries and daemons to implement management of notes"
 # armhf blocked by extra-cmake-modules
-# mips, mips64 and s390x blocked by kmime
-arch="all !armhf !mips !mips64 !s390x" # limited by akonadi
+arch="all !armhf"
 url="https://community.kde.org/KDE_PIM"
 license="LGPL-2.0-or-later"
 depends_dev="
@@ -34,6 +33,8 @@ check() {
 }
 
 package() {
-	DESTDIR="$pkgdir" cmake --build build --target install
+	DESTDIR="$pkgdir" cmake --install build
 }
-sha512sums="52933f210559a2adc56d6220bc287d713b164ebfe484b343157fc822bd99bcc7a1095eb02b64acea30c268ffdf13f3cfd812d7eac6a4be5ae5970d110d04d1b5  akonadi-notes-21.04.0.tar.xz"
+sha512sums="
+2432077d1336a432cc77b553c9e1b0446a2d99a31f588ea865c3a242419dccf9a3a23086ee5ecb91380a8d55aeb9041f6428c903f06bc472e9997a7310abd82c  akonadi-notes-21.04.3.tar.xz
+"

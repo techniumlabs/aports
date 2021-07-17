@@ -1,10 +1,11 @@
 # Contributor: Bart Ribbers <bribbers@disroot.org>
 # Maintainer: Bart Ribbers <bribbers@disroot.org>
 pkgname=kmediaplayer
-pkgver=5.82.0
+pkgver=5.84.0
 pkgrel=0
 pkgdesc="Media player framework for KDE 5"
-arch="all !armhf !mips64 !s390x" # armhf blocked by extra-cmake-modules and mips64, s390x blocked by polkit
+# riscv64 disabled due to missing rust in recursive dependency
+arch="all !armhf !mips64 !s390x !riscv64" # armhf blocked by extra-cmake-modules and mips64, s390x blocked by polkit
 url="https://community.kde.org/Frameworks"
 license="X11 AND LGPL-2.1-or-later"
 depends_dev="qt5-qtbase-dev kparts-dev kxmlgui-dev"
@@ -31,5 +32,5 @@ package() {
 	DESTDIR="$pkgdir" cmake --build build --target install
 }
 sha512sums="
-59723c8f27e657d9ff5782c2d2d12a4727c95d2328fe54735e9d34fbe98dc2d76ef15024c071d970d0f455cf1e60b8e9f86a648e8d6ebf9997bfdfd0575a835f  kmediaplayer-5.82.0.tar.xz
+d315197ce47f894fd0d5106862ee48fcdbba9b27ab1bbd8da943d2115a3e2974641c4952892ed215063b098c8b5cfa1044194ee57d4a309850094b1bf1d81c57  kmediaplayer-5.84.0.tar.xz
 "

@@ -1,12 +1,12 @@
 # Contributor: Bart Ribbers <bribbers@disroot.org>
 # Maintainer: Bart Ribbers <bribbers@disroot.org>
 pkgname=kimap
-pkgver=21.04.0
+pkgver=21.04.3
 pkgrel=0
 pkgdesc="Job-based API for interacting with IMAP servers"
 # armhf blocked by extra-cmake-modules
-# s390x, mips64 blocked by kio-dev
-arch="all !armhf !s390x !mips64"
+# s390x, mips64 and riscv64 blocked by kio-dev
+arch="all !armhf !s390x !mips64 !riscv64"
 url="https://community.kde.org/KDE_PIM"
 license="LGPL-2.0-or-later"
 depends_dev="
@@ -39,6 +39,8 @@ check() {
 }
 
 package() {
-	DESTDIR="$pkgdir" cmake --build build --target install
+	DESTDIR="$pkgdir" cmake --install build
 }
-sha512sums="de62883613f9015d719b52d153afea1c8f123fe5d334c18fd6d6bce2dbe52f2f97d0d6d066f408000ee5c6ac1ec79d18023c5c186284d6baba933808a6b940da  kimap-21.04.0.tar.xz"
+sha512sums="
+4b8cb4d2268c7e03dd8aaa1ecd6ce45f3c2a4ec2594585238102d0933d2540805f0ede1763f5e68ee156498870b402af3556e7b5509a406651dda674ad7aeebe  kimap-21.04.3.tar.xz
+"

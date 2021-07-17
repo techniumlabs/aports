@@ -1,11 +1,11 @@
 # Contributor: Bart Ribbers <bribbers@disroot.org>
 # Maintainer: Bart Ribbers <bribbers@disroot.org>
 pkgname=kdenlive
-pkgver=21.04.0
+pkgver=21.04.3
 pkgrel=0
-# s390x kdeclarative-dev knewstuff-dev knotifyconfig-dev kxmlgui-dev purpose-dev
+# s390x, mips64 and riscv64 blocked by polkit -> kxmlgui
 # ppc64le mlt uses 64bit long double while libgcc uses 128bit long double
-arch="all !armhf !s390x !ppc64le !mips64"
+arch="all !armhf !s390x !ppc64le !mips64 !riscv64"
 url="https://kdenlive.org"
 pkgdesc="An intuitive and powerful multi-track video editor, including most recent video technologies"
 license="GPL-2.0-or-later"
@@ -54,4 +54,6 @@ package() {
 	DESTDIR="$pkgdir" cmake --install build
 }
 
-sha512sums="cc44df08e0fbe2a16646d005782aac3a8522e95cabc6cfb157b083f460e77e37bad0ef39b8a8ab2aa488faab161e81fb527108daf71d4f3b281b2ad18148a17f  kdenlive-21.04.0.tar.xz"
+sha512sums="
+9ab5e3f93d0423a0bd746b4bc981a1b9ac14e8440b002d76e44b68597b9c8a16c1f2b498e53755fc5399795d6716addb87c75a58053f7560b108d5019282679f  kdenlive-21.04.3.tar.xz
+"

@@ -1,9 +1,9 @@
 # Maintainer: Bart Ribbers <bribbers@disroot.org>
 pkgname=qt6-qtquickcontrols2
-pkgver=6.1.0
+pkgver=6.1.2
 pkgrel=0
 pkgdesc="User interface controls based on Qt Quick"
-url="https://qt.io"
+url="https://qt.io/"
 arch="all"
 license="LGPL-2.1-only AND LGPL-3.0-only AND GPL-3.0-only AND Qt-GPL-exception-1.0"
 depends_dev="
@@ -37,5 +37,5 @@ package() {
 }
 
 sha512sums="
-1d6cfa4d23ce9185e55fd1f9714cb73c268afd4ba03acbc714e0afa7bef782f1df825d584c4d8e67a8a401c705021ad8ab18286be5bf51f0cd0259de08645ac9  qtquickcontrols2-everywhere-src-6.1.0.tar.xz
+6859050f70d70be237dd4a68ebd0988c7aab39a9586954f09f2752c2adaa129f242839f54d2aceed4d2ebd4cef988b175c2bc78a66878eba0ae10d35e1e6c6bc  qtquickcontrols2-everywhere-src-6.1.2.tar.xz
 "

@@ -1,7 +1,7 @@
 # Contributor: Bart Ribbers <bribbers@disroot.org>
 # Maintainer: Bart Ribbers <bribbers@disroot.org>
 pkgname=kde-dev-scripts
-pkgver=21.04.0
+pkgver=21.04.3
 pkgrel=0
 # armhf blocked by extra-cmake-modules
 arch="all !armhf !s390x"
@@ -28,4 +28,6 @@ package() {
 	DESTDIR="$pkgdir" cmake --build build --target install
 }
 
-sha512sums="445b00902ccc6dc11654360c6a6b0add125bfa786c1043a0301339ccdd19531d7502d567b284156115d13a089ee8e9153a26df707214a80dc58d606956983a07  kde-dev-scripts-21.04.0.tar.xz"
+sha512sums="
+dd35c0b79b7ab6f4dff36b91281a3e4dcd4b5d27d1de5b33d3c4db995dbc909a6d70897f2460659efab74097b95e3ebb1c2c0f08ece07a6fdc5bdba87fdef93f  kde-dev-scripts-21.04.3.tar.xz
+"

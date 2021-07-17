@@ -1,7 +1,7 @@
 # Contributor: Duncan Bellamy <dunk@denkimushi.com>
 # Maintainer: Duncan Bellamy <dunk@denkimushi.com>
 pkgname=py3-softlayer
-pkgver=5.9.4
+pkgver=5.9.6
 pkgrel=0
 pkgdesc="library for SoftLayer's API"
 url="https://github.com/softlayer/softlayer-python"
@@ -29,4 +29,6 @@ package() {
 	rm -rf "$pkgdir"/usr/lib/python3*/site-packages/tests
 }
 
-sha512sums="899ace17053a8053f7e61153d40483c7b6573364e59ee1cc9b6f4e725d055fbf99a7046cb140cbdd9b11b9c3ac396b23333fee813913411b7f6cec86f5c8bb5b  py3-softlayer-5.9.4.tar.gz"
+sha512sums="
+ffdc995e8231cc3c1662683a219500f8da52bda135338a7d9236d2c23d263dda447f52b1a80e6721b0951641650c8a132c49b3400a221a2aeefb50091c33174e  py3-softlayer-5.9.6.tar.gz
+"

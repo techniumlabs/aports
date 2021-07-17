@@ -1,13 +1,38 @@
 # Contributor: Bart Ribbers <bribbers@disroot.org>
 # Maintainer: Bart Ribbers <bribbers@disroot.org>
 pkgname=kopete
-pkgver=21.04.0
+pkgver=21.04.3
 pkgrel=0
-arch="all !armhf !s390x !mips64"
+# armhf blocked by extra-cmake-modules
+# s390x, mips64 and riscv64 blocked by polkit -> kcmutils
+arch="all !armhf !s390x !mips64 !riscv64"
 url="https://userbase.kde.org/Kopete"
 pkgdesc="An instant messenger supporting AIM, ICQ, Jabber, Gadu-Gadu, Novell GroupWise Messenger, and more"
 license="GPL-2.0-or-later AND LGPL-2.0-or-later AND GFDL-1.2-only"
-makedepends="extra-cmake-modules qt5-qtbase-dev kconfig-dev kcoreaddons-dev kcrash-dev kdbusaddons-dev kdoctools-dev kemoticons-dev ki18n-dev kcmutils-dev khtml-dev knotifyconfig-dev kparts-dev ktexteditor-dev kwallet-dev kdelibs4support-dev kcontacts-dev kidentitymanagement-dev kitemmodels-dev libkleo-dev gpgme-dev kdnssd-dev"
+makedepends="
+	extra-cmake-modules
+	gpgme-dev
+	kcmutils-dev
+	kconfig-dev
+	kcontacts-dev
+	kcoreaddons-dev
+	kcrash-dev
+	kdbusaddons-dev
+	kdelibs4support-dev
+	kdnssd-dev
+	kdoctools-dev
+	kemoticons-dev
+	khtml-dev
+	ki18n-dev
+	kidentitymanagement-dev
+	kitemmodels-dev
+	knotifyconfig-dev
+	kparts-dev
+	ktexteditor-dev
+	kwallet-dev
+	libkleo-dev
+	qt5-qtbase-dev
+	"
 checkdepends="xvfb-run"
 source="https://download.kde.org/stable/release-service/$pkgver/src/kopete-$pkgver.tar.xz"
 subpackages="$pkgname-doc $pkgname-lang"
@@ -26,7 +51,9 @@ check() {
 }
 
 package() {
-	DESTDIR="$pkgdir" cmake --build build --target install
+	DESTDIR="$pkgdir" cmake --install build
 }
 
-sha512sums="8f515210b24a7fe9efd26b702e1318adcb3b62ea4803f177b292f8a3283300e0e2b4a86a3de993819974c80767ebfe1c0522326423b227d21b57aecd1055c7ab  kopete-21.04.0.tar.xz"
+sha512sums="
+fa6ec2a8f40278061d3d07aa5bd82b6c36ca302bdf30b27cfb3271c66a27422f0df964b3e15e72ba8c7699a1459ee7ae23d8f0193d1cd395ff6ea27aeeb08656  kopete-21.04.3.tar.xz
+"

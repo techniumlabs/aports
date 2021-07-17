@@ -1,13 +1,27 @@
 # Contributor: Bart Ribbers <bribbers@disroot.org>
 # Maintainer: Bart Ribbers <bribbers@disroot.org>
 pkgname=klettres
-pkgver=21.04.0
+pkgver=21.04.3
 pkgrel=0
-arch="all !armhf !s390x !mips64"
+# armhf blocked by extra-cmake-modules
+# s390x, mips64 and riscv64 blocked by polkit -> knewstuff
+arch="all !armhf !s390x !mips64 !riscv64"
 url="http://edu.kde.org/klettres"
 pkgdesc="Learn the Alphabet"
 license="GPL-2.0-or-later AND GFDL-1.2-only"
-makedepends="extra-cmake-modules qt5-qtbase-dev qt5-qtsvg-dev kcompletion-dev kcrash-dev kdoctools-dev ki18n-dev knewstuff-dev kwidgetsaddons-dev kconfigwidgets-dev kcoreaddons-dev"
+makedepends="
+	extra-cmake-modules
+	kcompletion-dev
+	kconfigwidgets-dev
+	kcoreaddons-dev
+	kcrash-dev
+	kdoctools-dev
+	ki18n-dev
+	knewstuff-dev
+	kwidgetsaddons-dev
+	qt5-qtbase-dev
+	qt5-qtsvg-dev
+	"
 source="https://download.kde.org/stable/release-service/$pkgver/src/klettres-$pkgver.tar.xz"
 subpackages="$pkgname-doc $pkgname-lang"
 options="!check" # No tests
@@ -26,7 +40,9 @@ check() {
 }
 
 package() {
-	DESTDIR="$pkgdir" cmake --build build --target install
+	DESTDIR="$pkgdir" cmake --install build
 }
 
-sha512sums="aafdf5925cc9d94ac4175776efc9e3e7c043f8dad9170db11e606ad37a0cc32d94c9139f31ee00ecd39d0d92531fc0f75679a34aee511cfa4f383364b6d1ec93  klettres-21.04.0.tar.xz"
+sha512sums="
+33cf32acf0be7e62429e36f12bb84e04b67770bc07a238de8959c719c0fd6aba9515c56eada2e6004144e2311ad3f899040f8775d494c6434fea9482cada104d  klettres-21.04.3.tar.xz
+"

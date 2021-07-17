@@ -1,40 +1,41 @@
 # Contributor: Bart Ribbers <bribbers@disroot.org>
 # Maintainer: Bart Ribbers <bribbers@disroot.org>
 pkgname=libkipi
-pkgver=21.04.0
+pkgver=21.04.3
 pkgrel=0
 pkgdesc="KDE Image Plugin Interface library"
 # armhf blocked by extra-cmake-modules
-# s390x/mips64 blocked by kxmlgui
-arch="all !armhf !s390x !mips64"
+# s390x, mips64 and riscv64 blocked by kxmlgui
+arch="all !armhf !s390x !mips64 !riscv64"
 url="https://www.digikam.org/"
 license="GPL-2.0-or-later AND LGPL-2.0-or-later"
 depends_dev="
 	kconfig-dev
 	kservice-dev
 	kxmlgui-dev
-	qt5-qtbase-dev
+	qt5-qtbase-dev	
 	"
-makedepends="$depends_dev extra-cmake-modules"
+makedepends="$depends_dev
+	extra-cmake-modules
+	libjpeg-turbo-dev
+	libkexiv2-dev
+	tiff-dev
+	"
 source="https://download.kde.org/stable/release-service/$pkgver/src/libkipi-$pkgver.tar.xz"
 subpackages="$pkgname-dev"
-options="!check" # Test suite fails to compile
+options="!check" # No tests
 
 build() {
 	cmake -B build \
 		-DCMAKE_BUILD_TYPE=None \
 		-DCMAKE_INSTALL_PREFIX=/usr \
-		-DCMAKE_INSTALL_LIBDIR=lib \
-		-DBUILD_TESTING=OFF
+		-DCMAKE_INSTALL_LIBDIR=lib
 	cmake --build build
 }
 
-check() {
-	cd build
-	CTEST_OUTPUT_ON_FAILURE=TRUE ctest
-}
-
 package() {
-	DESTDIR="$pkgdir" cmake --build build --target install
+	DESTDIR="$pkgdir" cmake --install build
 }
-sha512sums="f626b2a0083783dcae50d52e7ef77542cfa818a0d9612dfe2280d4d926bf3a39d3170480951c6c396e1c122c07358d2a044ddfbf841b454b0cb0b5d6ba0cefc1  libkipi-21.04.0.tar.xz"
+sha512sums="
+5f94cf57da4578d2be02947b7e67d7e8b580757d78ce7de5fc08698c9a8dda2879af3486d0f40504a25b40b51bf18658f39b3ff38e4ebff33aaa18a249983a71  libkipi-21.04.3.tar.xz
+"

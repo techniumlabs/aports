@@ -1,8 +1,8 @@
 # Contributor: Andy Hawkins <andy@gently.org.uk>
 # Maintainer: Andy Hawkins <andy@gently.org.uk>
 pkgname=py3-inform
-pkgver=1.23
-pkgrel=2
+pkgver=1.25
+pkgrel=0
 pkgdesc="Print & Logging Utilities"
 url="https://inform.readthedocs.io/"
 arch="noarch"
@@ -13,12 +13,12 @@ depends="
 	py3-six
 	"
 makedepends="
+	py3-pytest-runner
 	py3-setuptools
 	"
 checkdepends="
 	py3-pytest
 	py3-hypothesis
-	py3-pytest-runner
 	"
 source="https://github.com/KenKundert/inform/archive/v$pkgver/inform-v$pkgver.tar.gz"
 builddir="$srcdir/inform-$pkgver"
@@ -34,4 +34,6 @@ check() {
 package() {
 	python3 setup.py install --prefix=/usr --root="$pkgdir"
 }
-sha512sums="e7c437b61aa5d438db4b0eff3ab13d0f7af25abd82de305e97b8ca0a4f0c3a31f068d12c19b0c81699fe480c5d956a536f0a7c4cc841ea435806f5d3e2701cb2  inform-v1.23.tar.gz"
+sha512sums="
+993544c8e9d77b14279aacf012444ad920a3b4d4858de56f1aecccd2294d8b2af4068cf4d1be20c99e0d54b4c2b414e33b5a0a2912d5fad0ea6a1ac192cd7a4c  inform-v1.25.tar.gz
+"

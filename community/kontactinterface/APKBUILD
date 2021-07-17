@@ -1,11 +1,11 @@
 # Contributor: Bart Ribbers <bribbers@disroot.org>
 # Maintainer: Bart Ribbers <bribbers@disroot.org>
 pkgname=kontactinterface
-pkgver=21.04.0
+pkgver=21.04.3
 pkgrel=0
 # armhf blocked by extra-cmake-modules
-# s390x blocked by kparts
-arch="all !armhf !s390x !mips64"
+# s390x, mips64 and riscv64 blocked by polkit -> kparts
+arch="all !armhf !s390x !mips64 !riscv64"
 url="https://kontact.kde.org/"
 pkgdesc="Kontact Plugin Interface Library"
 license="LGPL-2.0-only OR LGPL-3.0-only"
@@ -35,7 +35,9 @@ check() {
 }
 
 package() {
-	DESTDIR="$pkgdir" cmake --build build --target install
+	DESTDIR="$pkgdir" cmake --install build
 }
 
-sha512sums="16b414d13f44f46993bfe45606ef732529163f8b4e405c092bb0feff3c8e5017c26bc02b2658f37c20c9aa93524a789a747c66e95f54577306083abccfe3dd33  kontactinterface-21.04.0.tar.xz"
+sha512sums="
+e01fce2675cce7885f9167aab9fc4ae6d167e8c58aa6e4cb8fe9f714f35f02ee81700d5b86663f28fb9db802d877d2aac546e25ab9d23358a5e6c8ba3bf1f18d  kontactinterface-21.04.3.tar.xz
+"

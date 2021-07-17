@@ -1,0 +1,34 @@
+# Contributor: Sodface <sod@sodface.com>
+# Maintainer: Sodface <sod@sodface.com>
+pkgname=touchegg
+pkgver=2.0.11
+pkgrel=0
+pkgdesc="Multitouch gesture recognizer"
+url="https://github.com/JoseExposito/touchegg"
+arch="all"
+license="GPL-3.0-only"
+makedepends="cmake eudev-dev libinput-dev pugixml-dev cairo-dev libx11-dev
+	libxtst-dev libxrandr-dev libxi-dev glib-dev gtk+3.0-dev"
+options="!check" # No test suite
+subpackages="$pkgname-openrc"
+source="$pkgname-$pkgver.tar.gz::https://github.com/JoseExposito/touchegg/archive/$pkgver.tar.gz
+	$pkgname.initd"
+
+build() {
+	cmake -B build . \
+		-DCMAKE_BUILD_TYPE=None \
+		-DCMAKE_INSTALL_PREFIX=/usr \
+		-DUSE_SYSTEMD=off
+	cmake --build build
+}
+
+package() {
+	DESTDIR="$pkgdir" cmake --install build
+	install -Dm755 "$srcdir"/touchegg.initd \
+		"$pkgdir"/etc/init.d/touchegg
+}
+
+sha512sums="
+ba75a42110a3d2bf482a433fbfdb85f17cbd55332a21d58b62605f5f0211ccfd9cdf3651734f0d225adf6593a8ed92d8c886c164153b28c7a702c3f80ae80909  touchegg-2.0.11.tar.gz
+4c334bfd81f372e700f57670c17b9bf52b37adc37a62ae466d47e6ae67e14df5dffff5b80b4c031f2dc46b00077d8be8fc18e87214c682fb4130d87e599fd597  touchegg.initd
+"

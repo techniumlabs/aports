@@ -1,11 +1,12 @@
 # Contributor: Bart Ribbers <bribbers@disroot.org>
 # Maintainer: Bart Ribbers <bribbers@disroot.org>
 pkgname=okular
-pkgver=21.04.0
+pkgver=21.04.3
 pkgrel=0
 # armhf blocked by extra-cmake-modules
-# s390x blocked by ebook-tools
-arch="all !armhf !s390x !mips64"
+# s390x, mips64 and riscv64 blocked by polkit -> kio
+# ppc64le blocked by qt5-qtwebengine -> purpose
+arch="all !armhf !s390x !mips64 !riscv64 !ppc64le"
 url="https://kde.org/applications/office/org.kde.okular"
 pkgdesc="A universal document viewer"
 license="GPL-2.0-or-later AND LGPL-2.0-or-later"
@@ -102,4 +103,6 @@ mobile() {
 	amove usr/share/applications/org.kde.mobile*
 }
 
-sha512sums="81b1dbacbbcd76e92e7204c322fabf863e72f959ca6e1f68e1f8d3e6ae8f24ad04987f62bc206b97a7b7aa43b066ab9c3bc630a1bb47c30432183344942a296f  okular-21.04.0.tar.xz"
+sha512sums="
+21f34dcef50d15a8816d3898a002133e068ba239d1730892e0d71e58e6196b493544792fa5c06de689fdf1fe7f853586578f3963a64e46a9797484f983814c22  okular-21.04.3.tar.xz
+"

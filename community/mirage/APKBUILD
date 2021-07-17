@@ -1,24 +1,34 @@
-# Contributor: Newbyte <newbie13xd@gmail.com>
-# Maintainer: Newbyte <newbie13xd@gmail.com>
+# Contributor: Newbyte <newbyte@disroot.org>
+# Maintainer: Newbyte <newbyte@disroot.org>
 pkgname=mirage
 pkgver=0.7.1
-pkgrel=0
+pkgrel=1
 pkgdesc="Qt/QML Matrix client"
 url="https://github.com/mirukana/mirage"
-arch="all !armhf !mips64" # armhf: blocked by py3-pyotherside, qt5-qtquickcontrols2
+# armhf: blocked by py3-pyotherside, qt5-qtquickcontrols2
+# mips64: ???
+# s390x: blocked by py3-watchgod
+arch="all !armhf !mips64 !s390x"
 license="LGPL-3.0-or-later"
+options="!check" # requires types-aiohttp
 depends="
 	py3-aiofiles
 	py3-appdirs
 	py3-blist
 	py3-cairosvg
 	py3-filetype
+	py3-hsluv
 	py3-html-sanitizer
 	py3-matrix-nio
 	py3-mistune
 	py3-pillow
+	py3-plyer
 	py3-pymediainfo
 	py3-pyotherside
+	py3-redbaron
+	py3-simpleaudio
+	py3-sortedcontainers
+	py3-watchgod
 	"
 makedepends="
 	libjpeg-turbo-dev
@@ -28,7 +38,6 @@ makedepends="
 	libxscrnsaver-dev
 	olm-dev
 	openjpeg-dev
-	py3-pyotherside
 	py3-setuptools
 	python3-dev
 	qtchooser
@@ -38,10 +47,6 @@ makedepends="
 	qt5-qtimageformats
 	tiff-dev
 	zlib-dev
-	"
-checkdepends="
-	py3-flake8
-	py3-mypy
 	"
 _commit_hsluv_c=9e9be32d6010cad484a7b12b1a3d19c6cf4c1353
 source="
@@ -56,12 +61,8 @@ prepare() {
 }
 
 build() {
-	qmake PREFIX=/usr mirage.pro
+	qmake CONFIG+=qtquickcompiler PREFIX=/usr mirage.pro
 	make
-}
-
-check() {
-	make test
 }
 
 package() {

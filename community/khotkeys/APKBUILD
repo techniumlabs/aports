@@ -1,11 +1,11 @@
 # Contributor: Bart Ribbers <bribbers@disroot.org>
 # Maintainer: Bart Ribbers <bribbers@disroot.org>
 pkgname=khotkeys
-pkgver=5.21.5
+pkgver=5.22.3
 pkgrel=0
 # armhf blocked by extra-cmake-modules
-# s390x blocked by libksysguard
-arch="all !armhf !s390x !mips64"
+# s390x, mips64 and riscv64 blocked by libksysguard
+arch="all !armhf !s390x !mips64 !riscv64"
 url="https://kde.org/plasma-desktop/"
 pkgdesc="Key Accelerator Application"
 license="GPL-2.0-only AND LGPL-2.0-or-later"
@@ -51,5 +51,5 @@ package() {
 }
 
 sha512sums="
-16409a928af050278dda012150e969b60617a66aa000cbb722781788defb02268ac56ef521916e55f257e4b166df8ddffcf14c9c35b49410a79491f197b4aef5  khotkeys-5.21.5.tar.xz
+b37e30a895a28302104d0fc4c976cca99f3f26d4261d9695d38b6a4af027dc843f1dec85c9f0d111bd9ec3aa551a3b42445f2bd1ee29ec5623f3f0e66190c19a  khotkeys-5.22.3.tar.xz
 "

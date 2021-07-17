@@ -1,15 +1,25 @@
 # Contributor: Bart Ribbers <bribbers@disroot.org>
 # Maintainer: Bart Ribbers <bribbers@disroot.org>
 pkgname=libkcddb
-pkgver=21.04.0
+pkgver=21.04.3
 pkgrel=0
 # armhf blocked by extra-cmake-modules
-# s390x, mips64 blocked by kio-dev
-arch="all !armhf !s390x !mips64"
+# s390x, mips64 and riscv64 blocked by polkit -> kio
+arch="all !armhf !s390x !mips64 !riscv64"
 url="https://www.kde.org/applications/multimedia/"
 pkgdesc="KDE CDDB library"
 license="LGPL-2.0-or-later AND GPL-2.0-or-later"
-makedepends="extra-cmake-modules qt5-qtbase-dev kconfig-dev kdoctools-dev kcodecs-dev ki18n-dev kio-dev kwidgetsaddons-dev libmusicbrainz-dev"
+makedepends="
+	extra-cmake-modules
+	kcodecs-dev
+	kconfig-dev
+	kdoctools-dev
+	ki18n-dev
+	kio-dev
+	kwidgetsaddons-dev
+	libmusicbrainz-dev
+	qt5-qtbase-dev
+	"
 source="https://download.kde.org/stable/release-service/$pkgver/src/libkcddb-$pkgver.tar.xz"
 subpackages="$pkgname-dev $pkgname-doc $pkgname-lang"
 options="net" # Required for tests
@@ -31,7 +41,9 @@ check() {
 }
 
 package() {
-	DESTDIR="$pkgdir" cmake --build build --target install
+	DESTDIR="$pkgdir" cmake --install build
 }
 
-sha512sums="489e95d8e642068f8de37d7711916b44fd91d1ae89b488c99b5e1a240e98901b8c24dd26d817ba5a2cf8597c57ac266af8a485a1ed240696f3e23ba5f78b6405  libkcddb-21.04.0.tar.xz"
+sha512sums="
+48df1dafd22fc323ab546f927e8a6f4059fdcd2ede5bfceb4b67014ce3d526a9f07a16cc66593c58575196a34a1d68a22882bcc391823ec4deb61af3fe09cd80  libkcddb-21.04.3.tar.xz
+"

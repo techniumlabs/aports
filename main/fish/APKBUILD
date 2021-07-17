@@ -1,8 +1,8 @@
 # Contributor: Leo <thinkabit.ukim@gmail.com>
-# Maintainer: Leo <thinkabit.ukim@gmail.com>
+# Maintainer:
 pkgname=fish
-pkgver=3.2.2
-pkgrel=1
+pkgver=3.3.1
+pkgrel=0
 pkgdesc="Modern interactive commandline shell"
 url="https://fishshell.com/"
 arch="all"
@@ -10,7 +10,7 @@ license="GPL-2.0-only"
 depends="bc"
 depends_doc="util-linux" # Requires 'ul' program
 depends_dev="$pkgname-tools"
-makedepends="cmake doxygen ncurses-dev ncurses pcre2-dev"
+makedepends="cmake doxygen ncurses-dev ncurses pcre2-dev py3-sphinx"
 checkdepends="py3-pexpect bash"
 install="$pkgname.post-install $pkgname.post-upgrade $pkgname.pre-deinstall"
 subpackages="$pkgname-dev $pkgname-doc $pkgname-tools::noarch"
@@ -18,28 +18,28 @@ source="https://github.com/fish-shell/fish-shell/releases/download/$pkgver/fish-
 	README.alpine
 	"
 
+# temp allow textrels on riscv64
+[ "$CARCH" = "riscv64" ] && options="$options textrels"
+
 build() {
-	if [ "$CBUILD" != "$CHOST" ]; then
-		CMAKE_CROSSOPTS="-DCMAKE_SYSTEM_NAME=Linux -DCMAKE_HOST_SYSTEM_NAME=Linux"
-	fi
-	cmake -B builddir \
+	cmake -B build \
 		-DCMAKE_INSTALL_PREFIX=/usr \
 		-DCMAKE_INSTALL_LIBDIR=lib \
 		-DBUILD_SHARED_LIBS=True \
 		-DCMAKE_BUILD_TYPE=None \
 		-DCMAKE_INSTALL_SYSCONFDIR=/etc \
-		-DCMAKE_CXX_FLAGS="$CXXFLAGS" \
-		-DCMAKE_C_FLAGS="$CFLAGS" \
-		$CMAKE_CROSSOPTS .
-	make -C builddir
+		-DBUILD_DOCS=TRUE
+	cmake --build build
+	cmake --build build --target fish_tests
 }
 
 check() {
-	ctest
+	cd build
+	./fish_tests
 }
 
 package() {
-	make -C builddir install DESTDIR="$pkgdir"
+	DESTDIR="$pkgdir" cmake --install build
 	rm -fr "$pkgdir"/usr/share/$pkgname/groff
 
 	# Install our README
@@ -61,17 +61,17 @@ package() {
 doc() {
 	default_doc
 
-	mkdir -p "$subpkgdir"/usr/share/$pkgname
-	mv "$pkgdir"/usr/share/$pkgname/man "$subpkgdir"/usr/share/$pkgname
+	amove usr/share/$pkgname/man
 }
 
 tools() {
 	pkgdesc="$pkgdesc (tools)"
 	depends="$pkgname python3 cmd:man"
 
-	mkdir -p "$subpkgdir"/usr/share/$pkgname
-	mv "$pkgdir"/usr/share/$pkgname/tools "$subpkgdir"/usr/share/$pkgname
+	amove usr/share/$pkgname/tools
 }
 
-sha512sums="e82c5a390bd94f84c60843a94dc4f30bd46539828a54d2e96f208e0d54a0aa361a8c9d4a66cdf2fa636a5fab310a96bf1c165c58440c38d123f788fff3598f4a  fish-3.2.2.tar.xz
-c28cef48e3d9cde4956d36192dc221e63eca89282a937e2683578ac0958d98a9c54420aea4f1d91d516f5ee2c74589a75865a973305421e1ad0a9e70854dff4f  README.alpine"
+sha512sums="
+fc50ca44fab3f2d942284d4f714150f7ccf1e49c73da36f8d4ae4a33a9b3280f98bed15848839f5d443b4274fd0ff90174bafa6a8e9a4da226dda63d7766a660  fish-3.3.1.tar.xz
+c28cef48e3d9cde4956d36192dc221e63eca89282a937e2683578ac0958d98a9c54420aea4f1d91d516f5ee2c74589a75865a973305421e1ad0a9e70854dff4f  README.alpine
+"

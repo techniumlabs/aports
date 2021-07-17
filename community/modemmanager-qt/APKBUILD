@@ -1,15 +1,24 @@
 # Contributor: Bart Ribbers <bribbers@disroot.org>
 # Maintainer: Bart Ribbers <bribbers@disroot.org>
 pkgname=modemmanager-qt
-pkgver=5.82.0
+pkgver=5.84.0
 pkgrel=0
 pkgdesc="Qt wrapper for ModemManager DBus API"
-arch="all !armhf" # armhf blocked by extra-cmake-modules
-arch="$arch !mips !mips64 !s390x" # polkit
+# armhf blocked by extra-cmake-modules
+# mips64, s390x and riscv64 blocked by polkit -> modemmanager
+arch="all !armhf !mips64 !s390x !riscv64"
 url="https://community.kde.org/Frameworks"
 license="LGPL-2.1-only OR LGPL-3.0-only"
-depends_dev="modemmanager-dev qt5-qtbase-dev"
-makedepends="$depends_dev extra-cmake-modules doxygen graphviz-dev qt5-qttools-dev"
+depends_dev="
+	modemmanager-dev
+	qt5-qtbase-dev
+	"
+makedepends="$depends_dev
+	doxygen
+	extra-cmake-modules
+	graphviz-dev
+	qt5-qttools-dev
+	"
 subpackages="$pkgname-dev $pkgname-doc"
 options="!check" # requires dbus running
 source="https://download.kde.org/stable/frameworks/${pkgver%.*}/modemmanager-qt-$pkgver.tar.xz"
@@ -30,8 +39,8 @@ check() {
 
 
 package() {
-	DESTDIR="$pkgdir" cmake --build build --target install
+	DESTDIR="$pkgdir" cmake --install build
 }
 sha512sums="
-129b1618f9bb5a59c79a7a202e297c3dc6f90829c2e4841a0cd2ac15440fed19ea78ce16d2ae3b012fe02db568d337210bafcda183db9cb8a1dba0d087f16ee2  modemmanager-qt-5.82.0.tar.xz
+61dd3c5c0dd319fee86163e4e39356d551d49ce000c58b13e2e605be5132511c6c6464f6010ad70ab9dc3a3f28746a3d69df03746b7b9b0d170ed3bcb1b17056  modemmanager-qt-5.84.0.tar.xz
 "

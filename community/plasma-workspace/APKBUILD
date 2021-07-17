@@ -1,12 +1,12 @@
 # Contributor: Bart Ribbers <bribbers@disroot.org>
 # Maintainer: Bart Ribbers <bribbers@disroot.org>
 pkgname=plasma-workspace
-pkgver=5.21.5
+pkgver=5.22.3
 pkgrel=0
 pkgdesc="KDE Plasma Workspace"
 # armhf blocked by kirigami2
-# s390x blocked by kactivitymanagerd
-arch="all !armhf !s390x !mips64"
+# s390x, mips64 and riscv64 blocked by polkit -> kio-extras
+arch="all !armhf !s390x !mips64 !riscv64"
 url="https://kde.org/plasma-desktop/"
 license="(GPL-2.0-only OR GPL-3.0-only) AND LGPL-2.1-or-later AND GPL-2.0-or-later AND MIT AND LGPL-2.1-only AND LGPL-2.0-or-later AND (LGPL-2.1-only OR LGPL-3.0-only) AND LGPL-2.0-only"
 depends="
@@ -18,6 +18,7 @@ depends="
 	kquickcharts
 	kwin
 	milou
+	pipewire-media-session
 	plasma-integration
 	qt5-qtquickcontrols
 	qt5-qttools
@@ -56,6 +57,7 @@ depends_dev="
 	kwallet-dev
 	kwayland-dev
 	kwin-dev
+	layer-shell-qt-dev
 	libkscreen-dev
 	libksysguard-dev
 	networkmanager-qt-dev
@@ -77,13 +79,14 @@ case "$pkgver" in
 esac
 source="https://download.kde.org/$_rel/plasma/$pkgver/plasma-workspace-$pkgver.tar.xz"
 subpackages="$pkgname-dev $pkgname-libs $pkgname-doc $pkgname-lang"
-replaces="plasma-desktop<5.20"
+replaces="plasma-desktop<5.22"
 
 build() {
 	cmake -B build \
 		-DCMAKE_BUILD_TYPE=None \
 		-DCMAKE_INSTALL_PREFIX=/usr \
-		-DCMAKE_INSTALL_LIBDIR=lib
+		-DCMAKE_INSTALL_LIBDIR=lib \
+		-DPLASMA_WAYLAND_DEFAULT_SESSION=TRUE
 	cmake --build build
 }
 
@@ -91,7 +94,9 @@ check() {
 	cd build
 	# nightcolortest requires running dbus
 	# testdesktop, lookandfeel-kcmTest, test_kio_fonts, servicerunnertest systemtraymodeltest are broken
-	CTEST_OUTPUT_ON_FAILURE=TRUE xvfb-run ctest -E "(nightcolortest|testdesktop|lookandfeel-kcmTest|test_kio_fonts|servicerunnertest|systemtraymodeltest)"
+	# tst_triangleFilter requires plasma-workspace to be installed
+	# locationsrunnertest requires a running Wayland environment
+	CTEST_OUTPUT_ON_FAILURE=TRUE xvfb-run ctest -E "(nightcolortest|testdesktop|lookandfeel-kcmTest|test_kio_fonts|servicerunnertest|systemtraymodeltest|tst_triangleFilter|locationsrunnertest)"
 }
 
 package() {
@@ -101,5 +106,5 @@ package() {
 	rm -r "$pkgdir"/usr/lib/systemd
 }
 sha512sums="
-6918c1a29e977ac7f3ebf6ac7308f20f20712db96bf10599f3372987509630aa2ca8bc6adf0b1af4e543ccd2a2001e38ce02d759d25f09588c7c1aaa358af1b4  plasma-workspace-5.21.5.tar.xz
+9720c5aad03fb329714b54947e073b4ea0c3617ee269cc3b6a562fc6528c386a9e29a2ecaa1944593ccf4023446163e0daa1baf31110ebae0cfe51afbd8db85d  plasma-workspace-5.22.3.tar.xz
 "

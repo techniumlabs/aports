@@ -1,7 +1,7 @@
 # Contributor: Will Sinatra <wpsinatra@gmail.com>
 # Maintainer: Natanael Copa <ncopa@alpinelinux.org>
 pkgname=libdrm
-pkgver=2.4.105
+pkgver=2.4.107
 pkgrel=0
 pkgdesc="Userspace interface to kernel DRM services"
 url="https://dri.freedesktop.org/"
@@ -37,4 +37,6 @@ package() {
 	DESTDIR="$pkgdir" meson install --no-rebuild -C output
 }
 
-sha512sums="67e679271e5836841be91a45a19a2d07cacc78344fe5cf864537075dd7c451742bd16bf3367907835cf79348e6fddb2c538e559d153a4f26f2b24b4f6d343703  drm-libdrm-2.4.105.tar.gz"
+sha512sums="
+a3e11ad1237866eb5a2a50d5803c92132f7f874fdf003ffffe30be8caa5026f413cc2905a3e2617a713c86b8f77cbfceadefd6340a521e6aed1f0cb89b3bbf3e  drm-libdrm-2.4.107.tar.gz
+"

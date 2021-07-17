@@ -1,11 +1,10 @@
 # Contributor: Leo <thinkabit.ukim@gmail.com>
-# Maintainer: Leo <thinkabit.ukim@gmail.com>
+# Maintainer:
 pkgname=py3-rich
 _pkgname=rich
-pkgver=10.2.0
+pkgver=10.6.0
 pkgrel=0
 pkgdesc="Python library for rich text formatting and terminal formatting"
-options="!check" # Testsuite not present in pypi tarball and uses poetry
 url="https://rich.readthedocs.io/en/latest/"
 arch="noarch"
 license="MIT"
@@ -15,18 +14,23 @@ depends="
 	py3-pygments
 	py3-typing-extensions
 	"
-makedepends="py3-setuptools"
-source="https://files.pythonhosted.org/packages/source/${_pkgname:0:1}/$_pkgname/$_pkgname-$pkgver.tar.gz"
+makedepends="pyproject2setuppy"
+checkdepends="py3-pytest"
+source="$pkgname-$pkgver.tar.gz::https://github.com/willmcgugan/rich/archive/refs/tags/v$pkgver.tar.gz"
 builddir="$srcdir/$_pkgname-$pkgver"
 
 build() {
-	python3 setup.py build
+	python3 -m pyproject2setuppy.main build
+}
+
+check() {
+	PYTHONPATH="$PWD/build/lib" py.test-3 -v
 }
 
 package() {
-	python3 setup.py install --prefix=/usr --root="$pkgdir"
+	python3 -m pyproject2setuppy.main install --prefix=/usr --root="$pkgdir"
 }
 
 sha512sums="
-11b6cd154b3266563da583241721586467db287ea5e5ffcb9f4235e9293025e03b1dcbbe874b11444b4692a7ed30011cda209a2742d0d84e9a74b7e6b17c8eb4  rich-10.2.0.tar.gz
+59b777ef0fe3efe67138a7dbfc0c4e813b0a8c3d46adc6526b07241483919e0f71b478c0a66f3e0c207fcebdc0d639b7acf989ebf914c0e0fb6953029f0c9a16  py3-rich-10.6.0.tar.gz
 "

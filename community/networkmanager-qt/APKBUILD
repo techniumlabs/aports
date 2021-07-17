@@ -1,16 +1,21 @@
 # Contributor: Bart Ribbers <bribbers@disroot.org>
 # Maintainer: Bart Ribbers <bribbers@disroot.org>
 pkgname=networkmanager-qt
-pkgver=5.82.0
+pkgver=5.84.0
 pkgrel=0
 pkgdesc="Qt wrapper for NetworkManager API"
-arch="all !armhf" # armhf blocked by extra-cmake-modules
-arch="$arch !mips !mips64 !s390x" # polkit
+# armhf blocked by extra-cmake-modules
+# mips64, s390x and riscv64 blocked by polkit -> networkmanager
+arch="all !armhf !mips64 !s390x !riscv64"
 url="https://community.kde.org/Frameworks"
 license="LGPL-2.1-only OR LGPL-3.0-only"
 depends="networkmanager"
 depends_dev="networkmanager-dev"
-makedepends="$depends_dev extra-cmake-modules doxygen qt5-qttools-dev"
+makedepends="$depends_dev
+	doxygen
+	extra-cmake-modules
+	qt5-qttools-dev
+	"
 subpackages="$pkgname-dev $pkgname-doc"
 source="https://download.kde.org/stable/frameworks/${pkgver%.*}/networkmanager-qt-$pkgver.tar.xz"
 
@@ -31,8 +36,8 @@ check() {
 
 
 package() {
-	DESTDIR="$pkgdir" cmake --build build --target install
+	DESTDIR="$pkgdir" cmake --install build
 }
 sha512sums="
-07d3d0e5a9f526ecea5942f5d16aa97c3ee8ab3f2481cabc01a9132e85c92a3dd1a3da744accf413d8239dbca1fce3d1ae022ffafea620f9212bda2a8fce00fe  networkmanager-qt-5.82.0.tar.xz
+06a925c242d2bc0690822a792d0f346602f154193403db367059f21ce9b9c4799e4b50d0de76894152553aed3ff0c153246cf132ff383483e37794efb8b66e02  networkmanager-qt-5.84.0.tar.xz
 "

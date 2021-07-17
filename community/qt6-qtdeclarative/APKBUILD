@@ -1,9 +1,9 @@
 # Maintainer: Bart Ribbers <bribbers@disroot.org>
 pkgname=qt6-qtdeclarative
-pkgver=6.1.0
+pkgver=6.1.2
 pkgrel=0
 pkgdesc="Classes for QML and JavaScript languages"
-url="https://qt.io"
+url="https://qt.io/"
 arch="all"
 license="LGPL-2.1-only AND LGPL-3.0-only AND GPL-3.0-only AND Qt-GPL-exception-1.0"
 depends_dev="
@@ -49,5 +49,5 @@ dev() {
 
 
 sha512sums="
-6d6e969a60598165fdc525beb4caa048a5a07565f276bfb0cb9570409a3a0a9c6f72f5042a95e7097a22c89556879d243e2fd1242f95d68a09d8fc26f372762c  qtdeclarative-everywhere-src-6.1.0.tar.xz
+653f902762943643262d3575bb918bf04b4cab156b17f5e6d5fd0132fed059d578cbf60a0b7cc25051aad73c2cbbf17d33f709377d076fd402792b3e213f66e7  qtdeclarative-everywhere-src-6.1.2.tar.xz
 "

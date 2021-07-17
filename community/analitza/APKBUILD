@@ -1,7 +1,7 @@
 # Contributor: Bart Ribbers <bribbers@disroot.org>
 # Maintainer: Bart Ribbers <bribbers@disroot.org>
 pkgname=analitza
-pkgver=21.04.0
+pkgver=21.04.3
 pkgrel=0
 # armhf blocked by extra-cmake-modules
 # mips blocked by eigen -> suitesparse -> openblas
@@ -39,4 +39,6 @@ package() {
 	DESTDIR="$pkgdir" cmake --build build --target install
 }
 
-sha512sums="9fd702f048902251f47c7f0928ef6b8de1472be6a78b129981909cd12d729d68d00309cb2fde2c9d5edaefb613ab5cb4dd955401bc63e973ed0809d8ab2bcdac  analitza-21.04.0.tar.xz"
+sha512sums="
+d97139f9868e8ad19d8560bcc403fa9a45761581c1f048de113523a157d15b201288bf87c79d634ed408660ceb6f31e0514e1e09c73f5c95e0cda3c659bbe211  analitza-21.04.3.tar.xz
+"

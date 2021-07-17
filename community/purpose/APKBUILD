@@ -1,10 +1,13 @@
 # Contributor: Bart Ribbers <bribbers@disroot.org>
 # Maintainer: Bart Ribbers <bribbers@disroot.org>
 pkgname=purpose
-pkgver=5.82.0
+pkgver=5.84.0
 pkgrel=0
 pkgdesc="Framework for providing abstractions to get the developer's purposes fulfilled"
-arch="all !armhf !mips64 !s390x" # armhf blocked by qt5-qtdeclarative and mips64, s390x blocked by polkit
+# armhf blocked by extra-cmake-modules
+# mips64, s390x and riscv64 blocked by polkit -> kio
+# ppc64le blocked by kaccounts-integration
+arch="all !armhf !mips64 !s390x !riscv64 !ppc64le"
 url="https://community.kde.org/Frameworks"
 license="LGPL-2.1-or-later"
 depends_dev="
@@ -17,7 +20,9 @@ depends_dev="
 	qt5-qtbase-dev
 	qt5-qtdeclarative-dev
 	"
-makedepends="$depends_dev extra-cmake-modules"
+makedepends="$depends_dev
+	extra-cmake-modules
+	"
 checkdepends="xvfb-run"
 options="!check" # fails on builders
 source="https://download.kde.org/stable/frameworks/${pkgver%.*}/purpose-$pkgver.tar.xz"
@@ -39,8 +44,8 @@ check() {
 }
 
 package() {
-	DESTDIR="$pkgdir" cmake --build build --target install
+	DESTDIR="$pkgdir" cmake --install build
 }
 sha512sums="
-bccb2cb1ceec619eb61d27cfd027ed20e824a2ba627120581dd928bb331cc1dfc416b5f8067aa31b2a9166dca937a180efc094107a4585e590a5bd9eceec21a5  purpose-5.82.0.tar.xz
+1323ad30d7cddd04ada06c1bbee5ca8217173710d93a989b952c8ce4790aa7c6f3fbaf04b75cf56834d0e2867674c6296adeeb21c0b5c172c06eb257908000fd  purpose-5.84.0.tar.xz
 "

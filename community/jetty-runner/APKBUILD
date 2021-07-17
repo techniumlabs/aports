@@ -3,14 +3,15 @@
 pkgname=jetty-runner
 pkgver=9.4.15.20190215
 _pkgver="${pkgver%.*}.v${pkgver##*.}"
-pkgrel=0
+pkgrel=10
 pkgdesc="Fast and easy way to run Java web application from the command line."
 url="https://www.eclipse.org/jetty"
-arch="noarch !mips !mips64"
+# mips64 and riscv64 blocked by java-jre-headless
+arch="noarch !mips64 !riscv64"
 license="Apache-2.0"
-depends="openjdk8-jre-base"
+depends="java-jre-headless"
 subpackages="$pkgname-openrc"
-source="https://repo.maven.apache.org/maven2/org/eclipse/jetty/$pkgname/$_pkgver/$pkgname-$_pkgver.jar
+source="https://repo.maven.apache.org/maven2/org/eclipse/jetty/jetty-runner/$_pkgver/jetty-runner-$_pkgver.jar
 	$pkgname
 	$pkgname.initd
 	$pkgname.confd

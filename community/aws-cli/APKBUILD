@@ -1,11 +1,12 @@
 # Maintainer: Valery Kartel <valery.kartel@gmail.com>
 # Contributor: Valery Kartel <valery.kartel@gmail.com>
 pkgname=aws-cli
-pkgver=1.18.177
-pkgrel=1
+pkgver=1.19.105
+pkgrel=0
 pkgdesc="Universal Command Line Interface for Amazon Web Services"
 url="https://github.com/aws/aws-cli"
-arch="noarch"
+# mips64: py3-s3transfer missing
+arch="noarch !mips64"
 license="Apache-2.0"
 depends="python3 groff py3-botocore py3-jmespath py3-s3transfer py3-docutils
 	py3-colorama py3-yaml py3-rsa"
@@ -73,4 +74,6 @@ doc() {
 	mv "$pkgdir/$path/examples" "$pkgdir/$path/topics" \
 		"$subpkgdir/$path/"
 }
-sha512sums="c16b704e1a5c382f7ecf7543ef7a7de65fc0b4eea157ad5d6415dfc9f68be3ca4c14f401293567545043e0f6c316304dd38d69e641e5cf93b5760e77ad3f7bc0  aws-cli-1.18.177.tar.gz"
+sha512sums="
+73207ca67d490df705022844e6d025d051a276698204fcf82171e0075f5db2c347de0634cffc48fbd210314d66fd79c61d4129003ddbd6db698adc710fbb2068  aws-cli-1.19.105.tar.gz
+"

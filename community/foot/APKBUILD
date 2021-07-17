@@ -1,6 +1,6 @@
 # Maintainer: Alex McGrath <amk@amk.ie>
 pkgname=foot
-pkgver=1.7.2
+pkgver=1.8.1
 pkgrel=0
 pkgdesc="A fast, lightweight and minimalistic Wayland terminal emulator"
 url="https://codeberg.org/dnkl/foot.git"
@@ -18,6 +18,7 @@ makedepends="
 	fontconfig-dev
 	wayland-protocols
 	ncurses
+	utf8proc-dev
 	"
 subpackages="
 	$pkgname-doc
@@ -48,4 +49,6 @@ terminfo() {
 	cp $builddir/output/f/* "$subpkgdir/usr/share/terminfo/f/"
 }
 
-sha512sums="2acb46daca5840b3a9fb0fc7055f9234618d7d6884ce74fee382f3904136a85f5c17f7119449fd7943dba2ccce2dde9a62d13a1b363ee234765b6ab65d95e19b  foot-1.7.2.tar.gz"
+sha512sums="
+62a4cc018e49e270b8d806ea5b5c17965428a0f943b814608c25eb674db6130bfedae2431ac0c61f9c8de6bd227859cedb032f0f573a1e0885938d11efbda4e4  foot-1.8.1.tar.gz
+"

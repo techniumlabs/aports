@@ -1,7 +1,7 @@
 # Contributor: Bart Ribbers <bribbers@disroot.org>
 # Maintainer: Bart Ribbers <bribbers@disroot.org>
 pkgname=kjsembed
-pkgver=5.82.0
+pkgver=5.84.0
 pkgrel=0
 pkgdesc="JavaScript bindings for QObject"
 arch="all !armhf" # armhf blocked by extra-cmake-modules
@@ -29,5 +29,5 @@ package() {
 	DESTDIR="$pkgdir" cmake --build build --target install
 }
 sha512sums="
-be4f49a5450831e73e16dd136f7dbc354859997d075faf7cb681990d611fa969b95b8d4693b9ed9f73de22982597168210beb5aae201d8e0b502257ee7dca308  kjsembed-5.82.0.tar.xz
+4bd3f954373b3c447b1f21d0c4c13fe0d58122ef9cb7d0ec928c9e1b7f139cafc728caed33a86cd978e8721978885887b13c1ff98322bf86a9b8555000943030  kjsembed-5.84.0.tar.xz
 "

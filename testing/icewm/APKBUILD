@@ -1,7 +1,7 @@
 # Contributor: Paul Bredbury <brebs@sent.com>
 # Maintainer: Paul Bredbury <brebs@sent.com>
 pkgname=icewm
-pkgver=2.3.4
+pkgver=2.6.0
 pkgrel=0
 pkgdesc="Window manager designed for speed, usability and consistency"
 url="https://github.com/ice-wm/icewm"
@@ -30,7 +30,7 @@ makedepends="alsa-lib-dev
 source="https://github.com/ice-wm/icewm/releases/download/$pkgver/icewm-$pkgver.tar.lz"
 
 case "$CARCH" in
-	s390x|mips*)
+	s390x|mips*|riscv64)
 		;;
 	*)
 		makedepends="$makedepends librsvg-dev"
@@ -54,4 +54,6 @@ package() {
 	DESTDIR="$pkgdir" cmake --build build --target install
 }
 
-sha512sums="97d613c3dda84bc52d6b31772df5422aef84b6055b7240e90e5e1a5433d0250ad8fde7a01c4d5c3e714265fed4a3feefde3d6e6b4e1433896c16d2b4708edb1a  icewm-2.3.4.tar.lz"
+sha512sums="
+fe491c8c59aa530d48a20134857c787eccfeda5bd9529e063d865bd3c5f243ef41fbecba40aa06e7fa8037af89839958095debebc5d9b1acc9b5670bd0e12eb6  icewm-2.6.0.tar.lz
+"

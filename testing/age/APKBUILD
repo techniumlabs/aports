@@ -2,7 +2,7 @@
 # Contributor: Michał Polański <michal@polanski.me>
 # Maintainer: Michał Polański <michal@polanski.me>
 pkgname=age
-pkgver=1.0.0_rc1
+pkgver=1.0.0_rc3
 _realver=${pkgver/_rc/-rc.}
 pkgrel=0
 pkgdesc="Simple, modern and secure encryption tool"
@@ -11,11 +11,11 @@ license="BSD-3-Clause"
 arch="all"
 options="net chmod-clean"
 makedepends="go"
+subpackages="$pkgname-doc"
 source="https://github.com/FiloSottile/age/archive/v$_realver/age-$_realver.tar.gz"
 builddir="$srcdir/$pkgname-$_realver"
 
 export GOPATH="$srcdir"
-
 
 build() {
 	mkdir bin
@@ -27,7 +27,12 @@ check() {
 }
 
 package() {
-	install -Dm755 bin/* -t "$pkgdir"/usr/bin
+	install -Dm755 -t "$pkgdir"/usr/bin bin/*
+
+	install -Dm644 -t "$pkgdir"/usr/share/doc/$pkgname doc/*.1
+
 }
 
-sha512sums="7efcd2f84fba3d6da8cda0b8229fedab692db8731de94d0b4c60bfaee68f91bb9bed3c78d894916dafceb414a90773d9258457b39ec4d373a80b6e08e06fc87f  age-1.0.0-rc.1.tar.gz"
+sha512sums="
+d5fe881255d07a174b3e325bf58631a4a45c50cc8bbdf0d0711fa6de23c6b3eeb31fc21c549b2921f8f4b1031d0984a2d30f1664a4a483ee604f86dd419c9518  age-1.0.0-rc.3.tar.gz
+"

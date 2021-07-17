@@ -1,14 +1,30 @@
 # Contributor: Bart Ribbers <bribbers@disroot.org>
 # Maintainer: Bart Ribbers <bribbers@disroot.org>
 pkgname=kross
-pkgver=5.82.0
+pkgver=5.84.0
 pkgrel=0
 pkgdesc="Framework for scripting KDE applications"
-arch="all !armhf !mips64 !s390x" # armhf blocked by extra-cmake-modules and mips64, s390x blocked by polkit
+# armhf blocked by extra-cmake-modules
+# mips64, s390x and riscv64 blocked by polkit
+arch="all !armhf !mips64 !s390x !riscv64"
 url="https://community.kde.org/Frameworks"
 license="LGPL-2.1-or-later"
-depends_dev="qt5-qtbase-dev qt5-qttools-dev kcompletion-dev kcoreaddons-dev ki18n-dev kiconthemes-dev kio-dev kparts-dev kwidgetsaddons-dev kxmlgui-dev"
-makedepends="$depends_dev extra-cmake-modules kdoctools-dev"
+depends_dev="
+	kcompletion-dev
+	kcoreaddons-dev
+	ki18n-dev
+	kiconthemes-dev
+	kio-dev
+	kparts-dev
+	kwidgetsaddons-dev
+	kxmlgui-dev
+	qt5-qtbase-dev
+	qt5-qttools-dev
+	"
+makedepends="$depends_dev
+	extra-cmake-modules
+	kdoctools-dev
+	"
 source="https://download.kde.org/stable/frameworks/${pkgver%.*}/portingAids/kross-$pkgver.tar.xz"
 subpackages="$pkgname-dev $pkgname-doc $pkgname-lang"
 
@@ -26,8 +42,8 @@ check() {
 }
 
 package() {
-	DESTDIR="$pkgdir" cmake --build build --target install
+	DESTDIR="$pkgdir" cmake --install build
 }
 sha512sums="
-ac3b30bc49e4be321c2171dc8229df7df2f7980d4eb47af11141bf51ced4602c1ab81a8150612f02d09c33226bb98cc278451b5c1d4c10f465035f1fceb12ebe  kross-5.82.0.tar.xz
+a957c01f7e9878c2d5df1630759e332666cf6d8197113609cd403aedfea62857cbb9aa8017a9dbf8a0bd395dc38ccb065e6182546fff853bda0a3a1a9775af6e  kross-5.84.0.tar.xz
 "

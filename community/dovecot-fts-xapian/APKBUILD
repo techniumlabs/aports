@@ -1,7 +1,7 @@
 # Contributor: Duncan Bellamy <dunk@denkimushi.com>
 # Maintainer: Duncan Bellamy <dunk@denkimushi.com>
 pkgname=dovecot-fts-xapian
-pkgver=1.4.9b
+pkgver=1.4.11
 pkgrel=0
 pkgdesc="Dovecot xapian fts plugin"
 url="https://github.com/grosjo/fts-xapian"
@@ -14,7 +14,6 @@ builddir="$srcdir/"fts-xapian-$pkgver
 
 prepare() {
 	default_prepare
-	libtoolize
 	autoreconf -vif
 }
 
@@ -34,4 +33,6 @@ package() {
 	chrpath -d "$pkgdir"/usr/lib/dovecot/lib21_fts_xapian_plugin.so
 }
 
-sha512sums="00f6f57e433b0a4150e6561416da0b96c9f38d49cb8dbd7a2787e12c08594449130e32c24972cb4389424dcb425e06513a4c88664227fabe21cb9a2a9823cc08  dovecot-fts-xapian-1.4.9b.tar.gz"
+sha512sums="
+901919e4e2b5ede8f15d3465b66a54fadc24acea2fa0a837e536876b4c04a9de95daadbddd0898ccea803939e4e6db2838460b32ad4bc9139d119cc72767f853  dovecot-fts-xapian-1.4.11.tar.gz
+"

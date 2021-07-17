@@ -1,12 +1,12 @@
 # Contributor: Bart Ribbers <bribbers@disroot.org>
 # Maintainer: Bart Ribbers <bribbers@disroot.org>
 pkgname=bovo
-pkgver=21.04.0
+pkgver=21.04.3
 pkgrel=0
 pkgdesc="A Gomoku like game for two players"
 # armhf blocked by extra-cmake-modules
-# s390x blocked by kxmlgui
-arch="all !armhf !s390x !mips64"
+# s390x, mips64 and riscv64 blocked by polkit -> kxmlgui
+arch="all !armhf !s390x !mips64 !riscv64"
 url="https://kde.org/applications/games/org.kde.bovo"
 license="GPL-2.0-or-later AND GFDL-1.2-only"
 makedepends="
@@ -37,7 +37,9 @@ check() {
 }
 
 package() {
-	DESTDIR="$pkgdir" cmake --build build --target install
+	DESTDIR="$pkgdir" cmake --install build
 }
 
-sha512sums="ed10e54fef7109fc58016395f862f03696b317805316a0d03be42fdcd1d2c08db3fbb370444d251a1c1a11df4aa3dfa209e12150785ffaa9c20634d48651640c  bovo-21.04.0.tar.xz"
+sha512sums="
+13c7c3bcf275f1f4ccfd4754844b4ab08618ed80a5ba0681bdc62aadb1a7e8a4275c56c5967394d553890c384198d2bfa49dc66200642ea9e5608bff64006691  bovo-21.04.3.tar.xz
+"

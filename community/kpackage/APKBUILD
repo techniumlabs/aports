@@ -1,7 +1,7 @@
 # Contributor: Bart Ribbers <bribbers@disroot.org>
 # Maintainer: Bart Ribbers <bribbers@disroot.org>
 pkgname=kpackage
-pkgver=5.82.0
+pkgver=5.84.0
 pkgrel=0
 pkgdesc="Framework that lets applications manage user installable packages of non-binary assets"
 arch="all !armhf" # armhf blocked by extra-cmake-modules
@@ -32,5 +32,5 @@ package() {
 }
 
 sha512sums="
-9d8a168b48903d4b5c68ffa0709fd0cfea1e08376c1c0b1ef820ad13f6399a1792be724eeef18a27402f18c62494c864fe4dac17e9932a1ee3a5bb4de50f5fed  kpackage-5.82.0.tar.xz
+f3869e236d28e3a3950b36097a087ebf23feed95f0d289fc31cbb86ec50bcabbf1df41ccef5bdb15ab1bd8faeeffc87afe30a2e0d97af366bcde1e2042d10250  kpackage-5.84.0.tar.xz
 "

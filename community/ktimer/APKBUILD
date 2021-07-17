@@ -1,13 +1,25 @@
 # Contributor: Bart Ribbers <bribbers@disroot.org>
 # Maintainer: Bart Ribbers <bribbers@disroot.org>
 pkgname=ktimer
-pkgver=21.04.0
+pkgver=21.04.3
 pkgrel=0
-arch="all !armhf !s390x !mips64"
-url="https://kde.org/applications/utilities/org.kde.ktimer"
 pkgdesc="A little tool to execute programs after some time"
+# armhf blocked by extra-cmake-modules
+# s390x, mips64 and riscv64 blocked by polkit -> kio
+arch="all !armhf !s390x !mips64 !riscv64"
+url="https://kde.org/applications/utilities/org.kde.ktimer"
 license="GPL-2.0-or-later"
-makedepends="extra-cmake-modules qt5-qtbase-dev kdoctools-dev ki18n-dev kwidgetsaddons-dev kio-dev kdbusaddons-dev knotifications-dev kconfig-dev"
+makedepends="
+	extra-cmake-modules
+	kconfig-dev
+	kdbusaddons-dev
+	kdoctools-dev
+	ki18n-dev
+	kio-dev
+	knotifications-dev
+	kwidgetsaddons-dev
+	qt5-qtbase-dev
+	"
 source="https://download.kde.org/stable/release-service/$pkgver/src/ktimer-$pkgver.tar.xz"
 subpackages="$pkgname-doc $pkgname-lang"
 options="!check" # No tests
@@ -26,7 +38,9 @@ check() {
 }
 
 package() {
-	DESTDIR="$pkgdir" cmake --build build --target install
+	DESTDIR="$pkgdir" cmake --install build
 }
 
-sha512sums="62d6b4605e700dbdb575ecb47d84dc0faa53d607a8a7ee8de40e257fff34437f2bc149792c821a11edc83adb85b770ed97c5e37fc02522e246ea79f7671d6b0b  ktimer-21.04.0.tar.xz"
+sha512sums="
+3cf8a0387174202ffaab9e901cc4e6bf851403b21d8b34df6b437f13d310a7bd657438fb1c10eb0b238d3d6407334987db4b94433d27187d1cfaacf23c09bc2d  ktimer-21.04.3.tar.xz
+"

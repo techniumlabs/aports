@@ -1,13 +1,32 @@
 # Contributor: Bart Ribbers <bribbers@disroot.org>
 # Maintainer: Bart Ribbers <bribbers@disroot.org>
 pkgname=print-manager
-pkgver=21.04.0
+pkgver=21.04.3
 pkgrel=0
-arch="all !armhf !s390x !mips64" # armhf blocked by qt5-qtdeclarative
+# armhf blocked by qt5-qtdeclarative
+# s390x, mips64 and riscv64 blocked by polkit -> kio
+arch="all !armhf !s390x !mips64 !riscv64"
 url="https://www.kde.org/applications/utilities/"
 pkgdesc="A tool for managing print jobs and printers"
 license="GPL-2.0-or-later"
-makedepends="extra-cmake-modules qt5-qtbase-dev qt5-qtdeclarative-dev cups-dev kconfig-dev kconfigwidgets-dev kcoreaddons-dev kdbusaddons-dev kiconthemes-dev ki18n-dev kcmutils-dev kio-dev knotifications-dev plasma-framework-dev kwidgetsaddons-dev kwindowsystem-dev"
+makedepends="
+	cups-dev
+	extra-cmake-modules
+	kcmutils-dev
+	kconfig-dev
+	kconfigwidgets-dev
+	kcoreaddons-dev
+	kdbusaddons-dev
+	ki18n-dev
+	kiconthemes-dev
+	kio-dev
+	knotifications-dev
+	kwidgetsaddons-dev
+	kwindowsystem-dev
+	plasma-framework-dev
+	qt5-qtbase-dev
+	qt5-qtdeclarative-dev
+	"
 source="https://download.kde.org/stable/release-service/$pkgver/src/print-manager-$pkgver.tar.xz"
 subpackages="$pkgname-lang"
 options="!check" # No tests available
@@ -26,7 +45,9 @@ check() {
 }
 
 package() {
-	DESTDIR="$pkgdir" cmake --build build --target install
+	DESTDIR="$pkgdir" cmake --install build
 }
 
-sha512sums="3d3567111c28905e08748e864fda87b93cec2d2c42aedb996966c6cb8299ba1df32f4fbec7e3056c88bee5193f27fd1c70964c2e423602853da17bde34ce8d9a  print-manager-21.04.0.tar.xz"
+sha512sums="
+6ee679f46301213dcccc15212f78c23aff173d9fab2f26a492cc7e07e95c5f1fa98a2feea5a42d3f0460ac3b7ce8147f5624cdc36c4def74f15dd2b924f9412b  print-manager-21.04.3.tar.xz
+"

@@ -1,14 +1,35 @@
 # Contributor: Bart Ribbers <bribbers@disroot.org>
 # Maintainer: Bart Ribbers <bribbers@disroot.org>
 pkgname=baloo
-pkgver=5.82.0
+pkgver=5.84.0
 pkgrel=0
 pkgdesc="A framework for searching and managing metadata"
-arch="all !armhf !mips64 !s390x" # armhf blocked by qt5-qtdeclarative and mips64, s390x blocked by polkit
+# armhf blocked by qt5-qtdeclarative
+# mips64, s390x and riscv64 blocked by polkit
+arch="all !armhf !mips64 !s390x !riscv64"
 url="https://community.kde.org/Frameworks"
 license="LGPL-2.1-or-later AND (LGPL-2.1-only OR LGPL-3.0-only)"
-depends_dev="qt5-qtdeclarative-dev lmdb-dev kcoreaddons-dev kconfig-dev kdbusaddons-dev ki18n-dev kidletime-dev solid-dev kfilemetadata-dev kcrash-dev kio-dev kservice-dev kbookmarks-dev kcompletion-dev kjobwidgets-dev"
-makedepends="$depends_dev extra-cmake-modules qt5-qtbase-dev"
+depends_dev="
+	kbookmarks-dev
+	kcompletion-dev
+	kconfig-dev
+	kcoreaddons-dev
+	kcrash-dev
+	kdbusaddons-dev
+	kfilemetadata-dev
+	ki18n-dev
+	kidletime-dev
+	kio-dev
+	kjobwidgets-dev
+	kservice-dev
+	lmdb-dev
+	qt5-qtdeclarative-dev
+	solid-dev
+	"
+makedepends="$depends_dev
+	extra-cmake-modules
+	qt5-qtbase-dev
+	"
 source="https://download.kde.org/stable/frameworks/${pkgver%.*}/baloo-$pkgver.tar.xz"
 subpackages="$pkgname-dev $pkgname-lang"
 options="!check" # Tons of broken tests
@@ -22,8 +43,11 @@ build() {
 }
 
 package() {
-	DESTDIR="$pkgdir" cmake --build build --target install
+	DESTDIR="$pkgdir" cmake --install build
+
+	# We don't ship systemd
+	rm -r "$pkgdir"/usr/lib/systemd
 }
 sha512sums="
-aed73f3c67f3c7331706fa121c0fbc062b4619adf8ebe65fdb4edbd033f6c4bdaca17f8c00fc3eb3f4159af1cd5bf89c144bbf87d87e9ef60d5b682dabe059db  baloo-5.82.0.tar.xz
+724a8eb9183548ccf99bd2a3cf6938d937731f01e72a9ea3b83e65a96be8e52c0a5690e19b95fd2f43ef1cf3404efe9d61ba0bed5439b73d50762c48156c7529  baloo-5.84.0.tar.xz
 "

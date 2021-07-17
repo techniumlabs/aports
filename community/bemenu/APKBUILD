@@ -1,8 +1,8 @@
 # Contributor: Cosmo Borsky <me@cosmoborsky.com>
 # Maintainer: Sören Tempel <soeren+alpine@soeren-tempel.net>
 pkgname=bemenu
-pkgver=0.5.0
-pkgrel=1
+pkgver=0.6.2
+pkgrel=0
 pkgdesc="Dynamic menu library and client program with support for different backends"
 options="!check" # No testsuite
 url="https://github.com/Cloudef/bemenu"
@@ -27,4 +27,6 @@ package() {
 	make PREFIX=/usr DESTDIR="$pkgdir" install
 }
 
-sha512sums="5f4397bcb77d3e22340988bfb131feced1782f724ff637e40bf03c36a4377f38127c827f55faccc0dcce2ca482b9353fca7c6bfe700e6cac8e095e0df3b87a31  bemenu-0.5.0.tar.gz"
+sha512sums="
+53b8513a5ca2e1c982a1425ba0806b178c9d2bd2785739ff92cb1615f5d2ea5df9e8914f5a9575c7c2dfc8964872b927b542b9f5bc7335923aeeeead5c3d9f33  bemenu-0.6.2.tar.gz
+"

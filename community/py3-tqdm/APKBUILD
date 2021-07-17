@@ -1,7 +1,7 @@
 # Maintainer: Drew DeVault <sir@cmpwn.com>
 pkgname=py3-tqdm
 _pkgname=tqdm
-pkgver=4.60.0
+pkgver=4.61.1
 pkgrel=0
 pkgdesc="Fast, Extensible Progress Meter"
 options="!check" # Broken on our current Python build due to setuptools version conflict
@@ -48,4 +48,6 @@ package() {
 	ln -s tqdm-3 "$pkgdir"/usr/bin/tqdm
 }
 
-sha512sums="e76dda97323353725c8e30b254bacfa328b4708d37ba2d21dadd30fd26e76605d8f077f02f2047030c6ab9761710a0e86640153fee0e3a3f972db12266fcfde2  tqdm-4.60.0.tar.gz"
+sha512sums="
+6092a30389380a511abc8bee7e6144556d6dc1a993ba4a2685707afa2838a12f472aa216ac5e55d144da74f9be1d398d4c6f5352986a200557e4aba67831a505  tqdm-4.61.1.tar.gz
+"

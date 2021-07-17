@@ -1,13 +1,37 @@
 # Contributor: Bart Ribbers <bribbers@disroot.org>
 # Maintainer: Bart Ribbers <bribbers@disroot.org>
 pkgname=kwalletmanager
-pkgver=21.04.0
+pkgver=21.04.3
 pkgrel=0
-arch="all !armhf !s390x !mips64"
+# armhf blocked by extra-cmake-modules
+# s390x, mips64 and riscv64 blocked by polkit -> kio
+arch="all !armhf !s390x !mips64 !riscv64"
 url="https://kde.org/applications/system/org.kde.kwalletmanager5"
 pkgdesc="A tool to manage the passwords on your KDE system"
 license="GPL-2.0-or-later"
-makedepends="extra-cmake-modules qt5-qtbase-dev karchive-dev kauth-dev kconfig-dev kconfigwidgets-dev kcoreaddons-dev kdbusaddons-dev kdoctools-dev ki18n-dev kiconthemes-dev kjobwidgets-dev  kcmutils-dev kio-dev knotifications-dev kservice-dev ktextwidgets-dev kwallet-dev kwindowsystem-dev kxmlgui-dev kcrash-dev"
+makedepends="
+	extra-cmake-modules
+	karchive-dev
+	kauth-dev
+	kcmutils-dev
+	kconfig-dev
+	kconfigwidgets-dev
+	kcoreaddons-dev
+	kcrash-dev
+	kdbusaddons-dev
+	kdoctools-dev
+	ki18n-dev
+	kiconthemes-dev
+	kio-dev
+	kjobwidgets-dev
+	knotifications-dev
+	kservice-dev
+	ktextwidgets-dev
+	kwallet-dev
+	kwindowsystem-dev
+	kxmlgui-dev
+	qt5-qtbase-dev
+	"
 checkdepends="xvfb-run"
 source="https://download.kde.org/stable/release-service/$pkgver/src/kwalletmanager-$pkgver.tar.xz"
 subpackages="$pkgname-doc $pkgname-lang"
@@ -26,7 +50,9 @@ check() {
 }
 
 package() {
-	DESTDIR="$pkgdir" cmake --build build --target install
+	DESTDIR="$pkgdir" cmake --install build
 }
 
-sha512sums="cd0234cbe7bb366fba3bb8de95202b3a84d919d78345bd8737f714aeff5218ef11851d3e75ceb5154385743b2836e2d557b79aeca0b96f77f12004d7a9324ceb  kwalletmanager-21.04.0.tar.xz"
+sha512sums="
+89bedce351f0c27c7a0452d087fd0633c40ca82d3fc162bdff06c6ee5eb95b66305aa85b9e4c37c6f01ff54b45c575f6af5d5cf9a6ec7e8836198a9e928203a1  kwalletmanager-21.04.3.tar.xz
+"
